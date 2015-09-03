@@ -1,31 +1,27 @@
-def getArticleInfo():
+##### Takes the document name and return a list with the articles on the form:
+##### [ ['1', '2009', 'This is a title'],
+#####   ['2', '2009', 'This is another title'],
+#####   ['3', '2010', 'Third title']
+##### ]
+
+def getArticleInfo(doc_name):
     articleInfo = []
-    f = open("tcp_articles.txt","r")
+    f = open(doc_name,"r")
     line = f.readline() #Firste line states id, year, title of the article
-    print "first line: " + str(line)
     line = f.readline()
     counter = 0
     while line:
-        if ord(line[0]) < 48 or ord(line[0]) > 57: # Based on the ascii value: 0-9 is from 48-57
-            #print "APPENDING"
-            articleInfo[counter-1][2] = (articleInfo[counter-1][2].strip()) + " " + line
-            print articleInfo[counter-1][2]
+        split_index = list_duplicates_of(line,",")
+        if ord(line[0]) < 48 or ord(line[0]) > 57 or len(split_index) != 2: # Based on the ascii value: 0-9 is from 48-57
+            articleInfo[counter-1][2] = (articleInfo[counter-1][2].strip()) + " " + line[:-1] #Removing \n from the string
         else:
-            split_index = list_duplicates_of(line,",")
-            print split_index
             id = line[:split_index[0]]
-            print id
             year = line[split_index[0]+1:split_index[1]]
-            print year
-            title = line[split_index[1]+1:-1] #Removing \n from the string
-            print title
+            title = line[split_index[1]+1:-1]               #Removing \n from the string
             article = [id, year, title]
             articleInfo.append(article)
             counter += 1
-            #print "NEW: " + str(article)
-
         line = f.readline()
-
     f.close()
     return articleInfo
 
@@ -45,6 +41,6 @@ def list_duplicates_of(seq,item):
 
 if __name__ == '__main__':
     print "Running main.."
-    list = getArticleInfo()
-    print str(list[1:5])
+    list = getArticleInfo("tcp_articles.txt")
+    print list[1]
 

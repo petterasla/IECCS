@@ -4,6 +4,10 @@
 #####   ['3', '2010', 'Third title']
 ##### ]
 
+#from articledownloader.articledownloader import ArticleDownloader
+#downloader = ArticleDownloader('7dca2bf4cf2dddf69241416cece3d02a')
+
+
 def getArticleInfo(doc_name):
     articleInfo = []
     f = open(doc_name,"r")
@@ -39,9 +43,43 @@ def list_duplicates_of(seq,item):
             start_at = loc
     return locs
 
+def generateSearchURL(self, title):
+    return "http://www.scopus.com/results/results.url?numberOfFields=0&src=s&clickedLink=&edit=&editSaveSearch=&origin=searchbasic&authorTab=&affiliationTab=&advancedTab=&scint=1&menu=search&tablin=&searchterm1=" + \
+           title + "&field1=TITLE&dateType=Publication_Date_Type&yearFrom=Before+1960&yearTo=Present&loadDate=7&documenttype=All&subjects=LFSC&subjects=HLSC&subjects=PHSC&subjects=SOSC&src=s&st1=" + \
+           title + "&st2=&sot=b&sdt=b&sl=&s=TITLE%28" + \
+           title + "%29&sid=&searchId=&txGid=&sort=plf-f&originationType=b&rr=&null="
+
+def generateSearchURLs(self):
+    list = getArticleInfo("tcp_articles.txt")
+    URLs = []
+    for title in list:
+        URLs.append(generateSearchURL(title))
+    return URLs
+
 
 if __name__ == '__main__':
     print "Running main.."
-    list = getArticleInfo("tcp_articles.txt")
-    print list[1]
+    #list = getArticleInfo("tcp_articles.txt")
+    #URLs = []
+    #for title in list:
+        #URLs.append(generateSearchURL(title))
 
+    #print list[1]
+    #DOIs = []
+    #antallArtikler = 10
+    #for i in range(antallArtikler):
+        #print list[i]
+        #DOI = downloader.get_dois_from_search(list[i][2], 1)
+        #print DOI.pop()
+        #DOIs.append([list[i][0], list[i][1], list[i][2], DOI.pop()])
+
+    #for i in range(len(DOIs)):
+        #print DOIs[i]
+
+    #print antallArtikler
+    #print len(DOIs)
+
+    #print DOI.pop()
+    #abstract = downloader.get_abstract_from_doi(DOI.pop(), 'elsevier')
+    #print abstract
+    #print downloader.get_pdf_from_doi(DOI.pop(), 'test.pdf', 'elsevier')

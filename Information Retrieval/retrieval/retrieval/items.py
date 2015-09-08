@@ -5,12 +5,12 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy.item import Item, Field
 
 
-class RetrievalItem(scrapy.Item):
+class RetrievalItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    title = scrapy.Field()
-    link = scrapy.Field()
-    desc = scrapy.Field()
+    title = Field()
+    url = Field()
+    abstract = Field()

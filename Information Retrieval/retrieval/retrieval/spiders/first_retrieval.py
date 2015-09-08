@@ -6,7 +6,7 @@ import getArticleTitle
 class RetrievalSpider(scrapy.Spider):
     name = "abstract retrieval"
     allowed_domains = ["scopus.com"]
-    titles = getArticleTitle.getArticleInfo("tcp_articles.txt")
+   #titles = getArticleTitle.getArticleInfo("tcp_articles.txt")
     start_urls = getArticleTitle.generateSearchURLs()[10]
 
     def parse(self, response):

@@ -1,0 +1,20 @@
+Vi vil ha:
+- All meta-info
+- PDF-url fra scopus
+- Status søk (tomt søkeresultat, abstract funnet/ikke funnet )
+
+Crossref meta-data med følgende url:
+http://api.crossref.org/works?query=SØKEPARAMETER&rows=1&sort=score
+Gir ett resultat med beste score
+Matching på tittel, år og forfatter (fuzzy).
+
+Kjøre for stort sett (1000) for å se hva som skjer.
+
+Nyttig:
+- Kjør scrapy med denne kommandoen for å lagre i JSON: 
+	‘scrapy crawl «program_navn» -o items.json -t json’
+
+- https://realpython.com/blog/python/web-scraping-with-scrapy-and-mongodb/
+- http://api.mongodb.org/python/current/tutorial.html
+- http://docs.mongodb.org/manual/#getting-started
+- https://scotch.io/tutorials/an-introduction-to-mongodb

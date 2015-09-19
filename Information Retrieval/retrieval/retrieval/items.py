@@ -14,3 +14,8 @@ class RetrievalItem(Item):
     title = Field()
     url = Field()
     abstract = Field()
+
+class MetaItem(Item):
+    status = Field()
+    message = Field()
+

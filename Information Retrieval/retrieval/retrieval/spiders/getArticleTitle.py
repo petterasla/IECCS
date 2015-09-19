@@ -56,29 +56,13 @@ def generateSearchURLs():
         URLs.append(generateSearchURL(title[2]))
     return URLs
 
-#if __name__ == '__main__':
-#    print "Running main.."
-    #list = getArticleInfo("tcp_articles.txt")
-    #URLs = []
-    #for title in list:
-        #URLs.append(generateSearchURL(title))
+def generateMetaURL(title):
+    return "http://api.crossref.org/works?query=" + \
+           title + "&rows=1&sort=score"
 
-    #print list[1]
-    #DOIs = []
-    #antallArtikler = 10
-    #for i in range(antallArtikler):
-        #print list[i]
-        #DOI = downloader.get_dois_from_search(list[i][2], 1)
-        #print DOI.pop()
-        #DOIs.append([list[i][0], list[i][1], list[i][2], DOI.pop()])
-
-    #for i in range(len(DOIs)):
-        #print DOIs[i]
-
-    #print antallArtikler
-    #print len(DOIs)
-
-    #print DOI.pop()
-    #abstract = downloader.get_abstract_from_doi(DOI.pop(), 'elsevier')
-    #print abstract
-    #print downloader.get_pdf_from_doi(DOI.pop(), 'test.pdf', 'elsevier')
+def generateMetaURLs():
+    articles = getArticleInfo("../../../tcp_articles.txt")
+    URLs = []
+    for title in articles:
+        URLs.append(generateMetaURL(title[2]))
+    return URLs

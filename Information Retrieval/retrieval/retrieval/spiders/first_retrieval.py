@@ -7,7 +7,7 @@ class RetrievalSpider(scrapy.Spider):
     name = "abstract retrieval"
     allowed_domains = ["scopus.com"]
     #titles = getArticleTitle.getArticleInfo("tcp_articles.txt")
-    start_urls = getArticleTitle.generateSearchURLs()[0:30]
+    start_urls = getArticleTitle.generateSearchURLs()[0:3]
 
     def parse(self, response):
         item = RetrievalItem()
@@ -21,12 +21,7 @@ class RetrievalSpider(scrapy.Spider):
         print "\n\n#############################   hei #############################\n\n\n\n"
 
         item['abstract'] = response.xpath('//p[@id="recordAbs"]/text()').extract()
-        print item['abstract']
 
         print "\n\n#############################   hei #############################\n\n\n\n"
 
         yield item
-
-        """f = open("first-retrieval.txt", "w")
-        f.write(str(abstract))
-        f.close()"""

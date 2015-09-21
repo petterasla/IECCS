@@ -33,6 +33,7 @@ def compareData():
     print "size of articles info before: " + str(len(articleInfo))
     for article in articleInfo[0:30]:
         articleDict = {}
+        status = {}
         for meta in metaInfo[0:30]:
             if (article[2]!= meta["message"]["query"]["search-terms"]):
                 print "title and search term not the same"
@@ -42,7 +43,10 @@ def compareData():
                 print "Same article title and search terms in meta"
                 articleTitle = article[2].lower().strip()
                 articleYear = str(article[1].lower().strip())
-                metaTitle = meta["message"]["items"][0]["title"][0].lower().strip()
+                try:
+                    metaTitle = meta["message"]["items"][0]["title"][0].lower().strip()
+                except:
+                    print "Title not found"
                 try:
                     metaYear = str(meta["message"]["items"][0]["issued"]["date-parts"][0][0]).strip()
                 except:
@@ -96,9 +100,11 @@ def compareData():
 
                 articleDict["Title"] = str(articleTitle)
                 articleDict["Year"] = str(articleYear)
+                status["isMetaEqualToOriginal"] = "False"
 
-                if (articleTitle == metaTitle and articleYear == metaYear):
-                    print "title and year are the same -> put into same shit!"
+
+                if (articleTitle == metaTitle):
+                    print "title is the same --> put into same shit!"
 
                     articleDict["Publisher"] = str(metaPublisher)
                     articleDict["DOI"] = str(metaDOI)
@@ -107,13 +113,12 @@ def compareData():
                     articleDict["ISSN"] = str(metaISSN)
                     articleDict["Subject"] = str(metaSubject)
                     articleDict["Type"] = str(metaType)
-                    articleDict["Status"] = "Same"
+                    status["isMetaEqualToOriginal"] = "True"
                 else:
-                    print "DIFFERENT TITLES AND/OR YEAR"
-                    articleDict["Status"] = "Different"
-                    articleDict["Meta year"] = str(metaYear)
+                    print "DIFFERENT TITLES"
                     articleDict["Meta title"] = metaTitle.encode('ascii', 'ignore')
 
+                articleDict["Status"] = status
                 info.append(articleDict)
                 metaInfo.remove(meta)
                 print "\n"
@@ -121,13 +126,48 @@ def compareData():
     print "size of meta info after: " + str(len(metaInfo))
     print info
 
-    same = 0
-    different = 0
-    for article in info:
-        if article["Status"] == "Same":
-            same += 1
-        else:
-            different += 1
 
-    print "Same: " + str(same) + ", different: " + str(different)
-compareData()
+    print "Size of info: " + str(len(info))
+    return info
+
+def addAbstract(info):
+    with open("retrieval/retrieval/spiders/abstracts.json") as metaJson:
+        abstracts = json.load(metaJson)
+        metaJson.close()
+
+    print abstracts[0]
+    title1 = abstracts[0]["title"]
+    title2 = info[0]["Title"]
+
+    print title1
+    print title2
+    print title1 == title2
+
+    print "\n\n ADding abstracts..."
+
+    for x in info:
+        for abstract in abstracts:
+            title = abstract["title"].lower()
+            print "X in info:"
+            print x["Title"]
+            print x["Title"] == title
+
+            x["Status"]["isAbstractEqualToOriginal"] = "False"
+            if (x["Title"] != title):
+                continue
+            else:
+                print "titles are equal, append abstract and url"
+                x["URL"] = abstract["url"].encode('ascii', 'ignore')
+                x["Abstract"] = abstract["abstract"][0].encode('ascii', 'ignore')
+                x["Status"]["isAbstractEqualToOriginal"] = "True"
+                print "SETTING ABSTRACT EQUAL TO TRUE!"
+                print "\n"
+                break
+    for x in info[0:4]:
+        print x
+    print "\n Size of info: " + str(len(info))
+
+
+
+info = compareData()
+addAbstract(info)

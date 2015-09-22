@@ -163,7 +163,7 @@ def addAbstract(info):
                 print "SETTING ABSTRACT EQUAL TO TRUE!"
                 print "\n"
                 break
-    for x in info[0:4]:
+    for x in info:
         print x
     print "\n Size of info: " + str(len(info))
 

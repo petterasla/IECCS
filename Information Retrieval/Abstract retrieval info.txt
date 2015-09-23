@@ -2,4 +2,6 @@ Abstract retrieval
 Result of the abstracts retrieval:
 
 [0:1000] 	= 756/1000 retrieved
-[1000:2000] = 
+[1000:2000] = 777/1000 retrieved
+[2000:3000] = 734/1000 retrieved
+[4000:5000] = 731/1000 retrieved

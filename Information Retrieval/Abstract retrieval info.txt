@@ -1,7 +1,16 @@
 Abstract retrieval
 Result of the abstracts retrieval:
 
-[0:1000] 	= 756/1000 retrieved
-[1000:2000] = 777/1000 retrieved
-[2000:3000] = 734/1000 retrieved
-[4000:5000] = 731/1000 retrieved
+[0:1000] 	= 756/1000 retrieved - abstracts.json
+[1000:2000] = 777/1000 retrieved - abstract2.json
+[2000:3000] = 734/1000 retrieved - abstract3.json
+[3000:4000] = 731/1000 retrieved - abstract4.json
+[4000:5000] = 784/1000 retrieved - abstract5.json
+[5000:8000] =2220/3000 retrieved - abstracst6.json
+
+
+
+Result of the meta retrieval:
+[0:1000]    = 994/1000  retrieved - meta.json
+[1000:5000] = 3968/4000 retrieved - meta2.json
+[5000:6000] = 996/1000  retrieved - meta3.json

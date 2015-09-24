@@ -6,7 +6,7 @@ from retrieval.items import MetaItem
 
 class MetaSpider(scrapy.Spider):
     name = "meta retrieval"
-    start_urls = getArticleTitle.generateMetaURLs()[0:30]
+    start_urls = getArticleTitle.generateMetaURLs()[5000:6000]
 
     def parse(self, response):
         item = MetaItem()

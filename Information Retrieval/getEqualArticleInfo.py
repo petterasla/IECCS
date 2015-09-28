@@ -5,169 +5,182 @@ import getArticleTitle
 
 def compareData():
     articleInfo = getArticleTitle.getArticleInfo("tcp_articles.txt")
-    print "Article: " + articleInfo[0][2] + " -- published: " + str(articleInfo[0][1])
+    #print "Article: " + articleInfo[0][2] + " -- published: " + str(articleInfo[0][1])
 
-    with open("retrieval/retrieval/spiders/metaInfo.json") as metaJson:
+    with open("retrieval/retrieval/spiders/meta.json") as metaJson:
         metaInfo = json.load(metaJson)
         metaJson.close()
 
-    print "MetaInfo: " + str(metaInfo) + "\n\n"
+    #print "MetaInfo: " + str(metaInfo) + "\n\n"
 
     titleArticle = articleInfo[0][2].lower().strip()
     titleMeta = metaInfo[0]["message"]["items"][0]["title"][0].lower().strip()
-    print titleArticle
-    print titleMeta
-    print titleArticle == titleMeta
+    #print titleArticle
+    #print titleMeta
+    #print titleArticle == titleMeta
 
-    print "\n"
+    #print "\n"
 
     yearArticle = str(articleInfo[0][1]).strip()
     yearMeta = str(metaInfo[0]["message"]["items"][0]["issued"]["date-parts"][0][0]).strip()
-    print yearArticle
-    print yearMeta
-    print yearArticle == yearMeta
-    print "\n"
+    #print yearArticle
+    #print yearMeta
+    #print yearArticle == yearMeta
+    #print "\n"
 
     info = []
-    print "size of meta info before: " + str(len(metaInfo))
-    print "size of articles info before: " + str(len(articleInfo))
-    for article in articleInfo[0:30]:
+    #print "size of meta info before: " + str(len(metaInfo))
+    #print "size of articles info before: " + str(len(articleInfo))
+    for article in articleInfo:
         articleDict = {}
         status = {}
-        for meta in metaInfo[0:30]:
+        for meta in metaInfo:
             if (article[2]!= meta["message"]["query"]["search-terms"]):
-                print "title and search term not the same"
-                print "\n"
+                #print "title and search term not the same"
+                #print "\n"
                 continue
             else:
-                print "Same article title and search terms in meta"
+                #print "Same article title and search terms in meta"
                 articleTitle = article[2].lower().strip()
                 articleYear = str(article[1].lower().strip())
                 try:
                     metaTitle = meta["message"]["items"][0]["title"][0].lower().strip()
                 except:
-                    print "Title not found"
+                    pass
                 try:
                     metaYear = str(meta["message"]["items"][0]["issued"]["date-parts"][0][0]).strip()
                 except:
-                    print "Year not found"
+                    pass
                 try:
                     metaPublisher = meta["message"]["items"][0]["publisher"]
                 except:
-                    print "Publisher not found"
+                    pass
                 try:
                     metaDOI = meta["message"]["items"][0]["DOI"]
                 except:
-                    print "DOI not found"
+                    pass
                 try:
                     metaOriginURL = meta["message"]["items"][0]["URL"]
                 except:
-                    print "OriginURL not found"
+                    pass
                 try:
                     metaISSN = meta["message"]["items"][0]["ISSN"]
                 except:
-                    print "ISSN not found"
+                    pass
                 try:
                     metaSubject = meta["message"]["items"][0]["subject"]
                 except:
-                    print "Subject doesnt exist"
+                    pass
                 try:
                     metaType = meta["message"]["items"][0]["type"]
                 except:
-                    print "Meta type not found"
+                    pass
 
                 metaAuthor = []
-                for author in meta["message"]["items"][0]["author"]:
-                    metaAuthorDict = {}
-                    try:
-                        firstName = author["given"].encode('ascii', 'ignore')
-                        metaAuthorDict["First name"] = firstName
-                    except:
-                        print "First name not found"
-                    try:
-                        metaAuthorDict["Last name"] = author["family"].encode('ascii', 'ignore')
-                        metaAuthor.append(metaAuthorDict)
-                    except:
-                        print "Last name not found"
+                try:
+                    for author in meta["message"]["items"][0]["author"]:
+                        metaAuthorDict = {}
+                        try:
+                            firstName = author["given"].encode('ascii', 'ignore')
+                            metaAuthorDict["First name"] = firstName
+                        except:
+                            pass
+                        try:
+                            metaAuthorDict["Last name"] = author["family"].encode('ascii', 'ignore')
+                            metaAuthor.append(metaAuthorDict)
+                        except:
+                            pass
+                except:
+                    pass
 
-
-                print "comparing this info: "
+                """print "comparing this info: "
                 print articleTitle
                 print metaTitle
                 print articleYear
                 print metaYear
                 print "\n"
+                """
 
                 articleDict["Title"] = str(articleTitle)
                 articleDict["Year"] = str(articleYear)
-                status["isMetaEqualToOriginal"] = "False"
+                status["isMetaTitleEqualToOriginal"] = "False"
+                status["isMetaYearEqualToOriginal"] = "True"
 
 
                 if (articleTitle == metaTitle):
-                    print "title is the same --> put into same shit!"
+                    #print "title is the same --> put into same shit!"
 
                     articleDict["Publisher"] = str(metaPublisher)
                     articleDict["DOI"] = str(metaDOI)
                     articleDict["OriginURL"] = str(metaOriginURL)
                     articleDict["Author"] = metaAuthor
-                    articleDict["ISSN"] = str(metaISSN)
-                    articleDict["Subject"] = str(metaSubject)
+                    articleDict["ISSN"] = metaISSN
+                    articleDict["Subject"] = metaSubject
                     articleDict["Type"] = str(metaType)
-                    status["isMetaEqualToOriginal"] = "True"
+                    status["isMetaTitleEqualToOriginal"] = "True"
+                    if (articleYear != metaYear):
+                        status["isMetaYearEqualToOriginal"] = "False"
                 else:
-                    print "DIFFERENT TITLES"
+                    #print "DIFFERENT TITLES"
                     articleDict["Meta title"] = metaTitle.encode('ascii', 'ignore')
 
                 articleDict["Status"] = status
                 info.append(articleDict)
                 metaInfo.remove(meta)
-                print "\n"
+                #print "\n"
                 break
-    print "size of meta info after: " + str(len(metaInfo))
-    print info
+    #print "size of meta info after: " + str(len(metaInfo))
 
 
-    print "Size of info: " + str(len(info))
+    #print "Size of info: " + str(len(info))
+    print "finished with meta data comparison"
     return info
 
-def addAbstract(info):
+def addAbstractToData(info):
     with open("retrieval/retrieval/spiders/abstracts.json") as metaJson:
         abstracts = json.load(metaJson)
         metaJson.close()
 
-    print abstracts[0]
+    #print abstracts[0]
     title1 = abstracts[0]["title"]
     title2 = info[0]["Title"]
 
-    print title1
+    """print title1
     print title2
     print title1 == title2
 
+
+    """
     print "\n\n ADding abstracts..."
 
     for x in info:
         for abstract in abstracts:
             title = abstract["title"].lower()
-            print "X in info:"
-            print x["Title"]
-            print x["Title"] == title
 
-            x["Status"]["isAbstractEqualToOriginal"] = "False"
+            x["Status"]["isAbstractTitleEqualToOriginal"] = "False"
             if (x["Title"] != title):
                 continue
             else:
-                print "titles are equal, append abstract and url"
                 x["URL"] = abstract["url"].encode('ascii', 'ignore')
                 x["Abstract"] = abstract["abstract"][0].encode('ascii', 'ignore')
-                x["Status"]["isAbstractEqualToOriginal"] = "True"
-                print "SETTING ABSTRACT EQUAL TO TRUE!"
-                print "\n"
+                x["Status"]["isAbstractTitleEqualToOriginal"] = "True"
+                #print "SETTING ABSTRACT EQUAL TO TRUE!"
+                #print "\n"
                 break
+
+    print "finished adding abstracts"
+    return info
+
+
+def findAbstractAbsence(info):
+    print "size of info: " + str(len(info))
+    counter = 0
     for x in info:
-        print x
-    print "\n Size of info: " + str(len(info))
-
-
+        if (x["Status"]["isAbstractTitleEqualToOriginal"] == "True" and x["Abstract"] == "[No abstract available]"):
+            print x
+            counter += 1
+    print "number of missing abstracts is " + str(counter)
 
 info = compareData()
-addAbstract(info)
+inf = addAbstractToData(info)
+findAbstractAbsence(inf)

@@ -21,3 +21,53 @@ Result of the meta retrieval:
 [9000:11060]= 2038/2060 retrieved - meta5.json
 
 [0:11060]   = 10980/11060   retrieved = 99.27% meta.json
+
+When the meta title is equal to the original title the JSON format is like the one below. However the abstract is only
+added when the abstract title and the original title is equal to each other. The JSON format is:
+JSON format: {
+                'Title'         : 'String',
+                'Year'          : 'String',
+                'Type'          : 'String',
+                'Publisher'     : 'String',
+                'Abstract'      : 'String',
+                'DOI'           : 'String',
+                'URL'           : 'String',
+                'OriginalURL'   : 'String',
+                'ISSN'          : ["String", "String", "..."],
+                'Subject'       : ["String", "String", "..."],
+                'Author'        : [
+                                    { 'Last name': 'String', 'First name': 'String'},
+                                    { 'Last name': 'String', 'First name': 'String'},
+                                    { ... }
+                                  ],
+                'Status':
+                    {
+                        'isAbstractTitleEqualToOriginal': 'Checking abstract title against original title',
+                        'isMetaTitleEqualToOriginal'    : 'Checking meta title against the original title',
+                        'isMetaYearEqualToOriginal'     : 'Checking meta year against the original year'
+                    },
+            }
+
+
+i.e to check how many abstracts we have, we have to do a check of:
+- json["Status]["isAbstractTitleEqualToOriginal] == "True" and
+- json["Abstract"] != "[No abstract available]"
+
+###############################################################################
+###############################################################################
+
+When the meta title is different from the original (the abstract might be added if the abstract title is equal to the
+original) the JSON format will look like this below:
+JSON format: {
+                'Title'         : 'String',
+                'Meta title'    : 'String',
+                'Year'          : 'String',
+                ('Abstract'     : 'String',)
+                'Status':
+                    {
+                        'isAbstractTitleEqualToOriginal': 'Checking abstract title against original title',
+                        'isMetaTitleEqualToOriginal'    : 'Checking meta title against the original title',
+                        'isMetaYearEqualToOriginal'     : 'Checking meta year against the original year'
+                    },
+
+}

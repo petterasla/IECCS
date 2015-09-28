@@ -10,7 +10,7 @@ Result of the abstracts retrieval:
 [8000:10000]    = 1447/2000 retrieved   - abstract7.json
 [10000:11060]   = 761/1060 retrieved    - abstract8.json
 
-[0:11060]       = 8210/11060 retrieved = 74.23%
+[0:11060]       = 8210/11060 retrieved = 74.23% abstracts.json
 
 
 Result of the meta retrieval:
@@ -20,4 +20,4 @@ Result of the meta retrieval:
 [6000:9000] = 2984/3000 retrieved - meta4.json
 [9000:11060]= 2038/2060 retrieved - meta5.json
 
-[0:11060]   = 10980/11060   retrieved = 99.27%
+[0:11060]   = 10980/11060   retrieved = 99.27% meta.json

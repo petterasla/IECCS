@@ -8,6 +8,7 @@
 #downloader = ArticleDownloader('7dca2bf4cf2dddf69241416cece3d02a')
 
 import re
+import json
 
 def getArticleInfo(doc_name):
     articleInfo = []
@@ -68,6 +69,10 @@ def importArticleAbstracts(doc_name):
     print(articleInfo[366][5])
     f.close()
 
+    with open('abstracts_full.json', 'w') as outfile:
+        json.dump(articleInfo, outfile)
+        outfile.close()
+
 def list_duplicates_of(seq,item):
     start_at = -1
     locs = []
@@ -105,4 +110,4 @@ def generateMetaURLs():
         URLs.append(generateMetaURL(title[2]))
     return URLs
 
-importArticleAbstracts("../../../tcp_abstracts.txt")
+#importArticleAbstracts("../../../tcp_abstracts.txt")

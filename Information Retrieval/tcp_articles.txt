@@ -15875,8 +15875,7 @@ SYSTEMS
 9269,2008,POSITIVE EFFECTS OF NATURAL HAZARDS ON CULTURAL HERITAGE IN
 ROMANIA
 9270,2008,The issue of Carbon dioxide emission in Poland
-9271,2008,Study of the simulated heat affected zone of creep resistant
-9-12% advanced chromium steel
+9271,2008,Study of the simulated heat affected zone of creep resistant 9-12% advanced chromium steel
 9272,2008,Somali Jet Changes under the Global Warming
 9273,2008,Environmental assessment of digestibility improvement factors
 applied in animal production
@@ -17096,8 +17095,7 @@ Chile) to economically important arthropods
 driven by coastal construction at Mokpo Coastal Zone in Korea
 9921,2009,European rain rate modulation enhanced by changes in the NAO
 and atmospheric circulation regimes
-9922,2009,Can Brazil replace 5% of the 2025 gasoline world demand with
-ethanol?
+9922,2009,Can Brazil replace 5% of the 2025 gasoline world demand with ethanol?
 9923,2009,A novel approach for treatment of CO(2) from fossil fired
 power plants, Part A: The integrated systems ITRPP
 9924,2009,A new framework for isolating individual feedback processes in
@@ -17758,8 +17756,7 @@ cold days in the CNRM-CM3 global climate model
 Economic Indicators
 10270,2009,Bioethanol as a Vehicular Fuel: A Critical Review
 10271,2009,The Sustainability of Biofuels Depends on International Trade
-10272,2009,Emission Characteristics of a Diesel Engine Fueled by 25%
-Sunflower Oil Methyl Ester and 75% Diesel Fuel Blend
+10272,2009,Emission Characteristics of a Diesel Engine Fueled by 25% Sunflower Oil Methyl Ester and 75% Diesel Fuel Blend
 10273,2009,Landscape-scale Expansion of Roesel's bush-cricket
 Metrioptera roeselii at the North-western Range Limit in Central Europe
 (Orthoptera: Tettigoniidae)
@@ -21801,8 +21798,7 @@ significant global warming regardless of different approaches
 12367,2011,Global warming and hurricanes: the potential impact of
 hurricane intensification and sea level rise on coastal flooding
 12368,2011,The first step towards a 100% renewable energy-system for Ireland
-12369,2011,Does global warming threaten the dynamics of Arctic charr in
-Lake Geneva?
+12369,2011,Does global warming threaten the dynamics of Arctic charr in Lake Geneva?
 12370,2011,Gap-free fibre laser welding of Zn-coated steel on Al alloy
 for light-weight automotive applications
 12371,2011,Predictions based on the cumulative curves: Basic principles

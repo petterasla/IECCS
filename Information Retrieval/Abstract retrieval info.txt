@@ -49,6 +49,10 @@ JSON format: {
             }
 
 
+###############################################################################
+###############################################################################
+
+
 i.e to check how many abstracts we have, we have to do a check of:
 - json["Status]["isAbstractTitleEqualToOriginal] == "True" and
 - json["Abstract"] != "[No abstract available]"

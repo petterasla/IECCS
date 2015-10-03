@@ -1,26 +1,13 @@
 Abstract retrieval
-Result of the abstracts retrieval:
-
-[0:1000] 	    = 756/1000 retrieved    - abstracts.json
-[1000:2000]     = 777/1000 retrieved    - abstract2.json
-[2000:3000]     = 734/1000 retrieved    - abstract3.json
-[3000:4000]     = 731/1000 retrieved    - abstract4.json
-[4000:5000]     = 784/1000 retrieved    - abstract5.json
-[5000:8000]     = 2220/3000 retrieved   - abstract6.json
-[8000:10000]    = 1447/2000 retrieved   - abstract7.json
-[10000:11060]   = 761/1060 retrieved    - abstract8.json
+Result of the abstracts retrieval crawl:
 
 [0:11060]       = 8210/11060 retrieved = 74.23% abstracts.json
 
 
-Result of the meta retrieval:
-[0:1000]    = 994/1000  retrieved - meta.json
-[1000:5000] = 3968/4000 retrieved - meta2.json
-[5000:6000] = 996/1000  retrieved - meta3.json
-[6000:9000] = 2984/3000 retrieved - meta4.json
-[9000:11060]= 2038/2060 retrieved - meta5.json
+Result of the meta retrieval crawl:
 
 [0:11060]   = 10980/11060   retrieved = 99.27% meta.json
+
 
 When the meta title is equal to the original title the JSON format is like the one below. However the abstract is only
 added when the abstract title and the original title is equal to each other. The JSON format is:
@@ -42,7 +29,6 @@ JSON format: {
                                   ],
                 'Status':
                     {
-                        'isAbstractTitleEqualToOriginal': 'Checking abstract title against original title',
                         'isMetaTitleEqualToOriginal'    : 'Checking meta title against the original title',
                         'isMetaYearEqualToOriginal'     : 'Checking meta year against the original year'
                     },
@@ -66,10 +52,8 @@ JSON format: {
                 'Title'         : 'String',
                 'Meta title'    : 'String',
                 'Year'          : 'String',
-                ('Abstract'     : 'String',)
                 'Status':
                     {
-                        'isAbstractTitleEqualToOriginal': 'Checking abstract title against original title',
                         'isMetaTitleEqualToOriginal'    : 'Checking meta title against the original title',
                         'isMetaYearEqualToOriginal'     : 'Checking meta year against the original year'
                     },

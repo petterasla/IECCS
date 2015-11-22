@@ -80,3 +80,7 @@ def generateMetaURLs():
     for title in articles:
         URLs.append(generateMetaURL(title[2]))
     return URLs
+
+
+#articleInfo = getArticleInfo("../../../tcp_articles.txt")
+#print len(articleInfo)

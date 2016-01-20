@@ -59,7 +59,7 @@ def getCategoryData():
     data = getData()
     return data.Cat
 
-def getEndorsemeentData():
+def getEndorsementData():
     """
 
     :return:        A Series - pandas.core.series.Series
@@ -97,7 +97,7 @@ def getAbstractData():
         abstracts_list.append(abstract.replace("|", ","))
     return pd.DataFrame(abstracts_list, columns=["Abstract"]).Abstract
 
-#print getAbstractData().Abstract.tolist()[0]
+
 #*****************************                      ****************************
 def getLabelPropTopicData(topic):
     """

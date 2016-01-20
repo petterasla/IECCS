@@ -1,3 +1,4 @@
+
 """
 SVC
 Implementation of Support Vector Machine classifier using libsvm: the kernel can be non-linear but its SMO algorithm
@@ -13,7 +14,7 @@ regularization regimes.
 """
 
 from __future__ import print_function
-
+import System.DataProcessing.process_data as ptd
 from pprint import pprint
 from time import time
 import logging
@@ -26,7 +27,7 @@ from sklearn.svm import LinearSVC, SVC
 from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import Pipeline
 
-print(__doc__)
+#print(__doc__)
 
 # Display progress logs on stdout
 logging.basicConfig(level=logging.INFO,
@@ -39,9 +40,10 @@ logging.basicConfig(level=logging.INFO,
 # Uncomment the following to do the analysis on all the categories
 #categories = None
 
+data = ptd.getAbstractData()
 
-print("%d documents" % len(data.filenames))
-print("%d categories" % len(data.target_names))
+print("%d documents" % len(data))
+print("%d categories" % 3)
 print()
 
 ###############################################################################
@@ -50,22 +52,22 @@ print()
 pipeline = Pipeline([
     ('vect', CountVectorizer()),
     ('tfidf', TfidfTransformer()),
-    ('clf', SGDClassifier()),
+    ('clf', LinearSVC()),
 ])
 
 # uncommenting more parameters will give better exploring power but will
 # increase processing time in a combinatorial way
 parameters = {
-    'vect__max_df': (0.5, 0.75, 1.0),
+    'vect__analyzer': ['word'],
     #'vect__max_features': (None, 5000, 10000, 50000),
-    'vect__ngram_range': ((1, 1), (1, 2)),  # unigrams or bigrams
-    #'tfidf__use_idf': (True, False),
+    'vect__ngram_range': [(1, 1), (1,2)],
+    'tfidf__use_idf': (True, False),
     #'tfidf__norm': ('l1', 'l2'),
-    'clf__alpha': (0.00001, 0.000001),
-    'clf__penalty': ('l2', 'elasticnet'),
+    #'clf__alpha': (0.00001, 0.000001),
+    'clf__C': [1.0],
     #'clf__n_iter': (10, 50, 80),
-}
 
+}
 if __name__ == "__main__":
     # multiprocessing requires the fork to happen in a __main__ protected
     # block
@@ -79,7 +81,7 @@ if __name__ == "__main__":
     print("parameters:")
     pprint(parameters)
     t0 = time()
-    grid_search.fit(data.data, data.target)
+    grid_search.fit(data.tolist(), ptd.getEndorsementData().tolist())
     print("done in %0.3fs" % (time() - t0))
     print()
 

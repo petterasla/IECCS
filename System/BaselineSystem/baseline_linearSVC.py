@@ -15,21 +15,21 @@ abstracts = ptd.getAbstractData()
 endorsement_data = ptd.getEndorsementData()
 target_data = []
 for endorse in endorsement_data.tolist():
-    target_data.append(ptd.getAbstractStance('soft'), endorse)
+    target_data.append(ptd.getAbstractStance('soft', endorse))
 
 cv = StratifiedKFold(target_data, n_folds=7, shuffle=True,
                      random_state=1)
-classifiers = [LinearSVC(C=''), MultinomialNB()]
+classifiers = [LinearSVC(C=1.0), MultinomialNB()]
 
 for clf in classifiers:
     print 80 * "="
-    print clf.tostring()
+    print clf
     print 80 * "="
 
     pipeline = Pipeline([('vect', CountVectorizer(decode_error='ignore',
-                                                  analyzer='',
-                                                  ngram_range='',
-                                                  stop_words=,
+                                                  analyzer='word',
+                                                  ngram_range=(1,1),
+                                                  stop_words=None,
                                                   max_features=None)),
                          ('clf', clf)])
 
@@ -39,7 +39,7 @@ for clf in classifiers:
     print classification_report(target_data, pred_stances, digits=4)
 
     macro_f = fbeta_score(target_data, pred_stances, 1.0,
-                          labels=['AGAINST', 'FAVOR'], average='macro')
+                          labels=['AGAINST', 'FAVOR', 'NONE'], average='macro')
 
     print 'macro-average of F-score(FAVOR) and F-score(AGAINST): {:.4f}\n'.format(macro_f)
 

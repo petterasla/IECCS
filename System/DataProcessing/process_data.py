@@ -98,7 +98,45 @@ def getAbstractData():
     return pd.DataFrame(abstracts_list, columns=["Abstract"]).Abstract
 
 
-#*****************************                      ****************************
+#*****************************                      **********************************
+#*************************************************************************************
+
+def getAbstractStance(strength, endorsement):
+    """
+    Converts the endorsement level of the abstract as favor, against or none depending the strength limit
+
+    :param strength:        String that should decide the strength of stance of the abstract ['soft, 'medium', 'hard']
+    :param endorsement:     Integer level of endrosement
+    :return:                A string with the proper stance
+    """
+
+    # 7 levels of endorsement. See paper for further explanation.
+    if strength=="soft":
+        if endorsement <= 3:
+            return "FAVOR"
+        elif endorsement >= 5:
+            return "AGAINST"
+        else:
+            return "NONE"
+    elif strength == "medium":
+        if endorsement < 3:
+            return "FAVOR"
+        elif endorsement > 5:
+            return "AGAINST"
+        else:
+            return "NONE"
+    else:
+        if endorsement < 2:
+            return "FAVOR"
+        elif endorsement > 6:
+            return "AGAINST"
+        else:
+            return "NONE"
+
+#endorse = getEndorsementData().tolist()
+#print endorse[:25]
+#print getAbstractStance('soft', endorse[6])
+
 def getLabelPropTopicData(topic):
     """
     Extracts the data from a given topic

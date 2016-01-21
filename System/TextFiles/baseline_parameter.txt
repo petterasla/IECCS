@@ -1,0 +1,9 @@
+parameters = {
+    'vect__analyzer': ['word', 'char', 'char_wb'],
+    'vect__ngram_range': [(1, 1), (1,2), (2,2), (1,3), (3,3)],
+    'vect__stop_words': ['english', None],
+    'vect__max_features': (None, 5000, 10000, 50000),
+    'tfidf__use_idf': (True, False),
+    'clf__C': [1.0, 10.0],
+}
+

@@ -40,9 +40,14 @@ logging.basicConfig(level=logging.INFO,
 # Uncomment the following to do the analysis on all the categories
 #categories = None
 
-data = ptd.getAbstractData()
+abstracts = ptd.getAbstractData().tolist()
+endorsement = ptd.getEndorsementData().tolist()
+labels = []
+for endorse in endorsement:
+    labels.append(ptd.getAbstractStance('soft', endorse))
 
-print("%d documents" % len(data))
+
+print("%d documents" % len(abstracts))
 print("%d categories" % 3)
 print()
 
@@ -58,15 +63,12 @@ pipeline = Pipeline([
 # uncommenting more parameters will give better exploring power but will
 # increase processing time in a combinatorial way
 parameters = {
-    'vect__analyzer': ['word'],
-    #'vect__max_features': (None, 5000, 10000, 50000),
-    'vect__ngram_range': [(1, 1), (1,2)],
+    'vect__analyzer': ['word', 'char', 'char_wb'],
+    'vect__ngram_range': [(1, 1), (1,2), (2,2), (1,3), (2,3),(3,3)],
+    'vect__stop_words': ['english', None],
+    'vect__max_features': (None, 5000, 10000, 50000),
     'tfidf__use_idf': (True, False),
-    #'tfidf__norm': ('l1', 'l2'),
-    #'clf__alpha': (0.00001, 0.000001),
-    'clf__C': [1.0],
-    #'clf__n_iter': (10, 50, 80),
-
+    'clf__C': [1.0, 10.0],
 }
 if __name__ == "__main__":
     # multiprocessing requires the fork to happen in a __main__ protected
@@ -81,7 +83,7 @@ if __name__ == "__main__":
     print("parameters:")
     pprint(parameters)
     t0 = time()
-    grid_search.fit(data.tolist(), ptd.getEndorsementData().tolist())
+    grid_search.fit(abstracts, labels)
     print("done in %0.3fs" % (time() - t0))
     print()
 

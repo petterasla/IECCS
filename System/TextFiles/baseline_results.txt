@@ -1,0 +1,38 @@
+21. January:
+
+################################################################################
+################################################################################
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+================================================================================
+tfidf__use_idf: True, vect__analyzer: 'word', vect__max_features: None
+vect__ngram_range: (1, 3), vect__stop_words: None
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        77
+      FAVOR     0.6960    0.7239    0.7097      3897
+       NONE     0.8583    0.8498    0.8540      7968
+
+avg / total     0.7998    0.8032    0.8014     11942
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5212
+
+================================================================================
+tfidf__use_idf: False, vect__analyzer: 'word', vect__max_features: None
+vect__ngram_range: (1, 3), vect__stop_words: None
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        77
+      FAVOR     0.7157    0.6846    0.6998      3897
+       NONE     0.8451    0.8712    0.8580      7968
+
+avg / total     0.7974    0.8047    0.8008     11942
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5193
+
+################################################################################
+################################################################################

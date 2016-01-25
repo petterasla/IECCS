@@ -31,6 +31,7 @@ for clf in classifiers:
                                                   ngram_range=(1,1),
                                                   stop_words=None,
                                                   max_features=None)),
+                         ('tfidf', TfidfTransformer(use_idf=True)),
                          ('clf', clf)])
 
     pred_stances = cross_val_predict(pipeline, abstracts,
@@ -41,7 +42,7 @@ for clf in classifiers:
     macro_f = fbeta_score(target_data, pred_stances, 1.0,
                           labels=['AGAINST', 'FAVOR', 'NONE'], average='macro')
 
-    print 'macro-average of F-score(FAVOR) and F-score(AGAINST): {:.4f}\n'.format(macro_f)
+    print 'macro-average of F-score(FAVOR), F-score(AGAINST) and F-score (NONE): {:.4f}\n'.format(macro_f)
 
 
 

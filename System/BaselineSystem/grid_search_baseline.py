@@ -24,6 +24,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.linear_model import SGDClassifier
 from sklearn.svm import LinearSVC, SVC
+from sklearn.naive_bayes import MultinomialNB
 from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import Pipeline
 
@@ -57,18 +58,22 @@ print()
 pipeline = Pipeline([
     ('vect', CountVectorizer()),
     ('tfidf', TfidfTransformer()),
-    ('clf', LinearSVC()),
+    #('clf', MultinomialNB()),
+    #('clf', LinearSVC()),
+    ('clf', SVC()),
 ])
 
 # uncommenting more parameters will give better exploring power but will
 # increase processing time in a combinatorial way
 parameters = {
-    'vect__analyzer': ['word', 'char', 'char_wb'],
-    'vect__ngram_range': [(1, 1), (1,2), (2,2), (1,3), (2,3),(3,3)],
-    'vect__stop_words': ['english', None],
-    'vect__max_features': (None, 5000, 10000, 50000),
+    'vect__analyzer': ['word'],
+    'vect__ngram_range': [(1, 1), (1,2), (1,3)],
+    'vect__stop_words': [None, 'english'],
+    'vect__max_features': (None, 50000),
     'tfidf__use_idf': (True, False),
-    'clf__C': [1.0, 10.0],
+    'clf__kernel': ['rbf', 'linear', 'poly', 'sigmoid'],
+    'clf__shrinking': (True, False),
+    'clf__decision_function_shape': ['ovo', 'ovr', None]
 }
 if __name__ == "__main__":
     # multiprocessing requires the fork to happen in a __main__ protected

@@ -1,0 +1,7 @@
+25 januar:
+- Kjører exhaustive grid search for classifierne SVC og multinomialNB. Har allerede kjørt for linearSVC, dette tok 5.5
+timer, men virker til å faktisk finne beste parametrene. F-score ligger på 52.12 som beste baseline resultat så langt.
+Tenkte å gjøre dette for å ha en baseline med de tre classifierne. Planen var å lagre resultatene i
+System/TextFiles/baseline_results.txt og tilhørende beste parametre i System/TextFiles/baseline_parameter.txt.
+Resultatene kommer fra baseline_system.py, men denne gangen har jeg inkludert "NONE" i f-score, uten at jeg vet helt hva
+det utgjør i forhold til resultatene.

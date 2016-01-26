@@ -34,7 +34,16 @@ parameters =
     'vect__ngram_range': [(1, 1), (1, 2), (2, 2), (1, 3), (2, 3)],
     'vect__stop_words': ['english', None]}
 }
+done in 8170.573s
 
+Best score: 0.778
+Best parameters set:
+	clf__alpha: 0.5
+	tfidf__use_idf: True
+	vect__analyzer: 'word'
+	vect__max_features: 10000
+	vect__ngram_range: (2, 3)
+	vect__stop_words: 'english'
 
 ==================================================================================
 SVC
@@ -50,3 +59,14 @@ parameters =
      'vect__ngram_range': [(1, 1), (1, 2), (1, 3)],
      'vect__stop_words': [None, 'english']
  }
+ done in 93953.645s = 1 døgn, 1 time.
+ Best score: 0.799
+ Best parameters set:
+ 	clf__decision_function_shape: 'ovo'
+ 	clf__kernel: 'linear'
+ 	clf__shrinking: True
+ 	tfidf__use_idf: True
+ 	vect__analyzer: 'word'
+ 	vect__max_features: None
+ 	vect__ngram_range: (1, 3)
+ 	vect__stop_words: None

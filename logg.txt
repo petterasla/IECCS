@@ -5,3 +5,11 @@ Tenkte å gjøre dette for å ha en baseline med de tre classifierne. Planen var
 System/TextFiles/baseline_results.txt og tilhørende beste parametre i System/TextFiles/baseline_parameter.txt.
 Resultatene kommer fra baseline_system.py, men denne gangen har jeg inkludert "NONE" i f-score, uten at jeg vet helt hva
 det utgjør i forhold til resultatene.
+
+26. januar:
+- Fortsatt kjører for å finne parametre til SVC. Ble ferdig, men fikk ikke resultater pga maccen gikk i dvale. Tok rolig
+25 timer. Har ellers begynt å skrive på rapporten til SemEval 2016. Bare skrevet stikk-setninger for å få noe ned på
+"papiret". Dette ligger på sharelatex.
+TULLA. FIkk ut parametre allikevel :D Lagrer dem i baseline_parameter.txt.
+Lagrer resultatet etter å ha kjørt med parametre i baseline_results.txt. Det jeg har jobbet med har ligget i
+baseline branchen. Merger dette inn i master.

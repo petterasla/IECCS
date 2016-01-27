@@ -19,7 +19,11 @@ for endorse in endorsement_data.tolist():
 
 cv = StratifiedKFold(target_data, n_folds=7, shuffle=True,
                      random_state=1)
-classifiers = [LinearSVC(C=1.0), MultinomialNB()]
+classifiers = [
+    #LinearSVC(C=1.0),
+    SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
+#    MultinomialNB(alpha=0.5)
+]
 
 for clf in classifiers:
     print 80 * "="
@@ -28,7 +32,7 @@ for clf in classifiers:
 
     pipeline = Pipeline([('vect', CountVectorizer(decode_error='ignore',
                                                   analyzer='word',
-                                                  ngram_range=(1,1),
+                                                  ngram_range=(1,3),
                                                   stop_words=None,
                                                   max_features=None)),
                          ('tfidf', TfidfTransformer(use_idf=True)),

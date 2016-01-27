@@ -1,0 +1,16 @@
+Submission details:
+
+1 - Team ID: 				IDI@NTNU
+2 - Team affiliation:		Norwegian University of Science and Technology
+3 - Contact information: 	
+	- Address: Sem Sælands vei 9, Gløshaugen NTNU, 7491 Trondheim, Norway. 
+	- Department for Computer and Information Science
+	- Erwin Marsi (emarsi@idi.ntnu.no) or Petter Asla (pettefas@stud.ntnu.no) 
+
+4 - System specifications:
+	4.1 - Supervised
+	4.2 - Core approach: Using a voting classifier to predict the stance based on best probability of three different classifiers: Logistic Regression, Multinomial Naive Bayes (characters), Multinomial Naive Bayes(words).
+	4.3 - Feature used: Normal term count with word bigrams and character trigrams with lowercase true and min_df 5 (ignoring terms that have strictly lower count than given threshold). Publically available GloVe (http://nlp.stanford.edu/projects/glove/)) used for creating vectors for all words in a tweet, sum them to get a vector representation of the tweet and use that as feature. 
+	4.4 - Resources: Downloaded pre-trained word vectors available from GloVe (http://nlp.stanford.edu/projects/glove/).
+	4.5 - Tools used: Python and the scikit-learn library (http://scikit-learn.org/stable/) 
+	4.6 - Significan pre/post-processing: Finding the best weights for voting classifier based on cross val f-score.

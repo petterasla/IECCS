@@ -94,10 +94,11 @@ def getAbstractData():
     abstracts = getRawAbstractData()
     abstracts_list = []
     for abstract in abstracts:
-        abstracts_list.append(abstract.replace("|", ","))
+        string = abstract.replace("|", ",")
+        abstracts_list.append(re.sub('<[^>]*>', '', string))
     return pd.DataFrame(abstracts_list, columns=["Abstract"]).Abstract
 
-
+getAbstractData()
 #*****************************                      **********************************
 #*************************************************************************************
 

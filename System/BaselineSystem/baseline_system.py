@@ -6,6 +6,7 @@ from sklearn.pipeline import Pipeline, FeatureUnion, make_pipeline, make_union
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, TfidfVectorizer
 from sklearn.svm import SVC, LinearSVC
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.dummy import DummyClassifier
 from sklearn.metrics import classification_report
 from sklearn.cross_validation import cross_val_predict, StratifiedKFold
 from sklearn.metrics import fbeta_score
@@ -20,9 +21,11 @@ for endorse in endorsement_data.tolist():
 cv = StratifiedKFold(target_data, n_folds=7, shuffle=True,
                      random_state=1)
 classifiers = [
+    DummyClassifier(strategy='stratified', random_state=None, constant=None),
+    DummyClassifier(strategy='most_frequent', random_state=None, constant=None)
     #LinearSVC(C=1.0),
-    SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
-#    MultinomialNB(alpha=0.5)
+    #SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
+    #MultinomialNB(alpha=0.5)
 ]
 
 for clf in classifiers:

@@ -13,3 +13,14 @@ det utgjør i forhold til resultatene.
 TULLA. FIkk ut parametre allikevel :D Lagrer dem i baseline_parameter.txt.
 Lagrer resultatet etter å ha kjørt med parametre i baseline_results.txt. Det jeg har jobbet med har ligget i
 baseline branchen. Merger dette inn i master.
+
+
+28. januar:
+- Snakket med Erwin om hva vi gjorde, kunne gjort, hva vi skal og planen videre. Alt ligger på wiki-siden. Kort sagt
+blir det å jobbe mot paper til 26. februar og samtidig jobbe med skeptical science data. Vi endte på 10. (av 19) plass
+i SemEval konkurranse *klapp klapp*.
+
+29. januar:
+- Inkluder dummy classifiers med "stratified": generates predictions by respecting the training set’s class distribution
+og "most_frequent": classen som er mest representert blir alltid valgt. Resultatene lagt inn baseline_results.txt.
+Viste seg at most_frequent ikke ble så bra allikevel. Beste res er med SVM og Linear SVM (52 %). Time to beat that..

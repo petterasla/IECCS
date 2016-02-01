@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'retrieval.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'retrieval (+http://www.yourdomain.com)'
+USER_AGENT = 'retrieval of abstracts (+https://www.ntnu.no/wiki/pages/viewpage.action?pageId=84877344)'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 CONCURRENT_REQUESTS=8

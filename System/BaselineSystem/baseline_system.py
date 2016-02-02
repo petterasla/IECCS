@@ -1,5 +1,8 @@
+# Fix path for use in terminal ###
 import sys
-sys.path.append("/Users/Henrik/Documents/Datateknikk/Prosjektoppgave/IECCS/")
+import os
+sys.path.append(os.path.abspath(__file__ + "/../../../"))
+###
 
 import pandas as pd
 import System.DataProcessing.process_data as ptd

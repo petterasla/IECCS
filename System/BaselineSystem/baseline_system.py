@@ -1,3 +1,6 @@
+import sys
+sys.path.append("/Users/Henrik/Documents/Datateknikk/Prosjektoppgave/IECCS/")
+
 import pandas as pd
 import System.DataProcessing.process_data as ptd
 import numpy as np

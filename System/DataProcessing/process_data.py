@@ -32,7 +32,7 @@ def getData():
 
     :return:        A DataFrame
     """
-    return pd.read_csv("../TextFiles/tcp_abstracts.txt")
+    return pd.read_csv("System/TextFiles/tcp_abstracts.txt")
 
 def getIdData():
     """

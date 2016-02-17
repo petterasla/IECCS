@@ -1,0 +1,190 @@
+********************************************************************************
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+use_upsample = 0
+
+Henriks macbook air
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        77
+      FAVOR     0.7221    0.6736    0.6970      3897
+       NONE     0.8417    0.8775    0.8592      7968
+
+avg / total     0.7973    0.8053    0.8008     11942
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5188
+
+time = 560.31556797
+
+
+********************************************************************************
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+use_upsample = 1
+
+Henriks macbook air
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.9818    0.3506    0.5167       154
+      FAVOR     0.7197    0.6726    0.6953      3897
+       NONE     0.8391    0.8764    0.8573      7968
+
+avg / total     0.8022    0.8036    0.8004     12019
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.6898
+
+time = 409.560879946
+
+********************************************************************************
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+use_upsample = 0
+use_downsample = 1
+
+Henriks macbook air
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.5000    0.0260    0.0494        77
+      FAVOR     0.6703    0.6240    0.6463       984
+       NONE     0.8073    0.8647    0.8350      1981
+
+avg / total     0.7552    0.7656    0.7541      3042
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5102
+
+time = 52.1092910767
+
+********************************************************************************
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+use_upsample = 1
+use_downsample = 1
+
+downsample_rate_favor = 2
+downsample_rate_none  = 4
+
+Henriks macbook air
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.9559    0.8442    0.8966       154
+      FAVOR     0.6929    0.6352    0.6628       984
+       NONE     0.8212    0.8627    0.8415      1981
+
+avg / total     0.7874    0.7900    0.7878      3119
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.8003
+
+time = 46.429131031
+
+********************************************************************************
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+use_upsample = 1
+use_downsample = 1
+
+downsample_rate_favor = 1
+downsample_rate_none  = 2
+
+Henriks macbook air
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.9300    0.6039    0.7323       154
+      FAVOR     0.7015    0.6549    0.6774      1927
+       NONE     0.8319    0.8697    0.8504      3999
+
+avg / total     0.7930    0.7949    0.7926      6080
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.7534
+
+time = 101.166585922
+
+********************************************************************************
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+ use_upsample = 1
+ use_downsample = 1
+
+ downsample_rate_favor = 3
+ downsample_rate_none  = 6
+
+ Henriks macbook air
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.9216    0.9156    0.9186       154
+      FAVOR     0.7038    0.5775    0.6344       613
+       NONE     0.8190    0.8856    0.8510      1364
+
+avg / total     0.7933    0.7992    0.7936      2131
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.8013
+
+time =  31.2959811687
+
+********************************************************************************
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+ use_upsample = 1
+ use_downsample = 1
+
+ downsample_rate_favor = 3
+ downsample_rate_none  = 10
+
+ Henriks macbook air
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.9470    0.9286    0.9377       154
+      FAVOR     0.7197    0.6073    0.6587       410
+       NONE     0.8038    0.8734    0.8372       774
+
+avg / total     0.7945    0.7982    0.7941      1338
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.8112
+
+time =  19.4052817822
+
+Testing with unused data:
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000         0
+      FAVOR     0.4708    0.2666    0.3405     11532
+       NONE     0.4764    0.6738    0.5581     11168
+
+avg / total     0.4735    0.4670    0.4475     22700
+
+macro-average of F-score(FAVOR), and F-score(NONE): 0.4493
+********************************************************************************

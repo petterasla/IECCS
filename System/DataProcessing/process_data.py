@@ -5,7 +5,7 @@ import urllib
 import nltk
 from nltk.stem.porter import PorterStemmer
 from nltk.stem.wordnet import WordNetLemmatizer
-#from nltk.sentiment import vader as vader
+from nltk.sentiment import vader as vader
 from bs4 import BeautifulSoup
 from scipy import sparse
 # When using vader.SentimentIntensityAnalyzer() sentiment methods, you might have to download and store this in
@@ -34,6 +34,7 @@ def getData():
     """
     return pd.read_csv("../TextFiles/tcp_abstracts.txt")
 
+
 def getIdData():
     """
 
@@ -51,6 +52,7 @@ def getYearData():
     data = getData()
     return data.Year
 
+
 def getCategoryData():
     """
 
@@ -59,6 +61,7 @@ def getCategoryData():
     data = getData()
     return data.Cat
 
+
 def getEndorsementData():
     """
 
@@ -66,6 +69,7 @@ def getEndorsementData():
     """
     data = getData()
     return data.Endorse
+
 
 def getTitleData():
     """
@@ -85,6 +89,7 @@ def getRawAbstractData():
     data = getData()
     return data.Abstract
 
+
 def getAbstractData():
     """
     Extracts the abstracts, and convert '|' to ',' in the text due to the original file that was stores as CSV.
@@ -97,10 +102,93 @@ def getAbstractData():
         string = abstract.replace("|", ",")
         abstracts_list.append(re.sub('<[^>]*>', '', string))
     return pd.DataFrame(abstracts_list, columns=["Abstract"]).Abstract
+#getAbstractData()
 
-getAbstractData()
-#*****************************                      **********************************
-#*************************************************************************************
+
+def getAgainstAbstracts(strength):
+    """
+    Returns all abstracts labeled against based on stregth.
+
+    :return:        A Series - pandas.core.series.Series
+    """
+    data = getData()
+    abstracts = []
+
+    for abstract, endorsement in (zip(data.Abstract, data.Endorse)):
+        if strength=="soft":
+            if endorsement >= 5:
+                string = abstract.replace("|", ",")
+                abstracts.append(re.sub('<[^>]*>', '', string))
+
+        elif strength == "medium":
+            if endorsement > 5:
+                string = abstract.replace("|", ",")
+                abstracts.append(re.sub('<[^>]*>', '', string))
+
+        else:
+            if endorsement > 6:
+                string = abstract.replace("|", ",")
+                abstracts.append(re.sub('<[^>]*>', '', string))
+
+    return pd.DataFrame(abstracts, columns=["Abstract"]).Abstract, ["AGAINST" for i in range(len(abstracts))]
+
+
+def getDownsample(label, strength, sample_rate):
+    """
+    Returns downsampled amount of abstracts based on label.
+
+    :return:        A Series - pandas.core.series.Series
+    """
+    data = getData()
+    abstracts = []
+    test_abstracts = []
+    rate_count = 0
+
+    for abstract, endorsement in (zip(data.Abstract, data.Endorse)):
+        if getAbstractStance(strength, endorsement) == label and rate_count % sample_rate == 0:
+            string = abstract.replace("|", ",")
+            abstracts.append(re.sub('<[^>]*>', '', string))
+        else:
+            string = abstract.replace("|", ",")
+            test_abstracts.append(re.sub('<[^>]*>', '', string))
+        rate_count += 1
+
+    return pd.DataFrame(abstracts, columns=["Abstract"]).Abstract, [label for i in range(len(abstracts))], \
+           pd.DataFrame(test_abstracts, columns=["Abstract"]).Abstract, [label for i in range(len(test_abstracts))]
+
+
+def getAbstractStanceVsNoStance(strength, endorsement):
+    """
+    Converts the endorsement level of the abstract as favor, against or none depending the strength limit
+
+    :param strength:        String that should decide the strength of stance of the abstract ['soft, 'medium', 'hard']
+    :param endorsement:     Integer level of endrosement
+    :return:                A string with the proper stance
+    """
+
+    # 7 levels of endorsement. See paper for further explanation.
+    if strength=="soft":
+        if endorsement <= 3:
+            return "STANCE"
+        elif endorsement >= 5:
+            return "STANCE"
+        else:
+            return "NONE"
+    elif strength == "medium":
+        if endorsement < 3:
+            return "STANCE"
+        elif endorsement > 5:
+            return "STANCE"
+        else:
+            return "NONE"
+    else:
+        if endorsement < 2:
+            return "STANCE"
+        elif endorsement > 6:
+            return "STANCE"
+        else:
+            return "NONE"
+
 
 def getAbstractStance(strength, endorsement):
     """
@@ -133,10 +221,10 @@ def getAbstractStance(strength, endorsement):
             return "AGAINST"
         else:
             return "NONE"
-
 #endorse = getEndorsementData().tolist()
 #print endorse[:25]
 #print getAbstractStance('soft', endorse[6])
+
 
 def getLabelPropTopicData(topic):
     """
@@ -154,7 +242,6 @@ def getLabelPropTopicData(topic):
         if data[i][1] == topic:
             topicData.append(data[i])
     return topicData
-
 
 
 
@@ -335,6 +422,7 @@ def processAbstracts():
     return [favor_abstracts, against_abstracts]
 #processAbstracts()
 
+
 def createClimateLexicon(topXwords = 100):
     """
     This method uses (for now) abstracts pulled from The Consensus Project as data to create a lexicon
@@ -402,9 +490,7 @@ def determineNegationFeature(texts):
         else:
             negated.append(float(0))
     return sparse.csr_matrix(negated, dtype='float').T
-
 #print determineNegationFeature(["hei hei hva skjer", "jada daj ladl"])
-
 def lengthOfTweetFeature(texts):
     """
     Creates a normalized feature between 0 and 1 for the length of the tweet
@@ -414,8 +500,8 @@ def lengthOfTweetFeature(texts):
     """
     length = [float(len(text)/140.0) for text in texts]     #Maximunm length of a tweet
     return sparse.csr_matrix(length, dtype='float').T
-
 #print lengthOfTweetFeature(["hei hei hva skjer", "jada daj ladl"])
+
 
 def numberOfTokensFeature(texts):
     """
@@ -446,8 +532,8 @@ def numberOfCapitalWords(texts):
         else:
             capitalWords.append(float(0))
     return sparse.csr_matrix(capitalWords, dtype='float').T
-
 #print numberOfCapitalWords("HEI hvordan Gaar DET!")
+
 
 def numberOfNonSinglePunctMarks(texts):
     """
@@ -483,7 +569,6 @@ def numberOfNonSinglePunctMarks(texts):
         countz.append(float(counter))
 
     return sparse.csr_matrix(countz, dtype='float').T
-
 #numberOfNonSinglePunctMarks(["hei hei!!#%", "Dette er en test !#!"])
 #numberOfNonSinglePunctMarks(["hei !!!",  "ho!?! $$ njsf$$%&!! nofnpr$$$$!?"])
 
@@ -519,9 +604,7 @@ def isExclamationMark(texts):
 
         exlcMark.append(isQuestionMarkOrExclamationMarkLast)
 
-
     return sparse.csr_matrix(exlcMark, dtype='int').T
-
 
 
 def numberOfLengtheningWords(texts):
@@ -560,6 +643,7 @@ def determineSentiment(texts):
         sentiment.append(vader.SentimentIntensityAnalyzer().polarity_scores(text)['compound'] + 1.0)
     return sparse.csr_matrix(sentiment, dtype='float').T
 
+
 def getPOStags(tweet):
     """
     Using the input with help of the NLTK library to return the tweet with part-of-speech tags.
@@ -570,6 +654,7 @@ def getPOStags(tweet):
     # nltk.help.upenn_tagset() to see what each tag means..
     return nltk.pos_tag(tweet)
 
+
 def getNumberOfPronouns(posTaggedTweet):
     """
     Count number of pronouns used in a tweet
@@ -578,6 +663,7 @@ def getNumberOfPronouns(posTaggedTweet):
     :return:                Return number of pronouns as integer
     """
     return float(len([i for (i,x) in posTaggedTweet if x == 'PRP' or x == 'PRP$']))
+
 
 def getPosAndNegWords(tweet):
     """
@@ -626,5 +712,4 @@ def getSkepticalTweets():
         endIndex = text.find('"', startIndex+5)
         tweets.append(text[startIndex:endIndex])
     return tweets
-
 #print getSkepticalTweets()

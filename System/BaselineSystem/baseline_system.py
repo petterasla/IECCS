@@ -1,4 +1,6 @@
 # Fix path for use in terminal ###
+import time
+start_time = time.time()
 import sys
 import os
 sys.path.append(os.path.abspath(__file__ + "/../../../"))
@@ -57,5 +59,4 @@ for clf in classifiers:
 
     print 'macro-average of F-score(FAVOR), F-score(AGAINST) and F-score (NONE): {:.4f}\n'.format(macro_f)
 
-
-
+print("--- %s seconds ---" % (time.time() - start_time))

@@ -1,21 +1,37 @@
 import scrapy
+from scrapy.pipelines.files import FilesPipeline
 import re
 import json
-import import_data
+import import_data as import_data
 from retrieval.items import MetaItem
 
 class MetaSpider(scrapy.Spider):
     name = "meta retrieval"
-    start_urls = import_data.generateMetaURLs()[9000:]
+    start_urls = import_data.generateSearchURLs()[:2]
 
     def parse(self, response):
         item = MetaItem()
-        metaString = re.sub('<[^>]*>', '', response.xpath('//body/p/text()').extract()[0])
-        jsonMetaString = "[" + str(metaString) + "]"
+        url = response.xpath('//a[@title="Show document details"]/@href').extract()[0]
+        print 80 * "="
+        print "URL"
+        print 80 * "="
+        print url
+        print 80 * "#"
+        request = scrapy.Request(url, callback=self.parse_next)
+        request.meta['item'] = item
 
-        metaDict = json.loads(jsonMetaString)[0]
-        item["status"] = metaDict["status"]
-        item["message"] = metaDict["message"]
+        return request
 
-        yield item
-
+    def parse_next(self, response):
+        item = response.meta['item']
+        url = response.url
+        start_index = url.index("eid=") + 4
+        end_index = url.index("&", start_index)
+        eid = url[start_index:end_index]
+        print 80 * "="
+        print "EID"
+        print 80 * "="
+        print eid
+        print 80 * "#"
+        item['url'] = import_data.generateMetaURL(eid)
+        yield FilesPipeline(item['url'])

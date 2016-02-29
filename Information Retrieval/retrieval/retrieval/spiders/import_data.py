@@ -1,5 +1,6 @@
 import re
 import json
+import pandas as pd
 
 #Reading in tcp_articles.txt file and returning a list
 def getArticleInfo(doc_name):
@@ -57,26 +58,36 @@ def list_duplicates_of(seq,item):
             start_at = loc
     return locs
 
-def generateSearchURL(title):
+def generateSearchURL(title, year):
     return "http://www.scopus.com/results/results.url?numberOfFields=0&src=s&clickedLink=&edit=&editSaveSearch=&origin=searchbasic&authorTab=&affiliationTab=&advancedTab=&scint=1&menu=search&tablin=&searchterm1=" + \
-           title + "&field1=TITLE&dateType=Publication_Date_Type&yearFrom=Before+1960&yearTo=Present&loadDate=7&documenttype=All&subjects=LFSC&subjects=HLSC&subjects=PHSC&subjects=SOSC&src=s&st1=" + \
+           title + "&field1=TITLE&dateType=Publication_Date_Type&yearFrom=" + \
+           str(year-1) + "&yearTo=" + \
+           str(year+1) + "&loadDate=7&documenttype=All&subjects=LFSC&subjects=HLSC&subjects=PHSC&subjects=SOSC&src=s&st1=" + \
            title + "&st2=&sot=b&sdt=b&sl=&s=TITLE%28" + \
            title + "%29&sid=&searchId=&txGid=&sort=plf-f&originationType=b&rr=&null="
 
+
 def generateSearchURLs():
-    articles = getArticleInfo("../../../tcp_articles.txt")
+    info = pd.read_csv("../../../tcp_abstracts.txt")
+    titles = info.Title
+    years = info.Year
     URLs = []
-    for title in articles:
-        URLs.append(generateSearchURL(title[2]))
+    for i,title in enumerate(titles):
+        url = generateSearchURL(title.replace("|",","), years.iloc[i])
+        URLs.append(url)
     return URLs
 
-def generateMetaURL(title):
-    return "http://api.crossref.org/works?query=" + \
-           title + "&rows=1&sort=score"
+
+def generateMetaURL(eid):
+    return "http://www.scopus.com/onclick/export.uri?" + \
+    "oneClickExport=%7b%22Format%22%3a%22CSV%22%2c%22View%22%3a%22FullDocument%22%7d&origin=recordpage&" + \
+    eid + "&zone=recordPageHeader&outputType=export&txGid=0"
+
 
 def generateMetaURLs():
-    articles = getArticleInfo("../../../tcp_articles.txt")
+    info = pd.read_csv("../../../tcp_abstracts.txt")
+    titles = info.Title
     URLs = []
-    for title in articles:
-        URLs.append(generateMetaURL(title[2]))
+    for title in titles:
+        URLs.append(generateMetaURL(title.replace("|", ",")))
     return URLs

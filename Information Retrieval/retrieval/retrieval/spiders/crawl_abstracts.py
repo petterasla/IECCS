@@ -1,6 +1,6 @@
 import scrapy
 from retrieval.items import RetrievalItem
-import import_data
+import import_data as import_data
 
 # Retrieve abstracts from the scopus web-page
 class RetrievalSpider(scrapy.Spider):

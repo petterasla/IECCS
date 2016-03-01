@@ -3,8 +3,8 @@ import import_data as import_data
 from retrieval.items import MetaRetrievalItem
 
 
-class MetaSpider(scrapy.Spider):
-    name = "meta retrieval"
+class CSVSpider(scrapy.Spider):
+    name = "csv retrieval"
     print "CSV RETRIEVAL"
     print 80*"="
     start_urls = import_data.generateSearchURLs()[:1]
@@ -12,5 +12,5 @@ class MetaSpider(scrapy.Spider):
 
     def parse(self, response):
         yield MetaRetrievalItem(
-                file_urls=import_data.jsonToTextList("meta100.json")
+                file_urls=import_data.jsonToTextList("meta_url100to1000.json")
         )

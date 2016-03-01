@@ -20,3 +20,7 @@ class MetaItem(Item):
     eid = Field()
     csv = Field()
 
+class MetaRetrievalItem(Item):
+    file_urls = Field()
+    files = Field()
+

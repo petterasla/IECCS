@@ -80,7 +80,7 @@ def generateSearchURLs():
 
 def generateMetaURL(eid):
     return "http://www.scopus.com/onclick/export.uri?" + \
-    "oneClickExport=%7b%22Format%22%3a%22CSV%22%2c%22View%22%3a%22FullDocument%22%7d&origin=recordpage&" + \
+    "oneClickExport=%7b%22Format%22%3a%22CSV%22%2c%22View%22%3a%22FullDocument%22%7d&origin=recordpage&eid=" + \
     eid + "&zone=recordPageHeader&outputType=export&txGid=0"
 
 
@@ -91,3 +91,21 @@ def generateMetaURLs():
     for title in titles:
         URLs.append(generateMetaURL(title.replace("|", ",")))
     return URLs
+
+def jsonToTextList(input):
+    with open(input) as read_file:
+        json_file = json.load(read_file)
+    read_file.close()
+
+    l = []
+    s1 = "recordpage&"
+    s1_len = len(s1)
+    for data in json_file:
+        url = data['url']
+        index = url.index(s1) + s1_len
+        new_url = url[:index] + "eid=" + url[index:]
+        l.append(new_url)
+    return l
+
+
+#print jsonToTextList("meta100.json")[:2]

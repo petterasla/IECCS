@@ -16,12 +16,13 @@ NEWSPIDER_MODULE = 'retrieval.spiders'
 
 ITEM_PIPELINES = {'scrapy.pipelines.files.FilesPipeline': 1}
 
-FILES_STORE = '/Users/petterasla/Desktop/Skole/9.\ semester/In-Depth\ project/IECCS/Information\ Retrieval/Meta\ data'
+FILES_STORE = '/Users/petterasla/Desktop/Skole'
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'retrieval (+http://www.yourdomain.com)'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS=1
+CONCURRENT_REQUESTS=8
 
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay

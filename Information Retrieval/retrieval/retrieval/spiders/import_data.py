@@ -98,14 +98,10 @@ def jsonToTextList(input):
     read_file.close()
 
     l = []
-    s1 = "recordpage&"
-    s1_len = len(s1)
     for data in json_file:
         url = data['url']
-        index = url.index(s1) + s1_len
-        new_url = url[:index] + "eid=" + url[index:]
-        l.append(new_url)
+        l.append(url)
     return l
 
 
-#print jsonToTextList("meta100.json")[:2]
+#print jsonToTextList("meta_url3000to4000.json")[:2]

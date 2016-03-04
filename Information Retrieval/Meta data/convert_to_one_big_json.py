@@ -44,7 +44,6 @@ def convert_csv_file_to_json(folder_name, global_counter):
     # Return the dict and global counter
     return dict, global_counter+i
 
-#convert_csv_file_to_json("0 to 1000", 100000)
 
 def convert_folders_to_json():
     # Get list of current folders in directory
@@ -102,7 +101,7 @@ def compare_titles_between_meta_and_tcp_data():
                 meta_dict[key]["Endorsement"] = tcp_data.Endorse.iloc[i]
                 meta_dict[key]["Category"] = tcp_data.Cat.iloc[i]
                 if match_counter % 50 == 0:
-                    print "Time: " + str(time.time()-start) + "\t Counter: " + str(match_counter)
+                    print "Counter: " + str(match_counter) + "\t Time: " + str(time.time()-start)
                 break
 
     print "number of matches = " + str(match_counter)
@@ -121,4 +120,4 @@ def compare_titles_between_meta_and_tcp_data():
         output.close()
 
 
-compare_titles_between_meta_and_tcp_data()
+#compare_titles_between_meta_and_tcp_data()

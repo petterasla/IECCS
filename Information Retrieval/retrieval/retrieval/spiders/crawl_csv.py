@@ -1,3 +1,4 @@
+
 import scrapy
 import import_data as import_data
 from retrieval.items import MetaRetrievalItem
@@ -12,5 +13,5 @@ class CSVSpider(scrapy.Spider):
 
     def parse(self, response):
         yield MetaRetrievalItem(
-                file_urls=import_data.jsonToTextList("meta_url100to1000.json")
+                file_urls=import_data.jsonToTextList("meta_url10000to11942.json")
         )

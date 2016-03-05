@@ -1,4 +1,4 @@
-define(function(require) {
+define('app/shared/components/ui-view', ['require', '$router', 'knockout', 'crossroads', 'hasher', 'jquery'], function(require) {
     'use strict';
 
     var router      = require('$router'),

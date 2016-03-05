@@ -1,7 +1,7 @@
 define('app/templates/hello/hello-view', [], function() {
   'use strict';
 
-  return '<div class="content-page-library-view">' +
+  return  '<div class="content-page-library-view">' +
             '<h2>' +
               '<a href="#/libs/all/" title="Back">' +
                 '<i class="fa fa-arrow-circle-left back-button"></i>' +
@@ -9,5 +9,5 @@ define('app/templates/hello/hello-view', [], function() {
             '</h2>' +
             '<br/>' +
             '<library-details params="name: $data.name">' +
-            '</library-details></div>';
+          '</library-details></div>';
 });

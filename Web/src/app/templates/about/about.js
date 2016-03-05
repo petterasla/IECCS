@@ -1,7 +1,7 @@
 define('app/templates/about/about', [], function() {
   'use strict';
 
-  return '<div class="jumbotron"> ' +
+  return  '<div class="jumbotron"> ' +
           '<h1>Interactive Exploration of Consensus in Climate Science</h1> ' +
           '<p>Insert details about the project...</p> ' +
           '<p>To read about The Consus Project click below</<p>' +

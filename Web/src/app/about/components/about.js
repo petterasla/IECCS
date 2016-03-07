@@ -4,7 +4,7 @@ define('app/about/components/about',['require', 'knockout', 'app/templates/about
   //var ko   = require('knockout');
 
   function ViewAbout() {
-
+    this.title = 'Welcome';
   }
 
 

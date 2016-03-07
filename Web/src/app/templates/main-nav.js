@@ -8,11 +8,14 @@ define('app/templates/main-nav', [], function() {
             '<li data-bind="css: {active: $data.currentLocation() === \'/about/\'}">' +
               '<a href="#/about">About</a>' +
             '</li>' +
-            '<li data-bind="css: {active: $data.currentLocation() === \'/libs/all/\'}">' +
-              '<a href="#/libs/all/">Libraries</a>' +
+            '<li data-bind="css: {active: $data.currentLocation() === \'/bar-chart/\'}">' +
+              '<a href="#/bar-chart">Bar-chart</a>' +
             '</li>' +
             '<li data-bind="css: {active: $data.currentLocation() === \'/hello/\'}">' +
               '<a href="#/hello/">Hello</a>' +
+            '</li>' +
+            '<li data-bind="css: {active: $data.currentLocation() === \'/libs/all/\'}">' +
+              '<a href="#/libs/all/">Libraries</a>' +
             '</li>' +
           '</ul>' +
           '<ul class="nav navbar-nav pull-right">' +

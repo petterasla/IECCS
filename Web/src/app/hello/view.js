@@ -6,8 +6,6 @@ define('app/hello/view', ['knockout', 'app/libs/libraries'], function(ko, libs) 
       return ko.name === input.name;
     });
 
-    console.log(lib);
-
     this.title = ko.observable();
     this.name = ko.observable();
 

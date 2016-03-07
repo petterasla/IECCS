@@ -1,0 +1,171 @@
+// Color variables (appears count calculates by raw css)
+@color0: #777777; // Appears 5 times
+@color1: #ffffff; // Appears 5 times
+@color2: #000000; // Appears 4 times
+@color3: #aaaaaa; // Appears 3 times
+
+
+
+.c3 {
+  svg {
+    font: 10px sans-serif;
+  }
+  path {
+    fill: none;
+    stroke: @color2;
+  }
+  line {
+    fill: none;
+    stroke: @color2;
+  }
+  text {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+.c3-legend-item-tile, .c3-xgrid-focus, .c3-ygrid, .c3-event-rect, .c3-bars path  {
+  shape-rendering: crispEdges;
+}
+.c3-chart-arc {
+  path {
+    stroke: @color1;
+  }
+  text {
+    fill: @color1;
+    font-size: 13px;
+  }
+  .c3-gauge-value {
+    fill: @color2;
+  }
+}
+.c3-grid {
+  line {
+    stroke: @color3;
+  }
+  text {
+    fill: @color3;
+  }
+}
+.c3-xgrid {
+  stroke-dasharray: 3 3;
+}
+.c3-ygrid {
+  stroke-dasharray: 3 3;
+}
+.c3-text.c3-empty {
+  fill: #808080;
+  font-size: 2em;
+}
+.c3-line {
+  stroke-width: 1px;
+}
+.c3-circle._expanded_ {
+  stroke-width: 1px;
+  stroke: white;
+}
+.c3-selected-circle {
+  fill: white;
+  stroke-width: 2px;
+}
+.c3-bar {
+  stroke-width: 0;
+}
+.c3-bar._expanded_ {
+  fill-opacity: 0.75;
+}
+.c3-target.c3-focused {
+  opacity: 1;
+  path.c3-line {
+    stroke-width: 2px;
+  }
+  path.c3-step {
+    stroke-width: 2px;
+  }
+}
+.c3-target.c3-defocused {
+  opacity: 0.3 !important;
+}
+.c3-region {
+  fill-opacity: 0.1;
+  fill: steelblue;
+}
+.c3-brush {
+  .extent {
+    fill-opacity: 0.1;
+  }
+}
+.c3-legend-item {
+  font-size: 12px;
+}
+.c3-legend-item-hidden {
+  opacity: 0.15;
+}
+.c3-legend-background {
+  fill: white;
+  opacity: 0.75;
+  stroke-width: 1;
+  stroke: lightgray;
+}
+.c3-tooltip-container {
+  z-index: 10;
+}
+.c3-tooltip {
+  -moz-box-shadow: 7px 7px 12px -9px @color0;
+  -webkit-box-shadow: 7px 7px 12px -9px @color0;
+  background-color: @color1;
+  border-collapse: collapse;
+  border-spacing: 0;
+  box-shadow: 7px 7px 12px -9px @color0;
+  empty-cells: show;
+  opacity: 0.9;
+  tr {
+    border: 1px solid #cccccc;
+  }
+  th {
+    background-color: @color3;
+    color: @color1;
+    font-size: 14px;
+    padding: 2px 5px;
+    text-align: left;
+  }
+  td {
+    background-color: @color1;
+    border-left: 1px dotted #999999;
+    font-size: 13px;
+    padding: 3px 6px;
+  }
+  td>span {
+    display: inline-block;
+    height: 10px;
+    margin-right: 6px;
+    width: 10px;
+  }
+  td.value {
+    text-align: right;
+  }
+}
+.c3-area {
+  opacity: 0.2;
+  stroke-width: 0;
+}
+.c3-chart-arcs-title {
+  dominant-baseline: middle;
+  font-size: 1.3em;
+}
+.c3-chart-arcs {
+  .c3-chart-arcs-background {
+    fill: #e0e0e0;
+    stroke: none;
+  }
+  .c3-chart-arcs-gauge-unit {
+    fill: @color2;
+    font-size: 16px;
+  }
+  .c3-chart-arcs-gauge-max {
+    fill: @color0;
+  }
+  .c3-chart-arcs-gauge-min {
+    fill: @color0;
+  }
+}

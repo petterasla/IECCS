@@ -9,7 +9,7 @@ define('app/templates/main-nav', [], function() {
               '<a href="#/about">About</a>' +
             '</li>' +
             '<li data-bind="css: {active: $data.currentLocation() === \'/bar-chart/\'}">' +
-              '<a href="#/bar-chart">Bar-chart</a>' +
+              '<a href="#/bar-chart">Visualization</a>' +
             '</li>' +
             '<li data-bind="css: {active: $data.currentLocation() === \'/hello/\'}">' +
               '<a href="#/hello/">Hello</a>' +

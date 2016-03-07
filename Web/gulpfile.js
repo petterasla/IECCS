@@ -196,7 +196,9 @@ gulp.task('process-vendor-scripts', function() {
             'hasher/dist/js/hasher.js',
             'js-signals/dist/signals.js',
             'q/q.js',
-            'requirejs-text/text.js'], {cwd: buildConfig.bowerComponentsDir})
+            'requirejs-text/text.js',
+            'c3/c3.js',
+            'd3/d3.js'], {cwd: buildConfig.bowerComponentsDir})
             .pipe(plugins.changed(buildConfig.outputPath))
     );
     return stream.pipe(gulp.dest(buildConfig.outputPath));

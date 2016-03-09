@@ -13,7 +13,7 @@ define('app/bar-chart/module-init', ['require', 'knockout', '$router'], function
 
   n = function() {
     return router.when('/bar-chart/', {
-      templateUrl: 'app/templates/bar-chart/bar-chart',
+      templateUrl: 'text!app/templates/bar-chart/bar-chart.html',
       viewModelUrl: 'app/bar-chart/components/bar-chart'
     });
   };

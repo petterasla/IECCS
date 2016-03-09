@@ -1,4 +1,4 @@
-define('app/bar-chart/components/bar-chart',['require', 'knockout', 'c3', 'd3', 'app/bar-chart/data', 'app/templates/bar-chart/bar-chart'], function(require) {
+define('app/bar-chart/components/bar-chart',['require', 'text!app/templates/bar-chart/bar-chart.html','knockout', 'c3', 'd3', 'app/bar-chart/data'], function(require, template) {
   'use strict';
 
   //var ko   = require('knockout');
@@ -23,7 +23,7 @@ define('app/bar-chart/components/bar-chart',['require', 'knockout', 'c3', 'd3', 
     for (var i = 0; i < arrayLength; i++) {
         xValues.push(parseInt(data[i].Year));
     }
-    
+
     var chart = c3.generate({
       bindto: '#BarChart',
       data: {
@@ -73,6 +73,6 @@ define('app/bar-chart/components/bar-chart',['require', 'knockout', 'c3', 'd3', 
 
   return {
     viewModel: ViewAbout,
-    template: require('app/templates/bar-chart/bar-chart')
+    template: template
   };
 });

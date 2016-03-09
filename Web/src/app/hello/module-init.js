@@ -1,9 +1,6 @@
-define('app/hello/module-init', ['require', 'knockout', '$router'], function(require) {
+define('app/hello/module-init', ['require', 'knockout', '$router'], function(require, ko, router) {
   'use strict';
-  var t, n, init, ko, router;
-
-  ko = require('knockout');
-  router = require('$router');
+  var t, n, init;
 
   t = function() {
     return ko.components.register('hello-world', {

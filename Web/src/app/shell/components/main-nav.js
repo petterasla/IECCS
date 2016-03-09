@@ -1,7 +1,5 @@
-define('app/shell/components/main-nav', ['require', '$router', 'app/templates/main-nav'], function(require) {
+define('app/shell/components/main-nav', ['require', '$router', 'text!app/templates/main-nav.html'], function(require, router, template) {
   'use strict';
-
-  var router = require('$router');
 
   function init() {
     this.currentLocation = router.currentLocation;
@@ -9,6 +7,6 @@ define('app/shell/components/main-nav', ['require', '$router', 'app/templates/ma
 
   return {
     viewModel: init,
-    template: require('app/templates/main-nav')
+    template: template
   };
 });

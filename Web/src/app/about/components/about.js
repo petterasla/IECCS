@@ -1,7 +1,5 @@
-define('app/about/components/about',['require', 'knockout', 'app/templates/about/about'], function(require) {
+define('app/about/components/about',['require','text!app/templates/about/about.html', 'knockout'], function(require, template) {
   'use strict';
-
-  //var ko   = require('knockout');
 
   function ViewAbout() {
     this.title = 'Welcome';
@@ -10,6 +8,6 @@ define('app/about/components/about',['require', 'knockout', 'app/templates/about
 
   return {
     viewModel: ViewAbout,
-    template: require('app/templates/about/about')
+    template: template
   };
 });

@@ -1,9 +1,5 @@
-define('app/bar-chart/components/bar-chart',['require', 'text!app/templates/bar-chart/bar-chart.html','knockout', 'c3', 'd3', 'app/bar-chart/data'], function(require, template) {
+define('app/bar-chart/components/bar-chart',['require', 'text!app/templates/bar-chart/bar-chart.html','knockout', 'c3', 'd3', 'app/bar-chart/data'], function(require, template, ko, c3, d3, data) {
   'use strict';
-
-  //var ko   = require('knockout');
-  var c3   = require('c3');
-  var data = require('app/bar-chart/data');
 
   Array.prototype.getUnique = function(){
     var u = {}, a = [];

@@ -1,11 +1,5 @@
-define('app/hello/components/helloWorld',['require', 'knockout', 'app/libs/libraries'], function(require) {
+define('app/hello/components/helloWorld',['require', 'knockout', 'app/libs/libraries','text!app/templates/hello/hello-view.html'], function(require, ko, libs, template) {
   'use strict';
-
-  var ko   = require('knockout'),
-      libs = require('app/libs/libraries'),
-      template = require(['text!app/templates/hello/hello-view.html'], function (temp) {
-        return temp
-      });
 
   function ViewContent() {
     var tool = libs[0];

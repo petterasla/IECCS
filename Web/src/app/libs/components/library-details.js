@@ -1,8 +1,5 @@
-define('app/libs/components/library-details', ['require', 'knockout', 'app/libs/libraries', 'app/templates/libs/library-details'], function(require) {
+define('app/libs/components/library-details', ['require', 'text!app/templates/libs/library-details.html', 'knockout', 'app/libs/libraries'], function(require, template, ko, libs) {
   'use strict';
-
-  var ko = require('knockout'),
-      libs = require('app/libs/libraries');
 
   function LibView(input) {
     var t = ko.unwrap(input.name),
@@ -23,6 +20,6 @@ define('app/libs/components/library-details', ['require', 'knockout', 'app/libs/
 
   return {
     viewModel: LibView,
-    template: require('app/templates/libs/library-details')
+    template: template
   };
 });

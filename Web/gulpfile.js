@@ -336,6 +336,7 @@ gulp.task('watch', ['build'], function() {
     gulp.watch('src/assets/**', ['process-assets']);
     gulp.watch(['src/styles/*.less', 'src/app/**/*.less'], ['process-less']);
     gulp.watch('src/app/**/*.jade', ['process-app-jade']);
+    gulp.watch('src/app/**/*.html', ['process-app-html']);
     gulp.watch('src/index.jade', ['process-index-jade']);
 
     gulp.src(buildConfig.outputPath)

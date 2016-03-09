@@ -1,9 +1,6 @@
-define('app/about/module-init', ['require', 'knockout', '$router'], function(require) {
+define('app/about/module-init', ['require', 'knockout', '$router'], function(require, ko, router) {
   'use strict';
-  var t, n, init, ko, router;
-
-  ko = require('knockout');
-  router = require('$router');
+  var t, n, init;
 
   t = function() {
     return ko.components.register('about', {
@@ -13,7 +10,7 @@ define('app/about/module-init', ['require', 'knockout', '$router'], function(req
 
   n = function() {
     return router.when('/about/', {
-      templateUrl: 'app/templates/about/about',
+      templateUrl: 'text!app/templates/about/about.html',
       viewModelUrl: 'app/about/components/about'
     });
   };

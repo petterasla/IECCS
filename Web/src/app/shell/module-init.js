@@ -1,9 +1,7 @@
-define('app/shell/module-init', ['require', '$router', 'knockout'], function(require) {
+define('app/shell/module-init', ['require', '$router', 'knockout'], function(require, router, ko) {
   'use strict';
 
   function init() {
-    var router = require('$router'),
-        ko     = require('knockout');
 
     ko.components.register('main-nav', {
       require: 'app/shell/components/main-nav'
@@ -11,7 +9,7 @@ define('app/shell/module-init', ['require', '$router', 'knockout'], function(req
 
     router.when('/', {
       viewModelUrl: 'app/shell/home/home',
-      templateUrl: 'app/templates/home'
+      templateUrl: 'text!app/templates/home.html'
     }).otherwise({
       redirectTo: '/'
     });

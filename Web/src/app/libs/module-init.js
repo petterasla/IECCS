@@ -1,9 +1,7 @@
-define('app/libs/module-init', ['require', 'knockout', '$router'], function(require) {
+define('app/libs/module-init', ['require', 'knockout', '$router'], function(require, ko, router) {
   'use strict';
-  var t, n, init, ko, router;
+  var t, n, init;
 
-  ko = require('knockout');
-  router = require('$router');
 
   t = function() {
     return ko.components.register('library-details', {
@@ -13,10 +11,10 @@ define('app/libs/module-init', ['require', 'knockout', '$router'], function(requ
 
   n = function() {
     return router.when('/libs/all/', {
-      templateUrl: 'app/templates/libs/all',
+      templateUrl: 'text!app/templates/libs/all.html',
       viewModelUrl: 'app/libs/all'
     }).when('/libs/view/{name}/', {
-      templateUrl: 'app/templates/libs/view',
+      templateUrl: 'text!app/templates/libs/view.html',
       viewModelUrl: 'app/libs/view',
       rules: {
         name: /^[-._a-z0-9 ]{1,30}$/i

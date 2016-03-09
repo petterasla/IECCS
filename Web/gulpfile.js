@@ -278,6 +278,13 @@ gulp.task('process-app-jade', function() {
         .pipe(gulp.dest(buildConfig.outputPath));
 });
 
+gulp.task('process-app-html', function() {
+    return gulp.src('src/app/**/*.html', {base:'src'})
+      .pipe(plugins.plumber(onTaskError))
+      .pipe(plugins.changed('app', {cwd: buildConfig.outputPath}))
+      .pipe(gulp.dest(buildConfig.outputPath));
+});
+
 gulp.task('process-index-jade', function() {
     return gulp.src('src/index.jade', {base: 'src'})
         .pipe(plugins.plumber(onTaskError))
@@ -304,7 +311,7 @@ gulp.task('process-index-jade', function() {
         .pipe(gulp.dest(buildConfig.outputPath));
 });
 
-gulp.task('process-static-content', ['process-assets', 'process-less', 'process-app-jade', 'process-index-jade']);
+gulp.task('process-static-content', ['process-assets', 'process-less', 'process-app-jade','process-app-html', 'process-index-jade']);
 
 
 gulp.task('build', ['clean', 'process-vendor-scripts', 'process-app-scripts', 'process-static-content'], function(done) {

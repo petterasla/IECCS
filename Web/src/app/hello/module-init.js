@@ -13,10 +13,10 @@ define('app/hello/module-init', ['require', 'knockout', '$router'], function(req
 
   n = function() {
     return router.when('/hello/', {
-      templateUrl: 'app/templates/hello/hello'
+      templateUrl: 'text!app/templates/hello/hello.html'
       //viewModelUrl: 'app/hello/view'
     }).when('/hello/{name}', {
-      templateUrl: 'app/templates/hello/hello-view',
+      templateUrl: 'text!app/templates/hello/hello-view.html',
       viewModelUrl: 'app/hello/view',
       rules: {
         name: /^[-._a-z0-9 ]{1,30}$/i

@@ -1,8 +1,11 @@
-define('app/hello/components/helloWorld',['require', 'knockout', 'app/libs/libraries', 'app/templates/hello/hello'], function(require) {
+define('app/hello/components/helloWorld',['require', 'knockout', 'app/libs/libraries'], function(require) {
   'use strict';
 
   var ko   = require('knockout'),
-      libs = require('app/libs/libraries');
+      libs = require('app/libs/libraries'),
+      template = require(['text!app/templates/hello/hello-view.html'], function (temp) {
+        return temp
+      });
 
   function ViewContent() {
     var tool = libs[0];
@@ -21,6 +24,6 @@ define('app/hello/components/helloWorld',['require', 'knockout', 'app/libs/libra
 
   return {
     viewModel: ViewContent,
-    template: require('app/templates/hello/hello')
+    template: template
   };
 });

@@ -17,7 +17,6 @@ def getStanceByEndorse(endorse):
 
 def get_abstract_info():
     return pd.read_csv("../System/TextFiles/tcp_abstracts.txt")
-    #return pd.read_csv("../tcp_abstracts.txt")
 
 def convert_csv_file_to_json(folder_name):
     # List for storing the individual dicts
@@ -55,25 +54,27 @@ def convert_csv_file_to_json(folder_name):
     return l
 
 
-def cconvert_folders_to_json():
+def convert_folders_to_json():
     # Get list of current folders in directory
     folders = os.listdir(os.getcwd())
     # Removing mac's hidden file ".DS_Store" and this python file
-    new_folders = [folder for folder in folders if not folder in [".DS_Store","convert_to_one_big_json.py", "output.log", "meta_data.json"]]
+    print folders
+
+    new_folders = folders[1]
+    print new_folders
     # Final dictionary with every file
     final_list = []
     # Looping through every folder in directory
-    for folder in new_folders:
-        # Return a dictionary for the files in one folder
-        temp_list = convert_csv_file_to_json(folder)
-        print "Folder: " + str(folder)
-        # Adding each file in the dictionary to the final dictionary
-        for item in temp_list:
-            final_list.append(item)
+    # Return a dictionary for the files in one folder
+    temp_list = convert_csv_file_to_json(new_folders)
+    print "Folder: " + str(new_folders)
+    # Adding each file in the dictionary to the final dictionary
+    for item in temp_list:
+        final_list.append(item)
 
 
     # Store as json
-    with open("meta_data.json", "w") as output:
+    with open("meta_data_mini.json", "w") as output:
         json.dump(final_list, output)
         output.close()
 
@@ -83,7 +84,7 @@ def cconvert_folders_to_json():
 def compare_titles_between_meta_and_tcp_data():
     start = time.time()
     # Open json file with all the meta data
-    with open("meta_data.json", "r") as meta_read:
+    with open("meta_data_mini.json", "r") as meta_read:
         meta_dict = json.load(meta_read)
         meta_read.close()
 
@@ -126,8 +127,8 @@ def compare_titles_between_meta_and_tcp_data():
                 print "META: " + meta_title
                 for key in meta_d:
                     d[key] = meta_d[key]
-                ps = d["Page start"]
-                pe = d["Page end"]
+                ps = d["Page start"].replace(",","")
+                pe = d["Page end"].replace(",","")
                 try:
                     if len(pe) > 0 and len(ps) > 0 and pe >= ps:
                         # Just setting this because some page numbers are set to 123134-123.
@@ -144,7 +145,7 @@ def compare_titles_between_meta_and_tcp_data():
     print "Time used: " + str(time.time()-start)
 
     # Store as json
-    with open("matching_data.json", "w") as output:
+    with open("matching_data_mini.json", "w") as output:
         json.dump(tcp_list, output)
         output.close()
 

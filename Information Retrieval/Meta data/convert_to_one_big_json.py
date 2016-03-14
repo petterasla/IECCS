@@ -122,8 +122,8 @@ def compare_titles_between_meta_and_tcp_data():
                 match_counter += 1
                 # Adding additional data from tcp to meta dictionary
                 d["Match"] = True
-                print "TCP:  " +tcp_title
-                print "META: " + meta_title
+                
+                
                 for key in meta_d:
                     d[key] = meta_d[key]
                 ps = d["Page start"]

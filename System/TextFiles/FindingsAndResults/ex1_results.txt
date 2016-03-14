@@ -1,0 +1,25 @@
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+use_upsample = 1
+use_downsample = 1
+
+downsample_rate_favor = 0.3
+downsample_rate_none  = 0.3
+
+strength = 'soft'
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.9500    0.6951    0.8028        82
+      FAVOR     0.6863    0.5700    0.6228       614
+       NONE     0.7958    0.8757    0.8338      1255
+
+avg / total     0.7678    0.7719    0.7661      1951
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.7531
+
+time =  14.9573628902

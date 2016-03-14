@@ -1,4 +1,5 @@
-define('app/bar-chart/components/bar-chart',['require', 'text!app/templates/bar-chart/bar-chart.html','knockout', 'c3', 'd3', 'app/bar-chart/data'], function(require, template, ko, c3, d3, data) {
+/*
+define('app/visualization/components/bar-chart/bar-chart',['require', 'text!app/templates/visualization/bar-chart.html','knockout', '../../../../c3', 'd3', 'app/visualization/components/bar-chart/data'], function(require, template, ko, c3, d3, data) {
   'use strict';
 
   Array.prototype.getUnique = function(){
@@ -20,7 +21,8 @@ define('app/bar-chart/components/bar-chart',['require', 'text!app/templates/bar-
         xValues.push(parseInt(data[i].Year));
     }
 
-    var chart = c3.generate({
+
+    let chart = c3.generate({
       bindto: '#BarChart',
       data: {
         columns: [
@@ -63,12 +65,12 @@ define('app/bar-chart/components/bar-chart',['require', 'text!app/templates/bar-
 
     setTimeout(function () {
       chart.groups([['data1', 'data2', 'data3', 'data4']]);
-    }, 2000);*/
+    }, 2000);
   }
-
 
   return {
     viewModel: ViewAbout,
     template: template
   };
 });
+ */

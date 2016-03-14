@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row">
+    <div class="jumbotron">
+      <h2>
+        Visualization
+      </h2>
+      <p>
+        The chart illustrate the distribution of the classes per year in the TCP data.
+      </p>
+    </div>
+  </div>
+  <div class="row" data-bind="visible: !visualModel.allOptionsFalse()">
+    <div class="col-xs-12 col-sm-9 col-sm-offset-3">
+      <div class="btn-group btn-group-justified " role="group" >
+        <div class="btn-group active" role="group">
+          <button type="button" class="btn btn-vis-representation active">
+            Bar-chart <i class="fa fa-bar-chart fa-2x pull-right"></i>
+          </button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-vis-representation">
+            Graphs <i class="fa fa-line-chart fa-2x pull-right"></i>
+          </button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-vis-representation ">
+            World map <i class="fa fa-globe fa-2x pull-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-8 col-sm-3">
+      <div class="btn-group-vertical btn-group-justified" >
+        <button class="list-group-item navbar-inverse activate" data-bind="click: function() {checkOptions(); getStance()}">
+          Stance <i class="fa fa-arrow-right pull-right"></i>
+        </button>
+        <button class="list-group-item navbar-inverse activate" data-bind="click: function() {checkOptions(); getYear()}">
+          Year <i class="fa fa-arrow-right pull-right"></i>
+        </button>
+        <button class="list-group-item navbar-inverse activate" data-bind="click: function() {checkOptions(); getNewData()}">
+          New Data <i class="fa fa-arrow-right pull-right"></i>
+        </button>
+        <button class="list-group-item navbar-inverse activate" data-bind="click: function() {checkOptions(); getCustom()}">
+          Customary <i class="fa fa-arrow-right pull-right"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      <div class="centered" data-bind="visible: visualModel.allOptionsFalse">
+        <i class="fa fa-spinner fa-spin fa-5x"></i>
+      </div>
+      <!--<div data-bind="visible: visualModel.stance">
+        <div id="barChart"></div>
+      </div>-->
+      <div data-bind="visible: visualModel.stance">
+        <div class="jumbotron">
+          <h2> Stance option comming</h2>
+        </div>
+      </div>
+      <div data-bind="visible: visualModel.year">
+        <div class="jumbotron">
+          <h2> Year option comming</h2>
+        </div>
+      </div>
+
+      <div data-bind="visible: visualModel.newData">
+        <div class="jumbotron">
+          <h2> New data info comming</h2>
+        </div>
+      </div>
+      <div data-bind="visible: visualModel.custom">
+        <div class="jumbotron">
+          <h2>Customary search comming</h2>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,32 +1,17 @@
 <div class="container">
-  <!--
   <div class="row">
-    <div class="jumbotron">
-      <h2>
-        Visualization
-      </h2>
-      <p>
-        The chart illustrate the distribution of the classes per year in the TCP data.
-      </p>
-    </div>
-  </div>
-  -->
-  <!-- LIST REPRESENTATION NAV BAR ROW -->
-  <div class="row" data-bind="visible: !allOptionsFalse()">
-    <div class="col-xs-12 col-sm-9 col-sm-offset-3">
-      <div class="btn-group btn-group-justified " role="group" data-bind="foreach: representation">
-          <div class="btn-group" role="group">
-            <button type="button" class="btn btn-vis-representation"
-              data-bind="css: {activate: status}, click: function(i) {$parent.updateRepresentationStatus($index())}">
-              <span data-bind="text: type"></span><div data-bind="html: icon"></div>
-            </button>
-          </div>
+    <div class="col-xs-12">
+      <div >
+        <div class="alert alert-info alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4><strong>Visualization!</strong> Navigate to find various illustration of data.</h4>
+        </div>
       </div>
     </div>
   </div>
   <!-- LIST LEFT VISUALIZATION NAV BAR -->
   <div class="row">
-    <div class="col-xs-8 col-sm-3">
+    <div class="col-xs-12 col-sm-3">
       <div class="btn-group-vertical btn-group-justified" data-bind="foreach: visualModel">
         <button class="list-group-item vis-representation"
                 data-bind="css: {activate: status}, click: function(i) {$parent.updateVisualNavBar($index())}">
@@ -34,8 +19,25 @@
         </button>
       </div>
     </div>
+  </div>
+  <!-- LIST REPRESENTATION NAV BAR ROW -->
+
+  <div class="row pad">
+    <div data-bind="visible: !allOptionsFalse()">
+      <div class="col-xs-12">
+          <div class="btn-group btn-group-justified " role="group" data-bind="foreach: representation">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-vis-representation"
+                      data-bind="css: {activate: status}, click: function(i) {$parent.updateRepresentationStatus($index())}">
+                <span data-bind="text: type"></span><div data-bind="html: icon"></div>
+              </button>
+            </div>
+        </div>
+      </div>
+    </div>
+
     <!-- INJECT VISUAL DATA -->
-    <div class="col-xs-12 col-sm-9">
+    <div class="col-xs-12">
         <div class="centered" data-bind="visible: allOptionsFalse">
           <i class="fa fa-spinner fa-spin fa-5x"></i>
         </div>

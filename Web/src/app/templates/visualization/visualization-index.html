@@ -11,59 +11,39 @@
     </div>
   </div>
   -->
-  <div class="row" data-bind="visible: !visualModel.allOptionsFalse()">
+  <!-- LIST REPRESENTATION NAV BAR ROW -->
+  <div class="row" data-bind="visible: !allOptionsFalse()">
     <div class="col-xs-12 col-sm-9 col-sm-offset-3">
       <div class="btn-group btn-group-justified " role="group" data-bind="foreach: representation">
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-vis-representation"
-              data-bind="css: {activate: $data.status}, click: $parent.updateRepresentationStatus($index())">
+              data-bind="css: {activate: status}, click: $parent.updateRepresentationStatus($index())">
               <span data-bind="text: type"></span><div data-bind="html: icon"></div>
             </button>
           </div>
       </div>
     </div>
   </div>
+  <!-- LIST LEFT VISUALIZATION NAV BAR -->
   <div class="row">
     <div class="col-xs-8 col-sm-3">
-      <div class="btn-group-vertical btn-group-justified" >
-        <button class="list-group-item navbar-inverse activate" data-bind="click: function() {checkOptions(); getStance()}">
-          Stance <i class="fa fa-arrow-right pull-right"></i>
-        </button>
-        <button class="list-group-item navbar-inverse activate" data-bind="click: function() {checkOptions(); getYear()}">
-          Year <i class="fa fa-arrow-right pull-right"></i>
-        </button>
-        <button class="list-group-item navbar-inverse activate" data-bind="click: function() {checkOptions(); getNewData()}">
-          New Data <i class="fa fa-arrow-right pull-right"></i>
-        </button>
-        <button class="list-group-item navbar-inverse activate" data-bind="click: function() {checkOptions(); getCustom()}">
-          Customary <i class="fa fa-arrow-right pull-right"></i>
+      <div class="btn-group-vertical btn-group-justified" data-bind="foreach: visualModel">
+        <button class="list-group-item vis-representation"
+                data-bind="css: {activate: status}, click: $parent.checkOptions($index())">
+          <span data-bind="text: type"></span> <i class="fa fa-arrow-right pull-right"></i>
         </button>
       </div>
     </div>
+    <!-- INJECT VISUAL DATA -->
     <div class="col-xs-12 col-sm-9">
-      <div class="centered" data-bind="visible: visualModel.allOptionsFalse">
-        <i class="fa fa-spinner fa-spin fa-5x"></i>
-      </div>
-      <div data-bind="visible: visualModel.stance">
-        <div data-bind="component: 'bar-chart'"></div>
-      </div>
-      <div data-bind="visible: visualModel.year">
-        <div class="jumbotron">
-          <h2> Year option comming</h2>
+        <div class="centered" data-bind="visible: allOptionsFalse()">
+          <i class="fa fa-spinner fa-spin fa-5x"></i>
+        </div>
+      <div data-bind="foreach: visualModel">
+        <div data-bind="visible: $data.status">
+          <div data-bind="html: template"></div>
         </div>
       </div>
-
-      <div data-bind="visible: visualModel.newData">
-        <div class="jumbotron">
-          <h2> New data info comming</h2>
-        </div>
-      </div>
-      <div data-bind="visible: visualModel.custom">
-        <div class="jumbotron">
-          <h2>Customary search comming</h2>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>

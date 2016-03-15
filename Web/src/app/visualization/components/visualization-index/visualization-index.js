@@ -2,6 +2,11 @@ define('app/visualization/components/visualization-index/visualization-index', [
   'use strict';
 
   let init = function() {
+    this.representation = [
+      {id: 0, type: "Bar Chart", icon:'<i class="fa fa-bar-chart fa-2x pull-right"></i>', status: ko.observable(true)},
+      {id: 1, type: "Graph", icon: '<i class="fa fa-line-chart fa-2x pull-right"></i>',status: ko.observable(false)},
+      {id: 2, type: "Map", icon: '<i class="fa fa-globe fa-2x pull-right"></i>',status: ko.observable(false)}
+    ];
     this.visualModel = {
       stance: ko.observable(false),
       year: ko.observable(false),
@@ -18,6 +23,19 @@ define('app/visualization/components/visualization-index/visualization-index', [
       this.visualModel.allOptionsFalse(options());
     };
 
+    this.updateRepresentationStatus = (index) => {
+      console.log(`Updating representation status with index = ${index}`);
+      this.representation.forEach(function(item) {
+        if (index === item.id) {
+          console.log(`Setting ${item.type} to true`);
+          item.status(true);
+        }
+        else {
+          console.log(`Setting ${item.type} to false`);
+          item.status(false);
+        }
+      });
+    };
     this.getStance = () => {
       this.visualModel.stance(true);
       this.visualModel.year(false);

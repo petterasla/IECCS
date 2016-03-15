@@ -9,39 +9,45 @@
 // Using CDN font
 //
 @fa-font-path:            "https://netdna.bootstrapcdn.com/font-awesome/@{fa-version}/fonts";
-@back-color: #4dc9bc;
+@button-back-color: #4dc9bc;
 @bord-color: #35aea1;
 @hover-nav-text-color: lightgrey;
 @vis-representation: #eeeeee;
 
+// Removes blue focus mark around button border
+button:focus {outline:none !important;}
+
 .list-group-item.activate {
-  background-color: @back-color;
-  border-color: @bord-color;
-  color: white;
+  background-color: @button-back-color !important;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
   &:hover {
     color: @hover-nav-text-color !important;
   }
 }
-
 .centered {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   margin-top: 5em;
 }
+button.btn.btn-vis-representation.activate {
+  background-color: @button-back-color !important;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+}
 
 button.btn.btn-vis-representation{
-  background-color: @back-color !important;
+  background-color: @button-back-color !important;
   border-color: @bord-color !important;
   color: white;
   font-size: 2em;
   &:active {
-    background-color: brown !important;
+    background-color: white !important;
 
   }
   &:hover {
-    background-color: @vis-representation !important;
     color: #777777;
     border-color: transparent !important;
   }
 }
+
+

@@ -1,5 +1,4 @@
-/*
-define('app/visualization/components/bar-chart/bar-chart',['require', 'text!app/templates/visualization/bar-chart.html','knockout', '../../../../c3', 'd3', 'app/visualization/components/bar-chart/data'], function(require, template, ko, c3, d3, data) {
+define('app/visualization/components/bar-chart/bar-chart',['require', 'knockout', '../../../../c3', 'd3', 'app/visualization/components/bar-chart/data'], function(require, ko, c3, d3, data) {
   'use strict';
 
   Array.prototype.getUnique = function(){
@@ -53,7 +52,8 @@ define('app/visualization/components/bar-chart/bar-chart',['require', 'text!app/
       }
     });
 
-    /*setTimeout(function () {
+    /*
+    setTimeout(function () {
       chart.groups([['data1', 'data2', 'data3']]);
     }, 1000);
 
@@ -65,12 +65,12 @@ define('app/visualization/components/bar-chart/bar-chart',['require', 'text!app/
 
     setTimeout(function () {
       chart.groups([['data1', 'data2', 'data3', 'data4']]);
-    }, 2000);
+    }, 2000);*/
   }
 
   return {
     viewModel: ViewAbout,
-    template: template
+    template: '<div id="BarChart"></div>'
   };
 });
- */
+

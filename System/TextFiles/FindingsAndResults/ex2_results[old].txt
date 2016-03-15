@@ -1,0 +1,22 @@
+********************************************************************************
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+
+ Henriks macbook air
+================================================================================
+             precision    recall  f1-score   support
+
+       NONE     0.8404    0.8717    0.8558      7968
+     STANCE     0.7221    0.6681    0.6940      3974
+
+avg / total     0.8010    0.8040    0.8020     11942
+
+macro-average of F-score(STANCE) and F-score(NONE): 0.6940
+
+time =  57.9798150063
+
+********************************************************************************

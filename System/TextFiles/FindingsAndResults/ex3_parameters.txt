@@ -1,0 +1,76 @@
+6270 documents
+3 categories
+Performing grid search...
+pipeline:
+parameters:
+{'features__unigram_word__vect__max_features': (None, 50000), 'features__unigram_word__vect__ngram_range': [(1, 1), (1, 2), (1, 3)], 'features__td-idf__tfidf__use_idf': (True, False), 'features__unigram_word__vect__stop_words': [None, 'english'], 'features__unigram_word__vect__analyzer': ['word'], 'clf__C': array([  1.00000000e-06,   1.77827941e-06,   3.16227766e-06,
+         5.62341325e-06,   1.00000000e-05,   1.77827941e-05,
+         3.16227766e-05,   5.62341325e-05,   1.00000000e-04,
+         1.77827941e-04,   3.16227766e-04,   5.62341325e-04,
+         1.00000000e-03,   1.77827941e-03,   3.16227766e-03,
+         5.62341325e-03,   1.00000000e-02,   1.77827941e-02,
+         3.16227766e-02,   5.62341325e-02,   1.00000000e-01,
+         1.77827941e-01,   3.16227766e-01,   5.62341325e-01,
+         1.00000000e+00,   1.77827941e+00,   3.16227766e+00,
+         5.62341325e+00,   1.00000000e+01,   1.77827941e+01,
+         3.16227766e+01,   5.62341325e+01,   1.00000000e+02])}
+Done in 88673.187s 
+Best score: 0.773
+Best parameters set:
+	clf__C: 0.00017782794100389227
+	features__td-idf__tfidf__use_idf: True
+	features__unigram_word__vect__analyzer: 'word'
+	features__unigram_word__vect__max_features: 50000
+	features__unigram_word__vect__ngram_range: (1, 3)
+	features__unigram_word__vect__stop_words: None
+
+## OUTPUT
+/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/nltk/twitter/__init__.py:20: UserWarning: The twython library has not been installed. Some functionality from the twitter package will not be available.
+  warnings.warn("The twython library has not been installed. "
+6270 documents
+3 categories
+
+Performing grid search...
+pipeline: ['features', 'clf']
+parameters:
+{'clf__C': array([  1.00000000e-06,   1.77827941e-06,   3.16227766e-06,
+         5.62341325e-06,   1.00000000e-05,   1.77827941e-05,
+         3.16227766e-05,   5.62341325e-05,   1.00000000e-04,
+         1.77827941e-04,   3.16227766e-04,   5.62341325e-04,
+         1.00000000e-03,   1.77827941e-03,   3.16227766e-03,
+         5.62341325e-03,   1.00000000e-02,   1.77827941e-02,
+         3.16227766e-02,   5.62341325e-02,   1.00000000e-01,
+         1.77827941e-01,   3.16227766e-01,   5.62341325e-01,
+         1.00000000e+00,   1.77827941e+00,   3.16227766e+00,
+         5.62341325e+00,   1.00000000e+01,   1.77827941e+01,
+         3.16227766e+01,   5.62341325e+01,   1.00000000e+02]),
+ 'features__td-idf__tfidf__use_idf': (True, False),
+ 'features__unigram_word__vect__analyzer': ['word'],
+ 'features__unigram_word__vect__max_features': (None, 50000),
+ 'features__unigram_word__vect__ngram_range': [(1, 1), (1, 2), (1, 3)],
+ 'features__unigram_word__vect__stop_words': [None, 'english']}
+Fitting 10 folds for each of 792 candidates, totalling 7920 fits
+[Parallel(n_jobs=10)]: Done  30 tasks      | elapsed:  2.0min
+[Parallel(n_jobs=10)]: Done 180 tasks      | elapsed: 14.1min
+[Parallel(n_jobs=10)]: Done 430 tasks      | elapsed: 35.2min
+[Parallel(n_jobs=10)]: Done 780 tasks      | elapsed: 74.5min
+[Parallel(n_jobs=10)]: Done 1230 tasks      | elapsed: 148.0min
+[Parallel(n_jobs=10)]: Done 1780 tasks      | elapsed: 260.0min
+[Parallel(n_jobs=10)]: Done 2430 tasks      | elapsed: 388.1min
+[Parallel(n_jobs=10)]: Done 3180 tasks      | elapsed: 540.0min
+[Parallel(n_jobs=10)]: Done 4030 tasks      | elapsed: 708.0min
+[Parallel(n_jobs=10)]: Done 4980 tasks      | elapsed: 895.9min
+[Parallel(n_jobs=10)]: Done 6030 tasks      | elapsed: 1102.6min
+[Parallel(n_jobs=10)]: Done 7180 tasks      | elapsed: 1329.0min
+[Parallel(n_jobs=10)]: Done 7920 out of 7920 | elapsed: 1476.8min finished
+done in 88673.187s
+
+Best score: 0.773
+Best parameters set:
+	clf__C: 0.00017782794100389227
+	features__td-idf__tfidf__use_idf: True
+	features__unigram_word__vect__analyzer: 'word'
+	features__unigram_word__vect__max_features: 50000
+	features__unigram_word__vect__ngram_range: (1, 3)
+	features__unigram_word__vect__stop_words: None
+ 

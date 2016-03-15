@@ -30,3 +30,16 @@ TODO: Virker som om Erwin er veldig opptatt av å vise resulteter samt grafer/ta
 TODO: Inkludere masse runs for å vise at vi faktisk gjorde noe (i appendix - master oppagaven våres)
 TODO: Potensielt lage grafer/tabeller for systemet til SemEval for å vise at vi har prøvd mye
 TODO: Få med label prop og annen ekstra data vi prøvde
+=======
+11.-18. februar:
+- Path-fix for genrell kjøring i terminal
+- Optimalisering av grid search for multiprossesor kjøring på server (n_jobs). Output er inkludert i .log filer.
+    - Kjøring gjøres ved følgende kommando: 'nohup python file_name.py > output_file_name.log &'
+- Kommentarer for beskrivelse av grid search implementasjonen
+- Laget improved system + grid search for parametere (ex1.py + grid_search_improved.py)
+- Nye utilities funskjoner for å skrive til fil.
+- Noen endringer i resultater for baseline (bør vurdere å kjøre testene på nytt hvor vi har satt cross_validation random_state=1)
+- Nye utilities funksjoner for opp- og nedsampling (brukes i ex1.py).
+- Implementert opp- og nedsampling (ex1.py).
+- Nye utilities funskjoner for binary klassifisering (brukes i ex2.py).
+- Implementert binary klassifisering for stance vs no stance (ex2.py).

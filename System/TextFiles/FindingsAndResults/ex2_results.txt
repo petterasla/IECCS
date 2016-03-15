@@ -1,0 +1,14 @@
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+================================================================================
+             precision    recall  f1-score   support
+
+       NONE     0.8288    0.8680    0.8480      4183
+     STANCE     0.7078    0.6406    0.6725      2087
+
+avg / total     0.7885    0.7923    0.7896      6270
+
+macro-average of F-score(STANCE) and F-score(NONE): 0.6725

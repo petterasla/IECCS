@@ -17,7 +17,7 @@
       <div class="btn-group btn-group-justified " role="group" data-bind="foreach: representation">
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-vis-representation"
-              data-bind="css: {activate: status}, click: $parent.updateRepresentationStatus($index())">
+              data-bind="css: {activate: status}, click: function(i) {$parent.updateRepresentationStatus($index())}">
               <span data-bind="text: type"></span><div data-bind="html: icon"></div>
             </button>
           </div>
@@ -29,19 +29,21 @@
     <div class="col-xs-8 col-sm-3">
       <div class="btn-group-vertical btn-group-justified" data-bind="foreach: visualModel">
         <button class="list-group-item vis-representation"
-                data-bind="css: {activate: status}, click: $parent.checkOptions($index())">
+                data-bind="css: {activate: status}, click: function(i) {$parent.updateVisualNavBar($index())}">
           <span data-bind="text: type"></span> <i class="fa fa-arrow-right pull-right"></i>
         </button>
       </div>
     </div>
     <!-- INJECT VISUAL DATA -->
     <div class="col-xs-12 col-sm-9">
-        <div class="centered" data-bind="visible: allOptionsFalse()">
+        <div class="centered" data-bind="visible: allOptionsFalse">
           <i class="fa fa-spinner fa-spin fa-5x"></i>
         </div>
-      <div data-bind="foreach: visualModel">
-        <div data-bind="visible: $data.status">
-          <div data-bind="html: template"></div>
+      <div data-bind="foreach: {data:visualModel, as:'vm'}">
+        <div data-bind="foreach: {data:$parent.representation, as:'r'}">
+          <div data-bind="visible: vm.status() && r.status()">
+            <div data-bind="component: vm.repres[r.id]"></div>
+          </div>
         </div>
       </div>
     </div>

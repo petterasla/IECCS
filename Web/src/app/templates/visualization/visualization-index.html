@@ -1,4 +1,5 @@
 <div class="container">
+  <!--
   <div class="row">
     <div class="jumbotron">
       <h2>
@@ -9,24 +10,16 @@
       </p>
     </div>
   </div>
+  -->
   <div class="row" data-bind="visible: !visualModel.allOptionsFalse()">
     <div class="col-xs-12 col-sm-9 col-sm-offset-3">
-      <div class="btn-group btn-group-justified " role="group" >
-        <div class="btn-group active" role="group">
-          <button type="button" class="btn btn-vis-representation active">
-            Bar-chart <i class="fa fa-bar-chart fa-2x pull-right"></i>
-          </button>
-        </div>
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-vis-representation">
-            Graphs <i class="fa fa-line-chart fa-2x pull-right"></i>
-          </button>
-        </div>
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-vis-representation ">
-            World map <i class="fa fa-globe fa-2x pull-right"></i>
-          </button>
-        </div>
+      <div class="btn-group btn-group-justified " role="group" data-bind="foreach: representation">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-vis-representation"
+              data-bind="css: {activate: $data.status}, click: $parent.updateRepresentationStatus($index())">
+              <span data-bind="text: type"></span><div data-bind="html: icon"></div>
+            </button>
+          </div>
       </div>
     </div>
   </div>
@@ -51,13 +44,8 @@
       <div class="centered" data-bind="visible: visualModel.allOptionsFalse">
         <i class="fa fa-spinner fa-spin fa-5x"></i>
       </div>
-      <!--<div data-bind="visible: visualModel.stance">
-        <div id="barChart"></div>
-      </div>-->
       <div data-bind="visible: visualModel.stance">
-        <div class="jumbotron">
-          <h2> Stance option comming</h2>
-        </div>
+        <div data-bind="component: 'bar-chart'"></div>
       </div>
       <div data-bind="visible: visualModel.year">
         <div class="jumbotron">

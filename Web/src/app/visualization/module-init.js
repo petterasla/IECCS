@@ -2,10 +2,6 @@ define('app/visualization/module-init', ['require', 'knockout', '$router'], func
   'use strict';
   var n, init;
 
-
-
-
-
   n = function() {
     ko.components.register('visualization-index', {
       require: 'app/visualization/components/visualization-index/visualization-index'

@@ -9,6 +9,7 @@
       </div>
     </div>
   </div>
+
   <!-- LIST LEFT VISUALIZATION NAV BAR -->
   <div class="row">
     <div class="col-xs-12 col-sm-3">
@@ -20,31 +21,34 @@
       </div>
     </div>
   </div>
-  <!-- LIST REPRESENTATION NAV BAR ROW -->
 
+  <!-- LIST REPRESENTATION NAV BAR ROW -->
   <div class="row pad">
     <div data-bind="visible: !allOptionsFalse()">
       <div class="col-xs-12">
-          <div class="btn-group btn-group-justified " role="group" data-bind="foreach: representation">
-            <div class="btn-group" role="group">
-              <button type="button" class="btn btn-vis-representation"
-                      data-bind="css: {activate: status}, click: function(i) {$parent.updateRepresentationStatus($index())}">
-                <span data-bind="text: type"></span><div data-bind="html: icon"></div>
-              </button>
-            </div>
+        <div class="btn-group btn-group-justified" role="group" data-bind="foreach: representation">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-vis-representation"
+                    data-bind="css: {activate: status}, click: function(i) {$parent.updateRepresentationStatus($index())}">
+              <span data-bind="text: type"></span>
+              <div data-bind="html: icon"></div>
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- INJECT VISUAL DATA -->
     <div class="col-xs-12">
-        <div class="centered" data-bind="visible: allOptionsFalse">
-          <i class="fa fa-spinner fa-spin fa-5x"></i>
-        </div>
+      <div class="centered" data-bind="visible: allOptionsFalse">
+        <i class="fa fa-spinner fa-spin fa-5x"></i>
+      </div>
       <div data-bind="foreach: {data:visualModel, as:'vm'}">
         <div data-bind="foreach: {data:$parent.representation, as:'r'}">
           <div data-bind="visible: vm.status() && r.status()">
-            <div data-bind="component: vm.repres[r.id]"></div>
+            <div data-bind="if: vm.status() && r.status()">
+              <div data-bind="component: vm.repres[r.id]"></div>
+            </div>
           </div>
         </div>
       </div>

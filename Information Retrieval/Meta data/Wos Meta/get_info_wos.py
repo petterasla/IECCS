@@ -134,6 +134,6 @@ def dfs_recursive(dict, key=None, visited=None):
         dfs_recursive(dict[next_key], next_key, visited)
 
 
-dfs_recursive(l[1], l[1].keys()[0])
+dfs_recursive(l[0], l[0].keys()[0])
 
 

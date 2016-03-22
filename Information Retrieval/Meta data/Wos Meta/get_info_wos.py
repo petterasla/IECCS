@@ -100,6 +100,7 @@ def queryWoS(titles):
             print query_string
             # Perform the query on wos engine
             xmlString = wos.utils.query(client, query_string)
+            print xmlString
             # Convert to XML object
             root = ElementTree.XML(xmlString)
             # Convert XML object to a dictionary
@@ -111,21 +112,28 @@ def queryWoS(titles):
     return info
 
 l = queryWoS(small_list_titles)
-print l[0].keys()
+#print l[0].keys()
 
-def dfs_recursive(dict, start, visited=None):
+def dfs_recursive(dict, key=None, visited=None):
     if visited is None:
         visited = set()
-    visited.add(start)
-    print "visited: "
-    print visited
+        print "start: \n"
+    key_list = []
     try:
-        for next in dict[start].keys():
-            dfs_recursive(dict[start], next, visited)
+        key_list = dict.keys()
     except:
         print
-        print "Key: " + str(start)
-        print "Value: " + str(dict[start])
+        print "Key: " + key
+        print "Value: " + str(dict)
         print
+    if len(key_list) == 0:
+        print 30*"=" + " LEAF VALUE " + 30*"="
+    for next_key in key_list:
+        visited.add(next_key)
+        #print("Visiting key: " + str(next_key))
+        dfs_recursive(dict[next_key], next_key, visited)
 
-dfs_recursive(l[0], l[0].keys()[0])
+
+dfs_recursive(l[1], l[1].keys()[0])
+
+

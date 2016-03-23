@@ -81,7 +81,7 @@ def removeOperator(string):
 # Get all titles
 titles = pd.read_csv("../../tcp_abstracts.txt")
 # Return a small list of titles for testing
-small_list_titles = titles.Title.iloc[:1]
+small_list_titles = titles.Title.iloc[:2]
 
 def queryWoS(titles):
     # Create an empty list which should contain info later
@@ -114,7 +114,16 @@ def queryWoS(titles):
 l = queryWoS(small_list_titles)
 #print l[0].keys()
 
-def dfs_recursive(dict, key=None, visited=None):
+def addToDict(key, val, dic):
+    if key=='count':
+        return dic
+    try:
+        dic[key] = val
+    except:
+        print "Got same key: " + str(key)
+    return dic
+
+def dfs_recursive(dict, li, key=None, visited=None):
     if visited is None:
         visited = set()
         print "start: \n"
@@ -125,15 +134,31 @@ def dfs_recursive(dict, key=None, visited=None):
         print
         print "Key: " + key
         print "Value: " + str(dict)
+        li = addToDict(key, str(dict), li)
         print
     if len(key_list) == 0:
         print 30*"=" + " LEAF VALUE " + 30*"="
     for next_key in key_list:
         visited.add(next_key)
         #print("Visiting key: " + str(next_key))
-        dfs_recursive(dict[next_key], next_key, visited)
+        li = dfs_recursive(dict[next_key], li, key=next_key, visited=visited)
+
+    return li
+
+li = {}
+test = dfs_recursive(l[0], li, key=l[0].keys()[0])
+#test = dfs_recursive(l[1], li, key=l[1].keys()[0])
+print 80*"#"
+print
+print "Length of dictionary: " + str(len(test))
+print 
+print 80*"#"
+for key in test.keys():
+    print "Key: " + str(key)
+    print "Value: " + str(test[key])
+    print 80*"="
 
 
-dfs_recursive(l[0], l[0].keys()[0])
-
+#A 20-YEAR RECORD OF ALPINE GRASSHOPPER ABUNDANCE, WITH INTERPRETATIONS FOR CLIMATE CHANGE
+# A GEOLOGICAL PERSPECTIVE ON CLIMATIC-CHANGE - COMPUTER-SIMULATION OF ANCIENT CLIMATES
 

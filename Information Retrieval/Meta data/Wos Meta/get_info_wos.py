@@ -4,6 +4,8 @@ import wos.utils
 from xml.etree import ElementTree
 import credentials as c
 import pandas as pd
+import json
+import helper
 
 class XmlListConfig(list):
     def __init__(self, aList):
@@ -40,7 +42,6 @@ class XmlDictConfig(dict):
             self.update(dict(parent_element.items()))
         for element in parent_element:
             if element:
-
                 # treat like dict - we assume that if the first two tags
                 # in a series are different, then they are all different.
                 if len(element) == 1 or element[0].tag != element[1].tag:
@@ -78,10 +79,6 @@ def removeOperator(string):
     operators = ["AND", "OR", "NOT", "NEAR", "SAME"]
     return ' '.join([word for word in string.split(" ") if word.upper() not in operators])
 
-# Get all titles
-titles = pd.read_csv("../../tcp_abstracts.txt")
-# Return a small list of titles for testing
-small_list_titles = titles.Title.iloc[:2]
 
 def queryWoS(titles):
     # Create an empty list which should contain info later
@@ -111,21 +108,13 @@ def queryWoS(titles):
             time.sleep(1)
     return info
 
-l = queryWoS(small_list_titles)
-#print l[0].keys()
 
-def addToDict(key, val, dic):
-    if key=='count':
-        return dic
-    try:
-        dic[key] = val
-    except:
-        print "Got same key: " + str(key)
-    return dic
 
-def dfs_recursive(dict, li, key=None, visited=None):
+
+def dfs_recursive(dict, li, key=None, visited=None, counter=None):
     if visited is None:
         visited = set()
+        counter = 0
         print "start: \n"
     key_list = []
     try:
@@ -134,29 +123,49 @@ def dfs_recursive(dict, li, key=None, visited=None):
         print
         print "Key: " + key
         print "Value: " + str(dict)
-        li = addToDict(key, str(dict), li)
+        li, counter = helper.addToDict(key, dict, li, counter)
         print
     if len(key_list) == 0:
         print 30*"=" + " LEAF VALUE " + 30*"="
     for next_key in key_list:
         visited.add(next_key)
         #print("Visiting key: " + str(next_key))
-        li = dfs_recursive(dict[next_key], li, key=next_key, visited=visited)
+        li = dfs_recursive(dict[next_key], li, key=next_key, visited=visited, counter=counter)
 
     return li
 
+
+def toJson(l, tcp_data):
+    empty_dic = {}
+    dic = dfs_recursive(l[1], empty_dic, l[1].keys()[0])
+
+    new_dic = helper.getImportantInfo(dic)
+
+    print 80*"#"
+    print
+    print "Length of dictionary: " + str(len(new_dic))
+    print
+    print 80*"#"
+    for key in new_dic.keys():
+        print "Key: " + str(key)
+        print "Value: " + str(new_dic[key])
+        print 80*"="
+
+
+    """
+    with open('text.json', 'w') as out:
+        json.dump(dic, out)
+        out.close()
+    """
+# Get all titles
+tcp_data = pd.read_csv("../../tcp_abstracts.txt")
+# Return a small list of titles for testing
+small_list_titles = tcp_data.Title.iloc[:2]
+l = queryWoS(small_list_titles)
 li = {}
-test = dfs_recursive(l[0], li, key=l[0].keys()[0])
+#test = dfs_recursive(l[0], li, key=l[0].keys()[0])
 #test = dfs_recursive(l[1], li, key=l[1].keys()[0])
-print 80*"#"
-print
-print "Length of dictionary: " + str(len(test))
-print 
-print 80*"#"
-for key in test.keys():
-    print "Key: " + str(key)
-    print "Value: " + str(test[key])
-    print 80*"="
+toJson(l, tcp_data)
 
 
 #A 20-YEAR RECORD OF ALPINE GRASSHOPPER ABUNDANCE, WITH INTERPRETATIONS FOR CLIMATE CHANGE

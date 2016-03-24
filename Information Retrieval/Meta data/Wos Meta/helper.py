@@ -28,8 +28,8 @@ def addOrganizationInfo(key, val, dic):
         key_string_city = "Organization_city0"
         key_string_country = "Organization_country0"
         try:
-            dic[key_string_city] = val['address_spec']['organizations']['city']
-            dic[key_string_country] = val['address_spec']['organizations']['country']
+            dic[key_string_city] = val['address_spec']['city']
+            dic[key_string_country] = val['address_spec']['country']
             dic["Num_of_organizations"] = 1
         except KeyError:
             print "Key Error (wrong path) while storing organization address spec"
@@ -63,6 +63,7 @@ def addAuthorInfo(key,val, dic):
 
 tcp_data = pd.read_csv("../../tcp_abstracts.txt")
 def getImportantInfo(dic, index):
+    # Create an empty new dictionary
     new_dic = {}
     # Add fields from TCP
     new_dic["_id"] = tcp_data.Id.iloc[index]
@@ -79,26 +80,35 @@ def getImportantInfo(dic, index):
     return new_dic
 
 def addToDict(key, val, dic, counter):
+    # Debugging purposes..
     print 30*"=" + " LEAF VALUE " + 30*"="
     print
     print "Key: " + key
     print "Value: " + str(val)
     print
+
+    # No information in count values
     if key=='count':
         return dic, counter
+    # The key 'address_name' is usually a list, store properly by using the method..
     if key == 'address_name':
         dic = addOrganizationInfo(key, val, dic)
+    # The key 'name' is usually a list of authors, store properly by using the method
     elif key == 'name':
         dic = addAuthorInfo(key, val, dic)
+    # See if the dictionary with the key is taken, if yes add a number behind the new key
+    # otherwise store the key in dictionary with proper value
     try:
         if dic[key]:
             counter += 1
             new_key = key + str(counter)
             "Key already used.. Counter now = " + str(counter)
             dic[new_key] = val
+    # No key found, store the key-value pair
     except KeyError:
         dic[key] = val
     except:
         print("Some other than KeyError appeared when adding key-value to dictionary")
+    # Return the dictionary and counter..
     return dic, counter
 

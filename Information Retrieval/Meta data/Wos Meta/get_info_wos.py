@@ -112,34 +112,64 @@ def queryWoS(titles):
 
 
 def dfs_recursive(dict, new_dict, key=None, visited=None, counter=None):
+    """
+    Recursive method to find leaf nodes (values) in a dictionary
+
+    :param dict:        dict:
+    :param new_dict:    dict: Dunno why I called it new_dict..
+    :param key:         string:
+    :param visited:     set: of visited vertices
+    :param counter:     integer: only when trying to store a value with same key
+    :return:            Returns a dictionary with values only, no nesting
+    """
+    # First iteration, set some initial values - not really necessary though
     if visited is None:
         visited = set()
         counter = 0
         print "start: \n"
+    # Create a key list
     key_list = []
+    # Try to see if the dictionary has any keys.
     try:
         key_list = dict.keys()
+    # If not, then there is a leaf node (value) which should be added to dictionary
     except:
+        # Add value to the dictionary when leaf node found
         new_dict, counter = helper.addToDict(key, dict, new_dict, counter)
     for next_key in key_list:
-        visited.add(next_key) # Not used.. Just for debugging purpose
+        # Recursive dig deeper into the dictionary
+        visited.add(next_key)   # Not used.. Just for debugging purpose
         new_dict = dfs_recursive(dict[next_key], new_dict, key=next_key, visited=visited, counter=counter)
+    # Return the dictionary with no nesting
     return new_dict
 
 
 def storeDataAsJson(list_of_dicts):
+    """
+    This method loops through the converted XML dictionaries and store the important data as a new dictionary
+    When all dictionaries done, it should store the list as json
+
+    :param list_of_dicts:   list: containing dictionaries converted from XML
+    """
     # TODO: Discover why some fields are stored as the same in many dictionaries, like city:"CHRISTCHURCH"
+    # Creates empty dict and empty list
     empty_dic = {}
     new_list_of_dicts = []
+    # Loop through the returned dictionaries of WoS
     for i in range(len(list_of_dicts)):
+        # Store a new dictionary with values only, no nesting.
         dic = dfs_recursive(list_of_dicts[i], empty_dic, list_of_dicts[i].keys()[0])
+        # Store a new final dictionary by adding the most important data
         new_dic = helper.getImportantInfo(dic, i)
+        # Add final dictionary to a list
         new_list_of_dicts.append(new_dic)
+        # Just for printing purposes
         print
         print 120*"="
         print 120*"="
         print
 
+    # Printing the dictionaries in the final list
     for d in new_list_of_dicts:
         print d
         print "Lenght of dictionary: " + str(len(d.keys()))
@@ -154,6 +184,8 @@ def storeDataAsJson(list_of_dicts):
         json.dump(new_list_of_dicts, out)
         out.close()
     """
+
+
 # Get all titles
 tcp_data = pd.read_csv("../../tcp_abstracts.txt")
 # Return a small list of titles for testing

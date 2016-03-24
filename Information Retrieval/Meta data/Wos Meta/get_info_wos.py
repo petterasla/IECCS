@@ -111,7 +111,7 @@ def queryWoS(titles):
 
 
 
-def dfs_recursive(dict, li, key=None, visited=None, counter=None):
+def dfs_recursive(dict, new_dict, key=None, visited=None, counter=None):
     if visited is None:
         visited = set()
         counter = 0
@@ -120,52 +120,55 @@ def dfs_recursive(dict, li, key=None, visited=None, counter=None):
     try:
         key_list = dict.keys()
     except:
-        print
-        print "Key: " + key
-        print "Value: " + str(dict)
-        li, counter = helper.addToDict(key, dict, li, counter)
-        print
-    if len(key_list) == 0:
-        print 30*"=" + " LEAF VALUE " + 30*"="
+        new_dict, counter = helper.addToDict(key, dict, new_dict, counter)
     for next_key in key_list:
-        visited.add(next_key)
-        #print("Visiting key: " + str(next_key))
-        li = dfs_recursive(dict[next_key], li, key=next_key, visited=visited, counter=counter)
-
-    return li
+        visited.add(next_key) # Not used.. Just for debugging purpose
+        new_dict = dfs_recursive(dict[next_key], new_dict, key=next_key, visited=visited, counter=counter)
+    return new_dict
 
 
-def toJson(l, tcp_data):
+def storeDataAsJson(list_of_dicts):
+    # TODO: Discover why some fields are stored as the same in many dictionaries, like city:"CHRISTCHURCH"
     empty_dic = {}
-    dic = dfs_recursive(l[1], empty_dic, l[1].keys()[0])
+    new_list_of_dicts = []
+    for i in range(len(list_of_dicts)):
+        dic = dfs_recursive(list_of_dicts[i], empty_dic, list_of_dicts[i].keys()[0])
+        new_dic = helper.getImportantInfo(dic, i)
+        new_list_of_dicts.append(new_dic)
+        print
+        print 120*"="
+        print 120*"="
+        print
 
-    new_dic = helper.getImportantInfo(dic)
+    for d in new_list_of_dicts:
+        print d
+        print "Lenght of dictionary: " + str(len(d.keys()))
+        print
+    print "Length of new list of dicts: " + str(len(new_list_of_dicts))
 
-    print 80*"#"
-    print
-    print "Length of dictionary: " + str(len(new_dic))
-    print
-    print 80*"#"
-    for key in new_dic.keys():
-        print "Key: " + str(key)
-        print "Value: " + str(new_dic[key])
-        print 80*"="
 
+    # TODO: When everything is ready, uncomment below and store the shit out the data
 
     """
-    with open('text.json', 'w') as out:
-        json.dump(dic, out)
+    with open('wos_meta_data.json', 'w') as out:
+        json.dump(new_list_of_dicts, out)
         out.close()
     """
 # Get all titles
 tcp_data = pd.read_csv("../../tcp_abstracts.txt")
 # Return a small list of titles for testing
-small_list_titles = tcp_data.Title.iloc[:2]
-l = queryWoS(small_list_titles)
-li = {}
+small_list_titles = tcp_data.Title.iloc[:5]
+# Get a list of dicts containing data wos
+list_of_dicts_from_wos = queryWoS(small_list_titles)
+# Find the important data and store them as json
+storeDataAsJson(list_of_dicts_from_wos)
+
+
+
+#For testing recursive algorithm
+#li = {}
 #test = dfs_recursive(l[0], li, key=l[0].keys()[0])
 #test = dfs_recursive(l[1], li, key=l[1].keys()[0])
-toJson(l, tcp_data)
 
 
 #A 20-YEAR RECORD OF ALPINE GRASSHOPPER ABUNDANCE, WITH INTERPRETATIONS FOR CLIMATE CHANGE

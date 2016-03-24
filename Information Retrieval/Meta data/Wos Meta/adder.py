@@ -2,24 +2,29 @@ def add(dic, new_dic):
     """
     Add important data here with try/except clauses..
     """
+    # TODO: Include the most important fields with try/except clauses
 
-    # Add country
+    # Add country and city
     try:
-        if dic['Organization_country0']:
-            new_dic['Organization_country'] = dic['Organization_country0']
+        l_country = []
+        l_city = []
+        if dic['Num_of_organizations'] >= 1:
+            for i in range(dic['Num_of_organizations']):
+                key_string_country = "Organization_country"+str(i)
+                key_string_city = "Organization_city" + str(i)
+                l_country.append(dic[key_string_country])
+                l_city.append(dic[key_string_city])
+            new_dic['Organization_country'] = l_country
+            new_dic['Organization_city'] = l_city
     except:
-        print("No 'Organization_country0' found..")
+        print("No 'Organization_country' found..")
+    # Anothter try for country
     try:
         if dic['country']:
             new_dic["Country"] = dic['country']
     except:
-        print("No 'Organization_country found..")
-    # Add city
-    try:
-        if dic["Organization_city0"]:
-            new_dic["Organization_city"] = dic["Organization_city"]
-    except:
-        print("No 'Organization_city' found...")
+        print("No 'country' found..")
+    # Anothter try for city
     try:
         if dic["city"]:
             new_dic["City"] = dic["city"]
@@ -34,14 +39,12 @@ def add(dic, new_dic):
 
     # Add authors
     try:
-        if dic["Num_of_authors"] > 1:
-            l = []
+        l = []
+        if dic["Num_of_authors"] >= 1:
             for i in range(dic["Num_of_authors"]):
                 author_key = "Author_name" + str(i)
                 l.append(dic[author_key])
             new_dic["Authors"] = l
-        elif dic["Num_of_authors"] == 1:
-            new_dic["Authors"] = dic["Author_name0"]
     except:
         print("No 'Authors' found")
 

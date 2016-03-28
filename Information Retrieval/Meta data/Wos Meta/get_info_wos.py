@@ -80,21 +80,28 @@ def removeOperator(string):
     return ' '.join([word for word in string.split(" ") if word.upper() not in operators])
 
 
-def queryWoS(titles):
+def queryWoS(titles, years):
     # Create an empty list which should contain info later
     info = []
     # Connect to Web of Science
     with WosClient(c.getUserName(), c.getPassword()) as client:
-        # TODO: Include year restriction too
         # Looping through the titles (search parameter)
-        for title in titles:
+        for i,title in enumerate(titles):
             # Replace '|' with ','
             title = title.replace("|","")
+            # Get year published
+            year = years[i]
+            # Create year query with +/- 1 year
+            query_string_year = 'PY=(' + str(year-1) + ' OR ' + str(year) + ' OR ' + str(year+1) + ')'
             # Check if the title contains any operators (like AND, OR, NOT)
             if isOperator(title):
                 title = removeOperator(title)
+            # Create title query
+            query_string_title = 'TI=' + title
+            # Create query AND operator string
+            query_AND_operator = ' AND '
             # Create the query string
-            query_string = 'TI=' + title
+            query_string = query_string_title + query_AND_operator + query_string_year
             print query_string
             # Perform the query on wos engine
             xmlString = wos.utils.query(client, query_string)
@@ -191,8 +198,9 @@ def storeDataAsJson(list_of_dicts):
 tcp_data = pd.read_csv("../../tcp_abstracts.txt")
 # Return a small list of titles for testing
 small_list_titles = tcp_data.Title.iloc[:5]
+small_list_years = tcp_data.Year.iloc[:5]
 # Get a list of dicts containing data wos
-list_of_dicts_from_wos = queryWoS(small_list_titles)
+list_of_dicts_from_wos = queryWoS(small_list_titles, small_list_years)
 # Find the important data and store them as json
 storeDataAsJson(list_of_dicts_from_wos)
 

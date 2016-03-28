@@ -104,7 +104,7 @@ def queryWoS(titles, years):
             query_string = query_string_title + query_AND_operator + query_string_year
             print query_string
             # Perform the query on wos engine
-            xmlString = wos.utils.query(client, query_string)
+            xmlString = wos.utils.query(client, query_string, count=1)
             print xmlString
             # Convert to XML object
             root = ElementTree.XML(xmlString)

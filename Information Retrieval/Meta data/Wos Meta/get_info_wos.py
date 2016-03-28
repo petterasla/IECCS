@@ -85,6 +85,7 @@ def queryWoS(titles):
     info = []
     # Connect to Web of Science
     with WosClient(c.getUserName(), c.getPassword()) as client:
+        # TODO: Include year restriction too
         # Looping through the titles (search parameter)
         for title in titles:
             # Replace '|' with ','

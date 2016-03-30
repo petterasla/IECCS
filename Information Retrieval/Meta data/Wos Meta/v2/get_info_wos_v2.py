@@ -75,10 +75,10 @@ def init():
     list_of_roots_from_wos = queryWos(small_list_titles, small_list_years)
     data = extractDataFromRoot(list_of_roots_from_wos)
 
-    """
+
     with open('wos_data.json','w') as f:
         json.dump(data,f)
         f.close()
-    """
+
 
 init()

@@ -13,7 +13,6 @@ def add(root, index):
     dic["Title"] = tcp_data.Title.iloc[index].replace("|",",")
 
     dic["Language"] = getLanguage(root)
-    dic["Document_type"] = getDocType(root)
     dic["References"] = getRefs(root)
     dic["Organization_info"] = getOrganizationInfo(root)
     dic["Keywords"] = getKeywords(root)
@@ -28,6 +27,8 @@ def add(root, index):
     dic["Publication_issue"] = getPublicationInfo(root, "issue")
     dic["Publication_length"] = getPublicationLength(root)
     dic["Authors"] = getAuthors(root)
+    dic["Document_type"] = getDocumentType(root)
+    dic["WOS"] = getWOS(root)
 
     print len(dic)
     print dic
@@ -43,13 +44,6 @@ def getStanceByEndorse(endorse):
 
 def getLanguage(root):
     l = root.findall(".REC/static_data/fullrecord_metadata/languages/")
-    try:
-        return l[0].text
-    except:
-        return None
-
-def getDocType(root):
-    l = root.findall(".REC/static_data/fullrecord_metadata/normalized_doctypes/")
     try:
         return l[0].text
     except:
@@ -154,3 +148,14 @@ def getPublicationLength(root):
 
 def getAuthors(root):
     lis = root.findall(".REC/static_data/summary/names/")
+    author = None
+    for l in lis:
+        if l.tag == "wos_standard":
+            author.append(l.text)
+    return author
+
+def getDocumentType(root):
+    return root.findall(".REC/static_data/summary/doctypes/doctype")[0].text
+
+def getWOS(root):
+    return root.findall(".REC/UID")[0].text

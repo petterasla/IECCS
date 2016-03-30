@@ -5,16 +5,21 @@ Use root.findall(path).
 Example: root.findall(".REC/UID") to find UID list
 and use root.findall(".REC/UID")[0].text to extract this value. Use for-loop for more than one value
 
-##### UID #####
-.REC/UID
+###############
+#    UID      #
+#   .REC/UID  #
+###############
+
 
 Value:
 - WOS Unique ID
 (".REC/UID")[0].text
 
+##############################
+#       Dynamic data         #
+#   .REC/dynamic_data        #
+##############################
 
-##### Dynamic data #####
-.REC/dynamic_data
 
 Values:
 - Cluster related: type and value
@@ -23,41 +28,84 @@ Values:
 - Citation related: coll_id and local_count
 ("./REC/dynamic_data/citation_related/tc_list/silo_tc")[0].attrib
 
-
-##### Static data #################
-.REC/static_data
+###################################
+#       Static data               #
+#      .REC/static_data           #
+###################################
 
     ######## Item ########
-    /item
+    .REC/static_data/item
 
     values:
-    - Keyword plus: List of keywords (plus)
-    ("/item/keywords_plus/")
+    - List of keywords (plus)
+    ("../keywords_plus/")
 
     - Some id value
-    ("/item/ids")[0].text
+    ("../ids")[0].text
 
     - Bib id
-    ("/item/bib_id")[0].text
+    ("../bib_id")[0].text
 
     ####### Fullrecord metadata #########
-    /static_data
+    .REC/static_data/static_data/fullrecord_metadata
 
     values:
-    - Languages
-    ("/static_data/fullrecord_metadata/languages/language")[0].text
+    - List of Language
+    ("../languages")
 
-    - Normalized(?) language: i.e English
-    ("/static_data/fullrecord_metadata/normalized_languages/language")[0].text
+    - List of Normalized(?) language: i.e English
+    ("../normalized_languages")
 
-    - Normalized(?) document type: i.e Article
-    ("/static_data/fullrecord_metadata/normalized_doctypes/doctype")[0].text
+    - List of Normalized(?) document type: i.e Article
+    ("../normalized_doctypes")
 
     - References: i.e: 50
-    ("/static_data/fullrecord_metadata/refs")[0].attrib['count']
+    ("../refs")[0].attrib['count']
 
-    - Number of organizations contributing
-    /static_data/fullrecord_metadata/addresses/")
+    - List of organizations including address info like street, city, country
+    ("../addresses/address_name/address_spec/")
 
-    - List with address info like street, city, country
-    /static_data/fullrecord_metadata/addresses/address_name/address_spec/")
+    - List of keywords related to this record
+    ("../keywords/")
+
+    - List of headers (Category header)
+    ("../category_info/headings")
+
+    - List of subheadings
+    ("../category_info/subheadings/")
+
+    - List of subjects
+    ("../category_info/subjects/")
+
+    - List of abstract(s)
+    ("../abstracts/")
+
+
+
+    ####### Summary #########
+    .REC/static_data/static_data/summary
+
+    values:
+    - Electronic WUID?
+    ("../EWUID/edition")[0].attrib
+    ("../EWUID/WUID")[0].attrib
+
+    - Dictionary with public info like publication year, month, type, volume
+    ("../pub_info")[0].attrib
+
+    - Dictionary with page info with begin, end and page_count
+    ("../pub_info/page")[0].attrib
+
+    - List of titles
+    ("../titles/")
+
+    - List of names with info like first name, last name, wos_standard
+    ("../names/")
+
+    - List of document types
+    ("../doctypes/")
+
+    - List of publishers
+    ("../publishers/")
+        with each (../publishers/publisher/):
+        - /address_spec and /names

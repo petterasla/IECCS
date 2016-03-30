@@ -1,5 +1,7 @@
 import pandas as pd
+
 import adder
+
 
 def getStanceByEndorse(endorse):
     if endorse <= 3:
@@ -14,9 +16,13 @@ def addOrganizationInfo(key, val, dic):
         for i,d in enumerate(val):
             key_string_city = "Organization_city" + str(i)
             key_string_country = "Organization_country" + str(i)
+            key_string_street = "Organization_street" + str(i)
+            key_string_organization = "Organization_org" + str(i)
             try:
                 dic[key_string_city] = d['address_spec']['city']
                 dic[key_string_country] = d['address_spec']['country']
+                dic[key_string_street] = d['address_spec']['street']
+                dic[key_string_organization] = d['address_spec']['organizations']['organization']
             except KeyError:
                 print "Key Error (wrong path) while storing organization address spec"
             except:
@@ -27,9 +33,13 @@ def addOrganizationInfo(key, val, dic):
     except:
         key_string_city = "Organization_city0"
         key_string_country = "Organization_country0"
+        key_string_street = "Organization_street0"
+        key_string_organization = "Organization_org0"
         try:
             dic[key_string_city] = val['address_spec']['city']
             dic[key_string_country] = val['address_spec']['country']
+            dic[key_string_street] = d['address_spec']['street']
+            dic[key_string_organization] = d['address_spec']['organizations']['organization']
             dic["Num_of_organizations"] = 1
         except KeyError:
             print "Key Error (wrong path) while storing organization address spec"

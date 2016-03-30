@@ -1,11 +1,14 @@
+import json
 import time
-from wos import WosClient
-import wos.utils
 from xml.etree import ElementTree
+
 import credentials as c
 import pandas as pd
-import json
+import wos.utils
+from wos import WosClient
+
 import helper
+
 
 class XmlListConfig(list):
     def __init__(self, aList):
@@ -104,14 +107,19 @@ def queryWoS(titles, years):
             query_string = query_string_title + query_AND_operator + query_string_year
             print query_string
             # Perform the query on wos engine
-            xmlString = wos.utils.query(client, query_string, count=1)
+            xmlString = ""
+            try:
+                xmlString = wos.utils.query(client, query_string, count=1)
+            except:
+                print("Some error occurred while querying the WoS database")
             print xmlString
             # Convert to XML object
-            root = ElementTree.XML(xmlString)
-            # Convert XML object to a dictionary
-            xmlDict = XmlDictConfig(root)
-            # Add the dictionary to the info list
-            info.append(xmlDict)
+            if xmlString is not "":
+                root = ElementTree.XML(xmlString)
+                # Convert XML object to a dictionary
+                xmlDict = XmlDictConfig(root)
+                # Add the dictionary to the info list
+                info.append(xmlDict)
             # Just for being 'nice' to WoS and not bomb attack the server
             time.sleep(1)
     return info
@@ -187,11 +195,11 @@ def storeDataAsJson(list_of_dicts):
 
     # TODO: When everything is ready, uncomment below and store the shit out the data
 
-    """
+
     with open('wos_meta_data.json', 'w') as out:
         json.dump(new_list_of_dicts, out)
         out.close()
-    """
+
 
 
 # Get all titles

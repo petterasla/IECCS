@@ -46,8 +46,14 @@ Values:
     - Bib id
     ("../bib_id")[0].text
 
+    - Reprint something?
+    ("../reprint_contact/")
+        With following
+        - /address_spec and /names
+
+
     ####### Fullrecord metadata #########
-    .REC/static_data/static_data/fullrecord_metadata
+    .REC/static_data/fullrecord_metadata
 
     values:
     - List of Language
@@ -63,7 +69,7 @@ Values:
     ("../refs")[0].attrib['count']
 
     - List of organizations including address info like street, city, country
-    ("../addresses/address_name/address_spec/")
+    ("../addresses/address_name/")
 
     - List of keywords related to this record
     ("../keywords/")

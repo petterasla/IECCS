@@ -148,11 +148,15 @@ def getPublicationLength(root):
 
 def getAuthors(root):
     lis = root.findall(".REC/static_data/summary/names/")
-    author = None
-    for l in lis:
-        if l.tag == "wos_standard":
-            author.append(l.text)
-    return author
+    author = []
+    for li in lis:
+        for l in li:
+            if l.tag == "wos_standard":
+                author.append(l.text)
+    if len(author) > 0:
+        return author
+    else:
+        return None
 
 def getDocumentType(root):
     return root.findall(".REC/static_data/summary/doctypes/doctype")[0].text

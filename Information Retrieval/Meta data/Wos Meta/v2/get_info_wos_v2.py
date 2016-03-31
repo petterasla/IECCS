@@ -34,7 +34,7 @@ def queryWos(tcp_data, start, start_sample, end_sample):
         # Looping through the titles (search parameter)
         for i, id in enumerate(small_list_ids):
             # Replace '|' with ','
-            title = tcp_data.loc[id].Title.replace("|","").replace("(","").replace(")","").replace("?","").replace('"', '')
+            title = tcp_data.loc[id].Title.replace("|","").replace("(","").replace(")","").replace("?","").replace('"', '').replace("/"," ")
             # Get year published
             year = tcp_data.loc[id].Year
             # Create year query with +/- 1 year
@@ -88,8 +88,8 @@ def init():
     tcp_data = pd.read_csv("../../../tcp_abstracts.txt", index_col="Id")
 
     # Get a list of dicts containing data wos
-    sample_start = 1000
-    sample_end = 2000
+    sample_start = 2000
+    sample_end = 3000
     list_of_roots_from_wos, not_found = queryWos(tcp_data, start_time, sample_start, sample_end)
     data = extractDataFromRoot(list_of_roots_from_wos, tcp_data)
 

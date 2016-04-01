@@ -6,7 +6,7 @@ import credentialsv2 as c
 import pandas as pd
 import wos.utils
 from wos import WosClient
-
+import re
 import adder
 
 
@@ -24,7 +24,8 @@ def removeOperator(string):
 def queryWos(tcp_data, start, start_sample, end_sample):
     # Return a small list of titles, year and ids for testing
 
-    small_list_ids = tcp_data.index.values.tolist()[start_sample:end_sample]
+    with open("../wos_not_meta_data.json", "r") as f:
+        small_list_ids = json.load(f)
     # Create an empty list which should contain info later
     info = []
     not_found = []
@@ -34,7 +35,9 @@ def queryWos(tcp_data, start, start_sample, end_sample):
         # Looping through the titles (search parameter)
         for i, id in enumerate(small_list_ids):
             # Replace '|' with ','
-            title = tcp_data.loc[id].Title.replace("|","").replace("(","").replace(")","").replace("?","").replace('"', '').replace("/"," ")
+            title = tcp_data.loc[id].Title.replace("|",",").replace("?","").replace('"', '').replace("/"," ").replace("-", " ").replace(":", " ")
+            title = re.sub(r'\([^)]*\)', '', title)
+            title = title.replace("(","").replace(")","")
             # Get year published
             year = tcp_data.loc[id].Year
             # Create year query with +/- 1 year
@@ -54,24 +57,22 @@ def queryWos(tcp_data, start, start_sample, end_sample):
             try:
                 root = wos.utils.query_v2(client, query_string, count=1)
             except suds.WebFault:
-                print "Suds.WebFault: Waiting 1 minute"
+                print "Suds.WebFault: Waiting 15 sec"
                 print suds.WebFault.args
-                time.sleep(60)
+                time.sleep(15)
             except:
-                print "Some other error occured, sleep 30 minute"
-                time.sleep(30)
+                print "Some other error occured, sleep 15 sec"
+                time.sleep(15)
             if root is None:
                 # Adding tuple with id and title
                 not_found.append(id)
-                print("Did not find record with title {}".format(tcp_data.loc[id].Title))
+                print("Did not find record with title {}".format(title))
                 print("Not found length is {}".format(len(not_found)))
             else:
                 # Adding dictionary
                 info.append((root, id))
-                if len(info) % 25 == 0:
-                    print("Successfully retrieved is now {}".format(len(info)))
-            if (i+1) % 50 == 0:
-                print("Number of queries so far is {}. Time used is {:0.1f} minutes".format((i+1),((time.time()-start)/60.0)))
+                print("Successfully retrieved is now {}".format(len(info)))
+            print("Number of queries so far is {}. Time used is {:0.1f} minutes".format((i+1),((time.time()-start)/60.0)))
             time.sleep(1)
     return info, not_found
 
@@ -84,14 +85,18 @@ def extractDataFromRoot(roots, tcp_data):
 
 def init():
     # Get all titles
-    start_time = time.time()
     tcp_data = pd.read_csv("../../../tcp_abstracts.txt", index_col="Id")
 
+    sample_start = None
+    sample_end = None
+
+    start_time = time.time()
     # Get a list of dicts containing data wos
-    sample_start = 2000
-    sample_end = 3000
     list_of_roots_from_wos, not_found = queryWos(tcp_data, start_time, sample_start, sample_end)
     data = extractDataFromRoot(list_of_roots_from_wos, tcp_data)
+
+    if sample_end is None:
+        sample_end = "_of_not_found"
 
     file_name = 'wos_data{}.json'.format(sample_end)
     with open(file_name,'w') as f:
@@ -100,14 +105,20 @@ def init():
 
     not_found_file = 'not_found{}.json'.format(sample_end)
     with open(not_found_file, 'w') as f:
-        json.dump(not_found,f)
+        json.dump(not_found, f)
         f.close()
 
-    print("Time used was {:0.2f} seconds or {:0.1f} minutes".format((time.time() - start_time), ((time.time()-start_time)/60.0)))
-    print("Number of successfully retrieved records was {}".format(len(list_of_roots_from_wos)))
-    print("Number of unsuccessfully retrieved records was {}".format(len(not_found)))
+    s1 = "Time used was {:0.2f} seconds or {:0.1f} minutes \n".format((time.time() - start_time), ((time.time()-start_time)/60.0))
+    s2 = "Number of successfully retrieved records was {} \n".format(len(list_of_roots_from_wos))
+    s3 = "Number of unsuccessfully retrieved records was {} \n".format(len(not_found))
+
+    with open("wos_info.txt", "a") as f:
+        f.write(s1)
+        f.write(s2)
+        f.write(s3)
+
+
 
 
 init()
 
-# TODO: Do trial runs to see if the server is overloaded...

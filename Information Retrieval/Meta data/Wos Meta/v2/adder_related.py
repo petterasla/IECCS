@@ -2,6 +2,7 @@ def add(root):
     dic = {}
 
     dic["Abstract"] = getAbstract(root)
+    dic["Title"] = getTitle(root)
     dic["Language"] = getLanguage(root)
     dic["References"] = getRefs(root)
     dic["Organization_info"] = getOrganizationInfo(root)
@@ -199,3 +200,14 @@ def getAbstract(root):
     except:
         return None
 
+def getTitle(root):
+    ret = root.findall(".REC/static_data/summary/titles/")
+
+    try:
+        titles = [i.text for i in ret]
+        lengths = [len(s) for s in titles]
+        index = lengths.index(max(lengths))
+        title = titles[index]
+        return title
+    except:
+        return None

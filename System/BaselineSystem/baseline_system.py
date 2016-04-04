@@ -15,29 +15,24 @@ from sklearn.dummy import DummyClassifier
 from sklearn.metrics import classification_report
 from sklearn.cross_validation import cross_val_predict, StratifiedKFold
 from sklearn.metrics import fbeta_score
-from sklearn.svm import LinearSVC
+from sklearn.svm import LinearSVC, SVC
+from sklearn.naive_bayes import MultinomialNB
+import pandas as pd
 
 
 # ***** LOAD DATA   *****
-# Retrieve abstracts
-abstracts = ptd.getAbstractData()
-# Retrieve labels in form of endorsement
-endorsement_data = ptd.getEndorsementData()
+data = pd.read_csv('../TextFiles/data/tcp_train.csv', sep='\t')
 
-# Convert endorsement to classes (FAVOR, AGAINST, NONE)
-target_data = []
-for endorse in endorsement_data.tolist():
-    target_data.append(ptd.getAbstractStance('soft', endorse))
 
-cv = StratifiedKFold(target_data, n_folds=10, shuffle=True, random_state=1)
+cv = StratifiedKFold(data.Stance, n_folds=10, shuffle=True, random_state=1)
 
 # Select classifiers to use
 classifiers = [
     DummyClassifier(strategy='stratified', random_state=None, constant=None),
     DummyClassifier(strategy='most_frequent', random_state=None, constant=None),
-    #LinearSVC(C=1.0),
-    #SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
-    #MultinomialNB(alpha=0.5)
+    LinearSVC(C=1.0),
+    SVC(decision_function_shape='ovo', kernel='linear', shrinking=True),
+    MultinomialNB(alpha=0.5)
 ]
 
 # ***** TRAIN CLASSIFIERS   *****
@@ -54,12 +49,12 @@ for clf in classifiers:
                          ('tfidf', TfidfTransformer(use_idf=True)),
                          ('clf', clf)])
 
-    pred_stances = cross_val_predict(pipeline, abstracts,
-                                     target_data, cv=cv, n_jobs=10)
+    pred_stances = cross_val_predict(pipeline, data.Abstract,
+                                     data.Stance, cv=cv, n_jobs=10)
 
-    print classification_report(target_data, pred_stances, digits=4)
+    print classification_report(data.Stance, pred_stances, digits=4)
 
-    macro_f = fbeta_score(target_data, pred_stances, 1.0,
+    macro_f = fbeta_score(data.Stance, pred_stances, 1.0,
                           labels=['AGAINST', 'FAVOR', 'NONE'], average='macro')
 
     print 'macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f)

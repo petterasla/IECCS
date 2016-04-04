@@ -1,4 +1,78 @@
+================================================================================
+DummyClassifier(constant=None, random_state=None, strategy='stratified')
+================================================================================
+             precision    recall  f1-score   support
 
+    AGAINST     0.0000    0.0000    0.0000        41
+      FAVOR     0.3340    0.3177    0.3257      2046
+       NONE     0.6709    0.6871    0.6789      4183
+
+avg / total     0.5566    0.5620    0.5592      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.3348
+
+================================================================================
+DummyClassifier(constant=None, random_state=None, strategy='most_frequent')
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        41
+      FAVOR     0.0000    0.0000    0.0000      2046
+       NONE     0.6671    1.0000    0.8003      4183
+
+avg / total     0.4451    0.6671    0.5339      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.2668
+
+================================================================================
+LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        41
+      FAVOR     0.6822    0.6872    0.6847      2046
+       NONE     0.8410    0.8460    0.8435      4183
+
+avg / total     0.7837    0.7887    0.7862      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5094
+
+================================================================================
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovo', degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        41
+      FAVOR     0.6871    0.6901    0.6886      2046
+       NONE     0.8427    0.8489    0.8458      4183
+
+avg / total     0.7864    0.7915    0.7890      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5115
+
+================================================================================
+MultinomialNB(alpha=0.5, class_prior=None, fit_prior=True)
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        41
+      FAVOR     0.8000    0.0039    0.0078      2046
+       NONE     0.6679    0.9995    0.8007      4183
+
+avg / total     0.7066    0.6681    0.5367      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.2695
+
+time: 945.538555145
+
+
+=== OLD RESULTS (performed on all data) ===
 ################################################################################
 ################################################################################
 

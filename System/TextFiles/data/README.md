@@ -1,6 +1,6 @@
 DATA:
-In this folder you will find the TCP data. It can be found in four 
-different files: original (all), a trainig set, a validation set, and a 
+In this folder you will find the TCP data, including meta data and related record associated with TCP data. 
+It can be found in four different files: original (all), a trainig set, a validation set, and a 
 test set. The splits are genrated by DataProcessing.split_data. 
 
 All data splits are stratified and splitted randomly where each sample 

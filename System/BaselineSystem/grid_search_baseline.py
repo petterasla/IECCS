@@ -35,6 +35,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.cross_validation import StratifiedKFold
+import pandas as pd
 
 #print(__doc__)
 
@@ -44,22 +45,13 @@ logging.basicConfig(level=logging.INFO,
 
 
 ###############################################################################
-# Load some categories from the training set
+# Load data
+data = pd.read_csv('../TextFiles/data/tcp_train.csv', sep='\t')
 
-# Uncomment the following to do the analysis on all the categories
-#categories = None
-
-abstracts = ptd.getAbstractData().tolist()
-endorsement = ptd.getEndorsementData().tolist()
-labels = []
-for endorse in endorsement:
-    labels.append(ptd.getAbstractStance('soft', endorse))
-
-cv = StratifiedKFold(labels, n_folds=10, shuffle=True, random_state=1)
+cv = StratifiedKFold(data.Stance, n_folds=10, shuffle=True, random_state=1)
 
 
-print("%d documents" % len(abstracts))
-print("%d categories" % 3)
+print("%d documents" % len(data))
 print()
 
 ###############################################################################

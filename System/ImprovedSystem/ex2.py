@@ -27,10 +27,7 @@ import pandas as pd
 #downsample_rate_favor = 3
 #downsample_rate_none  = 10
 
-
-
 strength = 'soft'
-
 
 data = pd.read_csv('../TextFiles/data/tcp_train.csv', sep='\t')
 

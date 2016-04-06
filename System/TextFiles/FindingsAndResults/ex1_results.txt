@@ -4,6 +4,58 @@ LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
      multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
      verbose=0)
 
+use_upsample = 0
+use_downsample = 0
+
+downsample_rate_favor = -
+downsample_rate_none  = -
+
+strength = 'soft'
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        41
+      FAVOR     0.6994    0.6369    0.6667      2046
+       NONE     0.8250    0.8690    0.8464      4183
+
+avg / total     0.7786    0.7876    0.7822      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5044
+
+time =  109.947839022
+
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+use_upsample = 1
+use_downsample = 0
+
+downsample_rate_favor = -
+downsample_rate_none  = -
+
+strength = 'soft'
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.9714    0.4146    0.5812        82
+      FAVOR     0.6961    0.6359    0.6646      2046
+       NONE     0.8235    0.8676    0.8449      4183
+
+avg / total     0.7841    0.7866    0.7831      6311
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.6969
+
+time =  102.114639997
+
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
 use_upsample = 1
 use_downsample = 1
 
@@ -23,3 +75,133 @@ avg / total     0.7678    0.7719    0.7661      1951
 macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.7531
 
 time =  14.9573628902
+
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+use_upsample = 1
+use_downsample = 1
+
+downsample_rate_favor = 0.4
+downsample_rate_none  = 0.3
+
+strength = 'soft'
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.9524    0.7317    0.8276        82
+      FAVOR     0.6870    0.6728    0.6798       819
+       NONE     0.7823    0.8048    0.7934      1255
+
+avg / total     0.7526    0.7519    0.7516      2156
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.7669
+
+time =  28.6079189777
+
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+use_upsample = 1
+use_downsample = 1
+
+downsample_rate_favor = 0.5
+downsample_rate_none  = 0.3
+
+strength = 'soft'
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.9836    0.7317    0.8392        82
+      FAVOR     0.7160    0.7615    0.7380      1023
+       NONE     0.7903    0.7625    0.7762      1255
+
+avg / total     0.7648    0.7610    0.7618      2360
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.7845
+
+time =  33.1559240818
+
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+use_upsample = 1
+use_downsample = 1
+
+downsample_rate_favor = 0.5
+downsample_rate_none  = 0.4
+
+strength = 'soft'
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.9649    0.6707    0.7914        82
+      FAVOR     0.6853    0.6833    0.6843      1023
+       NONE     0.7991    0.8124    0.8057      1674
+
+avg / total     0.7621    0.7607    0.7606      2779
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.7604
+
+time =  39.8402130604
+
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+use_upsample = 1
+use_downsample = 1
+
+downsample_rate_favor = 0.5
+downsample_rate_none  = 0.2
+
+strength = 'soft'
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.9667    0.7073    0.8169        82
+      FAVOR     0.7335    0.8583    0.7910      1023
+       NONE     0.7766    0.6356    0.6991       837
+
+avg / total     0.7619    0.7559    0.7525      1942
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.7690
+
+time =  26.1504230499
+
+================================================================================
+LinearSVC(C=0.56234132519, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+
+use_upsample = 1
+use_downsample = 1
+
+downsample_rate_favor = 0.6
+downsample_rate_none  = 0.3
+
+strength = 'soft'
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.9818    0.6585    0.7883        82
+      FAVOR     0.7169    0.8021    0.7571      1228
+       NONE     0.7773    0.7036    0.7386      1255
+
+avg / total     0.7549    0.7493    0.7491      2565
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.7613
+
+time =  35.6331999302

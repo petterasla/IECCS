@@ -21,9 +21,9 @@ import pandas as pd
 
 # ***** SETTINGS   *****
 use_upsample = 1
-use_downsample = 0
+use_downsample = 1
 
-downsample_rate_favor = 0.3
+downsample_rate_favor = 0.5
 downsample_rate_none  = 0.3
 
 strength = 'soft'

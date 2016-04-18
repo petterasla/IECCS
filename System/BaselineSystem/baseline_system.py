@@ -19,6 +19,7 @@ from sklearn.cross_validation import cross_val_predict, StratifiedKFold
 from sklearn.metrics import fbeta_score
 from sklearn.svm import LinearSVC, SVC
 from sklearn.naive_bayes import MultinomialNB, BernoulliNB
+from sklearn.linear_model import LogisticRegression, SGDClassifier
 import pandas as pd
 
 
@@ -35,11 +36,14 @@ classifiers = [
     #DummyClassifier(strategy='stratified', random_state=None, constant=None),
     #DummyClassifier(strategy='most_frequent', random_state=None, constant=None),
     #LinearSVC(),
-    SVC(kernel='linear'),
+    #SVC(kernel='linear'),
     #MultinomialNB(),
-    #BernoulliNB()
+    #BernoulliNB(),
+    LogisticRegression(),
+    SGDClassifier()
 ]
 
+print("Running...")
 # ***** TRAIN CLASSIFIERS   *****
 for clf in classifiers:
     print 80 * "="
@@ -58,6 +62,7 @@ for clf in classifiers:
                                      train_data.Stance, cv=cv)
 
     print("Cross validated train score")
+    print 80 * "="
     print classification_report(train_data.Stance, pred_stances, digits=4)
 
     macro_f = fbeta_score(train_data.Stance, pred_stances, 1.0,
@@ -65,6 +70,7 @@ for clf in classifiers:
 
     print 'macro-average of F-score(FAVOR), F-score(AGAINST) and F-score (NONE): {:.4f}\n\n'.format(macro_f)
 
+    print 80 * "="
     print("Validation score")
     print 80 * "="
     validate_preds = cross_val_predict(pipeline, validate_data.Abstract,
@@ -102,6 +108,6 @@ if check_test:
 
         macro_f = fbeta_score(test_data.Stance, test_preds, 1.0,
                               labels=['AGAINST', 'FAVOR', 'NONE'], average='macro')
-        print("Test macri F-score: {:.4f}".format(macro_f))
+        print("Test macro F-score: {:.4f}".format(macro_f))
 print("--- %s seconds ---" % (time.time() - start_time))
 

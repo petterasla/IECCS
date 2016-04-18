@@ -35,9 +35,9 @@ classifiers = [
     #DummyClassifier(strategy='stratified', random_state=None, constant=None),
     #DummyClassifier(strategy='most_frequent', random_state=None, constant=None),
     #LinearSVC(),
-    #SVC(kernel='linear'),
+    SVC(kernel='linear'),
     #MultinomialNB(),
-    BernoulliNB()
+    #BernoulliNB()
 ]
 
 # ***** TRAIN CLASSIFIERS   *****

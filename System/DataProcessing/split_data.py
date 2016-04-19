@@ -1,4 +1,11 @@
 # Fix path for use in terminal ###
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+import json
+import pandas as pd
 import sys
 import os
 sys.path.append(os.path.abspath(__file__ + "/../../../"))
@@ -26,3 +33,50 @@ def split_test_val_train(strength):
 
 # Perform the split (only needed once)
 split_test_val_train('soft')
+
+#### CONVERT META JSON TO TRAIN/VAL/TEST WITH META:
+
+with open("../TextFiles/data/meta_data.json", "r") as f:
+    data = json.load(f)
+
+print("len of meta data: {}".format(len(data)))
+
+train = pd.read_csv("tcp_train.csv", sep='\t')
+val = pd.read_csv("tcp_validate.csv", sep='\t')
+test = pd.read_csv("tcp_test.csv", sep='\t')
+
+
+train_ids = train.Id.tolist()
+val_ids = val.Id.tolist()
+test_ids = test.Id.tolist()
+
+
+
+train_meta_dict = []
+val_meta_dict = []
+test_meta_dict = []
+for d in data:
+    if d["_id"] in train_ids:
+        train_meta_dict.append(d)
+    elif d["_id"] in val_ids:
+        val_meta_dict.append(d)
+    else:
+        test_meta_dict.append(d)
+
+print("len of train.csv: {}".format(len(train_ids)))
+print("len of train.csv: {}".format(len(train)))
+print("len of train.csv: {}".format(len(train_meta_dict)))
+
+print("len of validate.csv: {}".format(len(val)))
+print("len of validate.csv: {}".format(len(val_meta_dict)))
+print("len of validate.csv: {}".format(len(val_ids)))
+
+print("len of test.csv: {}".format(len(test_ids)))
+print("len of test.csv: {}".format(len(test)))
+print("len of test.csv: {}".format(len(test_meta_dict)))
+
+print("len of data shuold be equal to the sum: {} == {} ".format(len(data), (len(test_meta_dict) + len(train_meta_dict) + len(val_meta_dict))))
+
+pd.DataFrame(train_meta_dict).to_csv("../TextFiles/data/tcp_train_meta.csv", sep="\t")
+pd.DataFrame(val_meta_dict).to_csv("../TextFiles/data/tcp_validate_meta.csv", sep="\t")
+pd.DataFrame(test_meta_dict).to_csv("../TextFiles/data/tcp_test_meta.csv", sep="\t")

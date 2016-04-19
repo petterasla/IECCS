@@ -38,11 +38,21 @@ def getData():
 def getTrainingData():
     return pd.read_csv("../TextFiles/data/tcp_train.csv", sep='\t')
 
+def getTrainingDataWithMeta():
+    return pd.read_csv("../TextFiles/data/tcp_train_meta.csv", sep='\t')
+
 def getValidationData():
     return pd.read_csv("../TextFiles/data/tcp_validate.csv", sep='\t')
 
+def getValidationDataWithMeta():
+    return pd.read_csv("../TextFiles/data/tcp_validate_meta.csv", sep='\t')
+
 def getTestData():
     return pd.read_csv("../TextFiles/data/tcp_test.csv", sep='\t')
+
+def getTestDataWithMeta():
+    return pd.read_csv("../TextFiles/data/tcp_test_meta.csv", sep='\t')
+
 
 def getIdData():
     """

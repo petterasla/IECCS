@@ -42,3 +42,106 @@ avg / total     0.7883    0.7657    0.7713      2983
 
 Test macro F-score: 0.5674
 time =  157.002315998
+
+
+########################################################################################
+BernoulliNB(alpha=0.1, binarize=0.0, class_prior=None, fit_prior=True)
+########################################################################################
+================================================================================
+Cross validated train score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1385    0.2195    0.1698        41
+      FAVOR     0.5991    0.7458    0.6645      2046
+       NONE     0.8546    0.7473    0.7973      4183
+
+avg / total     0.7665    0.7434    0.7499      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5439
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0500    0.0588    0.0541        17
+      FAVOR     0.6277    0.7035    0.6634       877
+       NONE     0.8450    0.7936    0.8185      1793
+
+avg / total     0.7690    0.7596    0.7631      2687
+
+Validation macro F-score: 0.5120
+
+
+================================================================================
+TEST RESULTS FOR
+BernoulliNB(alpha=0.1, binarize=0.0, class_prior=None, fit_prior=True)
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        19
+      FAVOR     0.6721    0.6763    0.6742       973
+       NONE     0.8377    0.8428    0.8403      1991
+
+avg / total     0.7784    0.7831    0.7807      2983
+
+Test macro F-score: 0.5048
+time =  190.241985083
+
+
+
+########################################################################################
+LinearSVC(C=5.2, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+########################################################################################
+================================================================================
+Cross validated train score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.5000    0.0244    0.0465        41
+      FAVOR     0.6561    0.6647    0.6604      2046
+       NONE     0.8308    0.8331    0.8319      4183
+
+avg / total     0.7716    0.7729    0.7708      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5129
+
+================================================================================
+Validation score
+================================================================================
+/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn_for)
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        17
+      FAVOR     0.6790    0.6682    0.6736       877
+       NONE     0.8366    0.8511    0.8438      1793
+
+avg / total     0.7799    0.7860    0.7829      2687
+
+/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn_for)
+Validation macro F-score: 0.5058
+
+
+================================================================================
+TEST RESULTS FOR
+LinearSVC(C=5.2, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.4000    0.1053    0.1667        19
+      FAVOR     0.6797    0.6259    0.6517       973
+       NONE     0.8213    0.8589    0.8397      1991
+
+avg / total     0.7724    0.7781    0.7741      2983
+
+Test macro F-score: 0.5527
+time =  139.873800039

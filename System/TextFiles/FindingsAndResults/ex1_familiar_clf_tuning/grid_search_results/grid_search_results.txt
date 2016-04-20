@@ -13,3 +13,38 @@ Best parameters set:
 	vect__max_features: 50000
 	vect__ngram_range: (2, 3)
 	vect__stop_words: 'english'
+
+
+########################################################################################
+BernoulliNB()
+########################################################################################
+{'vect__analyzer': ['word', 'char'], 'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3), (3, 3)], 'clf__fit_prior': [True, False], 'tfidf__use_idf': (True, False), 'vect__stop_words': [None, 'english'], 'vect__max_features': (None, 50000), 'clf__alpha': array([ 0.1       ,  0.17782794,  0.31622777,  0.56234133,  1.        ])}
+Done in 17125.058s
+Best score: 0.547
+Best parameters set:
+	clf__alpha: 0.10000000000000001
+	clf__fit_prior: True
+	tfidf__use_idf: True
+	vect__analyzer: 'char'
+	vect__max_features: None
+	vect__ngram_range: (2, 3)
+	vect__stop_words: None
+
+
+########################################################################################
+LinearSVM()
+########################################################################################
+parameters:
+{'vect__analyzer': ['word', 'char'], 'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3), (3, 3)], 'tfidf__use_idf': (True, False), 'vect__stop_words': [None, 'english'], 'clf__C': array([   0.1       ,    0.16378937,    0.26826958,    0.43939706,
+          0.71968567,    1.17876863,    1.93069773,    3.16227766,
+          5.17947468,    8.48342898,   13.89495494,   22.75845926,
+         37.2759372 ,   61.05402297,  100.        ]), 'vect__max_features': (None, 50000)}
+Done in 40663.929s
+Best score: 0.511
+Best parameters set:
+	clf__C: 5.1794746792312099
+	tfidf__use_idf: False
+	vect__analyzer: 'word'
+	vect__max_features: None
+	vect__ngram_range: (1, 2)
+	vect__stop_words: 'english'

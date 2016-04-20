@@ -91,6 +91,7 @@ time =  190.241985083
 
 
 
+
 ########################################################################################
 LinearSVC(C=5.2, class_weight=None, dual=True, fit_intercept=True,
      intercept_scaling=1, loss='squared_hinge', max_iter=1000,
@@ -145,3 +146,59 @@ avg / total     0.7724    0.7781    0.7741      2983
 
 Test macro F-score: 0.5527
 time =  139.873800039
+
+
+
+
+########################################################################################
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=5, n_jobs=1,
+       penalty='l2', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False)
+########################################################################################
+
+Cross validated train score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1364    0.0732    0.0952        41
+      FAVOR     0.6291    0.5860    0.6068      2046
+       NONE     0.8010    0.8315    0.8160      4183
+
+avg / total     0.7406    0.7464    0.7430      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5060
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1875    0.1765    0.1818        17
+      FAVOR     0.6574    0.6716    0.6644       877
+       NONE     0.8383    0.8299    0.8341      1793
+
+avg / total     0.7751    0.7741    0.7746      2687
+
+Validation macro F-score: 0.5601
+
+
+================================================================================
+TEST RESULTS FOR
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='squared_hinge', n_iter=5, n_jobs=1,
+       penalty='l2', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False)
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0556    0.0526    0.0541        19
+      FAVOR     0.6331    0.6136    0.6232       973
+       NONE     0.8136    0.8262    0.8198      1991
+
+avg / total     0.7499    0.7519    0.7508      2983
+
+Test macro F-score: 0.4990
+time =  221.301043987

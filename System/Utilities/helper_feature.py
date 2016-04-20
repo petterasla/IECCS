@@ -1,6 +1,8 @@
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, TfidfVectorizer
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder, Imputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import FunctionTransformer
+from sklearn_pandas import DataFrameMapper
 import System.DataProcessing.process_meta_data as meta
 
 def getFeatures(list_of_feature_keys):
@@ -16,25 +18,39 @@ def getFeatureKeys():
     else:
         return keys
 
+
 feature_dict = {
-    "id-idf": ('vect', Pipeline([('vect', CountVectorizer(decode_error='ignore',
-                                                 analyzer='word',
-                                                 ngram_range=(1,3),
-                                                 stop_words=None,
-                                                 max_features=50000)),
-        ('tfidf', TfidfTransformer(use_idf=True))
-    ])),
-    "count-vect": ('vect', Pipeline([
-        ('vect', CountVectorizer(decode_error='ignore',
-                                 analyzer='word',
-                                 ngram_range=(1,3),
-                                 stop_words=None,
-                                 max_features=50000))
-    ])),
-    "year-feat": ('year', Pipeline([
-        ('year-feat', FunctionTransformer(meta.getYearFeature, validate=False))
-    ])),
+    "count-vect": ('vect', DataFrameMapper([
+        ('Abstract', CountVectorizer(decode_error='ignore',
+                                     analyzer='word',
+                                     ngram_range=(1,2),
+                                     stop_words='english',
+                                     max_features=None))
+        ])),
+
+    "tfidf": ('vect', DataFrameMapper([
+        ('Abstract', TfidfVectorizer(decode_error='ignore',
+                                     analyzer='word',
+                                     ngram_range=(1,2),
+                                     stop_words='english',
+                                     max_features=None)),
+        ])),
+
+    "year-feat": ('year',
+        #('year-feat',
+        FunctionTransformer(meta.getYearFeature, validate=False)
+
+        #DataFrameMapper([
+        #    (['Publication_year'], OneHotEncoder())
+        #])
+    ),
     "category-feat": ('cat', Pipeline([
         ('category-feat', FunctionTransformer(meta.getCategoryFeature, validate=False))
+    ])),
+    "language-feat": ('lan', Pipeline([
+        ('language-feat', FunctionTransformer(meta.getLanguageFeature, validate=False))
+    ])),
+    "reference-feat": ('ref', Pipeline([
+        ('reference-feat', FunctionTransformer(meta.getRefsFeature, validate=False))
     ]))
 }

@@ -67,7 +67,7 @@ for clf in classifiers:
     macro_f = fbeta_score(binaryStances, pred_stances, 1.0,
                           labels=['STANCE', 'NONE'],
                           pos_label='STANCE',
-                          average='macro')
+                          average='binary')
 
     print 'macro-average of F-score(STANCE) and F-score(NONE): {:.4f}\n'.format(macro_f)
 

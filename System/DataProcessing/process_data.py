@@ -53,6 +53,10 @@ def getTestData():
 def getTestDataWithMeta():
     return pd.read_csv("../TextFiles/data/tcp_test_meta.csv", sep='\t')
 
+def getMetaDataAsList():
+    with open("../TextFiles/data/meta_data.json", "r") as f:
+        data = json.load(f)
+    return data
 
 def getIdData():
     """

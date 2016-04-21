@@ -62,52 +62,223 @@ def getAllData():
 
 # Working
 def getYearFeature(frame):
-    all = getAllData()
-    labels = all.Publication_year.unique().tolist()
-    label_dict = {}
-    for index, year in enumerate(labels):
-        label_dict[year] = index
-    print("unique years: {}".format(len(labels)))
-    print("len of frame: {}".format(len(frame)))
+    all = getAllData().Publication_year
+    labels = all.unique().tolist()
+    label_dict = dict(zip(labels, range(len(labels))))
     dv = DictVectorizer()
-    dv.fit_transform(label_dict).toarray()
-    list_of_dicts = []
-    for year in frame.Publication_year:
-        list_of_dicts.append({year: label_dict[year]})
+    dv.fit_transform(label_dict)
+    list_of_dicts = [{year: label_dict[year]} for year in frame.Publication_year]
     return dv.transform(list_of_dicts)
 
-# Not working
-def getRefsFeature(abstracts):
-    print abstracts
-    exit()
-    data = getDataFrameFromAbstracts()
 
-    sub_frame = data.loc[abstracts]
-    checkSize(sub_frame, abstracts)
-    mapper = DataFrameMapper([
-        (["References"], [Imputer(), OneHotEncoder()])
-    ], sparse=True)
+def getLanguageFeature(frame):
+    all = getAllData().Language
+    sub = frame.Language
+    all, sub = checkAndReplaceNan(all, sub, unicode(-1))
+    labels = all.unique().tolist()
+    label_dict = dict(zip(labels, range(len(labels))))
+    dv = DictVectorizer()
+    dv.fit_transform(label_dict)
+    list_of_dicts = [{lan: label_dict[unicode(lan)]} for lan in sub]
+    return dv.transform(list_of_dicts)
 
-    return mapper.fit_transform(sub_frame)
 
-def getLanguageFeature(abstracts):
-    data = getDataFrameFromAbstracts()
-    labels = data.Language.unique().tolist()
-    sub_frame = data.loc[abstracts]
-    mapper = LabelEncoder()
-    mapper.fit(labels)
-    transformed = np.asarray(mapper.transform(sub_frame.Language.tolist())).reshape(-1, 1)
-    return transformed
+def getRefsFeature(frame):
+    all = getAllData().References
+    sub = frame.References
+    all, sub = checkAndReplaceNan(all, sub, unicode(-1))
+    labels = all.unique().tolist()
+    dv, label_dict = fitDictVect(labels)
+    list_of_dicts = [{ref: label_dict[unicode(int(ref))]} for ref in sub]
+    return dv.transform(list_of_dicts)
 
-def getCategoryFeature(abstracts):
-    data = getDataFrameFromAbstracts()
-    sub_frame = data.loc[abstracts]
-    feature = [float(cat) for cat in cats]
-    return sparse.csr_matrix(feature, dtype='float').T
+def getOrganizationInfo(frame):
+    all = getAllData().Organization_info
+    sub = frame.Organization_info
+    all, sub = checkAndReplaceNan(all, sub, unicode(-1))
+    info = all.tolist()
+    labels = list(set([l[0][0].lower() for l in info if not len(l[0])==1]))
+    labels.append(unicode("-1"))
+    dv, label_dict = fitDictVect(labels)
+    list_of_dicts = []
+    for info in sub:
+        if len(info.split("'")) < 2:
+            list_of_dicts.append({unicode(info): label_dict[unicode(info)]})
+        else:
+            key = info.split("'")[1].lower()
+            value = label_dict[unicode(info.split("'")[1].lower())]
+            list_of_dicts.append({key: value})
+    return dv.transform(list_of_dicts)
+
+def getKeywords(frame):
+    all = getAllData().Keywords
+    sub = frame.Keywords
+    checkAndReplaceNan(all, sub, unicode("nan"))
+    labels = all.tolist()
+    labels = list(set([len(sub_list) for sub_list in labels if not sub_list == "nan"]))
+    labels.append(unicode("nan"))
+    dv, label_dict = fitDictVect(labels)
+    list_of_dicts = [{len(sub_list.split(",")): label_dict[len(sub_list.split(","))]} if not sub_list == unicode("nan") else {unicode("nan"): label_dict[unicode("nan")]} for sub_list in sub]
+    return dv.transform(list_of_dicts)
+
+def getMonth(frame):
+    all = getAllData().Publication_month
+    sub = frame.Publication_month
+    all, sub = checkAndReplaceNan(all, sub, unicode("nan"))
+    labels = all.unique().tolist()
+    labels = list(set([month[:3] for month in labels]))
+    dv, label_dict = fitDictVect(labels)
+    list_of_dicts = [{month[:3]: label_dict[month[:3]]} for month in sub]
+    return dv.transform(list_of_dicts)
+
+def getVolume(frame):
+    all = getAllData().Publication_volume
+    sub = frame.Publication_volume
+    all, sub = checkAndReplaceNan(all, sub, unicode("-1"))
+    labels = all.unique().tolist()
+    dv, label_dict = fitDictVect(labels)
+    list_of_dicts = [{vol: label_dict[vol]} for vol in sub]
+    return dv.transform(list_of_dicts)
+
+def getType(frame):
+    all = getAllData().Publication_type
+    sub = frame.Publication_type
+    all, sub = checkAndReplaceNan(all, sub, unicode("-1"))
+    labels = all.unique()
+    dv, label_dict = fitDictVect(labels)
+    list_of_dicts = [{typ: label_dict[typ]} for typ in sub]
+    return dv.transform(list_of_dicts)
+
+def getIssue(frame):
+    all = getAllData().Publication_issue
+    sub = frame.Publication_issue
+    all, sub = checkAndReplaceNan(all, sub, unicode("-1"))
+    labels = all.unique()
+    print labels
+    dv, label_dict = fitDictVect(labels)
+    list_of_dicts = [{issue: label_dict[issue]} for issue in sub]
+    return dv.transform(list_of_dicts)
+
+def getPublicationLength(frame):
+    all = getAllData().Publication_length
+    sub = frame.Publication_length
+    all, sub = checkAndReplaceNan(all, sub, unicode("-1"))
+    labels = all.unique()
+    print labels
+    dv, label_dict = fitDictVect(labels)
+    list_of_dicts = [{length: label_dict[unicode(int(length))]} for length in sub]
+    return dv.transform(list_of_dicts)
+
+def getAuthors(frame):
+    all = getAllData().Authors
+    sub = frame.Authors
+    all, sub = checkAndReplaceNan(all, sub, unicode("-1"))
+    labels = all.tolist()
+    labels = list(set([author for sublist in labels if not sublist == unicode("-1") for author in sublist]))
+    labels.append(unicode("-1"))
+    dv, label_dict = fitDictVect(labels)
+    list_of_dicts = []
+    for author in sub:
+        try:
+            key = author.split("'")[1]
+            value = label_dict[key]
+            list_of_dicts.append({key: value})
+        except:
+            key = unicode("-1")
+            list_of_dicts.append({key: label_dict[key]})
+
+    return dv.transform(list_of_dicts)
+
+def getDocType(frame):
+    all = getAllData().Document_type
+    sub = frame.Document_type
+    all, sub = checkAndReplaceNan(all, sub, unicode("-1"))
+    labels = all.unique()
+    dv, label_dict = fitDictVect(labels)
+    list_of_dicts = [{typ: label_dict[unicode(typ)]} for typ in sub]
+    return dv.transform(list_of_dicts)
+
+def getSubject(frame):
+    all = getAllData().Subjects
+    sub = frame.Subjects
+    all, sub = checkAndReplaceNan(all, sub, 1)
+    labels = all.tolist()
+    labels = list(set([len(sub_list) for sub_list in labels if not sub_list == 1]))
+    labels.append(unicode("nan"))
+    dv, label_dict = fitDictVect(labels)
+    list_of_dicts = []
+    for subj in sub:
+        if type(subj) is int:
+            key = unicode("nan")
+            value = label_dict[key]
+            list_of_dicts.append({key: value})
+        else:
+            key = len(subj.split("'"))/2
+            value = label_dict[key]
+            list_of_dicts.append({key: value})
+    return dv.transform(list_of_dicts)
+
+def getSubHeader(frame):
+    all = getAllData().Sub_headers
+    sub = frame.Sub_headers
+    all, sub = checkAndReplaceNan(all, sub, 1)
+    labels = all.tolist()
+    labels = list(set([len(sub_list) for sub_list in labels if not sub_list == 1]))
+    labels.append(unicode("nan"))
+    dv, label_dict = fitDictVect(labels)
+    list_of_dicts = []
+    for subj in sub:
+        if type(subj) is int:
+            key = unicode("nan")
+            value = label_dict[key]
+            list_of_dicts.append({key: value})
+        else:
+            key = len(subj.split("'"))/2
+            value = label_dict[key]
+            list_of_dicts.append({key: value})
+    return dv.transform(list_of_dicts)
+
+def getHeader(frame):
+    all = getAllData().Headers
+    sub = frame.Headers
+    all, sub = checkAndReplaceNan(all, sub, 1)
+    labels = all.tolist()
+    labels = list(set([len(sub_list) for sub_list in labels if not sub_list == 1]))
+    labels.append(unicode("nan"))
+    print labels
+    dv, label_dict = fitDictVect(labels)
+    list_of_dicts = []
+    for subj in sub:
+        if type(subj) is int:
+            key = unicode("nan")
+            value = label_dict[key]
+            list_of_dicts.append({key: value})
+        else:
+            key = len(subj.split("'"))/2
+            value = label_dict[key]
+            list_of_dicts.append({key: value})
+    return dv.transform(list_of_dicts)
 
 
 def containNan(dataframe):
     return dataframe.isnull().values.any()
+
+def replaceNan(frame, value):
+    frame.fillna(value, inplace=True)
+    return frame
+
+def checkAndReplaceNan(frame1, frame2, value):
+    if containNan(frame1):
+        frame1 = replaceNan(frame1, value)
+    if containNan(frame2):
+        frame2 = replaceNan(frame2, value)
+    return frame1, frame2
+
+def fitDictVect(labels):
+    dv = DictVectorizer()
+    label_dict = dict(zip(labels, range(len(labels))))
+    dv.fit_transform(label_dict)
+    return dv, label_dict
 
 def checkSize(dataframe, abstracts):
     a = len(abstracts)

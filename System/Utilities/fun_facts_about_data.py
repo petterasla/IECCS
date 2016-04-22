@@ -35,18 +35,89 @@ def getInfoAboutStance(stance="All"):
         data = pd.DataFrame(d)
     else:
         data = getStanceData(stance)
+    print("SHOWING INFORMATION FOR THE SELECTED STANCE: '{}'\n".format(stance))
     print("Data consist of {} records".format(len(data)))
-
-    print("TITLE INFO\n")
+    print
+    print 80*"-"
+    print("TITLE INFO")
     getTitleInfo(data.Title)
-    print("YEAR INFO\n")
+    print 80*"-" + "\n\n"
+    print 80*"-"
+    print("YEAR INFO")
     getPublicationYear(data.Publication_year)
-    print("LANGUAGE INFO\n")
+    print 80*"-" + "\n\n"
+    print 80*"-"
+    print("LANGUAGE INFO")
     getLanguage(data.Language)
-    print("REFERENCE INFO\n")
+    print 80*"-" + "\n\n"
+    print 80*"-"
+    print("REFERENCE INFO")
     getRefs(data.References)
-    print("ORGANIZATION INFO\n")
-    #getOrgInfo
+    print 80*"-" + "\n\n"
+    print 80*"-"
+    print("ORGANIZATION INFO")
+    getOrgInfo(data.Organization_info)
+    print 80*"-" + "\n\n"
+    print 80*"-"
+    print("PUBLICATION LENGTH")
+    getPubLength(data.Publication_length)
+    print 80*"-" + "\n\n"
+    print 80*"-"
+    print("AUTHOR INFO")
+    getAuthor(data.Authors)
+    print 80*"-" + "\n\n"
+    print 80*"-"
+    print("HEADER AND SUB-HEADER INFO ")
+    print 80*"-"
+    getHeader(data.Headers, data.Sub_headers)
+    print 80*"-" + "\n"
+
+def getHeader(header, sub_header):
+    header.fillna("nan", inplace=True)
+    sub_header.fillna("nan", inplace=True)
+    headers = header.tolist()
+    sub_header = sub_header.tolist()
+    headers = [h for h in header if h != "nan"]
+    headers = [h for sublist in header for h in sublist]
+    sub_header = [h for h in header if h != "nan"]
+    sub_header = [h for sub in sub_header for h in sub]
+    uniq_head = list(set(headers))
+    uniq_sub = list(set(sub_header))
+    print("There are a total of {} headers, with {} unique ones".format(len(headers), len(uniq_head)))
+    print("And a total of {} sub headers with {} unique ones".format(len(sub_header), len(uniq_sub)))
+
+
+def getAuthor(frame):
+    frame.fillna("nan", inplace=True)
+    authors = frame.tolist()
+    authors = [a for a in authors if a != "nan"]
+    authors = [a for sublist in authors for a in sublist]
+    uniq_authors = list(set(authors))
+    print("There are a total {} contributing authors".format(len(authors)))
+    print("while the unique number of authors are {}".format(len(uniq_authors)))
+
+def getPubLength(frame):
+    frame.fillna("nan", inplace=True)
+    lengths = frame.tolist()
+    lengths = [int(l) for l in lengths if l != "nan"]
+    uniq_len = list(set(lengths))
+    print("The shortest length of a publication is {}, while the longest is {}".format(min(uniq_len), max(uniq_len)))
+    print("The average publication length is {:.2f}".format(sum(lengths)/float(len(lengths))))
+
+def getOrgInfo(frame):
+    frame.fillna("nan", inplace=True)
+    info = frame.tolist()
+    info = [i for i in info if i != "nan"]
+    country = [org[0].lower() for sub in info for org in sub]
+    uniq_country = list(set(country))
+    uniq_country = [str(country[0].upper() + country[1:]) for country in uniq_country]
+    city = [org[1].lower() for sub in info for org in sub]
+    uniq_city = list(set(city))
+    uniq_city = [str(c[0].upper() + c[1:]) for c in uniq_city]
+
+    print("There are organization info from {} unique countries"
+          "\nSome of them are {}".format(len(uniq_country), uniq_country[:5]))
+    print("From {} different cities. Some of the cities are:\n{}".format(len(uniq_city), uniq_city[:10]))
 
 
 def getRefs(frame):

@@ -204,3 +204,56 @@ avg / total     0.7499    0.7519    0.7508      2983
 
 Test macro F-score: 0.4990
 time =  221.301043987
+
+
+
+
+================================================================================
+SVC(C=5.2, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+Cross validated train score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.4615    0.1463    0.2222        41
+      FAVOR     0.6355    0.6075    0.6212      2046
+       NONE     0.8089    0.8317    0.8201      4183
+
+avg / total     0.7500    0.7541    0.7513      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5545
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     1.0000    0.1765    0.3000        17
+      FAVOR     0.6545    0.6351    0.6447       877
+       NONE     0.8211    0.8394    0.8301      1793
+
+avg / total     0.7678    0.7685    0.7662      2687
+
+Validation macro F-score: 0.5916
+
+
+================================================================================
+TEST RESULTS FOR
+SVC(C=5.2, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.0526    0.0870        19
+      FAVOR     0.6670    0.6300    0.6480       973
+       NONE     0.8214    0.8498    0.8353      1991
+
+avg / total     0.7674    0.7730    0.7695      2983
+
+Test macro F-score: 0.5234
+time =  431.983071089

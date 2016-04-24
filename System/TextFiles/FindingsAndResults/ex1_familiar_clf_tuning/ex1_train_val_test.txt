@@ -257,3 +257,57 @@ avg / total     0.7674    0.7730    0.7695      2983
 
 Test macro F-score: 0.5234
 time =  431.983071089
+
+
+
+
+
+================================================================================
+LogisticRegression(C=22.7, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='lbfgs', tol=0.0001,
+          verbose=0, warm_start=False)
+================================================================================
+Cross validated train score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        41
+      FAVOR     0.6557    0.7214    0.6870      2046
+       NONE     0.8522    0.8186    0.8350      4183
+
+avg / total     0.7825    0.7815    0.7813      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5073
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        17
+      FAVOR     0.6980    0.7035    0.7007       877
+       NONE     0.8525    0.8572    0.8548      1793
+
+avg / total     0.7966    0.8016    0.7991      2687
+
+Validation macro F-score: 0.5185
+
+
+================================================================================
+TEST RESULTS FOR
+LogisticRegression(C=22.7, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='lbfgs', tol=0.0001,
+          verbose=0, warm_start=False)
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        19
+      FAVOR     0.7196    0.6146    0.6630       973
+       NONE     0.8210    0.8870    0.8527      1991
+
+avg / total     0.7827    0.7925    0.7854      2983
+
+Test macro F-score: 0.5052
+time =  821.145388842

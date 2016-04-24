@@ -99,3 +99,19 @@ Best parameters set:
 ########################################################################################
 Logistic Regression()
 ########################################################################################
+parameters:
+{'vect__analyzer': ['word', 'char'], 'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3), (3, 3)], 'tfidf__use_idf': (True, False), 'clf__solver': ['newton-cg', 'lbfgs'], 'vect__stop_words': [None, 'english'], 'clf__penalty': ['l2'], 'clf__C': array([   0.1       ,    0.16378937,    0.26826958,    0.43939706,
+          0.71968567,    1.17876863,    1.93069773,    3.16227766,
+          5.17947468,    8.48342898,   13.89495494,   22.75845926,
+         37.2759372 ,   61.05402297,  100.        ]), 'vect__max_features': (None, 50000)}
+Done in 275106.655s
+Best score: 0.511
+Best parameters set:
+	clf__C: 22.758459260747887
+	clf__penalty: 'l2'
+	clf__solver: 'lbfgs'
+	tfidf__use_idf: True
+	vect__analyzer: 'word'
+	vect__max_features: None
+	vect__ngram_range: (1, 3)
+	vect__stop_words: None

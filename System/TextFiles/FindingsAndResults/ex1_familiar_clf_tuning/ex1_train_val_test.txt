@@ -116,8 +116,6 @@ macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5129
 ================================================================================
 Validation score
 ================================================================================
-/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
              precision    recall  f1-score   support
 
     AGAINST     0.0000    0.0000    0.0000        17
@@ -126,8 +124,6 @@ Validation score
 
 avg / total     0.7799    0.7860    0.7829      2687
 
-/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
 Validation macro F-score: 0.5058
 
 

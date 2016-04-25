@@ -2,40 +2,23 @@ import os
 import sys
 sys.path.append(os.path.abspath(__file__ + "/../../"))
 
-from keras.models import Sequential
-from keras.layers.core import Dense, Activation
-from keras.optimizers import SGD
-
-from glob import glob
-from System.DataProcessing.GloveVectorizer.glove_transformer import GloveVectorizer
+import skflow
+from sklearn.metrics import fbeta_score
+from sklearn.metrics import classification_report
+from sklearn.cross_validation import cross_val_predict, StratifiedKFold
 import pandas as pd
 
-# data
 data = pd.read_csv(open('../TextFiles/data/tcp_train.csv'), sep='\t', index_col=0)
 
+classifier = skflow.TensorFlowDNNClassifier(hidden_units=[10, 20, 10], n_classes=3)
 
+cv = StratifiedKFold(data.Stance, n_folds=10, shuffle=True, random_state=1)
+pred_stances = cross_val_predict(classifier, data.Abstract, data.Stance, cv=cv)
 
-# Sequential model
-model = Sequential()
+print classification_report(data.Stance, pred_stances, digits=4)
 
-# Stacking layers
-model.add(Dense(output_dim=64, input_dim=100))
-model.add(Activation("relu"))
-model.add(Dense(output_dim=10))
-model.add(Activation("softmax"))
+macro_f = fbeta_score(data.Stance, pred_stances, 1.0,
+                      labels=['AGAINST', 'FAVOR', 'NONE'],
+                      average='macro')
 
-# configure its learning process
-model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
-
-# configure your optimizer
-#model.compile(loss='categorical_crossentropy', optimizer=SGD(lr=0.01, momentum=0.9, nesterov=True))
-
-# iterate on your training data in batches
-model.fit(glove_vecs_data, y, nb_epoch=5, batch_size=32)
-
-# Evaluate your performance
-loss_and_metrics = model.evaluate(X_test, Y_test, batch_size=32)
-
-# predictions on new data
-classes = model.predict_classes(X_test, batch_size=32)
-proba = model.predict_proba(X_test, batch_size=32)
+print 'macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f)

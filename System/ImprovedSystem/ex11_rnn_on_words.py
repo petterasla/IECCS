@@ -98,7 +98,7 @@ classifier = skflow.TensorFlowEstimator(model_fn=rnn_model, n_classes=3,
 print("Initiating training...")
 while True:
     print(80 * '=')
-    classifier.fit(X_train, y_train)
+    classifier.fit(X_train, y_train, logdir='../TextFiles/logs/rnn_on_words/')
     #score = metrics.accuracy_score(y_test, classifier.predict(X_test))
     #print('Accuracy: {0:f}'.format(score))
 

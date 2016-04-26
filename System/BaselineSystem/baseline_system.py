@@ -1,6 +1,5 @@
 # Fix path for use in terminal ###
 import time
-start_time = time.time()
 import sys
 import os
 sys.path.append(os.path.abspath(__file__ + "/../../../"))

@@ -114,7 +114,7 @@ classifier = skflow.TensorFlowEstimator(model_fn=char_cnn_model, n_classes=3,
 print("Initiating training...")
 while True:
     print(80 * '=')
-    classifier.fit(X_train, y_train)
+    classifier.fit(X_train, y_train, logdir='../TextFiles/logs/cnn_on_characters')
     #score = metrics.accuracy_score(y_test, classifier.predict(X_test))
     #print("Accuracy: %f" % score)
 
@@ -129,3 +129,4 @@ while True:
                           average='macro')
 
     print('macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f))
+

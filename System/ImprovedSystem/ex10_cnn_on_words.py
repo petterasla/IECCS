@@ -101,6 +101,10 @@ def cnn_model(X, y):
     # Apply regular WX + B and classification.
     return skflow.models.logistic_regression(pool2, y)
 
+val_monitor = skflow.monitors.ValidationMonitor(X_train, y_train,
+                                                early_stopping_rounds=200,
+                                                n_classes=3,
+                                                print_steps=50)
 
 classifier = skflow.TensorFlowEstimator(model_fn=cnn_model, n_classes=3,
                                         steps=100, optimizer='Adam', learning_rate=0.01, continue_training=True)
@@ -122,7 +126,7 @@ while True:
     macro_f = fbeta_score(y_test, pred_stances, 1.0,
                           labels=[0, 1, 2],
                           average='macro')
-
+    tf.scalar_summary('macro-f', macro_f)
     print('macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f))
 
 """

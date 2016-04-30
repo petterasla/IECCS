@@ -30,12 +30,12 @@ import numpy as np
 from sklearn import metrics
 from sklearn.metrics import fbeta_score
 from sklearn.metrics import classification_report
-from sklearn.cross_validation import cross_val_predict, StratifiedKFold
 
 import pandas
 
 import tensorflow as tf
 from tensorflow.contrib import skflow
+
 
 def convertToInt(pandas):
     numberedStances = []
@@ -56,11 +56,14 @@ def findMaxLength(abstracts):
             max = len(abstract)
     return max
 
-### Training data
+
+### Loading data
 print("Loading data...")
 data_train = pandas.read_csv(open('../TextFiles/data/tcp_train.csv'), sep='\t', index_col=0)
-data_test = pandas.read_csv(open('../TextFiles/data/tcp_validate.csv'), sep='\t', index_col=0)
+data_val = pandas.read_csv(open('../TextFiles/data/tcp_validate.csv'), sep='\t', index_col=0)
+data_test = pandas.read_csv(open('../TextFiles/data/tcp_test.csv'), sep='\t', index_col=0)
 X_train, y_train = data_train.Abstract, pandas.Series(convertToInt(data_train.Stance))
+X_val, y_val = data_val.Abstract, pandas.Series(convertToInt(data_val.Stance))
 X_test, y_test = data_test.Abstract, pandas.Series(convertToInt(data_test.Stance))
 print("Finished loading data...")
 
@@ -72,6 +75,7 @@ print("Max document length: " + str(MAX_DOCUMENT_LENGTH))
 
 char_processor = skflow.preprocessing.ByteProcessor(MAX_DOCUMENT_LENGTH)
 X_train = np.array(list(char_processor.fit_transform(X_train)))
+X_val = np.array(list(char_processor.transform(X_val)))
 X_test = np.array(list(char_processor.transform(X_test)))
 print("Finished processing data...")
 
@@ -107,26 +111,47 @@ def char_cnn_model(X, y):
     # Apply regular WX + B and classification.
     return skflow.models.logistic_regression(pool2, y)
 
+val_monitor = skflow.monitors.ValidationMonitor(X_val, y_val,
+                                                early_stopping_rounds=3,
+                                                n_classes=3,
+                                                print_steps=5)
 classifier = skflow.TensorFlowEstimator(model_fn=char_cnn_model, n_classes=3,
-                                        steps=100, optimizer='Adam', learning_rate=0.01, continue_training=True)
+                                        steps=100, optimizer='Adam', learning_rate=0.01,
+                                        continue_training=True)
 
 # Continuously train for 1000 steps & predict on test set.
+i = 0
 print("Initiating training...")
-while True:
+while i<15:
     print(80 * '=')
-    classifier.fit(X_train, y_train, logdir='../TextFiles/logs/cnn_on_characters')
-    #score = metrics.accuracy_score(y_test, classifier.predict(X_test))
-    #print("Accuracy: %f" % score)
+    classifier.fit(X_train, y_train, val_monitor, logdir='../TextFiles/logs/cnn_on_characters')
 
-    #cv = StratifiedKFold(y_train, n_folds=10, shuffle=True, random_state=1)
-    #pred_stances = cross_val_predict(classifier, X_train, y_train, cv=cv)
-    pred_stances = classifier.predict(X_test)
+    pred_stances = classifier.predict(X_val)
 
-    print (classification_report(y_test, pred_stances, digits=4))
+    score = metrics.accuracy_score(y_val, pred_stances)
+    print("Accuracy: %f" % score)
 
-    macro_f = fbeta_score(y_test, pred_stances, 1.0,
+    print (classification_report(y_val, pred_stances, digits=4))
+
+    macro_f = fbeta_score(y_val, pred_stances, 1.0,
                           labels=[0, 1, 2],
                           average='macro')
 
     print('macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f))
+    i += 1
+
+print(80 * '#')
+
+pred_stances = classifier.predict(X_test)
+
+score = metrics.accuracy_score(y_test, pred_stances)
+print("Accuracy: %f" % score)
+
+print (classification_report(y_test, pred_stances, digits=4))
+
+macro_f = fbeta_score(y_test, pred_stances, 1.0,
+                      labels=[0, 1, 2],
+                      average='macro')
+
+print('macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f))
 

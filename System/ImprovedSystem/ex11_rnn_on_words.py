@@ -25,6 +25,7 @@ import pandas
 import tensorflow as tf
 from tensorflow.contrib import skflow
 
+
 def convertToInt(pandas):
     numberedStances = []
     for stance in pandas:
@@ -37,11 +38,14 @@ def convertToInt(pandas):
 
     return numberedStances
 
-### Training data
+
+### Load data
 print("Loading data...")
 data_train = pandas.read_csv(open('../TextFiles/data/tcp_train.csv'), sep='\t', index_col=0)
-data_test = pandas.read_csv(open('../TextFiles/data/tcp_validate.csv'), sep='\t', index_col=0)
+data_val = pandas.read_csv(open('../TextFiles/data/tcp_validate.csv'), sep='\t', index_col=0)
+data_test = pandas.read_csv(open('../TextFiles/data/tcp_test.csv'), sep='\t', index_col=0)
 X_train, y_train = data_train.Abstract, pandas.Series(convertToInt(data_train.Stance))
+X_val, y_val = data_val.Abstract, pandas.Series(convertToInt(data_val.Stance))
 X_test, y_test = data_test.Abstract, pandas.Series(convertToInt(data_test.Stance))
 print("Finished loading data...")
 
@@ -52,6 +56,7 @@ MAX_DOCUMENT_LENGTH = 100
 print("Max document length: " + str(MAX_DOCUMENT_LENGTH))
 vocab_processor = skflow.preprocessing.VocabularyProcessor(MAX_DOCUMENT_LENGTH)
 X_train = np.array(list(vocab_processor.fit_transform(X_train)))
+X_val = np.array(list(vocab_processor.transform(X_val)))
 X_test = np.array(list(vocab_processor.transform(X_test)))
 
 n_words = len(vocab_processor.vocabulary_)
@@ -91,23 +96,45 @@ def rnn_model(X, y):
     # regression over output classes.
     return skflow.models.logistic_regression(encoding, y)
 
+val_monitor = skflow.monitors.ValidationMonitor(X_val, y_val,
+                                                early_stopping_rounds=3,
+                                                n_classes=3,
+                                                print_steps=5)
+
 classifier = skflow.TensorFlowEstimator(model_fn=rnn_model, n_classes=3,
-                                        steps=1000, optimizer='Adam', learning_rate=0.01, continue_training=True)
+                                        steps=1000, optimizer='Adam', learning_rate=0.01,
+                                        continue_training=True)
 
 # Continuously train for 1000 steps & predict on test set.
+i = 0
 print("Initiating training...")
-while True:
+while i < 15:
     print(80 * '=')
-    classifier.fit(X_train, y_train, logdir='../TextFiles/logs/rnn_on_words/')
-    #score = metrics.accuracy_score(y_test, classifier.predict(X_test))
-    #print('Accuracy: {0:f}'.format(score))
+    classifier.fit(X_train, y_train, val_monitor, logdir='../TextFiles/logs/rnn_on_words/')
 
-    pred_stances = classifier.predict(X_test)
+    pred_stances = classifier.predict(X_val)
 
-    print (classification_report(y_test, pred_stances, digits=4))
+    score = metrics.accuracy_score(y_val, pred_stances)
+    print('Accuracy: {0:f}'.format(score))
 
-    macro_f = fbeta_score(y_test, pred_stances, 1.0,
+    print (classification_report(y_val, pred_stances, digits=4))
+
+    macro_f = fbeta_score(y_val, pred_stances, 1.0,
                           labels=[0, 1, 2],
                           average='macro')
 
     print('macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f))
+    i += 1
+
+pred_stances = classifier.predict(X_test)
+
+score = metrics.accuracy_score(y_test, classifier.predict(X_test))
+print('Accuracy: {0:f}'.format(score))
+
+print (classification_report(y_test, pred_stances, digits=4))
+
+macro_f = fbeta_score(y_test, pred_stances, 1.0,
+                      labels=[0, 1, 2],
+                      average='macro')
+
+print('macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f))

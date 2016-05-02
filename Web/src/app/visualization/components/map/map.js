@@ -9,12 +9,12 @@ define('app/visualization/components/map/map' ,
     var latlong = coordinates;
 
 
-    var dataReq = $http.get("https://ieccs.herokuapp.com/api/visual/organization/All")
+    var dataReq = $http.get('https://ieccs.herokuapp.com/api/visual/organization/All')
       .success(function (info) {
         mapData = info.Data;
       })
       .error(function (err) {
-        console.log(err)
+        console.log(err);
       });
 
     $q.all([dataReq]).then(function () {
@@ -37,18 +37,18 @@ define('app/visualization/components/map/map' ,
       console.log(AmCharts);
       // build map
 
-      console.log("building map");
+      console.log('building map');
 
       window.map = new AmCharts.AmMap();
       AmCharts.theme = AmCharts.themes.dark;
 
-      window.map.addTitle("Organization countries", 14);
-      window.map.addTitle("from TCP data", 11);
+      window.map.addTitle('Organization countries', 14);
+      window.map.addTitle('from TCP data', 11);
       window.map.areasSettings = {
-        unlistedAreasColor: "#000000",
+        unlistedAreasColor: '#000000',
         unlistedAreasAlpha: 0.1
       };
-      window.map.imagesSettings.balloonText = "<span style='font-size:14px;'><b>[[title]]</b>: [[value]]</span>";
+      window.map.imagesSettings.balloonText = '<span style=font-size:14px;><b>[[title]]</b>: [[value]]</span>';
       var dataProvider = {
         mapVar: AmCharts.maps.worldLow,
         images: []
@@ -62,25 +62,25 @@ define('app/visualization/components/map/map' ,
       var minSquare = minBulletSize * minBulletSize * 2 * Math.PI;
 
       // create circle for each country
-      for (var i = 0; i < mapData.length; i++) {
-        var dataItem = mapData[i];
-        var value = dataItem.value;
+      for (var j = 0; j < mapData.length; j++) {
+        var dataItem = mapData[j];
+        var valueTwo = dataItem.value;
         // calculate size of a bubble
-        var square = (value - min) / (max - min) * (maxSquare - minSquare) + minSquare;
+        var square = (valueTwo - min) / (max - min) * (maxSquare - minSquare) + minSquare;
         if (square < minSquare) {
           square = minSquare;
         }
         var size = Math.sqrt(square / (Math.PI * 2));
         var id = dataItem.code;
         dataProvider.images.push({
-          type: "circle",
+          type: 'circle',
           width: size,
           height: size,
           color: dataItem.color,
           longitude: latlong[id].longitude,
           latitude: latlong[id].latitude,
           title: dataItem.name,
-          value: value
+          value: valueTwo
         });
 
       }
@@ -99,7 +99,7 @@ define('app/visualization/components/map/map' ,
        var id = dataItem.code;
 
        dataProvider.images.push({
-       type: "circle",
+       type: 'circle',
        width: size,
        height: size,
        color: dataItem.color,
@@ -114,17 +114,17 @@ define('app/visualization/components/map/map' ,
       window.map.export = {
         enabled: true
       };
-      window.map.projection = "miller";
-      window.map.write("chartdiv");
-      console.log("gon trhoug everything");
-    })
+      window.map.projection = 'miller';
+      window.map.write('chartdiv');
+      console.log('gon trhoug everything');
+    });
   }
 
 
   return {
     viewModel: init(),
-    template: '<div id="chartdiv"></div>'
-  }
+    template: '<div id=chartdiv></div>'
+  };
 
 });
 

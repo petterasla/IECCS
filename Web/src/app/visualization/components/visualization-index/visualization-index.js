@@ -14,10 +14,10 @@ define('app/visualization/components/visualization-index/visualization-index', [
     this.tmp = {repres:['bar-chart', 'graph', 'map']};
 
     this.visualModel = [
-      {id: 0, type: 'Stance', status: ko.observable(false), repres: this.tmp.repres },
-      {id: 1, type: 'Year', status: ko.observable(false), repres: this.tmp.repres },
-      {id: 2, type: 'New Data', status: ko.observable(false), repres: this.tmp.repres },
-      {id: 3, type: 'Custom Search', status: ko.observable(false), repres: this.tmp.repres }
+      {id: 0, type: 'TCP data:', icon: '<i class="fa fa-info-circle fa center"></i>', status: ko.observable(false), repres: this.tmp.repres },
+      {id: 1, type: 'Unseen data:', icon: '<i class="fa fa-question-circle fa center"></i>', status: ko.observable(false), repres: this.tmp.repres }
+      //{id: 2, type: 'New Data', status: ko.observable(false), repres: this.tmp.repres },
+      //{id: 3, type: 'Custom Search', status: ko.observable(false), repres: this.tmp.repres }
     ];
 
     this.allOptionsFalse = ko.observable(true);

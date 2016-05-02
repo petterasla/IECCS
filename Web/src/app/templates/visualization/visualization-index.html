@@ -12,12 +12,15 @@
 
   <!-- LIST LEFT VISUALIZATION NAV BAR -->
   <div class="row">
-    <div class="col-xs-12 col-sm-3">
-      <div class="btn-group-vertical btn-group-justified" data-bind="foreach: visualModel">
-        <button class="list-group-item vis-representation"
-                data-bind="css: {activate: status}, click: function(i) {$parent.updateVisualNavBar($index())}">
-          <span data-bind="text: type"></span> <i class="fa fa-arrow-right pull-right"></i>
-        </button>
+    <div class="col-xs-12">
+      <div class="btn-group btn-group-justified" data-bind="foreach: visualModel">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-vis-representation"
+                  data-bind="css: {activate: status}, click: function(i) {$parent.updateVisualNavBar($index())}">
+            <span data-bind="text: type"></span>
+            <div data-bind="html: icon"></div>
+          </button>
+        </div>
       </div>
     </div>
   </div>

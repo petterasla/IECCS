@@ -22,7 +22,7 @@ define('app/visualization/components/map/map' ,
       console.log("data received.. Now processing");
       console.log("coords for cote divore = ");
       console.log(latlong["CI"]);
-      var minBulletSize = 3;
+      var minBulletSize = 6;
       var maxBulletSize = 70;
       var min = Infinity;
       var max = -Infinity;
@@ -38,15 +38,13 @@ define('app/visualization/components/map/map' ,
           max = value;
         }
       }
-      console.log("min value = " + min);
-      console.log("max value = " + max);
       console.log(AmCharts);
       // build map
 
       console.log("building map");
+
       window.map = new AmCharts.AmMap();
       AmCharts.theme = AmCharts.themes.dark;
-      console.log("Theme set.");
 
       window.map.addTitle("Organization countries", 14);
       window.map.addTitle("from TCP data", 11);
@@ -55,7 +53,6 @@ define('app/visualization/components/map/map' ,
         unlistedAreasAlpha: 0.1
       };
       window.map.imagesSettings.balloonText = "<span style='font-size:14px;'><b>[[title]]</b>: [[value]]</span>";
-      console.log("title and balloon text");
       var dataProvider = {
         mapVar: AmCharts.maps.worldLow,
         images: []
@@ -69,11 +66,8 @@ define('app/visualization/components/map/map' ,
       var minSquare = minBulletSize * minBulletSize * 2 * Math.PI;
 
       // create circle for each country
-      console.log(mapData.length);
-      for (var i = 41; i < mapData.length; i++) {
-        console.log(i);
+      for (var i = 0; i < mapData.length; i++) {
         var dataItem = mapData[i];
-        console.log(dataItem);
         var value = dataItem.value;
         // calculate size of a bubble
         var square = (value - min) / (max - min) * (maxSquare - minSquare) + minSquare;
@@ -94,7 +88,6 @@ define('app/visualization/components/map/map' ,
         });
 
       }
-      console.log("provider length");
 
 
       // the following code uses circle radius to show the difference
@@ -125,9 +118,9 @@ define('app/visualization/components/map/map' ,
       window.map.export = {
         enabled: true
       };
-      window.map.projection = "eckert6";
+      window.map.projection = "miller";
       window.map.write("chartdiv");
-
+      console.log("gon trhoug everything");
     })
   }
 

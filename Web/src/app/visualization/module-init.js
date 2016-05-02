@@ -12,6 +12,9 @@ define('app/visualization/module-init', ['require', 'knockout', '$router'], func
     ko.components.register('map', {
       require: 'app/visualization/components/map/map'
     });
+    ko.components.register('pie-chart', {
+      require: 'app/visualization/components/pie-chart/old/pie-chart'
+    });
 
     router.when('/visualization/', {
       templateUrl: 'text!app/templates/visualization/visualization-index.html',

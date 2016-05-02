@@ -7,17 +7,15 @@ define('app/visualization/components/visualization-index/visualization-index', [
 
     this.representation = [
       {id: 0, type: 'Bar Chart', icon:'<i class="fa fa-bar-chart fa center"></i>', status: ko.observable(true)},
-      {id: 1, type: 'Graph', icon: '<i class="fa fa-line-chart fa center"></i>',status: ko.observable(false)},
+      {id: 1, type: 'Pie Chart', icon: '<i class="fa fa-pie-chart fa center"></i>',status: ko.observable(false)},
       {id: 2, type: 'Map', icon: '<i class="fa fa-globe fa center"></i>',status: ko.observable(false)}
     ];
 
-    this.tmp = {repres:['bar-chart', 'graph', 'map']};
+    this.tmp = {repres:['bar-chart', 'pie-chart', 'map']};
 
     this.visualModel = [
       {id: 0, type: 'TCP data:', icon: '<i class="fa fa-info-circle fa center"></i>', status: ko.observable(false), repres: this.tmp.repres },
       {id: 1, type: 'Unseen data:', icon: '<i class="fa fa-question-circle fa center"></i>', status: ko.observable(false), repres: this.tmp.repres }
-      //{id: 2, type: 'New Data', status: ko.observable(false), repres: this.tmp.repres },
-      //{id: 3, type: 'Custom Search', status: ko.observable(false), repres: this.tmp.repres }
     ];
 
     this.allOptionsFalse = ko.observable(true);

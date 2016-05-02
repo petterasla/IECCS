@@ -1,7 +1,7 @@
 define('app/visualization/components/map/map' ,
-  ['require','knockout', '$http', 'q', 'text!app/templates/visualization/map.html',
+  ['require','knockout', '$http', 'q',
   'app/visualization/components/map/data', 'ammap', 'dark', 'worldLow'],
-  function(require, ko, $http, $q, template, coordinates) {
+  function(require, ko, $http, $q, coordinates) {
   'use strict';
 
   function init() {
@@ -11,7 +11,6 @@ define('app/visualization/components/map/map' ,
 
     var dataReq = $http.get("https://ieccs.herokuapp.com/api/visual/organization/All")
       .success(function (info) {
-        console.log(info);
         mapData = info.Data;
       })
       .error(function (err) {
@@ -19,9 +18,6 @@ define('app/visualization/components/map/map' ,
       });
 
     $q.all([dataReq]).then(function () {
-      console.log("data received.. Now processing");
-      console.log("coords for cote divore = ");
-      console.log(latlong["CI"]);
       var minBulletSize = 6;
       var maxBulletSize = 70;
       var min = Infinity;
@@ -127,7 +123,7 @@ define('app/visualization/components/map/map' ,
 
   return {
     viewModel: init(),
-    template: template
+    template: '<div id="chartdiv"></div>'
   }
 
 });

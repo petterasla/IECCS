@@ -198,7 +198,10 @@ gulp.task('process-vendor-scripts', function() {
             'q/q.js',
             'requirejs-text/text.js',
             'c3/c3.js',
-            'd3/d3.js'], {cwd: buildConfig.bowerComponentsDir})
+            'd3/d3.js',
+            'ammap3/ammap/ammap.js',
+            'ammap3/ammap/maps/js/worldLow.js',
+            'ammap3/ammap/themes/dark.js'], {cwd: buildConfig.bowerComponentsDir})
             .pipe(plugins.changed(buildConfig.outputPath))
     );
     return stream.pipe(gulp.dest(buildConfig.outputPath));

@@ -1,25 +1,29 @@
-define('app/shell/home/home', ['knockout','q', '$http'], function(ko, q, $http) {
+define('app/shell/home/home', ['knockout','q', '$http'], function(ko, $q, $http) {
   'use strict';
 
   function HomeModel() {
+    var self = this;
+    var retData = null;
 
-    this.showData = ko.observableArray(['Not doing anything']);
+    self.showData = ko.observableArray(['Not doing anything']);
 
-    this.getData = () => {
-      var url = 'https://ieccs.herokuapp.com/api/data';
-      this.showData('Watining for response...');
+    self.getData = function () {
       console.log('http req');
-      return $http.get(url)
-        .success((data) => {
-          console.log(data);
-          this.showData(data);
+      self.showData('Watining for response...');
+      var request = $http.get('https://ieccs.herokuapp.com/api/stance/year/FAVOR')
+        .success(function (data) {
+          console.log('Success');
+          retData = data;
         })
-        .error((err) => {
-          this.showData('Error. Something went wrong..');
+        .error(function (err) {
           console.log(err);
         });
-    };
 
+      $q.all([request]).then(function () {
+        self.showData(retData);
+      });
+    };
   }
+
   return HomeModel;
 });

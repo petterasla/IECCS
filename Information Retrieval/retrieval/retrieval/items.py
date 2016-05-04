@@ -16,6 +16,11 @@ class RetrievalItem(Item):
     abstract = Field()
 
 class MetaItem(Item):
-    status = Field()
-    message = Field()
+    url = Field()
+    eid = Field()
+    csv = Field()
+
+class MetaRetrievalItem(Item):
+    file_urls = Field()
+    files = Field()
 

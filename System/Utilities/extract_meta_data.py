@@ -1,8 +1,10 @@
-import System.DataProcessing.process_data as ptd
-import System.DataProcessing.process_meta_data as ptmd
+#import System.DataProcessing.process_data as ptd
+#import System.DataProcessing.process_meta_data as ptmd
 import pandas as pd
 import numpy as np
 import json
+import random
+import cPickle as pickle
 
 def getStanceData(stance):
     d = ptd.getMetaDataAsList()
@@ -86,6 +88,39 @@ def storeSubjectsToJson(stance="All"):
 #storeOrgsToJson("All")
 #storeLanguageToJson("NONE")
 
+
+def readTestSamples():
+    with open("../TextFiles/data/related_data.json", "r") as f:
+        data = json.load(f)
+
+    with open("samples_test.pkl", "r") as f:
+        samples = pickle.load(f)
+
+    for idx in samples:
+        print("Index: {}, sample title: {}\nSubjects: {}\nSub-Headers:{}\nAbstract: {}\nYear: {}\n".format(idx, data[idx]["Title"], data[idx]["Subjects"], data[idx]["Sub_headers"], data[idx]["Abstract"], data[idx]["Publication_year"]))
+        #print("WOS: {}".format(data[idx]["WOS"]))
+
+def getSubjects():
+    with open("../TextFiles/data/related_data.json", "r") as f:
+        data = json.load(f)
+
+    s = []
+    for d in data[:20]:
+        if d["Subjects"] is not None:
+            for subjects in d["Subjects"]:
+                print subjects.split(",")
+                #for subject in subjects:
+
+
+
+    print("len of subjects = {}".format(len(s)))
+    uniq = list(set(s))
+    print("len of subjects = {}".format(len(uniq)))
+
+
+#readTestSamples()
+getSubjects()
+'''
 mapData = [
     {"code":"AF" , "name":"Afghanistan", "value":32358260, "color":"#eea638"},
     {"code":"AL" , "name":"Albania", "value":3215988, "color":"#d8854f"},
@@ -292,3 +327,5 @@ for country in countries.keys():
 print("length of mapData = {}".format(len(mapData_all)))
 with open("../TextFiles/meta_data/organization_"+stance+".json", "w") as f:
     json.dump(mapData_all, f)
+
+'''

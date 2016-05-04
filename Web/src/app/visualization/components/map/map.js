@@ -34,7 +34,6 @@ define('app/visualization/components/map/map' ,
           max = value;
         }
       }
-      console.log(AmCharts);
       // build map
 
       console.log("building map");

@@ -82,9 +82,9 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
       none = none.concat(initNone.map(function (a) {return a.count;}));
 
       var keys = [];
-      keys = initFavor.map(function (a) {return parseInt(a._id)});
+      keys = initFavor.map(function (a) {return parseInt(a._id);});
 
-      let chart = c3.generate({
+      var chart = c3.generate({
         bindto: '#BarChart',
         data: {
           columns: [
@@ -119,5 +119,5 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
   return {
     viewModel: ViewAbout,
     template: '<div id="BarChart"></div>'
-  };
+  }; //<div class="centered" data-bind="visible: notLoaded"><i class="fa fa-spinner fa-spin fa-5x"></i></div>
 });

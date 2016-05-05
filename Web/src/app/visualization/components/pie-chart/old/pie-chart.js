@@ -78,7 +78,7 @@ define('app/visualization/components/pie-chart/old/pie-chart' ,['require','knock
 
       var keys = [];
       keys = initFavor.map(function (a) {
-        return String(a._id)
+        return String(a._id);
       });
 
       var pieData = {};
@@ -86,16 +86,16 @@ define('app/visualization/components/pie-chart/old/pie-chart' ,['require','knock
         var total = none[i] + favor[i] + against[i] + 0.0;
         var key = keys[i-1];
         var aga = against[i];
-        if (aga == 0) {
+        if (aga === 0) {
           aga = 0.0;
         } else {
-          aga = (aga/total).toFixed(3)
+          aga = (aga/total).toFixed(3);
         }
         pieData[key] =
           [
-            {"sector": "Favor", "size": parseFloat((favor[i]/total).toFixed(3))},
-            {"sector": "Against", "size": parseFloat(aga)},
-            {"sector": "None", "size": parseFloat((none[i]/total).toFixed(3))}
+            {'sector': 'Favor', 'size': parseFloat((favor[i]/total).toFixed(3))},
+            {'sector': 'Against', 'size': parseFloat(aga)},
+            {'sector': 'None', 'size': parseFloat((none[i]/total).toFixed(3))}
           ];
       }
       /**
@@ -125,27 +125,28 @@ define('app/visualization/components/pie-chart/old/pie-chart' ,['require','knock
           "text": "1991",
           "color": "#555"
         }, {
-          "y": "49%",
-          "align": "center",
-          "size": 15,
-          "text": "Year",
-          "color": "#555"
+          'y': '49%',
+          'align': 'center',
+          'size': 15,
+          'text': 'Year',
+          'color': '#555'
         }],
-        "listeners": [ {
-          "event": "init",
-          "method": function( e ) {
+        'listeners': [ {
+          'event': 'init',
+          'method': function( e ) {
             var chart = e.chart;
 
             function getCurrentData() {
               var data = pieData[currentYear];
               currentYear++;
-              if (currentYear > keys[keys.length-1])
+              if (currentYear > keys[keys.length-1]) {
                 currentYear = keys[0];
+              }
               return data;
             }
 
             function loop() {
-              console.log("inside loop");
+              console.log('inside loop');
               chart.allLabels[0].text = currentYear;
               var data = getCurrentData();
               console.log(data[1].sector);
@@ -161,8 +162,8 @@ define('app/visualization/components/pie-chart/old/pie-chart' ,['require','knock
             loop();
           }
         } ],
-        "export": {
-          "enabled": true
+        'export': {
+          'enabled': true
         }
       } );
     });
@@ -170,6 +171,6 @@ define('app/visualization/components/pie-chart/old/pie-chart' ,['require','knock
 
   return {
     viewModel: init(),
-    template: '<div id="piechartdiv"></div>'
-  }
+    template: '<div id=piechartdiv></div>'
+  };
 });

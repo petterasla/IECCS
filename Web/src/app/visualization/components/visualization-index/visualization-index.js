@@ -18,24 +18,25 @@ define('app/visualization/components/visualization-index/visualization-index', [
       {id: 1, type: 'Unseen data:', icon: '<i class="fa fa-question-circle fa center"></i>', status: ko.observable(false), repres: this.tmp.repres }
     ];
 
+
+
     this.allOptionsFalse = ko.observable(true);
 
     //console.log(`allOptions: ${this.allOptionsFalse()}`);
 
     this.updateVisualNavBar = (index) => {
       //console.log(`Updating visual model representation: ${index}`);
-      let options = false;
       this.visualModel.forEach((item) => {
         if (item.id === index) {
-        item.status(true);
-        options = false;
-        //console.log(`check options ${options}`);
-        this.allOptionsFalse(options);
-      }
-    else {
-        item.status(false);
-      }
-    });
+          item.status(true);
+          options = false;
+          //console.log(`check options ${options}`);
+          this.allOptionsFalse(options);
+        }
+        else {
+          item.status(false);
+        }
+      });
     };
 
     this.updateRepresentationStatus = (index) => {
@@ -51,6 +52,7 @@ define('app/visualization/components/visualization-index/visualization-index', [
         }
       });
     };
+
   };
 
   return {

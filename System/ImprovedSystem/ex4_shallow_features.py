@@ -22,8 +22,10 @@ from sklearn.svm import LinearSVC, SVC
 from sklearn.naive_bayes import MultinomialNB, BernoulliNB
 from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.preprocessing import FunctionTransformer
+from itertools import combinations
 import math
 import pandas as pd
+import cPickle as pickle
 
 # ***** SETTINGS   *****
 use_upsample = 0
@@ -59,64 +61,123 @@ if use_upsample:
 
 cv = StratifiedKFold(train_data.Stance, n_folds=10, shuffle=True, random_state=1)
 
-
-# List of feature keys:
-# ["id-idf", "count-vect", "year-feat", "category-feat", "language-feat"]
-
-feature_keys = ['sub-header-feat']
+#FEATURES LEFT OUT: ["reference-feat", ""pub-length-feat", "issue-feat", "volume-feat", "orgs-info"]
+leave_out = [ "tfidf","year-feat", "language-feat",
+             "reference-feat", 'orgs-feat', "keyword-feat", "month-feat",
+             "volume-feat", "type-feat", "issue-feat", "pub-length-feat",
+             "author-feat", "doc-type-feat", "subject-feat", "sub-header-feat",
+              "header-feat", "LDA-abstract-feat", "title-feat",
+             "tokens-title-feat", "tokens-abstract-feat"
+             ]
+feature_keys = helper.removeFeatureKeys(leave_out)
 # NOTE: can also use helper.getFeatureKeys() and set list in getFeatureKeys() method.
+# List of feature keys:
 # WORKING = ["count-vect", "tfidf", "year-feat", "language-feat",
 #           "reference-feat", 'orgs-feat', "keyword-feat", "month-feat",
 #            "volume-feat", "type-feat", "issue-feat", "pub-length-feat",
 #           "author-feat", "doc-type", "subject-feat", "sub-header-feat",
-#           "header-feat"
+#           "header-feat", "LDA-abstract-feat", "title-feat"
 #           ]
-# NOT WORKING = []
-# Select classifiers to use
+#print("Feature used (number = {}):\n{}".format(len(feature_keys), feature_keys))
+#print("Features left out (number = {}):\n{}".format(len(leave_out), leave_out))
 
+#l = ["tokens-abstract-feat", "tokens-title-feat", "LDA-abstract-feat", "title-feat"]
+#l = ["language-feat", "reference-feat", "pub-length-feat", "month-feat", "volumne-feat"]
+#l = ["subject-feat", "sub-header-feat", "header-feat", "type-feat", "doc-type-feat"]
+l = helper.removeFeatureKeys()
+print l
+feature_list = []
+feature_list.append([l[0]])
+for i in range(1, len(l)):
+    print feature_list[i-1] + [l[i]]
+    feature_list.append(feature_list[i-1] + [l[i]])
+
+print feature_list
+#del feature_list[0]
+#feature_list = sum([map(list, combinations(l, i)) for i in range(len(l) + 1)], [])
+#for sub in feature_list:
+#    sub.append("count-vect")
+
+print("Number of options: {}".format(len(feature_list)))
+# Adding LDA column
+train_data, validate_data, test_data = helper.addLDA(train_data, validate_data, test_data)
+
+# Lemmatize abstracts
+use_lemming = 1
+if use_lemming:
+    print("Lemmatizing abstracts and replacing..")
+    train_data, validate_data, test_data = helper.lemmatizeAbstracts(train_data, validate_data, test_data)
+
+
+# Select classifiers to use
+# noinspection PyUnboundLocalVariable
 classifiers = [
-    #LinearSVC(C=0.00017782794100389227),
+    LinearSVC(),
     #SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
-    MultinomialNB(alpha=0.1, fit_prior=False)
+    MultinomialNB(),
+    #SGDClassifier()
 ]
 
+dev_score = []
+val_score = []
 # ***** TRAIN CLASSIFIERS   *****
-for clf in classifiers:
-    print 80 * "="
-    print clf
-    print 80 * "="
+print("Start crunching. Time used: {:.1f} minutes".format((time.time()-start_time)/60.0))
+for idx, sub_feat_list in enumerate(feature_list):
+    print("Crunching on features: {}\nTime used: {:.1f} minutes".format(sub_feat_list, (time.time()-start_time)/60.0))
+    for clf in classifiers:
+        print 80 * "="
+        print clf
+        print 80 * "="
 
-    # Use optimized parameters from grid_search_improved
-    pipeline = Pipeline([
-        ('features', FeatureUnion(helper.getFeatures(feature_keys))),
-        ('clf', clf)
-    ])
+        # Use optimized parameters from grid_search_improved
+        pipeline = Pipeline([
+            ('features', FeatureUnion(helper.getFeatures(sub_feat_list))),
+            ('clf', clf)
+        ])
 
-    pred_stances = cross_val_predict(pipeline, train_data, train_data.Stance, cv=cv)
+        pred_stances = cross_val_predict(pipeline, train_data, train_data.Stance, cv=cv)
 
-    print("Cross validated train score")
-    print 80 * "="
-    print classification_report(train_data.Stance, pred_stances, digits=4)
+        print("Cross validated train score")
+        print 80 * "="
+        print classification_report(train_data.Stance, pred_stances, digits=4)
 
-    macro_f = fbeta_score(train_data.Stance, pred_stances, 1.0,
-                          labels=['AGAINST', 'FAVOR', 'NONE'], average='macro')
+        macro_f = fbeta_score(train_data.Stance, pred_stances, 1.0,
+                              labels=['AGAINST', 'FAVOR', 'NONE'], average='macro')
 
-    print 'macro-average of F-score(FAVOR), F-score(AGAINST) and F-score (NONE): {:.4f}\n\n'.format(macro_f)
+        print 'macro-average of F-score(FAVOR), F-score(AGAINST) and F-score (NONE): {:.4f}\n\n'.format(macro_f)
+        dev_score.append({idx: macro_f, "features": sub_feat_list})
 
-    print 80 * "="
-    print("Validation score")
-    print 80 * "="
+        print("Start validation. Time used: {:.1f} minutes".format((time.time()-start_time)/60.0))
+        print 80 * "="
+        print("Validation score")
+        print 80 * "="
 
-    validate_preds = pipeline\
-        .fit(train_data, train_data.Stance)\
-        .predict(validate_data)
+        validate_preds = pipeline\
+            .fit(train_data, train_data.Stance)\
+            .predict(validate_data)
 
-    print classification_report(validate_data.Stance, validate_preds, digits=4)
+        print classification_report(validate_data.Stance, validate_preds, digits=4)
 
-    macro_f = fbeta_score(validate_data.Stance, validate_preds, 1.0,
-                          labels=['AGAINST', 'FAVOR', 'NONE'], average='macro')
-    print("Validation macro F-score: {:.4f}\n\n".format(macro_f))
+        macro_f = fbeta_score(validate_data.Stance, validate_preds, 1.0,
+                              labels=['AGAINST', 'FAVOR', 'NONE'], average='macro')
+        print("Validation macro F-score: {:.4f}\n\n".format(macro_f))
+        val_score.append({idx: macro_f, "features": sub_feat_list})
 
+with open("dev_score_list.pkl", "w") as f:
+    pickle.dump(dev_score, f)
+with open("val_score_list.pkl", "w") as f:
+    pickle.dump(val_score, f)
+
+highest_dev = 0
+for idx, d in enumerate(dev_score):
+    if d[idx] > highest_dev:
+        highest_dev = d[idx]
+print("Highest dev macro f score: {}".format(highest_dev))
+highest_val = 0
+for idx, d in enumerate(val_score):
+    if d[idx] > highest_val:
+        highest_val = d[idx]
+print("Highest validate macro f score: {}".format(highest_val))
 
 #################################
 #                               #

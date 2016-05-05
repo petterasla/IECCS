@@ -11,3 +11,6 @@ his involves searching for articles (search &amp; information retrieval), downlo
 The third part of this project concerns interactive visualisation. 
 The visualisation mentioned above is nice, but so much more is possible. Provided that we can also extract the affiliation of authors, we can plot the distribution of climate skepticism on a world map, contrasting e.g. USA vs. Europe. What if we take the impact factors of journals into account? 
 Is there more or less skepticism in high-impact journals (e.g. Nature, Science) then in low-impact journals (Chinese Journal of Oceanology and Limnology). Many interesting options to explore (for some inspiration, see www.creativebloq.com/design-tools/data-visualization-712402).
+
+# ieccs-server
+https://github.com/djick/ieccs-server

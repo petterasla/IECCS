@@ -90,7 +90,7 @@ def storeSubjectsToJson(stance="All"):
 
 
 def readTestSamples():
-    with open("../TextFiles/data/related_data.json", "r") as f:
+    with open("../TextFiles/data/related_dat.json", "r") as f:
         data = json.load(f)
 
     with open("samples_test.pkl", "r") as f:
@@ -100,26 +100,160 @@ def readTestSamples():
         print("Index: {}, sample title: {}\nSubjects: {}\nSub-Headers:{}\nAbstract: {}\nYear: {}\n".format(idx, data[idx]["Title"], data[idx]["Subjects"], data[idx]["Sub_headers"], data[idx]["Abstract"], data[idx]["Publication_year"]))
         #print("WOS: {}".format(data[idx]["WOS"]))
 
-def getSubjects():
+def finalFiltering():
+    with open("../TextFiles/data/related_data_checked_for_duplicates.json", "r") as f:
+        data = json.load(f)
+
+    with open("../TextFiles/data/meta_data.json", "r") as f:
+        original_data = json.load(f)
+
+    print len(data)
+    s = []
+    for d in data:
+        if d["Subjects"] is not None:
+            for subjects in d["Subjects"]:
+                for subject in subjects.split(","):
+                    s.append(subject.lower().strip())
+
+    print("len of new subjects  = {}".format(len(s)))
+    uniq = list(set(s))
+    print("len of new subjects = {}\n".format(len(uniq)))
+
+    print len(original_data)
+    s_o = []
+    for d in original_data:
+        try:
+            if d["Subjects"] is not None:
+                for subjects in d["Subjects"]:
+                    for subject in subjects.split(","):
+                        s_o.append(subject.lower().strip())
+        except:
+            continue
+
+    print("len of old subjects = {}".format(len(s_o)))
+    uniq_o = list(set(s_o))
+    print("len of old subjects = {}\n".format(len(uniq_o)))
+
+
+    counter = 0
+    for subject in uniq:
+        if subject in uniq_o:
+            counter += 1
+
+    print("Number of subjects in related data found in original = {}\n".format(counter))
+
+    print("Printing subjects not in original data:")
+    unrecognized_subjects = []
+    for subject in uniq:
+        if subject not in uniq_o:
+            unrecognized_subjects.append(subject)
+    print("Lenght of unreq data: {}".format(len(unrecognized_subjects)))
+    found = list()
+    not_found = list()
+    f_subs = [
+        "government & law",
+        "hardware & architecture",
+        "business",
+        "business & economics",
+        "acoustics",
+        "law",
+        "legal",
+        "robotics",
+        "textiles",
+        "telecommunications",
+        "artificial intelligence"
+    ]
+    for s in f_subs:
+        unrecognized_subjects.append(s)
+    ## EX:
+    ## [u'Geosciences, Multidisciplinary', u'Geology', u'GEOSCIENCES, MULTIDISCIPLINARY']
+    for i, d in enumerate(data):
+        if d["Subjects"] is not None:
+            #print("\nID: {}".format(i+1))
+            for subjects in d["Subjects"]:
+                #print("Subjects: {}".format(subjects))
+                for subject in subjects.split(","):
+                    if subject.lower().strip() in unrecognized_subjects:
+                        not_found.append(d["WOS"])
+                    else:
+                        found.append(d["WOS"])
+                        #print("NOT FOUND: \t{}".format(subject))
+    found = list(set(found))
+    not_found_temp = list(set(not_found))
+
+    n_found = []
+    for ids in found:
+        if ids not in not_found_temp:
+            n_found.append(ids)
+    print("Found: {}\nNot found: {}".format(len(n_found), len(not_found_temp)))
+    #WOS:000291279200005
+    #for ids in not_found_temp[:5]:
+    #    for d in data:
+    #        if d["WOS"] == ids:
+    #            print("WOS ID {}\nSubjects: {}\nAbstract: {}\n".format(d["WOS"], d["Subjects"], d["Abstract"]))
+    counter = len(n_found)
+    for idx, ids in enumerate(not_found_temp):
+        for d in data:
+            if d["WOS"] == ids:
+                abstract = d["Abstract"]
+                abs_tokens = [a.lower() for a in abstract.split(" ")]
+                if "climate" in abs_tokens:
+                    n_found.append(ids)
+
+
+    print("\nNumber of related records = {}\nAdded {} samples which included 'climate'".format(len(n_found), len(n_found)-counter))
+    print("Filtered away: {}".format(len(not_found_temp)-(len(n_found)-counter)))
+
+    for ids in not_found_temp[:5]:
+        for d in data:
+            if d["WOS"] == ids:
+                abstract = d["Abstract"]
+                print("{}".format(d["WOS"]))
+                print("Subjects: {}".format(d["Subjects"]))
+                print("{}\n".format(abstract))
+
+    for s in sorted(unrecognized_subjects):
+        print s
+    print("\nLenght of unrec subjects: {}".format(len(unrecognized_subjects)))
+    final_filter = []
+    for ids in n_found:
+        for d in data:
+            if d["WOS"] == ids:
+                final_filter.append(d)
+
+    #if len(final_filter) == len(n_found):
+    #    with open("related_data_final_filtering.json", "w") as f:
+    #        json.dump(final_filter, f)
+    #        print(len(final_filter))
+    #        print("dumped")
+
+
+def removeDuplicates():
     with open("../TextFiles/data/related_data.json", "r") as f:
         data = json.load(f)
 
-    s = []
-    for d in data[:20]:
-        if d["Subjects"] is not None:
-            for subjects in d["Subjects"]:
-                print subjects.split(",")
-                #for subject in subjects:
+    print("len of related data: {}".format(len(data)))
+    uniq = list()
+    wos_ids = list()
+    for d in data:
+        if d["WOS"] not in wos_ids:
+            uniq.append(d)
+            wos_ids.append(d["WOS"])
+    print("len of related data: {}".format(len(uniq)))
+    test = []
+    for d in data:
+        test.append(d["WOS"])
+    test = set(test)
+    print("len of related data: {}".format(len(test)))
 
+    #if len(test) == len(uniq):
+        #with open("related_data_checked_for_duplicates.json", "w") as f:
+        #    json.dump(uniq, f)
+        #    print("dumped")
 
-
-    print("len of subjects = {}".format(len(s)))
-    uniq = list(set(s))
-    print("len of subjects = {}".format(len(uniq)))
-
-
+#removeDuplicates()
 #readTestSamples()
-getSubjects()
+finalFiltering()
 '''
 mapData = [
     {"code":"AF" , "name":"Afghanistan", "value":32358260, "color":"#eea638"},

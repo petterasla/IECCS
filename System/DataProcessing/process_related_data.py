@@ -32,6 +32,6 @@ Create new methods when needed :-)
 import json
 
 def getRelatedDataFile():
-    with open("../TextFiles/data/related_data.json", "r") as f:
+    with open("../TextFiles/data/related_record.json", "r") as f:
         data = json.load(f)
     return data

@@ -222,7 +222,7 @@ def finalFiltering():
                 final_filter.append(d)
 
     #if len(final_filter) == len(n_found):
-    #    with open("related_data_final_filtering.json", "w") as f:
+    #    with open("related_data_final_filtering_with_titles.json", "w") as f:
     #        json.dump(final_filter, f)
     #        print(len(final_filter))
     #        print("dumped")

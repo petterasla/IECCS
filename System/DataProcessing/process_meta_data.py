@@ -43,18 +43,15 @@ Create new methods when needed :-)
 import json
 import pandas as pd
 import time
+import string
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder, Imputer
 from sklearn_pandas import DataFrameMapper
 from sklearn.feature_extraction import DictVectorizer
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 import System.DataProcessing.process_data as ptd
 from sklearn.decomposition import LatentDirichletAllocation
-from gensim.models import LdaMulticore
-from gensim import corpora
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-import string
+
 
 
 
@@ -289,37 +286,7 @@ def checkSize(dataframe, abstracts):
 def removePunctuations(string):
     return string.replace("|", ",").replace("(", "").replace(")", "").replace("<", "").replace(">", "").replace(",", "").replace(".", "").replace("-", "").replace(":", "")
 
-def LDA(stance="All"):
-    start = time.time()
-    table = string.maketrans("", "")
-    if stance == "All":
-        data = ptd.getData().Title
-    else:
-        data = pd.DataFrame(ptd.getMetaDataAsList())
-        data = data[data.Stance == stance].Title
-
-    data = data.tolist()
-    tokenized_text = []
-    for d in data:
-        ab = str(d).translate(table, string.punctuation).lower()
-        word_list = word_tokenize(ab)
-        filtered_words = [word for word in word_list if word not in stopwords.words('english')]
-        tokenized_text.append(filtered_words)
-
-    dictionary = corpora.Dictionary(tokenized_text)
-    dictionary.filter_extremes(no_below=1, no_above=0.6)
-
-    corpus = [dictionary.doc2bow(text) for text in tokenized_text]
-    lda = LdaMulticore(corpus=corpus, num_topics=50, id2word=dictionary, chunksize=10000, passes=100, workers=3)
-
-    topics_matrix = lda.show_topics(formatted=False, num_words=20, num_topics=50)
-
-    for i, topic in enumerate(topics_matrix):
-        print("Topic #{}: {}".format(i+1, [str(i) + ": " + str(word[0]) for i, word in enumerate(topic[1])]))
-
-    print("\nTime used: {:.4f}".format((time.time()-start)/60.0))
-
-def print_top_words(model, feature_names, n_top_words):
+def print_top_words1(model, feature_names, n_top_words):
     topic_word_collection = []
     for topic_idx, topic in enumerate(model.components_):
         print("Topic {}: {}".format(topic_idx + 1, ", ".join([feature_names[i] for i in topic.argsort()[:-n_top_words - 1:-1]])))
@@ -327,35 +294,50 @@ def print_top_words(model, feature_names, n_top_words):
     return topic_word_collection
 
 
-def lda(stance):
-    start = time.time()
+def LDA_title_scikit(frame):
+    cv = CountVectorizer(analyzer="word")
+    tf = TfidfVectorizer(analyzer="word")
+    n_top_words = 20
+    n_topics = 30
     table = string.maketrans("", "")
-    if stance == "All":
-        data = ptd.getData().Title
-    else:
-        data = pd.DataFrame(ptd.getMetaDataAsList())
-        data = data[data.Stance == stance].Title
-
-    data = data.tolist()
+    data = frame.Title.tolist()
     raw_docs = []
     for d in data:
         raw_docs.append(str(d).translate(table, string.punctuation).lower())
 
-        #word_list = word_tokenize(ab)
-        #filtered_words = [word for word in word_list if word not in stopwords.words('english')]
-        #tokenized_text.append(filtered_words)
-
-        # Use tf (raw term count) features for LDA.
     print("Extracting tf features for LDA...")
     tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2, max_features=10000,
-                                stop_words='english')
+                                    stop_words='english')
     tf = tf_vectorizer.fit_transform(raw_docs)
-    model = LatentDirichletAllocation(n_topics=30, random_state=1)
+    model = LatentDirichletAllocation(n_topics=n_topics, random_state=1)
     model.fit(tf)
-    n_top_words = 20
+
     tf_feature_names = tf_vectorizer.get_feature_names()
-    topic_word_collection = print_top_words(model, tf_feature_names, n_top_words)
+    topic_word_collection = print_top_words1(model, tf_feature_names, n_top_words)
 
-    print("\nTime used: {:.4f}".format((time.time()-start)/60.0))
+    return cv.fit_transform(topic_word_collection)
+    #return tf.fit_transform(topic_word_collection)
 
-lda("AGAINST")
+def LDA_abstract_scikit(frame):
+    cv = CountVectorizer(analyzer="word")
+    tf = TfidfVectorizer(analyzer="word")
+    n_top_words = 20
+    n_topics = 30
+    table = string.maketrans("", "")
+    data = frame.Abstract.tolist()
+    raw_docs = []
+    for d in data:
+        raw_docs.append(str(d).translate(table, string.punctuation).lower())
+
+    print("Extracting tf features for LDA...")
+    tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2, max_features=10000,
+                                    stop_words='english')
+    tf = tf_vectorizer.fit_transform(raw_docs)
+    model = LatentDirichletAllocation(n_topics=n_topics, random_state=1)
+    model.fit(tf)
+
+    tf_feature_names = tf_vectorizer.get_feature_names()
+    topic_word_collection = print_top_words1(model, tf_feature_names, n_top_words)
+
+    return cv.fit_transform(topic_word_collection)
+    #return tf.fit_transform(topic_word_collection)

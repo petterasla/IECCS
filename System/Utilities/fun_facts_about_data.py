@@ -162,8 +162,8 @@ def getTitleInfo(frame):
 def getSubject(header):
     header.fillna("nan", inplace=True)
     headers = header.tolist()
-    headers = [h for h in header if h != "nan"]
-    headers = [h for sublist in header for h in sublist]
+    headers = [h for h in headers if h != "nan"]
+    headers = [h.lower().strip() for sublist in headers for h in sublist]
     uniq_head = list(set(headers))
     print("There are a total of {} subjects, with {} unique ones".format(len(headers), len(uniq_head)))
 

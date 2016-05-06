@@ -1,4 +1,4 @@
-define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout', 'c3', 'd3', '$http', 'q'], function(require, ko, c3, d3, $http, $q) {
+define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout', 'c3', 'd3', '$http', 'q', 'text!app/templates/visualization/bar.html'], function(require, ko, c3, d3, $http, $q, template) {
   'use strict';
 
   Array.prototype.getUnique = function(){
@@ -37,34 +37,63 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
     }
   }
 
-  function ViewAbout() {
+  function ViewBar() {
     var initFavor = [];
     var initAgainst = [];
     var initNone = [];
+    var self = this;
+    self.alert = ko.observable(0);
+    self.alertMsg = ko.observable('Error retrieving some of the data!');
+    self.progress = ko.observable(5);
+    self.progressPct = ko.observable('5%');
+    console.log(self.progress());
 
     var favorReq = $http.get('https://ieccs.herokuapp.com/api/stance/year/FAVOR')
       .success(function(data) {
         initFavor = data;
+        self.progress(self.progress()+30);
+        self.progressPct(self.progress()+'%');
+        console.log(self.progress());
       })
       .error(function(err) {
+        self.alert(1);
         console.log(err);
       });
     var againstReq = $http.get('https://ieccs.herokuapp.com/api/stance/year/AGAINST')
       .success(function(data) {
         initAgainst = data;
+        self.progress(self.progress()+30);
+        self.progressPct(self.progress()+'%');
+        console.log(self.progress());
       })
       .error(function(err) {
+        self.alert(1);
         console.log(err);
       });
     var noneReq = $http.get('https://ieccs.herokuapp.com/api/stance/year/NONE')
       .success(function(data) {
         initNone = data;
+        self.progress(self.progress()+30);
+        self.progressPct(self.progress()+'%');
+        console.log(self.progress());
       })
       .error(function(err) {
+        self.alert(1);
         console.log(err);
       });
 
     $q.all([favorReq, noneReq, againstReq]).then( function() {
+      self.progress(self.progress()+5);
+      self.progressPct(self.progress()+'%');
+      console.log(self.progress());
+
+      setTimeout(function(){
+        self.progress(self.progress()+1);
+        self.progressPct(self.progress()+'%');
+        console.log(self.progress());
+      }, 500);
+
+
       initFavor = initFavor.sort(compare);
       initNone = initNone.sort(compare);
       initAgainst = initAgainst.sort(compare);
@@ -117,7 +146,7 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
   }
 
   return {
-    viewModel: ViewAbout,
-    template: '<div id="BarChart"></div>'
-  }; //<div class="centered" data-bind="visible: notLoaded"><i class="fa fa-spinner fa-spin fa-5x"></i></div>
+    viewModel: ViewBar,
+    template: template
+  };
 });

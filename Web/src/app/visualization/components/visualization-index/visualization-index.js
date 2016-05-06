@@ -34,7 +34,7 @@ define('app/visualization/components/visualization-index/visualization-index', [
         else {
             item.status(false);
         }
-      })
+      });
     };
 
     self.updateRepresentationStatus = function(index) {
@@ -49,7 +49,7 @@ define('app/visualization/components/visualization-index/visualization-index', [
           item.status(false);
         }
       });
-    }
+    };
   }
 
   return {

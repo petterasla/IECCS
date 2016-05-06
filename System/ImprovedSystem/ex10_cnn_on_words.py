@@ -132,7 +132,7 @@ while i < 15:
     macro_f = fbeta_score(y_val, pred_stances, 1.0,
                           labels=[0, 1, 2],
                           average='macro')
-    tf.scalar_summary('macro-f', macro_f)
+
     print('macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f))
     i += 1
 

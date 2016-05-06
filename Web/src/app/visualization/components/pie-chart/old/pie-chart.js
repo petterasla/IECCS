@@ -1,5 +1,5 @@
 define('app/visualization/components/pie-chart/old/pie-chart' ,['require','knockout', '$http', 'q',
-  'amcharts', 'light', 'animate.min', 'pie'], function(require, ko, $http, $q) {
+  'amcharts', 'pie', 'light', 'animate.min'], function(require, ko, $http, $q) {
   'use strict';
 
   Object.size = function(obj) {
@@ -101,29 +101,29 @@ define('app/visualization/components/pie-chart/old/pie-chart' ,['require','knock
       /**
        * Create the chart
        */
+
+
       var currentYear = keys[0];
-      console.log(currentYear);
-      console.log(Object.keys(pieData));
-      var chart = AmCharts.makeChart( 'piechartdiv', {
-        'type': 'pie',
-        'theme': 'light',
-        'dataProvider': [],
-        'valueField': 'size',
-        'titleField': 'sector',
-        'startDuration': 0,
-        'innerRadius': 80,
-        'pullOutRadius': 20,
-        'marginTop': 30,
-        'titles': [{
-          'text': 'Stance development over the years'
+      var chart = AmCharts.makeChart( "piechartdiv", {
+        "type": "pie",
+        "theme": "light",
+        "dataProvider": [],
+        "valueField": "size",
+        "titleField": "sector",
+        "startDuration": 0,
+        "innerRadius": 80,
+        "pullOutRadius": 20,
+        "marginTop": 30,
+        "titles": [{
+          "text": "Stance development over the years"
         }],
-        'allLabels': [{
-          'y': '54%',
-          'align': 'center',
-          'size': 25,
-          'bold': true,
-          'text': '1995',
-          'color': '#555'
+        "allLabels": [{
+          "y": "54%",
+          "align": "center",
+          "size": 25,
+          "bold": true,
+          "text": "1991",
+          "color": "#555"
         }, {
           'y': '49%',
           'align': 'center',

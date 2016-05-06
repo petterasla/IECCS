@@ -1,25 +1,61 @@
 define('app/visualization/components/map/map' ,
-  ['require','knockout', '$http', 'q',
+  ['require','knockout', '$http', 'q', "text!app/templates/visualization/map.html",
   'app/visualization/components/map/data', 'ammap', 'dark', 'worldLow'],
-  function(require, ko, $http, $q, coordinates) {
+  function(require, ko, $http, $q, template, coordinates) {
   'use strict';
 
-  function init() {
-    var mapData = [];
-    var latlong = coordinates;
+    function requestData(type) {
+      var url;
+      var data;
+      var req;
+      if (type === "All"){
+        url = 'https://ieccs.herokuapp.com/api/visual/organization/'+type
+      }
+      else {
+        url = 'https://ieccs.herokuapp.com/api/visual/organization/'+type.toUpperCase()
+      }
+      req = $http.get(url)
+        .success(function(info) {
+          data = info.Data;
+          console.log("Data retrieved..");
+          drawMap(data);
+        })
+        .error(function(err) {
+          console.log(err)
+        });
+    }
 
+    function init() {
+      this.allStancesFalse = ko.observable(true);
 
-    var dataReq = $http.get('https://ieccs.herokuapp.com/api/visual/organization/All')
-      .success(function (info) {
-        mapData = info.Data;
-      })
-      .error(function (err) {
-        console.log(err);
-      });
+      this.stanceModel = [
+        {id: 0, type:"All", icon: '<i class="fa fa-globe"></i>', status: ko.observable(false)},
+        {id: 1, type:"Favor", icon: '<i class="fa fa-thumbs-o-up"></i>', status: ko.observable(false)},
+        {id: 2, type:"Against", icon: '<i class="fa fa-thumbs-o-down"></i>', status: ko.observable(false)},
+        {id: 3, type:"None", icon: '<i class="fa fa-hand-o-right"></i>', status: ko.observable(false)}
 
-    $q.all([dataReq]).then(function () {
+      ];
+
+      this.updateStanceStatus = (index) => {
+        this.stanceModel.forEach((item) => {
+          if (index == item.id) {
+            item.status(true);
+            console.log("Requesting..");
+            requestData(item.type);
+            this.allStancesFalse(false);
+          }
+          else {
+            item.status(false);
+          }
+        })
+      };
+    }
+
+    function drawMap(mapData) {
+      console.log("Building map");
+      var latlong = coordinates;
       var minBulletSize = 6;
-      var maxBulletSize = 70;
+      var maxBulletSize = 60;
       var min = Infinity;
       var max = -Infinity;
 
@@ -34,15 +70,12 @@ define('app/visualization/components/map/map' ,
           max = value;
         }
       }
-      console.log(AmCharts);
       // build map
-
-      console.log('building map');
 
       window.map = new AmCharts.AmMap();
       AmCharts.theme = AmCharts.themes.dark;
 
-      window.map.addTitle('Organization countries', 14);
+      window.map.addTitle('Author countries', 14);
       window.map.addTitle('from TCP data', 11);
       window.map.areasSettings = {
         unlistedAreasColor: '#000000',
@@ -53,10 +86,7 @@ define('app/visualization/components/map/map' ,
         mapVar: AmCharts.maps.worldLow,
         images: []
       };
-
       // create circle for each country
-
-
       // it's better to use circle square to show difference between values, not a radius
       var maxSquare = maxBulletSize * maxBulletSize * 2 * Math.PI;
       var minSquare = minBulletSize * minBulletSize * 2 * Math.PI;
@@ -84,47 +114,20 @@ define('app/visualization/components/map/map' ,
         });
 
       }
-
-
-      // the following code uses circle radius to show the difference
-      /*
-       for (var i = 0; i < mapData.length; i++) {
-       var dataItem = mapData[i];
-       var value = dataItem.value;
-       // calculate size of a bubble
-       var size = (value - min) / (max - min) * (maxBulletSize - minBulletSize) + minBulletSize;
-       if (size < minBulletSize) {
-       size = minBulletSize;
-       }
-       var id = dataItem.code;
-
-       dataProvider.images.push({
-       type: 'circle',
-       width: size,
-       height: size,
-       color: dataItem.color,
-       longitude: latlong[id].longitude,
-       latitude: latlong[id].latitude,
-       title: dataItem.name,
-       value: value
-       });
-       }*/
-
       window.map.dataProvider = dataProvider;
       window.map.export = {
         enabled: true
       };
+
       window.map.projection = 'miller';
       window.map.write('chartdiv');
-      console.log('gon trhoug everything');
-    });
-  }
+    }
 
 
-  return {
-    viewModel: init(),
-    template: '<div id=chartdiv></div>'
-  };
+    return {
+      viewModel: init,
+      template: template
+    };
 
 });
 

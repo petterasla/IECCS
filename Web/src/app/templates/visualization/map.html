@@ -1,3 +1,4 @@
+<!--
 <div data-bind="visible: $data.progress() < 101">
   <p></p>
   <p></p>
@@ -14,3 +15,25 @@
 </div>
 <p></p>
 <div id="chartdiv"></div>
+-->
+<div class="row pad">
+    <div class="col-xs-6 col-xs-offset-3">
+      <p style="text-align: center">Pick a stance</p>
+      <div class="btn-group btn-group-justified" role="group" data-bind="foreach: stanceModel">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-vis-representation2"
+                    data-bind="css: {activate: status}, click: function(i) {$parent.updateStanceStatus($index())}">
+              <span data-bind="text: type">
+              </span>
+            </button>
+          </div>
+        </div>
+    </div>
+</div>
+<div data-bind="visible: !allStancesFalse()">
+  <div id="left-pointer" class="col-xs-1"></div>
+  <div class="col-xs-10">
+      <div id=chartdiv></div>
+  </div>
+  <div id="right-pointer" class="col-xs-1"></div>
+</div>

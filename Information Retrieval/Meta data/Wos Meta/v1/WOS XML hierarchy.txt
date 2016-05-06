@@ -1,0 +1,181 @@
+Record for title = 20-YEAR RECORD OF ALPINE GRASSHOPPER ABUNDANCE, WITH INTERPRETATIONS FOR CLIMATE CHANGE
+
+REC
+|
+|
+-->	['UID']:  'WOS:A1991HA88800006'
+|
+|
+|
+|
+--> ['dynamic_data'] 	----> ['cluster_related']: {'identifiers': {'identifier': {'type': 'issn', 'value': '0110-6465'}}}
+|						|
+|						|
+|						----> ['citation_related']: {'tc_list': {'silo_tc': {'coll_id': 'WOS', 'local_count': '4'}}}
+|
+|
+|
+|
+|
+|
+|
+|
+|						
+--> ['static_data'] 	----> ['item'] 					-----> ['keyword_plus'] --> ['count']: '10' 
+						|								|						|
+						|								|						--> ['keyword']: [list with 10 keywords]}
+						|								-----> ['{http://www.w3.org/2001/XMLSchema-instance}type']: 'itemType_wos' 
+						|								|
+						|								|
+						|								-----> ['coll_id']: 'WOS'
+						|								|
+						|								|
+						|								-----> ['ids'] --> ['avail']: 'Y'
+						|								|
+						|								|
+						|								-----> ['bib_id']: '15 (2): 139-152 1991'	
+						|								|
+						|								|
+						|								-----> ['reprint_contact'] --> ['names'] --> ['count']: '1'
+						|															|			 |
+						|															|			 --> ['name'].keys()
+						|															|					|
+						|															|					|
+						|									['last_name', 'first_name', 'wos_standard', 'display_name', 'addr_no', 'seq_no', 'role', 'full_name', 'reprint', 'dais_id', 'display']
+						|															|
+						|															|
+						|															--> ['address_spec'].keys()
+						|																		|
+						| 																		|
+						|				                ['organizations', 'state', 'street', 'zip', 'addr_no', 'city', 'country', 'full_address']
+						|
+						|
+						|
+						----> ['fullrecord_metadata'] 	---->	['languages']	--> ['count']: '1'
+						|								|						|
+						|								|						--> ['language'] --> ['type']: 'primary'
+						|								|
+						|								|
+						|								----> ['normalized_doctypes'] 	--> ['count']: '1'
+						|								|								|
+						|								|								--> ['doctype']: 'Article'
+						|								|
+						|								|
+						|								----> ['normalized_languages'] 	--> ['count']: '1'
+						|								|								|
+						|								|								--> ['language'] -->['type']: 'primary'
+						|								|
+						|								|
+						|								----> ['addresses'] --> ['count']:2
+						|								|					|
+						|								|					|			## NOTICE == List index 0 (len=count)
+						|								|					--> ['address_name'][0] --> ['address_spec'].keys()
+						|								|													|
+						|								|													|
+						|								|						['organizations', 'street', 'addr_no', 'city', 'country', 'full_address']
+						|								|																
+						|								----> ['keywords']  --> ['count']: '8'
+						|								|					|
+						|								|					--> ['keyword']: [List of 8 keywords]
+						|								|
+						|								----> ['refs']		--> ['count']: '50'
+						|								|
+						|								|
+						|								----> ['abstracts']	--> ['count']: '1'
+						|								|					|
+						|								|					--> ['abstract'] --> ['abstract_text']
+						|								|											|
+						|								| 											--> ['count']:'2'
+						|								|											|
+						|								|											--> ['p']: [list with 2 	   |							   |													abstract texts]
+						|								|
+						|								----> ['category_info'] --> ['subjects'] 	--> ['count']: '3'
+						|														|					|
+						|														|					--> ['subject']: [list with 3  |													   |								subjects]
+						|														|
+						|														--> ['subheadings'] --> ['count']: '1'
+						|														|					|
+						|														|					--> ['subheading']:*subheading*
+						|														|
+						|														|
+						|														--> ['headings'] 	--> ['count']: '1'
+						|																			|
+						|																			--> ['heading']: *heading*
+						|
+						|
+						|
+						| 
+						|
+						|
+						|
+						----> ['summary']		---> ['publishers']	--> ['publisher'] --> ['names'] --> ['count']: '1'
+												|													|
+												|													--> ['name'].keys()
+												|															|
+												|															|
+												|						['display_name', 'addr_no', 'seq_no', 'role', 'full_name']
+												|
+												---> ['titles'] 	--> ['count']: '6'
+												|					|
+												|					--> ['title']: [list with 6 titles]
+												|
+												---> ['pub_info']	--> ['pubyear']: '1991'
+												|					|
+												|					--> ['vol']: '15'
+												|					|
+												|					--> ['coverdate']: '1991'
+												|
+												|					--> ['has_abstract']: 'Y'
+												|
+												|					--> ['sortdate']: '1991-01-01'
+												|
+												|					--> ['pubtype']: 'Journal'
+												|
+												|					--> ['issue']: '2'
+												|
+												|					--> ['page'] 	--> ['begin']: '139'
+												|									|
+												|									--> ['end']: '152'
+												|									|
+												|									--> ['page_count']: 14
+												|
+												|					--> ['pubmonth']: 'SEP'
+												|
+												---> ['names']		--> ['count']: '2'
+												|					|
+												|					|		## NOTICE == List index 0 (len=count)
+												|					--> ['name'][0] --> ['wos_standard']: 'WHITE, EG'
+												|									|
+												|									--> ['first_name']: 'EG'
+												|									|
+												|									--> ['seq_no']: '1'
+												|									|
+												|									--> ['role']: 'author'
+												|									|
+												|									--> ['full_name']: 'WHITE, EG'
+												|									|
+												|									--> ['daisng_id']: '22035639'
+												|									|
+												|									--> ['last_name']: 'WHITE'
+												|									|
+												|									--> ['dais_id']: '1031218'
+												|									|
+												|									--> ['display_name']: 'WHITE, EG'
+												|									|
+												|									--> ['suffix']: *suffix* like JR
+												|
+												---> ['doctypes']	--> ['count']: '1'
+												|					|
+												|					--> ['doctype']: 'Article'
+												|
+												|
+												---> ['EWUID']		--> ['WUID'] 	--> ['coll_id']: 'WOS'
+																	|
+																	--> ['edition'] --> ['value']: 'WOS.SCI'	
+
+
+NOTICE:
+
+	Many of these keys may not be available to access. 
+	To use this with python, one have to apply try/except clauses
+	for every key (except for the first two keys ('REC' and 'static_data' or 'dynamic_data')).

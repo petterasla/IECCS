@@ -33,30 +33,49 @@ def getData():
 
     :return:        A DataFrame
     """
-    return pd.read_csv("../TextFiles/data/tcp_abstracts.txt")
+    a = pd.read_csv("../TextFiles/data/tcp_abstracts.txt")
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
 
 def getTrainingData():
-    return pd.read_csv("../TextFiles/data/tcp_train.csv", sep='\t')
+    a = pd.read_csv("../TextFiles/data/tcp_train.csv", sep='\t')
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
 
 def getTrainingDataWithMeta():
-    return pd.read_csv("../TextFiles/data/tcp_train_meta.csv", sep='\t')
+    a = pd.read_csv("../TextFiles/data/tcp_train_meta.csv", sep='\t')
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
 
 def getValidationData():
-    return pd.read_csv("../TextFiles/data/tcp_validate.csv", sep='\t')
+    a = pd.read_csv("../TextFiles/data/tcp_validate.csv", sep='\t')
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
 
 def getValidationDataWithMeta():
-    return pd.read_csv("../TextFiles/data/tcp_validate_meta.csv", sep='\t')
+    a = pd.read_csv("../TextFiles/data/tcp_validate_meta.csv", sep='\t')
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
 
 def getTestData():
-    return pd.read_csv("../TextFiles/data/tcp_test.csv", sep='\t')
+    a =pd.read_csv("../TextFiles/data/tcp_test.csv", sep='\t')
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
 
 def getTestDataWithMeta():
-    return pd.read_csv("../TextFiles/data/tcp_test_meta.csv", sep='\t')
+    a = pd.read_csv("../TextFiles/data/tcp_test_meta.csv", sep='\t')
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
 
 def getMetaDataAsList():
     with open("../TextFiles/data/meta_data.json", "r") as f:
         data = json.load(f)
     return data
+
+def getDataWithMeta():
+    a = pd.DataFrame(getMetaDataAsList())
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
 
 def getIdData():
     """

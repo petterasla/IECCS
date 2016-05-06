@@ -70,7 +70,11 @@ def getInfoAboutStance(stance="All"):
     print("HEADER AND SUB-HEADER INFO ")
     print 80*"-"
     getHeader(data.Headers, data.Sub_headers)
-    print 80*"-" + "\n"
+    print 80*"-" + "\n\n"
+    print 80*"-"
+    print("SUBJECT INFO")
+    print 80*"-"
+    getSubject(data.Subjects)
 
 def getHeader(header, sub_header):
     header.fillna("nan", inplace=True)
@@ -155,13 +159,25 @@ def getTitleInfo(frame):
     unique = set([word for title in titles for word in title.split(" ")])
     print("There are {} unique words in the titles".format(len(unique)))
 
+def getSubject(header):
+    header.fillna("nan", inplace=True)
+    headers = header.tolist()
+    headers = [h for h in headers if h != "nan"]
+    headers = [h.lower().strip() for sublist in headers for h in sublist]
+    uniq_head = list(set(headers))
+    print("There are a total of {} subjects, with {} unique ones".format(len(headers), len(uniq_head)))
+
+
+
 def getStanceData(stance):
     d = ptd.getMetaDataAsList()
     data = pd.DataFrame(d)
     return data[data.Stance == stance]
 
-#getInfoAboutStance("All")
+getInfoAboutStance("All")
 #getInfoAboutStance("FAVOR")
-getInfoAboutStance("AGAINST")
+#getInfoAboutStance("AGAINST")
 #getInfoAboutStance("NONE")
+
+
 

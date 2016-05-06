@@ -41,19 +41,18 @@ dic["WOS"] = Web of Science ID
 Create new methods when needed :-)
 """
 import json
-from scipy import sparse
 import pandas as pd
 import time
+import string
+import numpy as np
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder, Imputer
 from sklearn_pandas import DataFrameMapper
-from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-from sklearn.base import TransformerMixin
-import math
-import numpy as np
-import difflib
 import System.DataProcessing.process_data as ptd
+from sklearn.decomposition import LatentDirichletAllocation
+
+
 
 
 def getAllData():
@@ -154,7 +153,6 @@ def getIssue(frame):
     sub = frame.Publication_issue
     all, sub = checkAndReplaceNan(all, sub, unicode("-1"))
     labels = all.unique()
-    print labels
     dv, label_dict = fitDictVect(labels)
     list_of_dicts = [{issue: label_dict[issue]} for issue in sub]
     return dv.transform(list_of_dicts)
@@ -164,7 +162,6 @@ def getPublicationLength(frame):
     sub = frame.Publication_length
     all, sub = checkAndReplaceNan(all, sub, unicode("-1"))
     labels = all.unique()
-    print labels
     dv, label_dict = fitDictVect(labels)
     list_of_dicts = [{length: label_dict[unicode(int(length))]} for length in sub]
     return dv.transform(list_of_dicts)
@@ -245,7 +242,6 @@ def getHeader(frame):
     labels = all.tolist()
     labels = list(set([len(sub_list) for sub_list in labels if not sub_list == 1]))
     labels.append(unicode("nan"))
-    print labels
     dv, label_dict = fitDictVect(labels)
     list_of_dicts = []
     for subj in sub:
@@ -285,3 +281,63 @@ def checkSize(dataframe, abstracts):
     b = dataframe.loc[abstracts].shape
     print("Length of abstracts:  {}".format(a))
     print("Length after doing loc: {}".format(b))
+
+
+def removePunctuations(string):
+    return string.replace("|", ",").replace("(", "").replace(")", "").replace("<", "").replace(">", "").replace(",", "").replace(".", "").replace("-", "").replace(":", "")
+
+def print_top_words1(model, feature_names, n_top_words):
+    topic_word_collection = []
+    for topic_idx, topic in enumerate(model.components_):
+        print("Topic {}: {}".format(topic_idx + 1, ", ".join([feature_names[i] for i in topic.argsort()[:-n_top_words - 1:-1]])))
+        topic_word_collection.append(" ".join([feature_names[i] for i in topic.argsort()[:-n_top_words - 1:-1]]))
+    return topic_word_collection
+
+
+def LDA_title_scikit(frame):
+    cv = CountVectorizer(analyzer="word")
+    tf = TfidfVectorizer(analyzer="word")
+    n_top_words = 20
+    n_topics = 30
+    table = string.maketrans("", "")
+    data = frame.Title.tolist()
+    raw_docs = []
+    for d in data:
+        raw_docs.append(str(d).translate(table, string.punctuation).lower())
+
+    print("Extracting tf features for LDA...")
+    tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2, max_features=10000,
+                                    stop_words='english')
+    tf = tf_vectorizer.fit_transform(raw_docs)
+    model = LatentDirichletAllocation(n_topics=n_topics, random_state=1)
+    model.fit(tf)
+
+    tf_feature_names = tf_vectorizer.get_feature_names()
+    topic_word_collection = print_top_words1(model, tf_feature_names, n_top_words)
+
+    return cv.fit_transform(topic_word_collection)
+    #return tf.fit_transform(topic_word_collection)
+
+def LDA_abstract_scikit(frame):
+    cv = CountVectorizer(analyzer="word")
+    tf = TfidfVectorizer(analyzer="word")
+    n_top_words = 20
+    n_topics = 30
+    table = string.maketrans("", "")
+    data = frame.Abstract.tolist()
+    raw_docs = []
+    for d in data:
+        raw_docs.append(str(d).translate(table, string.punctuation).lower())
+
+    print("Extracting tf features for LDA...")
+    tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2, max_features=10000,
+                                    stop_words='english')
+    tf = tf_vectorizer.fit_transform(raw_docs)
+    model = LatentDirichletAllocation(n_topics=n_topics, random_state=1)
+    model.fit(tf)
+
+    tf_feature_names = tf_vectorizer.get_feature_names()
+    topic_word_collection = print_top_words1(model, tf_feature_names, n_top_words)
+
+    return cv.fit_transform(topic_word_collection)
+    #return tf.fit_transform(topic_word_collection)

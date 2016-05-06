@@ -104,10 +104,13 @@ def cnn_model(X, y):
     # Apply regular WX + B and classification.
     return skflow.models.logistic_regression(pool2, y)
 
-val_monitor = skflow.monitors.ValidationMonitor(X_val, y_val,
-                                                early_stopping_rounds=3,
+
+val_monitor = skflow.monitors.ValidationMonitor(X_train, y_train,
+                                                early_stopping_rounds=200,
                                                 n_classes=3,
-                                                print_steps=5)
+                                                print_steps=50)
+
+
 classifier = skflow.TensorFlowEstimator(model_fn=cnn_model, n_classes=3,
                                         steps=100, optimizer='Adam', learning_rate=0.01,
                                         continue_training=True)

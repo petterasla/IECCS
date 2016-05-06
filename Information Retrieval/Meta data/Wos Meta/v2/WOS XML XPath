@@ -1,0 +1,117 @@
+WOS XML XPath
+
+Everything is stored in list
+Use root.findall(path).
+Example: root.findall(".REC/UID") to find UID list
+and use root.findall(".REC/UID")[0].text to extract this value. Use for-loop for more than one value
+
+###############
+#    UID      #
+#   .REC/UID  #
+###############
+
+
+Value:
+- WOS Unique ID
+(".REC/UID")[0].text
+
+##############################
+#       Dynamic data         #
+#   .REC/dynamic_data        #
+##############################
+
+
+Values:
+- Cluster related: type and value
+("./REC/dynamic_data/cluster_related/identifiers/identifier")[0].attrib
+
+- Citation related: coll_id and local_count
+("./REC/dynamic_data/citation_related/tc_list/silo_tc")[0].attrib
+
+###################################
+#       Static data               #
+#      .REC/static_data           #
+###################################
+
+    ######## Item ########
+    .REC/static_data/item
+
+    values:
+    - List of keywords (plus)
+    ("../keywords_plus/")
+
+    - Some id value
+    ("../ids")[0].text
+
+    - Bib id
+    ("../bib_id")[0].text
+
+    - Reprint something?
+    ("../reprint_contact/")
+        With following
+        - /address_spec and /names
+
+
+    ####### Fullrecord metadata #########
+    .REC/static_data/fullrecord_metadata
+
+    values:
+    - List of Language
+    ("../languages")
+
+    - List of Normalized(?) language: i.e English
+    ("../normalized_languages")
+
+    - List of Normalized(?) document type: i.e Article
+    ("../normalized_doctypes")
+
+    - References: i.e: 50
+    ("../refs")[0].attrib['count']
+
+    - List of organizations including address info like street, city, country
+    ("../addresses/address_name/")
+
+    - List of keywords related to this record
+    ("../keywords/")
+
+    - List of headers (Category header)
+    ("../category_info/headings")
+
+    - List of subheadings
+    ("../category_info/subheadings/")
+
+    - List of subjects
+    ("../category_info/subjects/")
+
+    - List of abstract(s)
+    ("../abstracts/")
+
+
+
+    ####### Summary #########
+    .REC/static_data/static_data/summary
+
+    values:
+    - Electronic WUID?
+    ("../EWUID/edition")[0].attrib
+    ("../EWUID/WUID")[0].attrib
+
+    - Dictionary with public info like publication year, month, type, volume
+    ("../pub_info")[0].attrib
+
+    - Dictionary with page info with begin, end and page_count
+    ("../pub_info/page")[0].attrib
+
+    - List of titles
+    ("../titles/")
+
+    - List of names with info like first name, last name, wos_standard
+    ("../names/")
+
+    - List of document types
+    ("../doctypes/")
+
+    - List of publishers
+    ("../publishers/")
+        with each (../publishers/publisher/):
+        - /address_spec and /names

@@ -1,47 +1,45 @@
 define('app/visualization/components/visualization-index/visualization-index', ['require', 'knockout', '$router','text!app/templates/visualization/visualization-index.html'], function(require, ko, router, template) {
   'use strict';
-  let self = this;
+  var self = this;
 
-  let init = function() {
-    let self = this; //If access is needed in i.e. function, send as parameter
+  function init() {
+    var self = this; //If access is needed in i.e. function, send as parameter
 
-    this.representation = [
+    self.representation = [
       {id: 0, type: 'Bar Chart', icon:'<i class="fa fa-bar-chart fa center"></i>', status: ko.observable(true)},
       {id: 1, type: 'Pie Chart', icon: '<i class="fa fa-pie-chart fa center"></i>',status: ko.observable(false)},
       {id: 2, type: 'Map', icon: '<i class="fa fa-globe fa center"></i>',status: ko.observable(false)}
     ];
 
-    this.tmp = {repres:['bar-chart', 'pie-chart', 'map']};
+    self.tmp = {repres:['bar-chart', 'pie-chart', 'map']};
 
-    this.visualModel = [
-      {id: 0, type: 'TCP data:', icon: '<i class="fa fa-info-circle fa center"></i>', status: ko.observable(false), repres: this.tmp.repres },
-      {id: 1, type: 'Unseen data:', icon: '<i class="fa fa-question-circle fa center"></i>', status: ko.observable(false), repres: this.tmp.repres }
+    self.visualModel = [
+      {id: 0, type: 'TCP data:', icon: '<i class="fa fa-info-circle fa center"></i>', status: ko.observable(false), repres: self.tmp.repres },
+      {id: 1, type: 'Unseen data:', icon: '<i class="fa fa-question-circle fa center"></i>', status: ko.observable(false), repres: self.tmp.repres }
     ];
 
-
-
-    this.allOptionsFalse = ko.observable(true);
+    self.allOptionsFalse = ko.observable(true);
 
     //console.log(`allOptions: ${this.allOptionsFalse()}`);
 
-    this.updateVisualNavBar = (index) => {
+    self.updateVisualNavBar = function(index) {
       //console.log(`Updating visual model representation: ${index}`);
-      this.visualModel.forEach((item) => {
+      var options = false;
+      self.visualModel.forEach(function(item) {
         if (item.id === index) {
           item.status(true);
           options = false;
-          //console.log(`check options ${options}`);
-          this.allOptionsFalse(options);
+          self.allOptionsFalse(options);
         }
         else {
-          item.status(false);
+            item.status(false);
         }
       });
     };
 
-    this.updateRepresentationStatus = (index) => {
+    self.updateRepresentationStatus = function(index) {
       //console.log(`Updating representation status with index = ${index}`);
-      this.representation.forEach(function(item) {
+      self.representation.forEach(function(item) {
         if (index === item.id) {
           //console.log(`Setting ${item.type} to true`);
           item.status(true);
@@ -52,8 +50,7 @@ define('app/visualization/components/visualization-index/visualization-index', [
         }
       });
     };
-
-  };
+  }
 
   return {
     viewModel: init,

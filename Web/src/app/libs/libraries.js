@@ -129,5 +129,48 @@ define('app/libs/libraries', [], function() {
       iconClass: 'fa-github',
       linkText: 'Source Code'
     }]
-  }];
+  }, {
+    name: 'C3.js',
+    description: ['D3-based reusable chart library.'],
+    links: [{
+      title: 'C3.js Website',
+      href: 'http://c3js.org',
+      iconClass: 'fa-globe',
+      linkText: 'Website'
+    }, {
+      title: 'Github Repository',
+      href: 'https://github.com/c3js/c3',
+      iconClass: 'fa-github',
+      linkText: 'Source Code'
+    }]
+  },{
+    name: 'C3.js',
+    description: ['D3.js is a JavaScript library for manipulating documents based on data. D3 helps you bring data to life using HTML, SVG, and CSS. D3’s emphasis on web standards gives you the full capabilities of modern browsers without tying yourself to a proprietary framework, combining powerful visualization components and a data-driven approach to DOM manipulation.'],
+    links: [{
+      title: 'D3.js Website',
+      href: 'https://d3js.org',
+      iconClass: 'fa-globe',
+      linkText: 'Website'
+    }, {
+      title: 'Github Repository',
+      href: 'https://github.com/mbostock/d3',
+      iconClass: 'fa-github',
+      linkText: 'Source Code'
+    }]
+  },{
+    name: 'AmCharts',
+    description: ['amCharts is an advanced charting library that will suit any data visualization need. Our charting solution include Column, Bar, Line, Area, Step, Step without risers, Smoothed line, Candlestick, OHLC, Pie/Donut, Radar/ Polar, XY/Scatter/Bubble, Bullet, Funnel/Pyramid charts as well as Gauges.'],
+    links: [{
+      title: 'AmCharts Website',
+      href: 'https://www.amcharts.com',
+      iconClass: 'fa-globe',
+      linkText: 'Website'
+    }, {
+      title: 'Github Repository',
+      href: 'https://github.com/amcharts/amcharts3',
+      iconClass: 'fa-github',
+      linkText: 'Source Code'
+    }]
+  }
+  ];
 });

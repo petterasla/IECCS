@@ -254,5 +254,6 @@ define('app/visualization/components/map/data', [''], function(){
   latlong.ZA = {'latitude':-29, 'longitude':24};
   latlong.ZM = {'latitude':-15, 'longitude':30};
   latlong.ZW = {'latitude':-20, 'longitude':30};
+  latlong.SS = {"latitude":-6, "longitude":55};
   return latlong;
 });

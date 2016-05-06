@@ -22,7 +22,7 @@
       <div class="btn-group btn-group-justified" role="group" data-bind="foreach: stanceModel">
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-vis-representation2"
-                    data-bind="css: {activate: status}, click: function(i) {$parent.updateStanceStatus($index())}">
+                    data-bind="css: {activate: status}, click: function(i, a) {$parent.updateStanceStatus($index(), $parents[2])}">
               <span data-bind="text: type">
               </span>
             </button>

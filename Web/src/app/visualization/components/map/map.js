@@ -1,33 +1,43 @@
 define('app/visualization/components/map/map' ,
   ['require','knockout', '$http', 'q', 'text!app/templates/visualization/map.html',
-  'app/visualization/components/map/data', 'ammap', 'dark', 'worldLow'],
-  function(require, ko, $http, $q, template, coordinates) {
+  'app/visualization/components/map/data','app/visualization/components/visualization-index/visualization-index' ,'ammap', 'dark', 'worldLow'],
+  function(require, ko, $http, $q, template, coordinates, visModel) {
   'use strict';
 
-    function requestData(type) {
+    function requestData(stance, type_data) {
       var url;
       var data;
       var req;
-      if (type === "All"){
-        url = 'https://ieccs.herokuapp.com/api/visual/old/organization/'+type
+      if (type_data == "Unseen data:") {
+        if (stance === "All") {
+          url = 'https://ieccs.herokuapp.com/api/visual/new/organization/' + stance
+        }
+        else {
+          url = 'https://ieccs.herokuapp.com/api/visual/new/organization/' + stance.toUpperCase()
+        }
       }
       else {
-        url = 'https://ieccs.herokuapp.com/api/visual/old/organization/'+type.toUpperCase()
+        if (stance === "All") {
+          url = 'https://ieccs.herokuapp.com/api/visual/old/organization/' + stance
+        }
+        else {
+          url = 'https://ieccs.herokuapp.com/api/visual/old/organization/' + stance.toUpperCase()
+        }
+
       }
       req = $http.get(url)
-        .success(function(info) {
+        .success(function (info) {
           data = info.Data;
           console.log('Data retrieved..');
-          drawMap(data);
+          drawMap(data, type_data);
         })
-        .error(function(err) {
+        .error(function (err) {
           console.log(err);
         });
     }
 
     function init() {
       var self = this;
-
       self.allStancesFalse = ko.observable(true);
 
       self.stanceModel = [
@@ -38,12 +48,12 @@ define('app/visualization/components/map/map' ,
 
       ];
 
-      self.updateStanceStatus = function(index)  {
+      self.updateStanceStatus = function(index, visModel)  {
         self.stanceModel.forEach(function(item) {
           if (index === item.id) {
             item.status(true);
             console.log('Requesting..');
-            requestData(item.type);
+            requestData(item.type, visModel.type);
             self.allStancesFalse(false);
           }
           else {
@@ -53,7 +63,7 @@ define('app/visualization/components/map/map' ,
       };
     }
 
-    function drawMap(mapData) {
+    function drawMap(mapData, type_data) {
       console.log('Building map');
       var latlong = coordinates;
       var minBulletSize = 6;
@@ -78,7 +88,7 @@ define('app/visualization/components/map/map' ,
       AmCharts.theme = AmCharts.themes.dark;
 
       window.map.addTitle('Author countries', 14);
-      window.map.addTitle('from TCP data', 11);
+      window.map.addTitle('from '+type_data, 11);
       window.map.areasSettings = {
         unlistedAreasColor: '#000000',
         unlistedAreasAlpha: 0.1

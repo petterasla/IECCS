@@ -9,10 +9,10 @@ define('app/visualization/components/map/map' ,
       var data;
       var req;
       if (type === "All"){
-        url = 'https://ieccs.herokuapp.com/api/visual/organization/'+type
+        url = 'https://ieccs.herokuapp.com/api/visual/old/organization/'+type
       }
       else {
-        url = 'https://ieccs.herokuapp.com/api/visual/organization/'+type.toUpperCase()
+        url = 'https://ieccs.herokuapp.com/api/visual/old/organization/'+type.toUpperCase()
       }
       req = $http.get(url)
         .success(function(info) {

@@ -13,7 +13,8 @@ def getStanceData(stance):
 
 def storeOrgsToJson(stance="All"):
     if stance == "All":
-        d = ptd.getMetaDataAsList()
+        with open("../TextFiles/data/related_data_final_filtering_with_titles.json", "r") as f:
+            d = json.load(f)
         frame = pd.DataFrame(d)
     else:
         frame = getStanceData(stance)
@@ -29,10 +30,17 @@ def storeOrgsToJson(stance="All"):
         count_dict[c] += 1
     for c in uniq_country:
         country_map[c] = c[0].upper() + c[1:]
-        print country_map[c]
 
-    with open("../TextFiles/meta_data/country_mapper.json", "w") as f:
-        json.dump(country_map, f)
+    with open("../TextFiles/meta_data/country_mapper.json", "r") as f:
+        mapper = json.load(f)
+
+    print("len of mapper: {}".format(len(mapper)))
+    print("len of country_map: {}".format(len(country_map)))
+
+    for key2 in country_map.keys():
+        if key2 not in mapper.keys():
+            mapper[key2] = country_map[key2]
+    print len(mapper)
     #for key in count_dict.keys():
     #    print("{} \t: {}".format(key, count_dict[key]))
 
@@ -253,8 +261,7 @@ def removeDuplicates():
 
 #removeDuplicates()
 #readTestSamples()
-finalFiltering()
-'''
+#finalFiltering()
 mapData = [
     {"code":"AF" , "name":"Afghanistan", "value":32358260, "color":"#eea638"},
     {"code":"AL" , "name":"Albania", "value":3215988, "color":"#d8854f"},
@@ -401,6 +408,7 @@ mapData = [
     {"code":"SA" , "name":"Saudi Arabia", "value":28082541, "color":"#eea638"},
     {"code":"SN" , "name":"Senegal", "value":12767556, "color":"#de4c4f"},
     {"code":"RS" , "name":"Serbia", "value":9853969, "color":"#d8854f"},
+    {"code":"SS" , "name": "Seychelles", "value": 1000000, "color":"#de4c4f"},
     {"code":"SL" , "name":"Sierra Leone", "value":5997486, "color":"#de4c4f"},
     {"code":"SG" , "name":"Singapore", "value":5187933, "color":"#eea638"},
     {"code":"SK" , "name":"Slovak Republic", "value":5471502, "color":"#d8854f"},
@@ -439,8 +447,8 @@ mapData = [
     {"code":"ZM" , "name":"Zambia", "value":13474959, "color":"#de4c4f"},
     {"code":"ZW" , "name":"Zimbabwe", "value":12754378, "color":"#de4c4f"}
 ]
-stance = "NONE"
-with open("../TextFiles/meta_data/orgs_"+stance+".json", "r") as f:
+stance = "ALL"
+with open("../TextFiles/meta_data/new_orgs_"+stance+".json", "r") as f:
     countries = json.load(f)
     print("leng of countries = {}".format(len(countries)))
 
@@ -459,7 +467,6 @@ for country in countries.keys():
             mapData_all.append({"code":code, "name":name, "value":value, "color":color})
 
 print("length of mapData = {}".format(len(mapData_all)))
-with open("../TextFiles/meta_data/organization_"+stance+".json", "w") as f:
+with open("../TextFiles/meta_data/new_organization_"+stance+".json", "w") as f:
     json.dump(mapData_all, f)
-
-'''
+    print "dumped"

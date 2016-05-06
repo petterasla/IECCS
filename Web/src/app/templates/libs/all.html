@@ -1,20 +1,19 @@
-<div class="content-page-libs-all">
-  <div class="page-header" style="margin-top: 30px">
+<div class="content-page-libs-all centered">
+  <div class="page-header">
     <h2 data-bind="text: $data.title"></h2>
   </div>
 
-  <ul data-bind="foreach: $data.libraries" class="list-unstyled">
-    <li>
-      <div style="color: #2196f3" class="hand fade">
-        <i class="fa fa-hand-o-right"></i>
-        &nbsp;
+    <ul data-bind="foreach: $data.libraries" class="list-group" style="margin-bottom: 275px">
+      <li class="list-group-item col-md-6 col-sm-6">
+        <div style="color: #2196f3" class="">
+          <i class="fa fa-hand-o-right fa-1"></i>
+          <a data-bind="attr: {href: '#/libs/view/' + encodeURIComponent($data.name)}, text: $data.title"></a>
         </div>
-      <a data-bind="attr: {href: '#/libs/view/' + encodeURIComponent($data.name)}, text: $data.title"></a>
       </li>
     </ul>
-  <div class="page-header" style="margin-top: 30px">
-    <h2>Template</h2>
-  </div>
+
+  <h2>Template</h2>
+
   <div class="panel panel-primary">
     <div class="panel-heading">Template provided by</div>
     <div class="panel-body">
@@ -53,7 +52,7 @@
       <code>git clone git://github.com/crissdev/spa-template-ko.git -b master spa-ko</code>
     </div>
   </div>
-  <div class="panel panel-default">
+  <div class="panel panel-primary">
     <div class="panel-heading">Bower</div>
     <div class="panel-body">
       <code>bower install spa-template-ko</code>

@@ -104,26 +104,26 @@ define('app/visualization/components/pie-chart/old/pie-chart' ,['require','knock
 
 
       var currentYear = keys[0];
-      var chart = AmCharts.makeChart( "piechartdiv", {
-        "type": "pie",
-        "theme": "light",
-        "dataProvider": [],
-        "valueField": "size",
-        "titleField": "sector",
-        "startDuration": 0,
-        "innerRadius": 80,
-        "pullOutRadius": 20,
-        "marginTop": 30,
-        "titles": [{
-          "text": "Stance development over the years"
+      var chart = AmCharts.makeChart( 'piechartdiv', {
+        'type': 'pie',
+        'theme': 'light',
+        'dataProvider': [],
+        'valueField': 'size',
+        'titleField': 'sector',
+        'startDuration': 0,
+        'innerRadius': 80,
+        'pullOutRadius': 20,
+        'marginTop': 30,
+        'titles': [{
+          'text': 'Stance development over the years'
         }],
-        "allLabels": [{
-          "y": "54%",
-          "align": "center",
-          "size": 25,
-          "bold": true,
-          "text": "1991",
-          "color": "#555"
+        'allLabels': [{
+          'y': '54%',
+          'align': 'center',
+          'size': 25,
+          'bold': true,
+          'text': '1991',
+          'color': '#555'
         }, {
           'y': '49%',
           'align': 'center',

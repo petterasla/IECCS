@@ -1,5 +1,5 @@
 define('app/visualization/components/map/map' ,
-  ['require','knockout', '$http', 'q', "text!app/templates/visualization/map.html",
+  ['require','knockout', '$http', 'q', 'text!app/templates/visualization/map.html',
   'app/visualization/components/map/data', 'ammap', 'dark', 'worldLow'],
   function(require, ko, $http, $q, template, coordinates) {
   'use strict';
@@ -8,51 +8,53 @@ define('app/visualization/components/map/map' ,
       var url;
       var data;
       var req;
-      if (type === "All"){
-        url = 'https://ieccs.herokuapp.com/api/visual/organization/'+type
+      if (type === 'All'){
+        url = 'https://ieccs.herokuapp.com/api/visual/organization/'+type;
       }
       else {
-        url = 'https://ieccs.herokuapp.com/api/visual/organization/'+type.toUpperCase()
+        url = 'https://ieccs.herokuapp.com/api/visual/organization/'+type.toUpperCase();
       }
       req = $http.get(url)
         .success(function(info) {
           data = info.Data;
-          console.log("Data retrieved..");
+          console.log('Data retrieved..');
           drawMap(data);
         })
         .error(function(err) {
-          console.log(err)
+          console.log(err);
         });
     }
 
     function init() {
-      this.allStancesFalse = ko.observable(true);
+      var self = this;
 
-      this.stanceModel = [
-        {id: 0, type:"All", icon: '<i class="fa fa-globe"></i>', status: ko.observable(false)},
-        {id: 1, type:"Favor", icon: '<i class="fa fa-thumbs-o-up"></i>', status: ko.observable(false)},
-        {id: 2, type:"Against", icon: '<i class="fa fa-thumbs-o-down"></i>', status: ko.observable(false)},
-        {id: 3, type:"None", icon: '<i class="fa fa-hand-o-right"></i>', status: ko.observable(false)}
+      self.allStancesFalse = ko.observable(true);
+
+      self.stanceModel = [
+        {id: 0, type:'All', icon: '<i class="fa fa-globe"></i>', status: ko.observable(false)},
+        {id: 1, type:'Favor', icon: '<i class="fa fa-thumbs-o-up"></i>', status: ko.observable(false)},
+        {id: 2, type:'Against', icon: '<i class="fa fa-thumbs-o-down"></i>', status: ko.observable(false)},
+        {id: 3, type:'None', icon: '<i class="fa fa-hand-o-right"></i>', status: ko.observable(false)}
 
       ];
 
-      this.updateStanceStatus = (index) => {
-        this.stanceModel.forEach((item) => {
-          if (index == item.id) {
+      self.updateStanceStatus = function(index)  {
+        self.stanceModel.forEach(function(item) {
+          if (index === item.id) {
             item.status(true);
-            console.log("Requesting..");
+            console.log('Requesting..');
             requestData(item.type);
-            this.allStancesFalse(false);
+            self.allStancesFalse(false);
           }
           else {
             item.status(false);
           }
-        })
+        });
       };
     }
 
     function drawMap(mapData) {
-      console.log("Building map");
+      console.log('Building map');
       var latlong = coordinates;
       var minBulletSize = 6;
       var maxBulletSize = 60;

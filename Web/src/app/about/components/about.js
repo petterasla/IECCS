@@ -2,7 +2,7 @@ define('app/about/components/about',['require','text!app/templates/about/about.h
   'use strict';
 
   function ViewAbout() {
-    this.title = 'Welcome';
+    this.title = 'About Our Work';
   }
 
 

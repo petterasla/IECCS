@@ -68,20 +68,9 @@ define('app/visualization/components/map/map' ,
       var latlong = coordinates;
       var minBulletSize = 6;
       var maxBulletSize = 60;
-      var min = Infinity;
-      var max = -Infinity;
-
-
-      // get min and max values
-      for (var i = 0; i < mapData.length; i++) {
-        var value = mapData[i].value;
-        if (value < min) {
-          min = value;
-        }
-        if (value > max) {
-          max = value;
-        }
-      }
+      var min = 1;
+      var max = 7000;
+      
       // build map
 
       window.map = new AmCharts.AmMap();

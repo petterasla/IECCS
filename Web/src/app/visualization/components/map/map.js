@@ -56,13 +56,13 @@ define('app/visualization/components/map/map' ,
 
 
       self.updateStanceStatus = function(index, visModel)  {
-        console.log("progress = " + this.progress());
+        console.log('progress = ' + this.progress());
         updateBar(5, self);
         self.stanceModel.forEach(function(item) {
           if (index === item.id) {
             item.status(true);
             console.log('Requesting..');
-            updateBar(25, self);
+            updateBar(50, self);
             requestData(item.type, visModel.type, self);
             self.allStancesFalse(false);
           }
@@ -75,14 +75,15 @@ define('app/visualization/components/map/map' ,
 
     function updateBar(percentage, self) {
       self.progress(percentage);
-      self.progressPct(self.progress() + "%");
-      console.log("progress = " + self.progress());
-      console.log("progressMSG = " + self.progressPct())
+      self.progressPct(self.progress() + '%');
+      console.log('progress = ' + self.progress());
+      console.log('progressMSG = ' + self.progressPct());
     }
 
     function drawMap(mapData, typeData, self) {
       console.log('Building map');
-      updateBar(100, self);
+      updateBar(95, self);
+
       var latlong = coordinates;
       var minBulletSize = 6;
       var maxBulletSize = 60;
@@ -140,7 +141,10 @@ define('app/visualization/components/map/map' ,
 
       window.map.projection = 'miller';
       window.map.write('chartdiv');
-      setTimeout(updateBar(102, self), 500);
+
+      setTimeout(function(){
+        updateBar(102, self)
+      }, 600);
     }
 
 

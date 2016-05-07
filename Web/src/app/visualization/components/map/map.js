@@ -4,24 +4,24 @@ define('app/visualization/components/map/map' ,
   function(require, ko, $http, $q, template, coordinates, visModel) {
   'use strict';
 
-    function requestData(stance, type_data) {
+    function requestData(stance, typeData) {
       var url;
       var data;
       var req;
-      if (type_data == "Unseen data:") {
-        if (stance === "All") {
-          url = 'https://ieccs.herokuapp.com/api/visual/new/organization/' + stance
+      if (typeData === 'Unseen data:') {
+        if (stance === 'All') {
+          url = 'https://ieccs.herokuapp.com/api/visual/new/organization/' + stance;
         }
         else {
-          url = 'https://ieccs.herokuapp.com/api/visual/new/organization/' + stance.toUpperCase()
+          url = 'https://ieccs.herokuapp.com/api/visual/new/organization/' + stance.toUpperCase();
         }
       }
       else {
-        if (stance === "All") {
-          url = 'https://ieccs.herokuapp.com/api/visual/old/organization/' + stance
+        if (stance === 'All') {
+          url = 'https://ieccs.herokuapp.com/api/visual/old/organization/' + stance;
         }
         else {
-          url = 'https://ieccs.herokuapp.com/api/visual/old/organization/' + stance.toUpperCase()
+          url = 'https://ieccs.herokuapp.com/api/visual/old/organization/' + stance.toUpperCase();
         }
 
       }
@@ -29,7 +29,7 @@ define('app/visualization/components/map/map' ,
         .success(function (info) {
           data = info.Data;
           console.log('Data retrieved..');
-          drawMap(data, type_data);
+          drawMap(data, typeData);
         })
         .error(function (err) {
           console.log(err);
@@ -63,7 +63,7 @@ define('app/visualization/components/map/map' ,
       };
     }
 
-    function drawMap(mapData, type_data) {
+    function drawMap(mapData, typeData) {
       console.log('Building map');
       var latlong = coordinates;
       var minBulletSize = 6;
@@ -88,7 +88,7 @@ define('app/visualization/components/map/map' ,
       AmCharts.theme = AmCharts.themes.dark;
 
       window.map.addTitle('Author countries', 14);
-      window.map.addTitle('from '+type_data, 11);
+      window.map.addTitle('from '+typeData, 11);
       window.map.areasSettings = {
         unlistedAreasColor: '#000000',
         unlistedAreasAlpha: 0.1

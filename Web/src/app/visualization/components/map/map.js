@@ -4,7 +4,7 @@ define('app/visualization/components/map/map' ,
   function(require, ko, $http, $q, template, coordinates, visModel) {
   'use strict';
 
-    function requestData(stance, typeData) {
+    function requestData(stance, typeData, self) {
       var url;
       var data;
       var req;
@@ -27,17 +27,23 @@ define('app/visualization/components/map/map' ,
       }
       req = $http.get(url)
         .success(function (info) {
-          data = info.Data;
           console.log('Data retrieved..');
-          drawMap(data, typeData);
+          data = info.Data;
+          updateBar(75, self);
+          drawMap(data, typeData, self);
         })
         .error(function (err) {
+          self.alert(1);
           console.log(err);
         });
     }
 
     function init() {
       var self = this;
+      self.alert = ko.observable(0);
+      self.progress = ko.observable(102);
+      self.progressPct = ko.observable('0%');
+      self.alertMsg = ko.observable('Error retrieving some of the data!');
       self.allStancesFalse = ko.observable(true);
 
       self.stanceModel = [
@@ -48,12 +54,16 @@ define('app/visualization/components/map/map' ,
 
       ];
 
+
       self.updateStanceStatus = function(index, visModel)  {
+        console.log("progress = " + this.progress());
+        updateBar(5, self);
         self.stanceModel.forEach(function(item) {
           if (index === item.id) {
             item.status(true);
             console.log('Requesting..');
-            requestData(item.type, visModel.type);
+            updateBar(25, self);
+            requestData(item.type, visModel.type, self);
             self.allStancesFalse(false);
           }
           else {
@@ -63,25 +73,22 @@ define('app/visualization/components/map/map' ,
       };
     }
 
-    function drawMap(mapData, typeData) {
+    function updateBar(percentage, self) {
+      self.progress(percentage);
+      self.progressPct(self.progress() + "%");
+      console.log("progress = " + self.progress());
+      console.log("progressMSG = " + self.progressPct())
+    }
+
+    function drawMap(mapData, typeData, self) {
       console.log('Building map');
+      updateBar(100, self);
       var latlong = coordinates;
       var minBulletSize = 6;
       var maxBulletSize = 60;
-      var min = Infinity;
-      var max = -Infinity;
+      var min = 1;
+      var max = 7000;
 
-
-      // get min and max values
-      for (var i = 0; i < mapData.length; i++) {
-        var value = mapData[i].value;
-        if (value < min) {
-          min = value;
-        }
-        if (value > max) {
-          max = value;
-        }
-      }
       // build map
 
       window.map = new AmCharts.AmMap();
@@ -133,6 +140,7 @@ define('app/visualization/components/map/map' ,
 
       window.map.projection = 'miller';
       window.map.write('chartdiv');
+      setTimeout(updateBar(102, self), 500);
     }
 
 

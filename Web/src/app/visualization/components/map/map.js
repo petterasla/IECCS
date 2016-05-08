@@ -143,7 +143,7 @@ define('app/visualization/components/map/map' ,
       window.map.write('chartdiv');
 
       setTimeout(function(){
-        updateBar(102, self)
+        updateBar(102, self);
       }, 600);
     }
 

@@ -35,6 +35,10 @@ import pandas
 
 import tensorflow as tf
 from tensorflow.contrib import skflow
+import System.Utilities.write_to_file as fileWriter
+
+from tensorflow.contrib.learn.python.learn.estimators import base
+
 
 
 def convertToInt(pandas):
@@ -112,46 +116,56 @@ def char_cnn_model(X, y):
     return skflow.models.logistic_regression(pool2, y)
 
 val_monitor = skflow.monitors.ValidationMonitor(X_val, y_val,
-                                                early_stopping_rounds=3,
+                                                early_stopping_rounds=200,
                                                 n_classes=3,
-                                                print_steps=5)
+                                                batch_size=10,
+                                                print_steps=20)
 classifier = skflow.TensorFlowEstimator(model_fn=char_cnn_model, n_classes=3,
                                         steps=100, optimizer='Adam', learning_rate=0.01,
                                         continue_training=True)
 
+# Write results to file:
+f = fileWriter.initFile("../TextFiles/FindingsAndResults/ex9/ex9")
 # Continuously train for 1000 steps & predict on test set.
 i = 0
 print("Initiating training...")
-while i<15:
+fileWriter.writeTextToFile("Initiating training...", f)
+while i<11:
     print(80 * '=')
+    fileWriter.writeTextToFile(80 * '=' , f)
     classifier.fit(X_train, y_train, val_monitor, logdir='../TextFiles/logs/cnn_on_characters')
 
     pred_stances = classifier.predict(X_val)
 
     score = metrics.accuracy_score(y_val, pred_stances)
     print("Accuracy: %f" % score)
+    fileWriter.writeTextToFile("Accuracy: %f" % score, f)
 
     print (classification_report(y_val, pred_stances, digits=4))
+    fileWriter.writeTextToFile(classification_report(y_val, pred_stances, digits=4), f)
 
     macro_f = fbeta_score(y_val, pred_stances, 1.0,
                           labels=[0, 1, 2],
                           average='macro')
 
     print('macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f))
+    fileWriter.writeTextToFile('macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f), f)
     i += 1
 
 print(80 * '#')
-
+print(80 * '#')
+fileWriter.writeTextToFile(80 * '#\n' + 80 * '#', f)
 pred_stances = classifier.predict(X_test)
 
 score = metrics.accuracy_score(y_test, pred_stances)
 print("Accuracy: %f" % score)
-
+fileWriter.writeTextToFile("Accuracy: %f" % score, f)
 print (classification_report(y_test, pred_stances, digits=4))
+fileWriter.writeTextToFile(classification_report(y_test, pred_stances, digits=4), f)
 
 macro_f = fbeta_score(y_test, pred_stances, 1.0,
                       labels=[0, 1, 2],
                       average='macro')
 
 print('macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f))
-
+fileWriter.writeTextToFile('macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f), f)

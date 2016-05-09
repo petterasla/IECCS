@@ -21,17 +21,29 @@ import pandas as pd
 # ***** SETTINGS   *****
 strength = 'soft'
 validate = 1
-
+test = 1
+if test:
+    print("Applying on test data")
+else:
+    print("Not using test")
 
 # ***** LOAD DATA STANCE VS NO STANCE   *****
-data = pd.read_csv('../TextFiles/data/tcp_train.csv', sep='\t')
+if test:
+    d1 = pd.read_csv('../TextFiles/data/tcp_train.csv', sep='\t')
+    d2 = pd.read_csv('../TextFiles/data/tcp_validate.csv', sep='\t')
+    data = pd.concat([d1, d2])
+else:
+    data = d1 = pd.read_csv('../TextFiles/data/tcp_train.csv', sep='\t')
 
 binaryStances = []
 for endorse in data.Endorse.tolist():
     binaryStances.append(ptd.getAbstractStanceVsNoStance(strength, endorse))
 
 if validate:
-    dataVal = pd.read_csv('../TextFiles/data/tcp_validate.csv', sep='\t')
+    if test:
+        dataVal = pd.read_csv('../TextFiles/data/tcp_train.csv', sep='\t')
+    else:
+        dataVal = pd.read_csv('../TextFiles/data/tcp_validate.csv', sep='\t')
     binaryStancesVal = []
     for endorseVal in dataVal.Endorse.tolist():
         binaryStancesVal.append(ptd.getAbstractStanceVsNoStance(strength, endorseVal))
@@ -85,8 +97,14 @@ print 'macro-average of F-score(STANCE) and F-score(NONE): {:.4f}\n'.format(macr
 print 80 * '#'
 print 80 * '#'
 
-data2 = pd.read_csv('../TextFiles/data/tcp_train.csv', sep='\t')
-data2 = data2[data2.Stance != 'NONE']
+if test:
+    d3 = pd.read_csv('../TextFiles/data/tcp_train.csv', sep='\t')
+    d4 = pd.read_csv('../TextFiles/data/tcp_validate.csv', sep='\t')
+    data2 = pd.concat([d3, d4])
+    data2 = data2[data2.Stance != 'NONE']
+else:
+    data2 = pd.read_csv('../TextFiles/data/tcp_train.csv', sep='\t')
+    data2 = data2[data2.Stance != 'NONE']
 
 if validate:
     for index, row in dataVal.iterrows():

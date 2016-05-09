@@ -20,15 +20,7 @@ import pandas as pd
 
 # ***** SETTINGS   *****
 strength = 'soft'
-
-#use_upsample = 1
-#use_downsample = 1
-
-#perform_test_on_unused_data = 1
-
-#downsample_rate_favor = 0.3
-#downsample_rate_none  = 10
-
+validate = 1
 
 
 # ***** LOAD DATA STANCE VS NO STANCE   *****
@@ -38,11 +30,17 @@ binaryStances = []
 for endorse in data.Endorse.tolist():
     binaryStances.append(ptd.getAbstractStanceVsNoStance(strength, endorse))
 
+if validate:
+    dataVal = pd.read_csv('../TextFiles/data/tcp_validate.csv', sep='\t')
+    binaryStancesVal = []
+    for endorseVal in dataVal.Endorse.tolist():
+        binaryStancesVal.append(ptd.getAbstractStanceVsNoStance(strength, endorseVal))
+
 
 cv = StratifiedKFold(binaryStances, n_folds=10, shuffle=True, random_state=1)
 
 # ***** CLASSIFIER  *****
-clf = LinearSVC(C=0.56234132519034907)
+clf = LinearSVC(C=1.9306977288832496)
     #SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
     #MultinomialNB(alpha=0.5)
 
@@ -57,37 +55,51 @@ pipeline = Pipeline([('vect', CountVectorizer(decode_error='ignore',
                                               ngram_range=(1,3),
                                               stop_words=None,
                                               max_features=None)),
-                     ('tfidf', TfidfTransformer(use_idf=False)),
+                     ('tfidf', TfidfTransformer(use_idf=True)),
                      ('clf', clf)])
 
-pred_stances = cross_val_predict(pipeline, data.Abstract, binaryStances, cv=cv, n_jobs=10)
+if validate:
+    pipeline.fit(data.Abstract, binaryStances)
+    pred_stances = pipeline.predict(dataVal.Abstract)
 
-print classification_report(binaryStances, pred_stances, digits=4)
+    print classification_report(binaryStancesVal, pred_stances, digits=4)
 
-macro_f = fbeta_score(binaryStances, pred_stances, 1.0,
-                      labels=['STANCE', 'NONE'],
-                      pos_label='STANCE',
-                      average='binary')
+    macro_f = fbeta_score(binaryStancesVal, pred_stances, 1.0,
+                          labels=['STANCE', 'NONE'],
+                          pos_label='STANCE',
+                          average='macro')
+
+else:
+    pred_stances = cross_val_predict(pipeline, data.Abstract, binaryStances, cv=cv, n_jobs=10)
+
+    print classification_report(binaryStances, pred_stances, digits=4)
+
+    macro_f = fbeta_score(binaryStances, pred_stances, 1.0,
+                          labels=['STANCE', 'NONE'],
+                          pos_label='STANCE',
+                          average='macro')
+
 
 print 'macro-average of F-score(STANCE) and F-score(NONE): {:.4f}\n'.format(macro_f)
 
 print 80 * '#'
 print 80 * '#'
 
-#print pred_stances
-#print len(data)
-for index, row in data.iterrows():
-    if (pred_stances[index] == 'NONE'):
-        data.drop(index, inplace=True)
-#print len(data)
-
 data2 = pd.read_csv('../TextFiles/data/tcp_train.csv', sep='\t')
 data2 = data2[data2.Stance != 'NONE']
 
-#cv2 = StratifiedKFold(data2.Stance, n_folds=10, shuffle=True, random_state=1)
+if validate:
+    for index, row in dataVal.iterrows():
+        if (pred_stances[index] == 'NONE'):
+            dataVal.drop(index, inplace=True)
+else:
+    for index, row in data.iterrows():
+        if (pred_stances[index] == 'NONE'):
+            data.drop(index, inplace=True)
+
 
 # Select classifiers to use
-clf2 = LinearSVC(C=0.56234132519034907)
+clf2 = LinearSVC(C=37.275937203149383)
     #SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
     #MultinomialNB(alpha=0.5)
 
@@ -99,23 +111,36 @@ print 80 * "="
 # Use optimized parameters from grid_search_improved
 pipeline2 = Pipeline([('vect', CountVectorizer(decode_error='ignore',
                                               analyzer='word',
-                                              ngram_range=(1,3),
-                                              stop_words=None,
+                                              ngram_range=(1,1),
+                                              stop_words='english',
                                               max_features=None)),
                      ('tfidf', TfidfTransformer(use_idf=False)),
                      ('clf', clf2)])
 
-#pred_stances2 = cross_val_predict(pipeline2, data2.Abstract, data.Stance, cv=cv2, n_jobs=10)
-pipeline2.fit(data2.Abstract, data2.Stance)
+if validate:
+    pipeline2.fit(data2.Abstract, data2.Stance)
 
-pred_stances2 = pipeline2.predict(data.Abstract)
+    pred_stances2 = pipeline2.predict(dataVal.Abstract)
 
-print classification_report(data.Stance, pred_stances2, digits=4)
+    print classification_report(dataVal.Stance, pred_stances2, digits=4)
 
-macro_f2 = fbeta_score(data.Stance, pred_stances2, 1.0,
-                      labels=['FAVOR', 'AGAINST'],
-                      pos_label='FAVOR',
-                      average='binary')
+    macro_f2 = fbeta_score(dataVal.Stance, pred_stances2, 1.0,
+                           labels=['FAVOR', 'AGAINST'],
+                           pos_label='FAVOR',
+                           average='macro')
+
+
+else:
+    pipeline2.fit(data2.Abstract, data2.Stance)
+
+    pred_stances2 = pipeline2.predict(data.Abstract)
+
+    print classification_report(data.Stance, pred_stances2, digits=4)
+
+    macro_f2 = fbeta_score(data.Stance, pred_stances2, 1.0,
+                          labels=['FAVOR', 'AGAINST'],
+                          pos_label='FAVOR',
+                          average='macro')
 
 print 'macro-average of F-score(FAVOR) and F-score(AGAINST): {:.4f}\n'.format(macro_f2)
 

@@ -1,0 +1,43 @@
+/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/nltk/twitter/__init__.py:20: UserWarning: The twython library has not been installed. Some functionality from the twitter package will not be available.
+  warnings.warn("The twython library has not been installed. "
+6270 training documents
+3 categories
+
+Using train, validation and test approach with clf LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+Performing grid search...
+pipeline: ['vect', 'tfidf', 'clf']
+parameters:
+{'clf__C': array([   0.1       ,    0.16378937,    0.26826958,    0.43939706,
+          0.71968567,    1.17876863,    1.93069773,    3.16227766,
+          5.17947468,    8.48342898,   13.89495494,   22.75845926,
+         37.2759372 ,   61.05402297,  100.        ]),
+ 'tfidf__use_idf': (True, False),
+ 'vect__analyzer': ['word'],
+ 'vect__max_features': (None, 50000),
+ 'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3), (3, 3)],
+ 'vect__stop_words': [None, 'english']}
+Fitting 10 folds for each of 600 candidates, totalling 6000 fits
+[Parallel(n_jobs=10)]: Done  30 tasks      | elapsed:   19.4s
+[Parallel(n_jobs=10)]: Done 180 tasks      | elapsed:  4.6min
+[Parallel(n_jobs=10)]: Done 430 tasks      | elapsed: 10.1min
+[Parallel(n_jobs=10)]: Done 780 tasks      | elapsed: 19.1min
+[Parallel(n_jobs=10)]: Done 1230 tasks      | elapsed: 29.5min
+[Parallel(n_jobs=10)]: Done 1780 tasks      | elapsed: 44.3min
+[Parallel(n_jobs=10)]: Done 2430 tasks      | elapsed: 59.8min
+[Parallel(n_jobs=10)]: Done 3180 tasks      | elapsed: 79.9min
+[Parallel(n_jobs=10)]: Done 4030 tasks      | elapsed: 104.1min
+[Parallel(n_jobs=10)]: Done 4980 tasks      | elapsed: 140.4min
+[Parallel(n_jobs=10)]: Done 6000 out of 6000 | elapsed: 187.3min finished
+done in 11256.652s
+
+Best score: 0.794
+Best parameters set:
+	clf__C: 1.9306977288832496
+	tfidf__use_idf: True
+	vect__analyzer: 'word'
+	vect__max_features: None
+	vect__ngram_range: (1, 3)
+	vect__stop_words: None

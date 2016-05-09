@@ -1,0 +1,22 @@
+6270 training documents
+3 categories
+Using train, validation and test approach with clf LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+Performing grid search...
+pipeline:
+parameters:
+{'vect__analyzer': ['word'], 'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3), (3, 3)], 'tfidf__use_idf': (True, False), 'vect__stop_words': [None, 'english'], 'clf__C': array([   0.1       ,    0.16378937,    0.26826958,    0.43939706,
+          0.71968567,    1.17876863,    1.93069773,    3.16227766,
+          5.17947468,    8.48342898,   13.89495494,   22.75845926,
+         37.2759372 ,   61.05402297,  100.        ]), 'vect__max_features': (None, 50000)}
+Done in 11256.652s 
+Best score: 0.794
+Best parameters set:
+	clf__C: 1.9306977288832496
+	tfidf__use_idf: True
+	vect__analyzer: 'word'
+	vect__max_features: None
+	vect__ngram_range: (1, 3)
+	vect__stop_words: None

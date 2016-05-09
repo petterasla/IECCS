@@ -7,11 +7,11 @@ define('app/visualization/components/visualization-index/visualization-index', [
 
     self.representation = [
       {id: 0, type: 'Bar Chart', icon:'<i class="fa fa-bar-chart fa center"></i>', status: ko.observable(true)},
-      {id: 1, type: 'Pie Chart', icon: '<i class="fa fa-pie-chart fa center"></i>',status: ko.observable(false)},
+      {id: 1, type: 'Graph', icon: '<i class="fa fa-share-alt fa center"></i>',status: ko.observable(false)},
       {id: 2, type: 'Map', icon: '<i class="fa fa-globe fa center"></i>',status: ko.observable(false)}
     ];
 
-    self.tmp = {repres:['bar-chart', 'pie-chart', 'map']};
+    self.tmp = {repres:['bar-chart', 'graph', 'map']};
 
     self.visualModel = ko.observableArray([
       {id: 0, type: 'TCP data:', icon: '<i class="fa fa-info-circle fa center"></i>', status: ko.observable(false), repres: self.tmp.repres },

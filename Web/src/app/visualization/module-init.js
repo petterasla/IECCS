@@ -12,8 +12,8 @@ define('app/visualization/module-init', ['require', 'knockout', '$router'], func
     ko.components.register('map', {
       require: 'app/visualization/components/map/map'
     });
-    ko.components.register('pie-chart', {
-      require: 'app/visualization/components/pie-chart/old/pie-chart'
+    ko.components.register('graph', {
+      require: 'app/visualization/components/graph/graph'
     });
 
     router.when('/visualization/', {

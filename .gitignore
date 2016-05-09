@@ -6,6 +6,7 @@
 
 ## Directory-based project format:
 .idea/
+System/TextFiles/logs/
 
 Information Retrieval/Meta data/Wos Meta/v1/credentials.py
 Information Retrieval/Meta data/Wos Meta/v2/credentialsv2.py

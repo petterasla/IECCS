@@ -144,7 +144,7 @@ define('app/libs/libraries', [], function() {
       linkText: 'Source Code'
     }]
   },{
-    name: 'C3.js',
+    name: 'D3.js',
     description: ['D3.js is a JavaScript library for manipulating documents based on data. D3 helps you bring data to life using HTML, SVG, and CSS. D3’s emphasis on web standards gives you the full capabilities of modern browsers without tying yourself to a proprietary framework, combining powerful visualization components and a data-driven approach to DOM manipulation.'],
     links: [{
       title: 'D3.js Website',
@@ -170,6 +170,40 @@ define('app/libs/libraries', [], function() {
       href: 'https://github.com/amcharts/amcharts3',
       iconClass: 'fa-github',
       linkText: 'Source Code'
+    }]
+  }, {
+    name: 'Neo4j',
+    description: ['Neo4j is a highly scalable native graph database that leverages data relationships as first-class entities, helping enterprises build intelligent applications to meet today’s evolving data challenges.'],
+    links: [{
+      title: 'Neo4j Webside',
+      href: "http://neo4j.com",
+      iconClass: 'fa-globe',
+      linkText: 'Webside'
+    },{
+      title:"Github Repository",
+      href: "https://github.com/neo4j/neo4j",
+      iconClass: 'fa-github',
+      linkText: "Source Code"
+    }, {
+      title: "Twitter",
+      href: "https://twitter.com/neo4j",
+      iconClass: "fa-twitter",
+      linkText: "Twitter"
+    }
+  ]
+    }, {
+    name:"Graph Commons",
+    description: ["Graph Commons is a collaborative 'network mapping' platform and a knowledge base of relationships. You can map relationships at scale and unfold the mystery about complex issues that impact you and your community."],
+    links: [{
+      title: "Graph Commons",
+      href: "https://graphcommons.com",
+      iconClass:"fa-globe",
+      linkText: "Webside"
+    }, {
+      title:"Github Repository",
+      href: "https://github.com/graphcommons",
+      iconClass: "fa-github",
+      linkText: "Source Code"
     }]
   }
   ];

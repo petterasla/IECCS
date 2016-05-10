@@ -176,34 +176,34 @@ define('app/libs/libraries', [], function() {
     description: ['Neo4j is a highly scalable native graph database that leverages data relationships as first-class entities, helping enterprises build intelligent applications to meet today’s evolving data challenges.'],
     links: [{
       title: 'Neo4j Webside',
-      href: "http://neo4j.com",
+      href: 'http://neo4j.com',
       iconClass: 'fa-globe',
       linkText: 'Webside'
     },{
-      title:"Github Repository",
-      href: "https://github.com/neo4j/neo4j",
+      title:'Github Repository',
+      href: 'https://github.com/neo4j/neo4j',
       iconClass: 'fa-github',
-      linkText: "Source Code"
+      linkText: 'Source Code'
     }, {
-      title: "Twitter",
-      href: "https://twitter.com/neo4j",
-      iconClass: "fa-twitter",
-      linkText: "Twitter"
+      title: 'Twitter',
+      href: 'https://twitter.com/neo4j',
+      iconClass: 'fa-twitter',
+      linkText: 'Twitter'
     }
   ]
     }, {
-    name:"Graph Commons",
-    description: ["Graph Commons is a collaborative 'network mapping' platform and a knowledge base of relationships. You can map relationships at scale and unfold the mystery about complex issues that impact you and your community."],
+    name:'Graph Commons',
+    description: ['Graph Commons is a collaborative "network mapping" platform and a knowledge base of relationships. You can map relationships at scale and unfold the mystery about complex issues that impact you and your community.'],
     links: [{
-      title: "Graph Commons",
-      href: "https://graphcommons.com",
-      iconClass:"fa-globe",
-      linkText: "Webside"
+      title: 'Graph Commons',
+      href: 'https://graphcommons.com',
+      iconClass:'fa-globe',
+      linkText: 'Webside'
     }, {
-      title:"Github Repository",
-      href: "https://github.com/graphcommons",
-      iconClass: "fa-github",
-      linkText: "Source Code"
+      title:'Github Repository',
+      href: 'https://github.com/graphcommons',
+      iconClass: 'fa-github',
+      linkText: 'Source Code'
     }]
   }
   ];

@@ -3,6 +3,7 @@
       <p style="text-align: center">Pick a stance</p>
       <div class="btn-group btn-group-justified" role="group" data-bind="foreach: stanceModel">
           <div class="btn-group" role="group">
+            <div data-bind="click: $parent.updateStanceStatus(0, $parents[2])"></div>
             <button type="button" class="btn btn-vis-representation2"
                     data-bind="css: {activate: status}, click: function(i, a) {$parent.updateStanceStatus($index(), $parents[2])}">
               <span data-bind="text: type">

@@ -47,7 +47,7 @@ define('app/visualization/components/map/map' ,
       self.allStancesFalse = ko.observable(true);
 
       self.stanceModel = [
-        {id: 0, type:'All', icon: '<i class="fa fa-globe"></i>', status: ko.observable(false)},
+        {id: 0, type:'All', icon: '<i class="fa fa-globe"></i>', status: ko.observable(true)},
         {id: 1, type:'Favor', icon: '<i class="fa fa-thumbs-o-up"></i>', status: ko.observable(false)},
         {id: 2, type:'Against', icon: '<i class="fa fa-thumbs-o-down"></i>', status: ko.observable(false)},
         {id: 3, type:'None', icon: '<i class="fa fa-hand-o-right"></i>', status: ko.observable(false)}

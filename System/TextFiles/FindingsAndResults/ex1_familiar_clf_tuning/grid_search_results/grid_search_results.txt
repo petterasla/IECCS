@@ -51,12 +51,12 @@ parameters:
 Done in 40663.929s
 Best score: 0.511
 Best parameters set:
-	clf__C: 5.1794746792312099
+	clf__C: 1.17876863
 	tfidf__use_idf: False
 	vect__analyzer: 'word'
 	vect__max_features: None
 	vect__ngram_range: (1, 2)
-	vect__stop_words: 'english'
+	vect__stop_words: None
 
 
 ########################################################################################

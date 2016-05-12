@@ -95,11 +95,58 @@ time =  190.241985083
 
 
 ########################################################################################
-LinearSVC(C=5.2, class_weight=None, dual=True, fit_intercept=True,
+LinearSVC()
+########################################################################################
+================================================================================
+LinearSVC(C=1.17876863, class_weight=None, dual=True, fit_intercept=True,
      intercept_scaling=1, loss='squared_hinge', max_iter=1000,
      multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
      verbose=0)
-########################################################################################
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        41
+      FAVOR     0.6659    0.5875    0.6243      2046
+       NONE     0.8049    0.8590    0.8310      4183
+
+avg / total     0.7543    0.7648    0.7581      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.4851
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     1.0000    0.0588    0.1111        17
+      FAVOR     0.7015    0.5895    0.6406       877
+       NONE     0.8107    0.8812    0.8445      1793
+
+avg / total     0.7762    0.7808    0.7733      2687
+
+Validation macro F-score: 0.5321
+
+
+================================================================================
+TEST RESULTS FOR
+LinearSVC(C=1.17876863, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.5000    0.1053    0.1739        19
+      FAVOR     0.7119    0.6249    0.6656       973
+       NONE     0.8249    0.8805    0.8518      1991
+
+avg / total     0.7860    0.7922    0.7867      2983
+
+Test macro F-score: 0.5638
+
+#########
+# Old res#
+########
 ================================================================================
 Cross validated train score
 ================================================================================

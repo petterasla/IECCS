@@ -14,8 +14,8 @@ define('app/visualization/components/visualization-index/visualization-index', [
     self.tmp = {repres:['bar-chart', 'graph', 'map']};
 
     self.visualModel = ko.observableArray([
-      {id: 0, type: 'TCP data:', icon: '<i class="fa fa-info-circle fa center"></i>', status: ko.observable(false), repres: self.tmp.repres },
-      {id: 1, type: 'Unseen data:', icon: '<i class="fa fa-question-circle fa center"></i>', status: ko.observable(false), repres: self.tmp.repres }
+      {id: 0, type: 'TCP data', icon: '<i class="fa fa-info-circle fa center"></i>', status: ko.observable(false), repres: self.tmp.repres },
+      {id: 1, type: 'Unseen data', icon: '<i class="fa fa-question-circle fa center"></i>', status: ko.observable(false), repres: self.tmp.repres }
     ]);
 
     self.allOptionsFalse = ko.observable(true);

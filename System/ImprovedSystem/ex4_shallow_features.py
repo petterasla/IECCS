@@ -84,21 +84,16 @@ feature_keys = helper.removeFeatureKeys(leave_out)
 #l = ["tokens-abstract-feat", "tokens-title-feat", "LDA-abstract-feat", "title-feat"]
 #l = ["language-feat", "reference-feat", "pub-length-feat", "month-feat", "volumne-feat"]
 #l = ["subject-feat", "sub-header-feat", "header-feat", "type-feat", "doc-type-feat"]
-l = helper.removeFeatureKeys()
-print l
-feature_list = []
-feature_list.append([l[0]])
-for i in range(1, len(l)):
-    print feature_list[i-1] + [l[i]]
-    feature_list.append(feature_list[i-1] + [l[i]])
+#l = helper.removeFeatureKeys()
+#feature_list = [['subject-feat', 'sub-header-feat', 'header-feat', 'type-feat', 'doc-type-feat', 'count-vect']]
+feature_list = [['tokens-title-feat', 'LDA-abstract-feat', 'title-feat', 'count-vect']]
 
-print feature_list
 #del feature_list[0]
 #feature_list = sum([map(list, combinations(l, i)) for i in range(len(l) + 1)], [])
 #for sub in feature_list:
 #    sub.append("count-vect")
 
-print("Number of options: {}".format(len(feature_list)))
+#print("Number of options: {}".format(len(feature_list)))
 # Adding LDA column
 train_data, validate_data, test_data = helper.addLDA(train_data, validate_data, test_data)
 
@@ -112,7 +107,7 @@ if use_lemming:
 # Select classifiers to use
 # noinspection PyUnboundLocalVariable
 classifiers = [
-    LinearSVC(),
+    #LinearSVC(),
     #SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
     MultinomialNB(),
     #SGDClassifier()
@@ -121,6 +116,7 @@ classifiers = [
 dev_score = []
 val_score = []
 # ***** TRAIN CLASSIFIERS   *****
+
 print("Start crunching. Time used: {:.1f} minutes".format((time.time()-start_time)/60.0))
 for idx, sub_feat_list in enumerate(feature_list):
     print("Crunching on features: {}\nTime used: {:.1f} minutes".format(sub_feat_list, (time.time()-start_time)/60.0))
@@ -163,28 +159,13 @@ for idx, sub_feat_list in enumerate(feature_list):
         print("Validation macro F-score: {:.4f}\n\n".format(macro_f))
         val_score.append({idx: macro_f, "features": sub_feat_list})
 
-with open("dev_score_list.pkl", "w") as f:
-    pickle.dump(dev_score, f)
-with open("val_score_list.pkl", "w") as f:
-    pickle.dump(val_score, f)
-
-highest_dev = 0
-for idx, d in enumerate(dev_score):
-    if d[idx] > highest_dev:
-        highest_dev = d[idx]
-print("Highest dev macro f score: {}".format(highest_dev))
-highest_val = 0
-for idx, d in enumerate(val_score):
-    if d[idx] > highest_val:
-        highest_val = d[idx]
-print("Highest validate macro f score: {}".format(highest_val))
 
 #################################
 #                               #
 #       Testing procedure       #
 #                               #
 #################################
-check_test = 0
+check_test = 1
 if check_test:
     train_and_validation = pd.concat([train_data, validate_data])
     for clf in classifiers:

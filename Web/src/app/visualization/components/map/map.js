@@ -4,10 +4,30 @@ define('app/visualization/components/map/map' ,
   function(require, ko, $http, $q, template, coordinates, visModel) {
   'use strict';
 
+    function compare(a,b) {
+      a = parseInt(a.value);
+      b = parseInt(b.value);
+      if (a < b) {
+        return -1;
+      }
+      else if (a > b) {
+        return 1;
+      }
+      else {
+        return 0;
+      }
+    }
+
     function requestData(stance, typeData, self) {
       var url;
+      var url1;
+      var url2;
+      var url3;
       var data;
       var req;
+      var req1;
+      var req2;
+      var req3;
       if (typeData === 'Unseen data:') {
         if (stance === 'All') {
           url = 'https://ieccs.herokuapp.com/api/visual/new/organization/' + stance;
@@ -17,25 +37,76 @@ define('app/visualization/components/map/map' ,
         }
       }
       else {
-        if (stance === 'All') {
+        if (stance === 'Alls') {
           url = 'https://ieccs.herokuapp.com/api/visual/old/organization/' + stance;
+        }
+        else if (stance === 'All'){
+          url1 = 'https://ieccs.herokuapp.com/api/visual/old/organization/FAVOR';
+          url2 = 'https://ieccs.herokuapp.com/api/visual/old/organization/AGAINST';
+          url3 = 'https://ieccs.herokuapp.com/api/visual/old/organization/NONE';
         }
         else {
           url = 'https://ieccs.herokuapp.com/api/visual/old/organization/' + stance.toUpperCase();
         }
 
       }
-      req = $http.get(url)
-        .success(function (info) {
-          console.log('Data retrieved..');
-          data = info.Data;
+      if (stance === 'All') {
+        var favor_data = [];
+        var against_data = [];
+        var none_data = [];
+
+        req1 = $http.get(url)
+          .success(function (info) {
+            console.log('Data retrieved..');
+            favor_data = info.Data;
+            //updateBar(75, self);
+            drawMap(data, typeData, self);
+          })
+          .error(function (err) {
+            self.alert(1);
+            console.log(err);
+          });
+        req2 = $http.get(url)
+          .success(function (info) {
+            console.log('Data retrieved..');
+            against_data = info.Data;
+            //updateBar(75, self);
+            drawMap(data, typeData, self);
+          })
+          .error(function (err) {
+            self.alert(1);
+            console.log(err);
+          });
+        req3 = $http.get(url)
+          .success(function (info) {
+            console.log('Data retrieved..');
+            none_data = info.Data;
+            //updateBar(75, self);
+            drawMap(data, typeData, self);
+          })
+          .error(function (err) {
+            self.alert(1);
+            console.log(err);
+          });
+        $q.all([req1, req2, req3]).then( function() {
+          data = (against_data + favor_data + none_data).sort(compare);
           updateBar(75, self);
-          drawMap(data, typeData, self);
-        })
-        .error(function (err) {
-          self.alert(1);
-          console.log(err);
+          drawMap(data, self);
         });
+      }
+      else {
+        req = $http.get(url)
+          .success(function (info) {
+            console.log('Data retrieved..');
+            data = info.Data;
+            updateBar(75, self);
+            drawMap(data, typeData, self);
+          })
+          .error(function (err) {
+            self.alert(1);
+            console.log(err);
+          });
+      }
     }
 
     function init() {
@@ -127,6 +198,7 @@ define('app/visualization/components/map/map' ,
           width: size,
           height: size,
           color: dataItem.color,
+          bringForwardOnHover: false,
           longitude: latlong[id].longitude,
           latitude: latlong[id].latitude,
           title: dataItem.name,

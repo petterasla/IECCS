@@ -1,4 +1,4 @@
-#import System.DataProcessing.process_data as ptd
+import System.DataProcessing.process_data as ptd
 #import System.DataProcessing.process_meta_data as ptmd
 import pandas as pd
 import numpy as np
@@ -71,28 +71,31 @@ def storeLanguageToJson(stance="All"):
 
 def storeSubjectsToJson(stance="All"):
     if stance == "All":
-        d = ptd.getMetaDataAsList()
+        #d = ptd.getMetaDataAsList()
+        with open("../TextFiles/data/related_data_final_filtering_with_titles.json", "r") as f:
+            d = json.load(f)
+            d = pd.DataFrame(d)
         frame = pd.DataFrame(d).Subjects
     else:
         frame = getStanceData(stance).Subjects
     frame.fillna("nan", inplace=True)
     headers = frame.tolist()
     headers = [h for h in headers if h != "nan"]
-    headers = [h for sublist in headers for h in sublist]
+    headers = [h.lower() for sublist in headers for h in sublist]
     uniq_head = list(set(headers))
     d = dict(zip(uniq_head, np.zeros(len(uniq_head))))
     for s in headers:
         d[s] += 1
 
-    for key in d.keys():
-        print("{} \t: {}".format(key, d[key]))
+    #for key in d.keys():
+    #    print("{} \t: {}".format(key, d[key]))
     print("There are a total of {} subjects, with {} unique ones".format(len(headers), len(uniq_head)))
 
-    with open("../TextFiles/meta_data/subjects_NONE.json", "w") as f:
-        json.dump(d, f)
+    #with open("../TextFiles/meta_data/subjects_NONE.json", "w") as f:
+    #    json.dump(d, f)
 
 
-#storeSubjectsToJson("NONE")
+storeSubjectsToJson("All")
 #storeOrgsToJson("All")
 #storeLanguageToJson("NONE")
 
@@ -262,6 +265,7 @@ def removeDuplicates():
 #removeDuplicates()
 #readTestSamples()
 #finalFiltering()
+"""
 mapData = [
     {"code":"AF" , "name":"Afghanistan", "value":32358260, "color":"#eea638"},
     {"code":"AL" , "name":"Albania", "value":3215988, "color":"#d8854f"},
@@ -466,7 +470,6 @@ for country in countries.keys():
             color = dic["color"]
             mapData_all.append({"code":code, "name":name, "value":value, "color":color})
 
-print("length of mapData = {}".format(len(mapData_all)))
-with open("../TextFiles/meta_data/new_organization_"+stance+".json", "w") as f:
-    json.dump(mapData_all, f)
-    print "dumped"
+#print("length of mapData = {}".format(len(mapData_all)))
+#with open("../TextFiles/meta_data/new_organization_"+stance+".json", "w") as f:
+"""

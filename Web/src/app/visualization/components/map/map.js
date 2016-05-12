@@ -7,27 +7,30 @@ define('app/visualization/components/map/map' ,
     function compare(a,b) {
       a = parseInt(a.value);
       b = parseInt(b.value);
-      if (a < b) {
+      if (a > b) {
         return -1;
       }
-      else if (a > b) {
+      else if (a < b) {
         return 1;
       }
       else {
         return 0;
       }
     }
-
+    function setColor(data, color) {
+      data.forEach(function(item) {
+        item.color = color;
+      });
+      return data;
+    }
     function requestData(stance, typeData, self) {
-      var url;
-      var url1;
-      var url2;
-      var url3;
+      var url, url1, url2, url3;
       var data;
-      var req;
-      var req1;
-      var req2;
-      var req3;
+      var req, req1, req2, req3;
+      var favor_color = "#00FF00"; // GREEN
+      var against_color = "#FF0000"; // RED
+      var none_color = "#0000FF"; // BLUE
+
       if (typeData === 'Unseen data:') {
         if (stance === 'All') {
           url = 'https://ieccs.herokuapp.com/api/visual/new/organization/' + stance;
@@ -37,10 +40,8 @@ define('app/visualization/components/map/map' ,
         }
       }
       else {
-        if (stance === 'Alls') {
-          url = 'https://ieccs.herokuapp.com/api/visual/old/organization/' + stance;
-        }
-        else if (stance === 'All'){
+        if (stance === 'All') {
+          //url = 'https://ieccs.herokuapp.com/api/visual/old/organization/' + stance;
           url1 = 'https://ieccs.herokuapp.com/api/visual/old/organization/FAVOR';
           url2 = 'https://ieccs.herokuapp.com/api/visual/old/organization/AGAINST';
           url3 = 'https://ieccs.herokuapp.com/api/visual/old/organization/NONE';
@@ -51,54 +52,56 @@ define('app/visualization/components/map/map' ,
 
       }
       if (stance === 'All') {
-        var favor_data = [];
-        var against_data = [];
-        var none_data = [];
+        var favor_data, against_data, none_data = [];
 
-        req1 = $http.get(url)
+        req1 = $http.get(url1)
           .success(function (info) {
-            console.log('Data retrieved..');
-            favor_data = info.Data;
-            //updateBar(75, self);
-            drawMap(data, typeData, self);
+            //console.log('Favor success');
+            favor_data = setColor(info.Data, favor_color);
           })
           .error(function (err) {
             self.alert(1);
             console.log(err);
           });
-        req2 = $http.get(url)
+
+        req2 = $http.get(url2)
           .success(function (info) {
-            console.log('Data retrieved..');
-            against_data = info.Data;
-            //updateBar(75, self);
-            drawMap(data, typeData, self);
+            //console.log('against success');
+            against_data = setColor(info.Data, against_color);
           })
           .error(function (err) {
             self.alert(1);
             console.log(err);
           });
-        req3 = $http.get(url)
+        req3 = $http.get(url3)
           .success(function (info) {
-            console.log('Data retrieved..');
-            none_data = info.Data;
-            //updateBar(75, self);
-            drawMap(data, typeData, self);
+            //console.log('none success');
+            none_data = setColor(info.Data, none_color);
           })
           .error(function (err) {
             self.alert(1);
             console.log(err);
           });
-        $q.all([req1, req2, req3]).then( function() {
-          data = (against_data + favor_data + none_data).sort(compare);
+
+        $q.all([req1, req2, req3]).then(function() {
+          data = against_data.concat(favor_data.concat(none_data));
+          data.sort(compare);
+          console.log("all requests received and compared");
           updateBar(75, self);
-          drawMap(data, self);
-        });
+          drawMap(data, typeData, self)
+        })
       }
       else {
         req = $http.get(url)
           .success(function (info) {
             console.log('Data retrieved..');
-            data = info.Data;
+            if (stance == "Favor") {
+              data = setColor(info.Data, favor_color);
+            } else if (stance == "Against") {
+              data = setColor(info.Data, against_color);
+            } else {
+              data = setColor(info.Data, none_color);
+            }
             updateBar(75, self);
             drawMap(data, typeData, self);
           })
@@ -118,10 +121,10 @@ define('app/visualization/components/map/map' ,
       self.allStancesFalse = ko.observable(true);
 
       self.stanceModel = [
-        {id: 0, type:'All', icon: '<i class="fa fa-globe"></i>', status: ko.observable(true)},
-        {id: 1, type:'Favor', icon: '<i class="fa fa-thumbs-o-up"></i>', status: ko.observable(false)},
-        {id: 2, type:'Against', icon: '<i class="fa fa-thumbs-o-down"></i>', status: ko.observable(false)},
-        {id: 3, type:'None', icon: '<i class="fa fa-hand-o-right"></i>', status: ko.observable(false)}
+        {id: 0, type:'All', icon: '', status: ko.observable(true)},
+        {id: 1, type:'Favor', icon: '<i class="fa fa-circle background-favor"></i>', status: ko.observable(false)},
+        {id: 2, type:'Against', icon: '<i class="fa fa-circle background-against"></i>', status: ko.observable(false)},
+        {id: 3, type:'None', icon: '<i class="fa fa-circle background-none"></i>', status: ko.observable(false)}
 
       ];
 
@@ -198,6 +201,7 @@ define('app/visualization/components/map/map' ,
           width: size,
           height: size,
           color: dataItem.color,
+          alpha: 0.8,
           bringForwardOnHover: false,
           longitude: latlong[id].longitude,
           latitude: latlong[id].latitude,

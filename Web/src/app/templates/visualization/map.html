@@ -1,13 +1,13 @@
 <div class="row pad">
     <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
       <p style="text-align: center">Pick a stance</p>
+      <div data-bind="click: updateStanceStatus(0, $parents[1])"></div>
       <div class="btn-group btn-group-justified" role="group" data-bind="foreach: stanceModel">
           <div class="btn-group" role="group">
-            <div data-bind="click: $parent.updateStanceStatus(0, $parents[2])"></div>
             <button type="button" class="btn btn-vis-representation2"
                     data-bind="css: {activate: status}, click: function(i, a) {$parent.updateStanceStatus($index(), $parents[2])}">
-              <span data-bind="text: type">
-              </span>
+              <span data-bind="text: type"></span>
+              <span data-bind="html: icon"></span>
             </button>
           </div>
         </div>
@@ -33,12 +33,15 @@
 </div>
 
 <div data-bind="visible: !allStancesFalse()">
+  <div class="col-xs-12 border-line" >
+    <div id=chartdiv></div>
   <!--
   <div id="left-pointer" class="col-xs-1"></div>
+
     <div class="col-xs-10">
-  -->
       <div id=chartdiv></div>
-  <!--
+
+
   </div>
   <div id="right-pointer" class="col-xs-1"></div>
   -->

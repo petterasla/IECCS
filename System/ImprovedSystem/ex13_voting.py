@@ -50,59 +50,52 @@ if use_upsample:
 cv = StratifiedKFold(train_data.Stance, n_folds=10, shuffle=True, random_state=1)
 
 # Select classifiers to use
-classifiers = [
-    LinearSVC(C=1.178),
-    #SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
-    MultinomialNB(alpha=0.1, fit_prior=False)
-    #LogisticRegression()
-]
 
 # ***** TRAIN CLASSIFIERS   *****
-for clf in classifiers:
-    print 80 * "="
-    print clf
-    print 80 * "="
+print 80 * "="
+print "VotingClassifier"
+print 80 * "="
 
-    # Use optimized parameters from grid_search_improved
-    svm_clf = Pipeline([('vect', CountVectorizer(decode_error='ignore',
-                                                  analyzer='word',
-                                                  ngram_range=(1, 2),
-                                                  stop_words=None,
-                                                  max_features=None)),
-                         ('clf', LinearSVC(C=1.178))])
-    mnb_clf = Pipeline([('vect', CountVectorizer(decode_error='ignore',
-                                                 analyzer='word',
-                                                 ngram_range=(2, 3),
-                                                 stop_words='english',
-                                                 max_features=50000)),
-                        ('tf-idf', TfidfTransformer(use_idf=True)),
-                        ('clf', MultinomialNB(alpha=0.1, fit_prior=False))])
+# Use optimized parameters from grid_search_improved
+svm_clf = Pipeline([('vect', CountVectorizer(decode_error='ignore',
+                                              analyzer='word',
+                                              ngram_range=(1, 2),
+                                              stop_words=None,
+                                              max_features=None)),
+                     ('clf', LinearSVC(C=1.178))])
+mnb_clf = Pipeline([('vect', CountVectorizer(decode_error='ignore',
+                                             analyzer='word',
+                                             ngram_range=(2, 3),
+                                             stop_words='english',
+                                             max_features=50000)),
+                    ('tf-idf', TfidfTransformer(use_idf=True)),
+                    ('clf', MultinomialNB(alpha=0.1, fit_prior=False))])
 
-    vot_clf = VotingClassifier(estimators=[('svm', svm_clf),
-                                           ('mnb', mnb_clf)],
-                               voting='soft',
-                               weights=[1, 1])
+vot_clf = VotingClassifier(estimators=[('svm', svm_clf),
+                                       ('mnb', mnb_clf)],
+                           voting='soft',
+                           weights=[1, 1])
 
-    pred_stances = cross_val_predict(vot_clf, train_data.Abstract, train_data.Stance, cv=cv, n_jobs=10)
+pred_stances = cross_val_predict(vot_clf, train_data.Abstract, train_data.Stance, cv=cv, n_jobs=10)
 
-    print classification_report(train_data.Stance, pred_stances, digits=4)
+print classification_report(train_data.Stance, pred_stances, digits=4)
 
-    macro_f = fbeta_score(train_data.Stance, pred_stances, 1.0,
-                          labels=['AGAINST', 'FAVOR', 'NONE'],
-                          average='macro')
+macro_f = fbeta_score(train_data.Stance, pred_stances, 1.0,
+                      labels=['AGAINST', 'FAVOR', 'NONE'],
+                      average='macro')
 
-    print 'macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f)
+print 'macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f)
 
-    print 80 * "="
-    print("Validation score")
-    print 80 * "="
-    validate_preds = cross_val_predict(vot_clf, validate_data.Abstract,
-                                       validate_data.Stance)
-    print classification_report(validate_data.Stance, validate_preds, digits=4)
+print 80 * "="
+print("Validation score")
+print 80 * "="
+validate_preds = cross_val_predict(vot_clf, validate_data.Abstract,
+                                   validate_data.Stance)
+print classification_report(validate_data.Stance, validate_preds, digits=4)
 
-    macro_f = fbeta_score(validate_data.Stance, validate_preds, 1.0,
-                          labels=['AGAINST', 'FAVOR', 'NONE'], average='macro')
-    print("Validation macro F-score: {:.4f}\n\n".format(macro_f))
+macro_f = fbeta_score(validate_data.Stance, validate_preds, 1.0,
+                      labels=['AGAINST', 'FAVOR', 'NONE'], average='macro')
+print("Validation macro F-score: {:.4f}\n\n".format(macro_f))
 
 #################################
 #                               #
@@ -112,36 +105,35 @@ for clf in classifiers:
 check_test = 0
 if check_test:
     train_and_validation = pd.concat([train_data, validate_data])
-    for clf in classifiers:
-        print 80 * "="
-        print "TEST RESULTS FOR"
-        print clf
-        print 80 * "="
-        svm_clf = Pipeline([('vect', CountVectorizer(decode_error='ignore',
-                                                     analyzer='word',
-                                                     ngram_range=(1, 2),
-                                                     stop_words=None,
-                                                     max_features=None)),
-                            ('clf', LinearSVC(C=1.178))])
-        mnb_clf = Pipeline([('vect', CountVectorizer(decode_error='ignore',
+    print 80 * "="
+    print "TEST RESULTS FOR"
+    print "VotingClassifier"
+    print 80 * "="
+    svm_clf = Pipeline([('vect', CountVectorizer(decode_error='ignore',
                                                  analyzer='word',
-                                                 ngram_range=(2, 3),
-                                                 stop_words='english',
-                                                 max_features=50000)),
-                        ('tf-idf', TfidfTransformer(use_idf=True)),
-                        ('clf', MultinomialNB(alpha=0.1, fit_prior=False))])
+                                                 ngram_range=(1, 2),
+                                                 stop_words=None,
+                                                 max_features=None)),
+                        ('clf', LinearSVC(C=1.178))])
+    mnb_clf = Pipeline([('vect', CountVectorizer(decode_error='ignore',
+                                             analyzer='word',
+                                             ngram_range=(2, 3),
+                                             stop_words='english',
+                                             max_features=50000)),
+                    ('tf-idf', TfidfTransformer(use_idf=True)),
+                    ('clf', MultinomialNB(alpha=0.1, fit_prior=False))])
 
-        vot_clf = VotingClassifier(estimators=[('svm', svm_clf),
-                                           ('mnb', mnb_clf)],
-                               voting='soft',
-                               weights=[1, 1]).fit(train_and_validation.Abstract)
+    vot_clf = VotingClassifier(estimators=[('svm', svm_clf),
+                                       ('mnb', mnb_clf)],
+                           voting='soft',
+                           weights=[1, 1]).fit(train_and_validation.Abstract)
 
-        preds = vot_clf.predict(test_data.Abstract)
+    preds = vot_clf.predict(test_data.Abstract)
 
-        print classification_report(test_data.Stance, vot_clf, digits=4)
+    print classification_report(test_data.Stance, vot_clf, digits=4)
 
-        macro_f = fbeta_score(test_data.Stance, vot_clf, 1.0,
-                              labels=['AGAINST', 'FAVOR', 'NONE'], average='macro')
-        print("Test macro F-score: {:.4f}".format(macro_f))
+    macro_f = fbeta_score(test_data.Stance, vot_clf, 1.0,
+                          labels=['AGAINST', 'FAVOR', 'NONE'], average='macro')
+    print("Test macro F-score: {:.4f}".format(macro_f))
 
 print "time = " , time.time()-start_time

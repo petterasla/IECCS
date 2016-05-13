@@ -77,6 +77,16 @@ def getDataWithMeta():
     a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
     return a
 
+def getUnlabelledData():
+    with open("../TextFiles/data/related_data_final_filtering_with_titles.json", "r") as f:
+        return pd.DataFrame(json.load(f))
+
+def getUnlabelledDataAsList():
+    with open("../TextFiles/data/related_data_final_filtering_with_titles.json", "r") as f:
+        return json.load(f)
+
+
+
 def getIdData():
     """
 

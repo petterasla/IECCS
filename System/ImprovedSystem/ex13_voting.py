@@ -73,7 +73,7 @@ mnb_clf = Pipeline([('vect', CountVectorizer(decode_error='ignore',
 
 vot_clf = VotingClassifier(estimators=[('svm', svm_clf),
                                        ('mnb', mnb_clf)],
-                           voting='soft',
+                           voting='hard',
                            weights=[1, 1])
 
 pred_stances = cross_val_predict(vot_clf, train_data.Abstract, train_data.Stance, cv=cv, n_jobs=10)
@@ -125,8 +125,7 @@ if check_test:
 
     vot_clf = VotingClassifier(estimators=[('svm', svm_clf),
                                        ('mnb', mnb_clf)],
-                           voting='soft',
-                           weights=[1, 1]).fit(train_and_validation.Abstract)
+                           voting='hard').fit(train_and_validation.Abstract)
 
     preds = vot_clf.predict(test_data.Abstract)
 

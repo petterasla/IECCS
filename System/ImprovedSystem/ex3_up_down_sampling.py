@@ -21,8 +21,8 @@ from sklearn.naive_bayes import MultinomialNB
 import pandas as pd
 
 # ***** SETTINGS   *****
-use_upsample = 0
-use_downsample = 1
+use_upsample = 1
+use_downsample = 0
 
 downsample_rate_favor = 0.5
 downsample_rate_none = 0.3
@@ -49,7 +49,7 @@ else:
 
 if use_upsample:
     print("using up sampling")
-    train_data = pd.concat([train_data, train_data[train_data.Stance == "AGAINST"]])
+    train_data = pd.concat([train_data, train_data[train_data.Stance == "AGAINST"], train_data[train_data.Stance == "AGAINST"], train_data[train_data.Stance == "AGAINST"]])
 
 
 cv = StratifiedKFold(train_data.Stance, n_folds=10, shuffle=True, random_state=1)
@@ -115,7 +115,7 @@ if check_test:
 
     if use_upsample:
         print("testing with up sampling")
-        validate_data = pd.concat([validate_data, validate_data[validate_data.Stance == "AGAINST"]])
+        validate_data = pd.concat([validate_data, validate_data[validate_data.Stance == "AGAINST"], validate_data[validate_data.Stance == "AGAINST"], validate_data[validate_data.Stance == "AGAINST"]])
 
     train_and_validation = pd.concat([train_data, validate_data])
     for clf in classifiers:

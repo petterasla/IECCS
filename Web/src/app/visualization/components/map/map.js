@@ -27,9 +27,9 @@ define('app/visualization/components/map/map' ,
       var url, url1, url2, url3;
       var data;
       var req, req1, req2, req3;
-      var favor_color = "#00FF00"; // GREEN
-      var against_color = "#FF0000"; // RED
-      var none_color = "#0000FF"; // BLUE
+      var favorColor = '#00FF00'; // GREEN
+      var againstColor = '#FF0000'; // RED
+      var noneColor = '#0000FF'; // BLUE
 
       if (typeData === 'Unseen data:') {
         if (stance === 'All') {
@@ -52,12 +52,12 @@ define('app/visualization/components/map/map' ,
 
       }
       if (stance === 'All') {
-        var favor_data, against_data, none_data = [];
+        var favorData, againstData, noneData = [];
 
         req1 = $http.get(url1)
           .success(function (info) {
             //console.log('Favor success');
-            favor_data = setColor(info.Data, favor_color);
+            favorData = setColor(info.Data, favorColor);
           })
           .error(function (err) {
             self.alert(1);
@@ -67,7 +67,7 @@ define('app/visualization/components/map/map' ,
         req2 = $http.get(url2)
           .success(function (info) {
             //console.log('against success');
-            against_data = setColor(info.Data, against_color);
+            againstData = setColor(info.Data, againstColor);
           })
           .error(function (err) {
             self.alert(1);
@@ -76,7 +76,7 @@ define('app/visualization/components/map/map' ,
         req3 = $http.get(url3)
           .success(function (info) {
             //console.log('none success');
-            none_data = setColor(info.Data, none_color);
+            noneData = setColor(info.Data, noneColor);
           })
           .error(function (err) {
             self.alert(1);
@@ -84,23 +84,23 @@ define('app/visualization/components/map/map' ,
           });
 
         $q.all([req1, req2, req3]).then(function() {
-          data = against_data.concat(favor_data.concat(none_data));
+          data = againstData.concat(favorData.concat(noneData));
           data.sort(compare);
-          console.log("all requests received and compared");
+          console.log('all requests received and compared');
           updateBar(75, self);
-          drawMap(data, typeData, self)
-        })
+          drawMap(data, typeData, self);
+        });
       }
       else {
         req = $http.get(url)
           .success(function (info) {
             console.log('Data retrieved..');
-            if (stance == "Favor") {
-              data = setColor(info.Data, favor_color);
-            } else if (stance == "Against") {
-              data = setColor(info.Data, against_color);
+            if (stance === 'Favor') {
+              data = setColor(info.Data, favorColor);
+            } else if (stance === 'Against') {
+              data = setColor(info.Data, againstColor);
             } else {
-              data = setColor(info.Data, none_color);
+              data = setColor(info.Data, noneColor);
             }
             updateBar(75, self);
             drawMap(data, typeData, self);

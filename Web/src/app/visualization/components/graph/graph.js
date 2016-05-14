@@ -10,7 +10,7 @@ define('app/visualization/components/graph/graph' ,['require','knockout',
         size:'Large subset',
         type:'TCP data:',
         url:'https://graphcommons.com/graphs/560a2a81-e564-4bb0-b5cc-bdd5588de3e6/embed',
-        url_small:'https://graphcommons.com/graphs/4620d8a7-f393-45e8-b29b-45c2c7ed7893/embed',
+        urlSmall:'https://graphcommons.com/graphs/4620d8a7-f393-45e8-b29b-45c2c7ed7893/embed',
         status:ko.observable(true)
       },
       {
@@ -18,25 +18,25 @@ define('app/visualization/components/graph/graph' ,['require','knockout',
         size:'Large subset',
         type:'Unseen data:',
         url:'https://graphcommons.com/graphs/63b04999-10d3-4ce5-9c97-4454ab717cd3/embed',
-        url_small:'https://graphcommons.com/graphs/60f2202f-c226-4e3c-ad22-8e7c4be9f03b/embed',
+        urlSmall:'https://graphcommons.com/graphs/60f2202f-c226-4e3c-ad22-8e7c4be9f03b/embed',
         status:ko.observable(false)
       }
     ];
     self.url = ko.observable(self.graphModel[0].url);
-    self.url_small = ko.observable(self.graphModel[0].url_small);
+    self.urlSmall = ko.observable(self.graphModel[0].urlSmall);
 
-    self.updateUrl = function(data_type) {
-      if (data_type.id === 1) {
+    self.updateUrl = function(dataType) {
+      if (dataType.id === 1) {
         self.url(self.graphModel[1].url);
-        self.url_small(self.graphModel[1].url_small);
+        self.urlSmall(self.graphModel[1].urlSmall);
       }
       else {
         self.url = ko.observable(self.graphModel[0].url);
-        self.url_small = ko.observable(self.graphModel[0].url_small);
+        self.urlSmall = ko.observable(self.graphModel[0].urlSmall);
       }
     };
     self.toGraphCommon = function() {
-      window.location.href = self.url_small();
+      window.location.href = self.urlSmall();
     };
   }
 

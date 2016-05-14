@@ -78,11 +78,11 @@ def getDataWithMeta():
     return a
 
 def getUnlabelledData():
-    with open("../TextFiles/data/related_data_final_filtering_with_titles.json", "r") as f:
+    with open("../TextFiles/data/related_data_correct_v1.json", "r") as f:
         return pd.DataFrame(json.load(f))
 
 def getUnlabelledDataAsList():
-    with open("../TextFiles/data/related_data_final_filtering_with_titles.json", "r") as f:
+    with open("../TextFiles/data/related_data_correct_v1.json", "r") as f:
         return json.load(f)
 
 

@@ -1,5 +1,19 @@
 <div class="jumbotron centered">
   <h1>Interactive Exploration of Consensus in Climate Science</h1>
+
+  <div data-bind="visible: $data.progress() < 101"></div>
+  <div data-bind="visible: $data.alert() == 1, text: $data.alertMsg()" class="alert alert-danger alert-dismissible"
+       role="alert">
+  </div>
+
+  <div class="progress" data-bind="visible: $data.progress() < 101">
+    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+         data-bind="style: { width: $data.progressPct() }, attr: { 'aria-valuenow': $data.progress() }">
+    </div>
+  </div>
+  <div id="BarChart"></div>
+
+  <p></p>
   <p>
     This single page web aplication presents the result of our research on stance detection in scientific literature.
     The topic of the literature in question is anthropogenic (human-induced) global warming.

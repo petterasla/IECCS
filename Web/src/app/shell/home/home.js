@@ -15,11 +15,21 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
     }
   }
 
+  function clone(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+      if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+  }
+
   function mergeDublicateYears(list) {
+    var listCopy = list.slice();
     var temp = {};
     var obj = null;
-    for(var i=0; i < list.length; i++) {
-      obj=list[i];
+    for(var i=0; i < listCopy.length; i++) {
+      obj=listCopy[i];
 
       if(!temp[obj._id]) {
         temp[obj._id] = obj;
@@ -35,10 +45,19 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
   }
 
   function HomeModel() {
-    var initFavor = [];
-    var initAgainst = [];
-    var initNone = [];
     var self = this;
+    this.usePercentage = ko.observable(false);
+    var total = [];
+    var initFavor = [];
+    var favor = [];
+    var favorPerc = [];
+    var initAgainst = [];
+    var against = [];
+    var againstPerc = [];
+    var initNone = [];
+    var none = [];
+    var nonePerc = [];
+
     self.alert = ko.observable(0);
     self.alertMsg = ko.observable('Error retrieving some of the data!');
     self.progress = ko.observable(5);
@@ -134,15 +153,52 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
       initNone = mergeDublicateYears(initNone);
 
 
-      var favor = [];
+      for (var i= 0; i<initFavor.length;i++){
+        total.push(clone(initFavor[i]));
+      }
+      for (var i= 0; i<initAgainst.length;i++){
+        total.push(clone(initAgainst[i]));
+      }
+      for (var i= 0; i<initNone.length;i++){
+        total.push(clone(initNone[i]));
+      }
+
+      total = mergeDublicateYears(total);
+
+      total.forEach(function (item) {
+        initFavor.filter(function (obj) {
+          if (obj._id === item._id) {
+            var percent = parseFloat(obj.count / item.count);
+            obj.percent = Math.round(percent * 10000)/100;          }
+        });
+        initNone.filter(function (obj) {
+          if (obj._id === item._id) {
+            var percent = parseFloat(obj.count / item.count);
+            obj.percent = Math.round(percent * 10000)/100;          }
+        });
+        initAgainst.filter(function (obj) {
+          if (obj._id === item._id) {
+            var percent = parseFloat(obj.count / item.count);
+            obj.percent = Math.round(percent * 10000)/100;
+          }
+        });
+      });
+
+      favorPerc.push('Favor');
+      favorPerc = favorPerc.concat(initFavor.map(function (a) {return a.percent;}));
+
+      againstPerc.push('Against');
+      againstPerc = againstPerc.concat(initAgainst.map(function (a) {return a.percent;}));
+
+      nonePerc.push('None');
+      nonePerc = nonePerc.concat(initNone.map(function (a) {return a.percent;}));
+
       favor.push('Favor');
       favor = favor.concat(initFavor.map(function (a) {return a.count;}));
 
-      var against = [];
       against.push('Against');
       against = against.concat(initAgainst.map(function (a) {return a.count;}));
 
-      var none = [];
       none.push('None');
       none = none.concat(initNone.map(function (a) {return a.count;}));
 
@@ -178,8 +234,22 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
           }
         }
       });
+
+      self.usePercentage.subscribe(function(newValue) {
+        if (newValue) {
+          chart.load({
+            columns: [favorPerc, againstPerc, nonePerc]
+          });
+        } else {
+          chart.load({
+            columns: [favor, against, none]
+          });
+        }
+
+      });
     });
   }
+
 
   return HomeModel;
 });

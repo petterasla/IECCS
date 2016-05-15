@@ -37,6 +37,16 @@ def getData():
     a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
     return a
 
+def getMetaDataAsList():
+    with open("../TextFiles/data/meta_data.json", "r") as f:
+        data = json.load(f)
+    return data
+
+def getDataWithMeta():
+    a = pd.DataFrame(getMetaDataAsList())
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
+
 def getTrainingData():
     a = pd.read_csv("../TextFiles/data/tcp_train.csv", sep='\t')
     a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
@@ -67,15 +77,7 @@ def getTestDataWithMeta():
     a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
     return a
 
-def getMetaDataAsList():
-    with open("../TextFiles/data/meta_data.json", "r") as f:
-        data = json.load(f)
-    return data
 
-def getDataWithMeta():
-    a = pd.DataFrame(getMetaDataAsList())
-    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
-    return a
 
 def getUnlabelledData():
     with open("../TextFiles/data/related_data_correct_v1.json", "r") as f:

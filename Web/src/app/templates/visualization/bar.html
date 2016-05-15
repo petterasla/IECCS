@@ -1,16 +1,21 @@
-<div data-bind="visible: $data.progress() < 101">
-  <p></p>
-  <p></p>
-  <p></p>
-</div>
-<div data-bind="visible: $data.alert() == 1, text: $data.alertMsg()" class="alert alert-danger alert-dismissible"
-     role="alert">
-</div>
-
-<div class="progress" data-bind="visible: $data.progress() < 101">
-  <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-       data-bind="style: { width: $data.progressPct() }, attr: { 'aria-valuenow': $data.progress() }">
+<div class="centered">
+  <div data-bind="visible: $data.progress() < 101">
+    <p></p>
+    <p></p>
+    <p></p>
   </div>
+  <div data-bind="visible: $data.alert() == 1, text: $data.alertMsg()" class="alert alert-danger alert-dismissible"
+       role="alert">
+  </div>
+
+  <div class="progress" data-bind="visible: $data.progress() < 101">
+    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+         data-bind="style: { width: $data.progressPct() }, attr: { 'aria-valuenow': $data.progress() }">
+    </div>
+  </div>
+  <p>Use the mouse to hover over the bars to see additional information. Click on the labels beneath the chart to see changes</p>
+  <div id="BarChart"></div>
+  <label>
+    <input type="checkbox" data-bind="checked: usePercentage" /> Show percentage distribution per year
+  </label>
 </div>
-<p class="centered">Use the mouse to hover over the bars to see additional information. Click on the labels beneath the chart to see changes</p>
-<div id="BarChart"></div>

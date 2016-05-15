@@ -1,28 +1,6 @@
 define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout', 'c3', 'd3', '$http', 'q', 'text!app/templates/visualization/bar.html'], function(require, ko, c3, d3, $http, $q, template) {
   'use strict';
 
-  Array.prototype.getUnique = function(){
-    var u = {}, a = [];
-    for(var i = 0, l = this.length; i < l; ++i){
-      if(u.hasOwnProperty(this[i])) {
-        continue; 
-      }
-      a.push(this[i]);
-      u[this[i]] = 1;
-    }
-    return a;
-  };
-
-  Object.size = function(obj) {
-    var size = 0, key;
-    for (key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        size++;
-      }
-    }
-    return size;
-  };
-
   function compare(a,b) {
     a = parseInt(a._id);
     b = parseInt(b._id);
@@ -37,11 +15,49 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
     }
   }
 
+  function clone(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+      if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+  }
+
+  function mergeDublicateYears(list) {
+    var listCopy = list.slice();
+    var temp = {};
+    var obj = null;
+    for(var i=0; i < listCopy.length; i++) {
+      obj=listCopy[i];
+
+      if(!temp[obj._id]) {
+        temp[obj._id] = obj;
+      } else {
+        temp[obj._id].count += obj.count;
+      }
+    }
+    var result = [];
+    for (var prop in temp) {
+      result.push(temp[prop]);
+    }
+    return result
+  }
+
   function ViewBar() {
-    var initFavor = [];
-    var initAgainst = [];
-    var initNone = [];
     var self = this;
+    this.usePercentage = ko.observable(false);
+    var total = [];
+    var initFavor = [];
+    var favor = [];
+    var favorPerc = [];
+    var initAgainst = [];
+    var against = [];
+    var againstPerc = [];
+    var initNone = [];
+    var none = [];
+    var nonePerc = [];
+
     self.alert = ko.observable(0);
     self.alertMsg = ko.observable('Error retrieving some of the data!');
     self.progress = ko.observable(5);
@@ -98,15 +114,57 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
       initNone = initNone.sort(compare);
       initAgainst = initAgainst.sort(compare);
 
-      var favor = [];
+      initFavor = mergeDublicateYears(initFavor);
+      initAgainst = mergeDublicateYears(initAgainst);
+      initNone = mergeDublicateYears(initNone);
+
+
+      for (var i= 0; i<initFavor.length;i++){
+        total.push(clone(initFavor[i]));
+      }
+      for (var i= 0; i<initAgainst.length;i++){
+        total.push(clone(initAgainst[i]));
+      }
+      for (var i= 0; i<initNone.length;i++){
+        total.push(clone(initNone[i]));
+      }
+
+      total = mergeDublicateYears(total);
+
+      total.forEach(function (item) {
+        initFavor.filter(function (obj) {
+          if (obj._id === item._id) {
+            var percent = parseFloat(obj.count / item.count);
+            obj.percent = Math.round(percent * 10000)/100;          }
+        });
+        initNone.filter(function (obj) {
+          if (obj._id === item._id) {
+            var percent = parseFloat(obj.count / item.count);
+            obj.percent = Math.round(percent * 10000)/100;          }
+        });
+        initAgainst.filter(function (obj) {
+          if (obj._id === item._id) {
+            var percent = parseFloat(obj.count / item.count);
+            obj.percent = Math.round(percent * 10000)/100;
+          }
+        });
+      });
+
+      favorPerc.push('Favor');
+      favorPerc = favorPerc.concat(initFavor.map(function (a) {return a.percent;}));
+
+      againstPerc.push('Against');
+      againstPerc = againstPerc.concat(initAgainst.map(function (a) {return a.percent;}));
+
+      nonePerc.push('None');
+      nonePerc = nonePerc.concat(initNone.map(function (a) {return a.percent;}));
+
       favor.push('Favor');
       favor = favor.concat(initFavor.map(function (a) {return a.count;}));
 
-      var against = [];
       against.push('Against');
       against = against.concat(initAgainst.map(function (a) {return a.count;}));
 
-      var none = [];
       none.push('None');
       none = none.concat(initNone.map(function (a) {return a.count;}));
 
@@ -141,6 +199,19 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
             categories: keys
           }
         }
+      });
+
+      self.usePercentage.subscribe(function(newValue) {
+        if (newValue) {
+          chart.load({
+            columns: [favorPerc, againstPerc, nonePerc]
+          });
+        } else {
+          chart.load({
+            columns: [favor, against, none]
+          });
+        }
+
       });
     });
   }

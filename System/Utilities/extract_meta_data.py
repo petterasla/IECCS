@@ -6,6 +6,52 @@ import json
 import random
 import cPickle as pickle
 
+def checkIdenticals():
+    old = ptd.getDataWithMeta()
+    old_2011 = old[old.Publication_year == 2011]
+    old_2011_wos = old_2011.WOS.tolist()
+    new = ptd.getUnlabelledData()
+    print("len of new data: {}".format(len(new)))
+    new_2011 = new[new.Publication_year == "2011"]
+    new_2011_wos = new_2011.WOS.tolist()
+
+    print("old length 2011: {}".format(len(old_2011_wos)))
+    print("new length 2011: {}".format(len(new_2011_wos)))
+
+    print old_2011_wos[:5]
+    print new_2011_wos[:5]
+
+    identical = []
+    for wos in new_2011_wos:
+        for wos2 in old_2011_wos:
+            if wos == wos2:
+                print("{}\n{}\n".format(wos, wos2))
+                identical.append(wos)
+
+    print("Number of identical papers = {}".format(len(identical)))
+
+    new_data = ptd.getUnlabelledDataAsList()
+
+    print ("len of old before: {}".format(len(new_data)))
+    new_data_after = []
+    for dic in new_data:
+        if dic["WOS"] not in identical:
+            new_data_after.append(dic)
+
+    print ("len of old after: {}".format(len(new_data_after)))
+
+    #if len(new_data)-len(identical) == len(new_data_after):
+    #    print("ready to be stored")
+    #    with open("related_data_correct_v1.json", "w") as f:
+    #        json.dump(new_data_after, f)
+    #        print("dumped")
+    #else:
+    #    print("not equal after removing identicals...")
+
+
+
+#checkIdenticals()
+
 def getStanceData(stance):
     d = ptd.getMetaDataAsList()
     data = pd.DataFrame(d)
@@ -72,9 +118,7 @@ def storeLanguageToJson(stance="All"):
 def storeSubjectsToJson(stance="All"):
     if stance == "All":
         #d = ptd.getMetaDataAsList()
-        with open("../TextFiles/data/related_data_final_filtering_with_titles.json", "r") as f:
-            d = json.load(f)
-            d = pd.DataFrame(d)
+        d = ptd.getDataWithMeta()
         frame = pd.DataFrame(d).Subjects
     else:
         frame = getStanceData(stance).Subjects

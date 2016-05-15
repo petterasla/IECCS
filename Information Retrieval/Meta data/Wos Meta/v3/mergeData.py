@@ -8,13 +8,10 @@ import difflib
 import time
 import System.DataProcessing.process_data as ptd
 
-path = os.getcwd()+"/data"
-wos = []
-for i, filename in enumerate(os.listdir(path)):
-    with open(path+"/"+filename, 'r') as read_file:
-        x = json.load(read_file)
-    for d in x:
-        wos.append(d["WOS"])
+
+
+with open("wos_identities_1991_2011.json", "r") as f:
+    wos = json.load( f)
 
 print wos[:3]
 print("len of wos before identicals: {}".format(len(wos)))

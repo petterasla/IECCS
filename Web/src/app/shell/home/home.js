@@ -102,7 +102,7 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
         console.log(err);
       });
 
-    var favorReqNew = $http.get('https://ieccs.herokuapp.com/api/stance/year/FAVOR') //Change to new data
+    var favorReqNew = $http.get('https://ieccs.herokuapp.com/api/stance/year/new/FAVOR') //Change to new data
       .success(function(data) {
         initFavor.push.apply(initFavor, data);
         self.progress(self.progress()+15);
@@ -113,7 +113,7 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
         self.alert(1);
         console.log(err);
       });
-    var againstReqNew = $http.get('https://ieccs.herokuapp.com/api/stance/year/AGAINST') //Change to new data
+    var againstReqNew = $http.get('https://ieccs.herokuapp.com/api/stance/year/new/AGAINST') //Change to new data
       .success(function(data) {
         initAgainst.push.apply(initAgainst,data);
         self.progress(self.progress()+15);
@@ -124,7 +124,7 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
         self.alert(1);
         console.log(err);
       });
-    var noneReqNew = $http.get('https://ieccs.herokuapp.com/api/stance/year/NONE') //Change to new data
+    var noneReqNew = $http.get('https://ieccs.herokuapp.com/api/stance/year/new/NONE') //Change to new data
       .success(function(data) {
         initNone.push.apply(initNone, data);
         self.progress(self.progress()+15);

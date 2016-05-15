@@ -16,10 +16,14 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
   }
 
   function clone(obj) {
-    if (null == obj || "object" != typeof obj) return obj;
+    if (null === obj || 'object' !== typeof obj) {
+      return obj;
+    }
     var copy = obj.constructor();
     for (var attr in obj) {
-      if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+      if (obj.hasOwnProperty(attr)) {
+        copy[attr] = obj[attr];
+      }
     }
     return copy;
   }
@@ -41,7 +45,7 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
     for (var prop in temp) {
       result.push(temp[prop]);
     }
-    return result
+    return result;
   }
 
   function HomeModel() {
@@ -156,10 +160,10 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
       for (var i= 0; i<initFavor.length;i++){
         total.push(clone(initFavor[i]));
       }
-      for (var i= 0; i<initAgainst.length;i++){
+      for (i= 0; i<initAgainst.length;i++){
         total.push(clone(initAgainst[i]));
       }
-      for (var i= 0; i<initNone.length;i++){
+      for (i= 0; i<initNone.length;i++){
         total.push(clone(initNone[i]));
       }
 

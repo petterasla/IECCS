@@ -28,9 +28,9 @@ define('app/visualization/components/map/map' ,
       var url, url1, url2, url3;
       var data;
       var req, req1, req2, req3;
-      var favorColor = '#00B300'; // GREEN
-      var againstColor = '#FF0000'; // RED
-      var noneColor = '#0000FF'; // BLUE
+      var favorColor = '#2ECC40'; // GREEN
+      var againstColor = '#FF4136'; // RED
+      var noneColor = '#0074D9'; // BLUE
 
       if (typeData === 'Unseen data:') {
         if (stance === 'All') {
@@ -189,7 +189,7 @@ define('app/visualization/components/map/map' ,
       mapData.forEach(function(item) {
         codeList.push({code: item.code,
           first: false, second:false, last:false,
-          check1: false, check2: false})
+          check1: false, check2: false});
       });
 
       var valueDiff = 100;
@@ -200,10 +200,8 @@ define('app/visualization/components/map/map' ,
             codeList.forEach(function (item) {
               if (item.code === id && item.first === false) {
                 item.first = true;
-                additional = item.additional;
               }
               else if (item.code === id && item.second === false) {
-                additional = item.additional;
                 item.second = true;
               }
               else if (item.code === id && item.last === false) {
@@ -224,7 +222,6 @@ define('app/visualization/components/map/map' ,
         }
         var size = Math.sqrt(square / (Math.PI * 2));
         var id = dataItem.code;
-        var additional = 0;
         var largest = 11;
         var medium = 8;
         var smallest = 5;
@@ -255,7 +252,7 @@ define('app/visualization/components/map/map' ,
             else if (item.code === id){
               size = smallest;
             }
-          })
+          });
         }
 
 

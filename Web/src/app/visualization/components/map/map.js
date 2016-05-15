@@ -1,8 +1,9 @@
 define('app/visualization/components/map/map' ,
   ['require','knockout', '$http', 'q', 'text!app/templates/visualization/map.html',
-  'app/visualization/components/map/data','app/visualization/components/visualization-index/visualization-index' ,'ammap', 'dark', 'worldLow'],
-  function(require, ko, $http, $q, template, coordinates, visModel) {
+  'app/visualization/components/map/data' ,'ammap', 'dark', 'worldLow'],
+  function(require, ko, $http, $q, template, coordinates) {
   'use strict';
+
 
     function compare(a,b) {
       a = parseInt(a.value);
@@ -27,7 +28,7 @@ define('app/visualization/components/map/map' ,
       var url, url1, url2, url3;
       var data;
       var req, req1, req2, req3;
-      var favorColor = '#00FF00'; // GREEN
+      var favorColor = '#00B300'; // GREEN
       var againstColor = '#FF0000'; // RED
       var noneColor = '#0000FF'; // BLUE
 
@@ -157,7 +158,6 @@ define('app/visualization/components/map/map' ,
     function drawMap(mapData, typeData, self) {
       console.log('Building map');
       updateBar(95, self);
-
       var latlong = coordinates;
       var minBulletSize = 6;
       var maxBulletSize = 60;
@@ -185,6 +185,34 @@ define('app/visualization/components/map/map' ,
       var maxSquare = maxBulletSize * maxBulletSize * 2 * Math.PI;
       var minSquare = minBulletSize * minBulletSize * 2 * Math.PI;
 
+      var codeList = [];
+      mapData.forEach(function(item) {
+        codeList.push({code: item.code,
+          first: false, second:false, last:false,
+          check1: false, check2: false})
+      });
+
+      var valueDiff = 100;
+      mapData.forEach(function(dataItem) {
+        var valueTwo = dataItem.value;
+        var id = dataItem.code;
+          if (valueTwo < valueDiff) {
+            codeList.forEach(function (item) {
+              if (item.code === id && item.first === false) {
+                item.first = true;
+                additional = item.additional;
+              }
+              else if (item.code === id && item.second === false) {
+                additional = item.additional;
+                item.second = true;
+              }
+              else if (item.code === id && item.last === false) {
+                item.last = true;
+              }
+            });
+          }
+        });
+
       // create circle for each country
       for (var j = 0; j < mapData.length; j++) {
         var dataItem = mapData[j];
@@ -196,10 +224,45 @@ define('app/visualization/components/map/map' ,
         }
         var size = Math.sqrt(square / (Math.PI * 2));
         var id = dataItem.code;
+        var additional = 0;
+        var largest = 11;
+        var medium = 8;
+        var smallest = 5;
+        if (valueTwo < valueDiff) {
+          codeList.forEach(function(item) {
+            if (item.code === id && item.last) {
+              if (!item.check1) {
+                size = largest;
+                item.check1 = true;
+              }
+              else if (!item.check2) {
+                size = medium;
+                item.check2 = true;
+              }
+              else {
+                size = smallest;
+              }
+            }
+            else if (item.code === id && item.second) {
+              if (!item.check1) {
+                size = medium;
+                item.check1 = true;
+              }
+              else {
+                size = smallest;
+              }
+            }
+            else if (item.code === id){
+              size = smallest;
+            }
+          })
+        }
+
+
         dataProvider.images.push({
           type: 'circle',
-          width: size,
-          height: size,
+          width: size ,
+          height: size ,
           color: dataItem.color,
           alpha: 0.8,
           bringForwardOnHover: false,

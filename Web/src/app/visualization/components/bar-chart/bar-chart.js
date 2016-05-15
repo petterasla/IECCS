@@ -215,8 +215,24 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
             columns: [favor, against, none]
           });
         }
-
       });
+
+      self.updateStanceStatus = function(index, visModel)  {
+        console.log('progress = ' + this.progress());
+        updateBar(5, self);
+        self.stanceModel.forEach(function(item) {
+          if (index === item.id) {
+            item.status(true);
+            console.log('Requesting..');
+            updateBar(50, self);
+            requestData(item.type, visModel.type, self);
+            self.allStancesFalse(false);
+          }
+          else {
+            item.status(false);
+          }
+        });
+      };
     });
   }
 

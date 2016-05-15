@@ -30,7 +30,7 @@ vectorizer.fit(data.Abstract)
 abstract_vocab = set(vectorizer.get_feature_names())
 
 # base dir for local copies of Glove vectors for different corpora & dimensions
-base_dir = '/Users/Henrik/Downloads/glove'
+base_dir = '/Volumes/My Passport/glove'
 
 # glob pattern for Glove vectors
 glove_fnames = glob(base_dir + '/*.txt')# + glob(base_dir + '/*/*.txt')

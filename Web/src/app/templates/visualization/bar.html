@@ -1,5 +1,5 @@
 <div class="centered">
-  <div data-bind="click: updateStanceStatus(0, $parents[1])"></div>
+  <div data-bind="click: dataType($parents[1].id)"></div>
   <div data-bind="visible: $data.progress() < 101">
     <p></p>
     <p></p>
@@ -14,9 +14,9 @@
          data-bind="style: { width: $data.progressPct() }, attr: { 'aria-valuenow': $data.progress() }">
     </div>
   </div>
-  <p>Use the mouse to hover over the bars to see additional information. Click on the labels beneath the chart to see changes</p>
   <div id="BarChart"></div>
   <label>
     <input type="checkbox" data-bind="checked: usePercentage" /> Show percentage distribution per year
   </label>
+  <p>Use the mouse to hover over the bars to see additional information. Click on the labels beneath the chart to see changes</p>
 </div>

@@ -18,19 +18,21 @@ define('app/visualization/components/map/map' ,
         return 0;
       }
     }
+
     function setColor(data, color) {
       data.forEach(function(item) {
         item.color = color;
       });
       return data;
     }
+
     function requestData(stance, typeData, self) {
       var url, url1, url2, url3;
       var data;
       var req, req1, req2, req3;
-      var favorColor = '#2ECC40'; // GREEN
-      var againstColor = '#FF4136'; // RED
-      var noneColor = '#0074D9'; // BLUE
+      var favorColor = '#2ca02c'; // GREEN
+      var againstColor = '#ff7f0e'; // RED
+      var noneColor = '#1f77b4'; // BLUE
 
       if (typeData === 'Unseen data:') {
         if (stance === 'All') {
@@ -261,7 +263,7 @@ define('app/visualization/components/map/map' ,
           width: size ,
           height: size ,
           color: dataItem.color,
-          alpha: 0.8,
+          alpha: 1,
           bringForwardOnHover: false,
           longitude: latlong[id].longitude,
           latitude: latlong[id].latitude,

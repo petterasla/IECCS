@@ -222,6 +222,9 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
             ['Favor', 'Against', 'None']
           ]
         },
+        color: {
+          pattern: ['#2ca02c', '#ff7f0e', '#1f77b4']
+        },
         grid: {
           y: {
             lines: [{value:0}]

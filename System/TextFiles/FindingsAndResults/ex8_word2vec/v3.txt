@@ -1,0 +1,56 @@
+
+LogisticRegression( solver='lbfgs', multi_class='multinomial', class_weight='balanced')
+
+svm_clf = LinearSVC(C=1.17876863, multi_class='ovr'):
+CountVectorizer(analyzer="word", ngram_range=(1, 2), stop_words=None, max_features=None, decode_error='ignore')
+
+mnb_clf = MultinomialNB(alpha=0.1, fit_prior=False)
+CountVectorizer(decode_error='ignore', analyzer='word', ngram_range=(2, 3), stop_words='english', max_features=50000)),
+    TfidfTransformer(use_idf=True))
+
+
+================================================================================
+TRAIN
+================================================================================
+WORD2VEC VECTORS: word2vec
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1429    0.0488    0.0727        41
+      FAVOR     0.6544    0.7053    0.6789      2046
+       NONE     0.8455    0.8188    0.8319      4183
+
+avg / total     0.7785    0.7767    0.7770      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5278
+
+================================================================================
+VALIDATE
+================================================================================
+WORD2VEC VECTORS: word2vec
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1111    0.0588    0.0769        17
+      FAVOR     0.6830    0.7320    0.7067       877
+       NONE     0.8619    0.8355    0.8485      1793
+
+avg / total     0.7988    0.7968    0.7973      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5440
+
+
+================================================================================
+TEST
+================================================================================
+WORD2VEC VECTORS: word2vec
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.4000    0.2105    0.2759        19
+      FAVOR     0.6973    0.7338    0.7151       973
+       NONE     0.8645    0.8463    0.8553      1991
+
+avg / total     0.8070    0.8056    0.8059      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.6154

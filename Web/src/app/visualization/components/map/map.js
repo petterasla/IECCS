@@ -175,7 +175,7 @@ define('app/visualization/components/map/map' ,
       window.map.addTitle('from '+typeData, 11);
       window.map.areasSettings = {
         unlistedAreasColor: '#000000',
-        unlistedAreasAlpha: 0.1
+        unlistedAreasAlpha: 0.5
       };
       window.map.imagesSettings.balloonText = '<span style=font-size:14px;><b>[[title]]</b>: [[value]]</span>';
       var dataProvider = {

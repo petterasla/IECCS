@@ -24,3 +24,10 @@ Information about the sample removed is:
 IF THIS HAPPENS AGAIN, REMEMBER TO DELETE IN "meta_data.json" and in the mongoDB too.. FML.
 In MongoDB console, type this command (and remove #ID# with actual id):
 db.Data_wos.remove({_id:#ID#} ,{justOne:1})
+
+
+To med like abstracts i ny data. Følgende titler:
+"Ranibizumab and Bevacizumab for Neovascular Age-Related Macular Degeneration The CATT Research Group"
+"Climate Change and Spatiotemporal Distributions of Vector-Borne Diseases in Nepal - A Systematic Synthesis of Literature"
+
+Abstracts set from "Background" to "Background1" and "Background2"

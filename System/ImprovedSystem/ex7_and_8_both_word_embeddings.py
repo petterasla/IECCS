@@ -11,7 +11,7 @@ from System.DataProcessing.Word2Vec.word2vec_transformer import Word2VecVectoriz
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
-from sklearn.svm import LinearSVC
+from sklearn.svm import LinearSVC, SVC
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report
 from sklearn.cross_validation import cross_val_predict, StratifiedKFold
@@ -24,7 +24,7 @@ data = pd.read_csv(open('../TextFiles/data/tcp_train.csv'), sep='\t', index_col=
 val = pd.read_csv(open('../TextFiles/data/tcp_validate.csv'), sep='\t', index_col=0)
 test = pd.read_csv(open('../TextFiles/data/tcp_test.csv'), sep='\t', index_col=0)
 
-glove_fnames = glob('../DataProcessing/GloveVectorizer/vectors/*.pkl')
+glove_fnames = glob('../DataProcessing/GloveVectorizer/vectors/glove.840B.300d_tcp_abstracts.pkl')
 glove_ids = [fname.split('/')[-1].split('_')[0] for fname in glove_fnames]
 
 word2vec_fnames = glob('../DataProcessing/Word2Vec/vectors/word2vec_GoogleNews-vectors-negative300_tcp_abstracts.pkl')
@@ -40,7 +40,7 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
     word2vec_vecs = pd.read_pickle(word2vec_fnames[0])
 
     glove_clf = Pipeline([('vect', GloveVectorizer(glove_vecs)),
-                          ('clf', LogisticRegression(C=0.1,
+                          ('clf', LogisticRegression(
                                                      solver='lbfgs',
                                                      multi_class='multinomial',
                                                      class_weight='balanced',
@@ -54,15 +54,16 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
 
     word_clf = Pipeline([('vect', CountVectorizer(decode_error='ignore',
                                                   analyzer='word',
-                                                  ngram_range=(2, 3),
+                                                  ngram_range=(1, 1),
                                                   stop_words='english',
-                                                  max_features=50000)),
-                         ('tfidf', TfidfTransformer(use_idf=True)),
-                         ('clf', MultinomialNB(alpha=0.1, fit_prior=False))])
+                                                  max_features=None)),
+                         ('tfidf', TfidfTransformer(use_idf=False)),
+                         ('clf', SVC(C=5.2, kernel='linear', probability=True))])
 
     vote_pipeline = VotingClassifier(estimators=[('glove', glove_clf),
                                                  ('word2vec', word2vec_pipeline),
-                                                 ('mnb', word_clf)],
+                                                 ('mnb', word_clf)
+                                                 ],
                                      voting='soft')
 
     """
@@ -94,7 +95,7 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
 
     print 'macro-average of F-score(FAVOR) and F-score(AGAINST): {:.4f}\n'.format(macro_f)
 
-    testing = 1
+    testing = 0
     if testing:
 
         print 'TEST:'

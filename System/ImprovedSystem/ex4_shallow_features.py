@@ -109,8 +109,9 @@ if use_lemming:
 classifiers = [
     #LinearSVC(),
     #SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
-    MultinomialNB(),
-    #SGDClassifier()
+    #MultinomialNB(),
+    #SGDClassifier(),
+    SVC(C=5.2, kernel='linear')
 ]
 
 dev_score = []

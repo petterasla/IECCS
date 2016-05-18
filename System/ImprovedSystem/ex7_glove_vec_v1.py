@@ -17,13 +17,15 @@ from sklearn.metrics import classification_report
 from sklearn.cross_validation import cross_val_predict, StratifiedKFold
 from sklearn.metrics import fbeta_score
 from sklearn.ensemble import VotingClassifier
+import System.DataProcessing.process_data as ptd
 
 validate = 1
-testing = 1
+testing = 0
 
 data = pd.read_csv(open('../TextFiles/data/tcp_train.csv'), sep='\t', index_col=0)
 val = pd.read_csv(open('../TextFiles/data/tcp_validate.csv'), sep='\t', index_col=0)
 test = pd.read_csv(open('../TextFiles/data/tcp_test.csv'), sep='\t', index_col=0)
+
 
 glove_fnames = glob('../DataProcessing/GloveVectorizer/vectors/*.pkl')
 glove_ids = [fname.split('/')[-1].split('_')[0] for fname in glove_fnames]
@@ -35,7 +37,7 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
     print 80 * '='
 
     glove_vecs = pd.read_pickle(fname)
-    glove_clf = Pipeline([('vect', Word2VecVectorizer(glove_vecs)),
+    glove_clf = Pipeline([('vect', GloveVectorizer(glove_vecs)),
                           ('clf', LogisticRegression(
                                                      solver='lbfgs',
                                                      multi_class='multinomial',

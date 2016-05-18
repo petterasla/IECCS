@@ -14,14 +14,14 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.metrics import classification_report
 from sklearn.cross_validation import cross_val_predict, StratifiedKFold
 from sklearn.metrics import fbeta_score
-from sklearn.svm import LinearSVC
+from sklearn.svm import LinearSVC, SVC
 
 import pandas as pd
 
 # ***** SETTINGS   *****
 strength = 'soft'
 validate = 1
-test = 1
+test = 0
 if test:
     print("Applying on test data")
 else:
@@ -52,8 +52,8 @@ if validate:
 cv = StratifiedKFold(binaryStances, n_folds=10, shuffle=True, random_state=1)
 
 # ***** CLASSIFIER  *****
-clf = LinearSVC(C=1.9306977288832496)
-    #SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
+clf = SVC(C=5.2, kernel='linear')
+    #LinearSVC(C=1.9306977288832496)
     #MultinomialNB(alpha=0.5)
 
 # ***** TRAIN CLASSIFIERS   *****
@@ -64,10 +64,10 @@ print 80 * "="
 # Use optimized parameters from grid_search_improved
 pipeline = Pipeline([('vect', CountVectorizer(decode_error='ignore',
                                               analyzer='word',
-                                              ngram_range=(1,3),
-                                              stop_words=None,
+                                              ngram_range=(1, 1),
+                                              stop_words='english',
                                               max_features=None)),
-                     ('tfidf', TfidfTransformer(use_idf=True)),
+                     ('tfidf', TfidfTransformer(use_idf=False)),
                      ('clf', clf)])
 
 if validate:
@@ -117,7 +117,7 @@ else:
 
 
 # Select classifiers to use
-clf2 = LinearSVC(C=37.275937203149383)
+clf2 = SVC(C=5.2, kernel='linear')
     #SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
     #MultinomialNB(alpha=0.5)
 
@@ -128,12 +128,12 @@ print 80 * "="
 
 # Use optimized parameters from grid_search_improved
 pipeline2 = Pipeline([('vect', CountVectorizer(decode_error='ignore',
-                                              analyzer='word',
-                                              ngram_range=(1,1),
-                                              stop_words='english',
-                                              max_features=None)),
-                     ('tfidf', TfidfTransformer(use_idf=False)),
-                     ('clf', clf2)])
+                                               analyzer='word',
+                                               ngram_range=(1, 1),
+                                               stop_words='english',
+                                               max_features=None)),
+                      ('tfidf', TfidfTransformer(use_idf=False)),
+                      ('clf', clf2)])
 
 if validate:
     pipeline2.fit(data2.Abstract, data2.Stance)

@@ -14,10 +14,14 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.metrics import classification_report
 from sklearn.cross_validation import cross_val_predict, StratifiedKFold
 from sklearn.metrics import fbeta_score
-from sklearn.svm import LinearSVC
-from sklearn.linear_model import LogisticRegression
+from sklearn.svm import LinearSVC, SVC
+from sklearn.linear_model import LogisticRegression, SGDClassifier
+from sklearn.naive_bayes import MultinomialNB, BernoulliNB
 
 import pandas as pd
+import sklearn
+
+
 
 # ***** SETTINGS   *****
 use_upsample = 0
@@ -50,26 +54,31 @@ cv = StratifiedKFold(train_data.Stance, n_folds=10, shuffle=True, random_state=1
 
 # Select classifiers to use
 classifiers = [
-    #LinearSVC(C=1),
-    #SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
-    #MultinomialNB(alpha=0.5)
-    LogisticRegression()
+    LinearSVC(C=0.1),
+    #SVC(C=5.2, kernel='linear')
+    #MultinomialNB(alpha=0.63, fit_prior=True)
+    #LogisticRegression(C=22.759, penalty='l2', solver='lbfgs')
+    #SGDClassifier(alpha=0.0001, loss='squared_hinge')
+    #BernoulliNB(alpha=0.1, fit_prior=True)
 ]
 
 # ***** TRAIN CLASSIFIERS   *****
 for clf in classifiers:
-    print 80 * "="
-    print clf
-    print 80 * "="
+
 
     # Use optimized parameters from grid_search_improved
     pipeline = Pipeline([('vect', CountVectorizer(decode_error='ignore',
                                                   analyzer='word',
-                                                  ngram_range=(1, 1),
-                                                  stop_words=None,
-                                                  max_features=10000)),
+                                                  ngram_range=(1, 3),
+                                                  stop_words='english',
+                                                  max_features=None)),
                          #('tfidf', TfidfTransformer(use_idf=False)),
                          ('clf', clf)])
+
+    print 80 * "="
+    print clf
+    print pipeline
+    print 80 * "="
 
     pred_stances = cross_val_predict(pipeline, train_data.Abstract, train_data.Stance, cv=cv, n_jobs=10)
 
@@ -97,7 +106,7 @@ for clf in classifiers:
 #       Testing procedure       #
 #                               #
 #################################
-check_test = 1
+check_test = 0
 if check_test:
     train_and_validation = pd.concat([train_data, validate_data])
     for clf in classifiers:

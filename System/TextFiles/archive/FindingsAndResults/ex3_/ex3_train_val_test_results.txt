@@ -1,34 +1,40 @@
 using down sampling
 using up sampling
 ================================================================================
-LinearSVC(C=1.178, class_weight=None, dual=True, fit_intercept=True,
-     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
-     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
-     verbose=0)
+SVC(C=5.2, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Pipeline(steps=[('vect', CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 1), preprocessor=None, stop_words='english',
+       ...,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))])
 ================================================================================
              precision    recall  f1-score   support
 
-    AGAINST     0.8675    0.8780    0.8727        82
-      FAVOR     0.7124    0.6804    0.6960      1023
-       NONE     0.7462    0.7729    0.7593      1255
+    AGAINST     0.8182    0.8780    0.8471        82
+      FAVOR     0.6686    0.6882    0.6782      1023
+       NONE     0.7367    0.7155    0.7259      1255
 
-avg / total     0.7357    0.7364    0.7358      2360
+avg / total     0.7100    0.7093    0.7095      2360
 
-macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.7760
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.7504
 
 ================================================================================
 Validation score
 ================================================================================
              precision    recall  f1-score   support
 
-    AGAINST     1.0000    0.0588    0.1111        17
-      FAVOR     0.7015    0.5895    0.6406       877
-       NONE     0.8107    0.8812    0.8445      1793
+    AGAINST     1.0000    0.1765    0.3000        17
+      FAVOR     0.6542    0.6385    0.6463       877
+       NONE     0.8228    0.8388    0.8307      1793
 
-avg / total     0.7762    0.7808    0.7733      2687
+avg / total     0.7689    0.7693    0.7672      2687
 
-Validation macro F-score: 0.5321
-
+Validation macro F-score: 0.5923
 
 ================================================================================
 TEST RESULTS FOR
@@ -52,36 +58,46 @@ time =  119.126997948
 
 using down sampling
 ================================================================================
-LinearSVC(C=1.178, class_weight=None, dual=True, fit_intercept=True,
-     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
-     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
-     verbose=0)
+SVC(C=5.2, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Pipeline(steps=[('vect', CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 1), preprocessor=None, stop_words='english',
+       ...,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))])
 ================================================================================
              precision    recall  f1-score   support
 
-    AGAINST     0.2308    0.0732    0.1111        41
-      FAVOR     0.6944    0.6774    0.6858      1023
-       NONE     0.7355    0.7665    0.7507      1255
+    AGAINST     0.4348    0.2439    0.3125        41
+      FAVOR     0.6705    0.6804    0.6754      1023
+       NONE     0.7297    0.7315    0.7306      1255
 
-avg / total     0.7084    0.7150    0.7108      2319
+avg / total     0.6984    0.7003    0.6989      2319
 
-macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5159
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5728
 
 ================================================================================
 Validation score
 ================================================================================
              precision    recall  f1-score   support
 
-    AGAINST     1.0000    0.0588    0.1111        17
-      FAVOR     0.7015    0.5895    0.6406       877
-       NONE     0.8107    0.8812    0.8445      1793
+    AGAINST     1.0000    0.1765    0.3000        17
+      FAVOR     0.6542    0.6385    0.6463       877
+       NONE     0.8228    0.8388    0.8307      1793
 
-avg / total     0.7762    0.7808    0.7733      2687
+avg / total     0.7689    0.7693    0.7672      2687
 
-Validation macro F-score: 0.5321
+Validation macro F-score: 0.5923
 
 
-testing with down sampling
+time =  142.55870986
+
+
+testing with down sampling (SEPARATE RUN; NOT RELATED TO TRAIN/VAL)
 ================================================================================
 TEST RESULTS FOR
 LinearSVC(C=1.178, class_weight=None, dual=True, fit_intercept=True,
@@ -104,33 +120,43 @@ time =  161.145936012
 
 using up sampling
 ================================================================================
-LinearSVC(C=1.178, class_weight=None, dual=True, fit_intercept=True,
-     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
-     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
-     verbose=0)
+SVC(C=5.2, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Pipeline(steps=[('vect', CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 1), preprocessor=None, stop_words='english',
+       ...,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))])
 ================================================================================
              precision    recall  f1-score   support
 
-    AGAINST     0.9863    0.8780    0.9290        82
-      FAVOR     0.6654    0.5850    0.6226      2046
-       NONE     0.8078    0.8573    0.8318      4183
+    AGAINST     0.8861    0.8537    0.8696        82
+      FAVOR     0.6313    0.6051    0.6179      2046
+       NONE     0.8096    0.8267    0.8181      4183
 
-avg / total     0.7640    0.7693    0.7653      6311
+avg / total     0.7528    0.7552    0.7539      6311
 
-macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.7945
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.7685
 
 ================================================================================
 Validation score
 ================================================================================
              precision    recall  f1-score   support
 
-    AGAINST     1.0000    0.0588    0.1111        17
-      FAVOR     0.7015    0.5895    0.6406       877
-       NONE     0.8107    0.8812    0.8445      1793
+    AGAINST     1.0000    0.1765    0.3000        17
+      FAVOR     0.6542    0.6385    0.6463       877
+       NONE     0.8228    0.8388    0.8307      1793
 
-avg / total     0.7762    0.7808    0.7733      2687
+avg / total     0.7689    0.7693    0.7672      2687
 
-Validation macro F-score: 0.5321
+Validation macro F-score: 0.5923
+
+
+time =  175.217615128
 
 
 testing with up sampling

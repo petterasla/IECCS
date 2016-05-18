@@ -19,7 +19,9 @@ import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 
-data = pd.read_csv(open("../../TextFiles/data/tcp_abstracts.txt"))
+data1 = pd.read_csv(open("../../TextFiles/data/tcp_abstracts.txt"))
+data2 = pd.read_json(open("../../TextFiles/data/related_data_correct_v1.json"))
+data = pd.concat([data1, data2])
 
 # First establish the vocabulary of all abstracts.
 # lowercase because Glove terms are lowercased
@@ -30,12 +32,12 @@ vectorizer.fit(data.Abstract)
 abstract_vocab = set(vectorizer.get_feature_names())
 
 # base dir for local copies of Glove vectors for different corpora & dimensions
-base_dir = '/Volumes/My Passport/glove'
+#base_dir = '/Volumes/My Passport/glove/glove.840B.300d.txt'
 
 # glob pattern for Glove vectors
-glove_fnames = glob(base_dir + '/*.txt')# + glob(base_dir + '/*/*.txt')
+glove_fnames = ['/Volumes/My Passport/glove/glove.840B.300d.txt']#glob(base_dir + '/.txt')# + glob(base_dir + '/*/*.txt')
 
-out_dir = '/Users/Henrik/Documents/Datateknikk/Prosjektoppgave/IECCS/System/DataProcessing/GloveVectorizer/vectors'
+out_dir = '/Users/petterasla/Desktop/Skole/9. semester/In-Depth project/IECCS/System/DataProcessing/GloveVectorizer/finalVec'
 
 # Read the Glove vectors Slurping the whole file with pd.read_cvs does not
 # work as the table gets get truncated! Presumably because of some kind of

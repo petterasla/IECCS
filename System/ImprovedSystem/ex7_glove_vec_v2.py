@@ -24,7 +24,11 @@ data = pd.read_csv(open('../TextFiles/data/tcp_train.csv'), sep='\t', index_col=
 val = pd.read_csv(open('../TextFiles/data/tcp_validate.csv'), sep='\t', index_col=0)
 test = pd.read_csv(open('../TextFiles/data/tcp_test.csv'), sep='\t', index_col=0)
 
-glove_fnames = glob('../DataProcessing/GloveVectorizer/vectors/*.pkl')
+#glove_fnames1 = glob('../DataProcessing/GloveVectorizer/vectors/glove.6B.300d_tcp_abstracts.pkl')
+glove_fnames = glob('../DataProcessing/GloveVectorizer/vectors/glove.840B.300d_tcp_abstracts.pkl')
+#glove_fnames = glove_fnames1 + glove_fnames2
+print glove_fnames
+
 glove_ids = [fname.split('/')[-1].split('_')[0] for fname in glove_fnames]
 
 # *****     FINDING BEST VECTOR SPACE     *****
@@ -53,7 +57,7 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
                                              ('linear', char_clf)],
                                      voting='soft')
 
-    """
+
     print "TRAIN"
     print 80 * '='
     cv = StratifiedKFold(data.Stance, n_folds=10, shuffle=True, random_state=1)
@@ -82,8 +86,8 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
                           average='macro')
 
     print 'macro-average of F-score(FAVOR) and F-score(AGAINST): {:.4f}\n'.format(macro_f)
-
-    testing = 1
+    """
+    testing = 0
     if testing:
         print "TEST"
         print 80 * '='

@@ -31,7 +31,7 @@ print word2vec_ids
 
 
 w2vec_clf = LogisticRegression( solver='lbfgs', multi_class='multinomial', class_weight='balanced')
-svm_clf = SVC(C=5.17876863, kernel='linear', probability=True)
+svm_clf = SVC(C=5.2, kernel='linear', probability=True)
 
 # *****     FINDING BEST VECTOR SPACE     *****
 print 80 * '='
@@ -46,18 +46,18 @@ word2vec_clf = Pipeline([('vect', Word2VecVectorizer(word2vec_vecs)),
                               ('clf', w2vec_clf)])
 
 linear_clf = Pipeline([('vect', CountVectorizer(analyzer="word",
-                                   ngram_range=(1, 2),
-                                   stop_words=None,
+                                   ngram_range=(1, 1),
+                                   stop_words='english',
                                    max_features=None,
                                    decode_error='ignore')),
-          #('tfidf', TfidfTransformer(use_idf=False)),
+          ('tfidf', TfidfTransformer(use_idf=False)),
           ('clf', svm_clf)])
 
 vote_pipeline = VotingClassifier(estimators=[('glove', word2vec_clf),
                                             ('linear', linear_clf)],
                                             voting='soft')
 
-
+"""
 cv = StratifiedKFold(train_data.Stance, n_folds=10, shuffle=True, random_state=1)
 
 pred_stances = cross_val_predict(vote_pipeline, train_data.Abstract, train_data.Stance, cv=cv)
@@ -69,7 +69,7 @@ macro_f = fbeta_score(train_data.Stance, pred_stances, 1.0,
                       average='macro')
 
 print 'macro-average of F-score(FAVOR) and F-score(AGAINST): {:.4f}\n'.format(macro_f)
-
+"""
 
 print 80 * '='
 print "VALIDATE"
@@ -91,7 +91,7 @@ macro_f = fbeta_score(validate_data.Stance, pred_stances, 1.0,
 print 'macro-average of F-score(FAVOR) and F-score(AGAINST): {:.4f}\n'.format(macro_f)
 
 
-test = 1
+test = 0
 
 if test:
     print 80 * '='

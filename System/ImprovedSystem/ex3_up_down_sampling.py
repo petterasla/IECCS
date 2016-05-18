@@ -14,15 +14,15 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.metrics import classification_report
 from sklearn.cross_validation import cross_val_predict, StratifiedKFold
 from sklearn.metrics import fbeta_score
-from sklearn.svm import LinearSVC
+from sklearn.svm import LinearSVC, SVC
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import MultinomialNB
 
 import pandas as pd
 
 # ***** SETTINGS   *****
-use_upsample = 1
-use_downsample = 0
+use_upsample = 0
+use_downsample = 1
 
 downsample_rate_favor = 0.5
 downsample_rate_none = 0.3
@@ -49,34 +49,36 @@ else:
 
 if use_upsample:
     print("using up sampling")
-    train_data = pd.concat([train_data, train_data[train_data.Stance == "AGAINST"], train_data[train_data.Stance == "AGAINST"], train_data[train_data.Stance == "AGAINST"]])
+    train_data = pd.concat([train_data, train_data[train_data.Stance == "AGAINST"]])
 
 
 cv = StratifiedKFold(train_data.Stance, n_folds=10, shuffle=True, random_state=1)
 
 # Select classifiers to use
 classifiers = [
-    LinearSVC(C=1.178),
-    #SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
+    #LinearSVC(C=1.178),
+    SVC(kernel='linear', C=5.2)
     #MultinomialNB(alpha=0.1, fit_prior=False)
     #LogisticRegression()
 ]
 
 # ***** TRAIN CLASSIFIERS   *****
 for clf in classifiers:
-    print 80 * "="
-    print clf
-    print 80 * "="
+
 
     # Use optimized parameters from grid_search_improved
     pipeline = Pipeline([('vect', CountVectorizer(decode_error='ignore',
                                                   analyzer='word',
-                                                  ngram_range=(1, 2),
-                                                  stop_words=None,
+                                                  ngram_range=(1, 1),
+                                                  stop_words='english',
                                                   max_features=None)),
-                         #('tfidf', TfidfTransformer(use_idf=True)),
+                         ('tfidf', TfidfTransformer(use_idf=False)),
                          ('clf', clf)])
 
+    print 80 * "="
+    print clf
+    print pipeline
+    print 80 * "="
     pred_stances = cross_val_predict(pipeline, train_data.Abstract, train_data.Stance, cv=cv, n_jobs=10)
 
     print classification_report(train_data.Stance, pred_stances, digits=4)
@@ -103,7 +105,7 @@ for clf in classifiers:
 #       Testing procedure       #
 #                               #
 #################################
-check_test = 1
+check_test = 0
 if check_test:
     if use_downsample:
         print("testing with down sampling")

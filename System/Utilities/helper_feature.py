@@ -50,7 +50,8 @@ feature_dict = {
                                      analyzer='word',
                                      ngram_range=(1, 1),
                                      stop_words='english',
-                                     max_features=50000)),
+                                     max_features=None,
+                                     use_idf=False)),
         ])),
 
     "year-feat": ('year', FunctionTransformer(meta.getYearFeature, validate=False)),

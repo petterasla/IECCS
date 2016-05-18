@@ -32,6 +32,7 @@ from sklearn.svm import LinearSVC, SVC
 from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.cross_validation import StratifiedKFold
+from sklearn.naive_bayes import MultinomialNB
 
 import System.Utilities.write_to_file as write
 
@@ -69,24 +70,26 @@ print()
 # classifier
 pipeline = Pipeline([
     ('vect', CountVectorizer()),
-    ('tfidf', TfidfTransformer()),
-    #('clf', MultinomialNB()),
-    ('clf', LinearSVC()),
+    #('tfidf', TfidfTransformer()),
+    ('clf', MultinomialNB()),
+    #('clf', LinearSVC()),
     #('clf', SVC()),
 ])
 
 # uncommenting more parameters will give better exploring power but will
 # increase processing time in a combinatorial way
 parameters = {
-    'vect__analyzer': ['word'],
-    'vect__ngram_range': [(1, 1), (1,2), (1,3)],
+    'vect__analyzer': ['word', 'char'],
+    'vect__ngram_range': [(1, 1), (1,2), (1,3), (2, 3)],
     'vect__stop_words': [None, 'english'],
-    'vect__max_features': (None, 50000),
-    'tfidf__use_idf': (True, False),
+    #'vect__max_features': (None, 50000),
     #'clf__kernel': ['rbf', 'linear', 'poly', 'sigmoid'],
     #'clf__shrinking': (True, False),
     #'clf__decision_function_shape': ['ovo', 'ovr', None],
-    'clf__C' : np.logspace(-6,2,33),
+    #'clf__C' : np.logspace(-1, 1.3, 6),
+    #'clf__kernel': ['linear']
+    'clf__alpha': np.logspace(-1,0,6),
+    'clf__fit_prior': [True, False]
     #'clf__penalty' : ['l1', 'l2'],
     #'clf__tol' : np.linspace(0.0001,1,11)
 }
@@ -96,7 +99,8 @@ if __name__ == "__main__":
 
     # find the best parameters for both the feature extraction and the
     # classifier
-    grid_search = GridSearchCV(pipeline, parameters, n_jobs=10, verbose=1, cv=cv)
+    grid_search = GridSearchCV(pipeline, parameters, n_jobs=10, verbose=1, cv=cv,
+                               scoring='f1_macro')
 
     print("Performing grid search...")
     write.writeTextToFile("Performing grid search...",file)

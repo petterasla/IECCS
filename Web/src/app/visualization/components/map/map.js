@@ -34,9 +34,12 @@ define('app/visualization/components/map/map' ,
       var againstColor = '#ff7f0e'; // RED
       var noneColor = '#1f77b4'; // BLUE
 
-      if (typeData === 'Unseen data:') {
+      if (typeData === 'Unseen data') {
         if (stance === 'All') {
-          url = 'https://ieccs.herokuapp.com/api/visual/new/organization/' + stance;
+          //url = 'https://ieccs.herokuapp.com/api/visual/new/organization/' + stance;
+          url1 = 'https://ieccs.herokuapp.com/api/visual/new/organization/FAVOR';
+          url2 = 'https://ieccs.herokuapp.com/api/visual/new/organization/AGAINST';
+          url3 = 'https://ieccs.herokuapp.com/api/visual/new/organization/NONE';
         }
         else {
           url = 'https://ieccs.herokuapp.com/api/visual/new/organization/' + stance.toUpperCase();

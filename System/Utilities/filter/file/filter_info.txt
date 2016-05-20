@@ -1,0 +1,167 @@
+/usr/local/bin/python "/Users/petterasla/Desktop/Skole/9. semester/In-Depth project/IECCS/System/Utilities/filter/filtering_related_data.py"
+/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/nltk/twitter/__init__.py:20: UserWarning: The twython library has not been installed. Some functionality from the twitter package will not be available.
+  warnings.warn("The twython library has not been installed. "
+================================================================================
+Abstract filter:
+================================================================================
+
+len of data: 83507
+len of data after: 82548
+
+================================================================================
+Duplicate filter:
+================================================================================
+
+len of related data: 82548
+
+	key: WOS:000362016100069 	 Value: 1.0
+	key: WOS:000373241300022 	 Value: 1.0
+	key: WOS:000338311400001 	 Value: 1.0
+	key: WOS:000285660500001 	 Value: 2.0
+	key: WOS:000360184600013 	 Value: 1.0
+	key: WOS:000326125700013 	 Value: 2.0
+	key: WOS:000324968700006 	 Value: 1.0
+	key: WOS:000338596600017 	 Value: 1.0
+	key: WOS:000348192900031 	 Value: 1.0
+	key: WOS:000306406300001 	 Value: 1.0
+
+len of related data: 12477
+
+================================================================================
+Common TCP 2011 filter:
+================================================================================
+
+len of incomming data: 12477
+old length 2011: 1555
+new length 2011: 2328
+Number of identical papers = 46
+
+len of new data 2011 after processed: 2282
+len of new data total: 12431
+
+================================================================================
+Subject filter:
+================================================================================
+
+Len of data: 12431
+len of new subjects  = 69244
+[u'oncology', u'biomedical social sciences', u'meteorology & atmospheric sciences', u'nanoscience & nanotechnology', u'arts & humanities - other topics', u'allergy', u'mycology', u'radio & television', u'fisheries', u'atomic', u'molecular & chemical', u'sci', u'evolutionary biology', u'substance abuse', u'area studies', u'geography', u'forestry', u'fluids & plasmas', u'public administration', u'general & internal medicine', u'multidisciplinary', u'education', u'mathematical methods', u'geological', u'cell & tissue engineering', u'otorhinolaryngology', u'thermodynamics', u'materials science', u'biomedical', u'cardiovascular system & cardiology', u'ssci', u'ceramics', u'biodiversity conservation', u'nuclear medicine & medical imaging', u'clinical neurology', u'finance', u'interdisciplinary', u'paleontology', u'linguistics', u'cardiac & cardiovascular systems', u'entomology', u'neuroimaging', u'leisure', u'ethnic studies', u'ophthalmology', u'aerospace', u'astronomy & astrophysics', u'multidisciplinary sciences', u'infectious diseases', u'special', u'legal medicine', u'immunology', u'virology', u'microscopy', u'veterinary sciences', u'biomaterials', u'architecture', u'demography', u'analytical', u'biological', u'composites', u'government & law', u'optics', u'medical informatics', u'geriatrics & gerontology', u'agricultural engineering', u'ecology', u'developmental biology', u'literary theory & criticism', u'biochemical research methods', u'textiles', u'rheumatology', u'nutrition & dietetics', u'audiology & speech-language pathology', u'nuclear science & technology', u'biodiversity & conservation', u'environmental sciences', u'health care sciences & services', u'dermatology', u'sport sciences', u'surgery', u'crystallography', u'agriculture', u'social sciences', u'life sciences & biomedicine - other topics', u'construction & building technology', u'sociology', u'psychology', u'energy & fuels', u'scientific disciplines', u'nuclear', u'microbiology', u'legal', u'planning & development', u'religion', u'parasitology', u'general & internal', u'plant sciences', u'medicine', u'medical ethics', u'archaeology', u'public', u'law', u'neurosciences', u'biology', u'philosophy', u'pediatrics', u'anatomy & morphology', u'business', u'transportation science & technology', u'environmental & occupational health', u'inorganic & nuclear', u'geochemistry & geophysics', u'anthropology', u'management', u'oceanography', u'manufacturing', u'marine', u'behavioral sciences', u'particles & fields', u'polymer science', u'organic', u'operations research & management science', u'economics', u'rehabilitation', u'neurosciences & neurology', u'history & philosophy of science', u'social', u'toxicology', u'sport & tourism', u'geosciences', u'experimental', u'instruments & instrumentation', u'mathematical', u'industrial', u'mineralogy', u'civil', u'communication', u'health policy & services', u'robotics', u'soil science', u'urban studies', u'respiratory system', u'cybernetics', u'family studies', u'zoology', u'art', u'interdisciplinary applications', u'telecommunications', u'international relations', u'logic', u'horticulture', u'radiology', u'science & technology - other topics', u'emergency medicine', u"women's studies", u'peripheral vascular disease', u'petroleum', u'metallurgy & metallurgical engineering', u'hematology', u'physiology', u'andrology', u'clinical', u'music', u'coatings & films', u'urology & nephrology', u'artificial intelligence', u'genetics & heredity', u'transportation', u'language & linguistics', u'limnology', u'reproductive biology', u'marine & freshwater biology', u'imaging science & photographic technology', u'environmental', u'endocrinology & metabolism', u'mining & mineral processing', u'oral surgery & medicine', u'dentistry', u'business & economics', u'obstetrics & gynecology', u'applied', u'television', u'asian studies', u'physical geography', u'tropical medicine', u'medical laboratory technology', u'hardware & architecture', u'electrochemistry', u'biotechnology & applied microbiology', u'spectroscopy', u'medicinal', u'social sciences - other topics', u'radio', u'history', u'mechanics', u'research & experimental medicine', u'criminology & penology', u'nursing', u'research & experimental', u'ornithology', u'primary health care', u'mathematical & computational biology', u'engineering', u'romance', u'ergonomics', u'agricultural economics & policy', u'electrical & electronic', u'orthopedics', u'agronomy', u'ocean', u'psychoanalysis', u'pathology', u'film', u'physical', u'educational', u'theory & methods', u'statistics & probability', u'humanities', u'integrative & complementary medicine', u'geology', u'education & educational research', u'environmental sciences & ecology', u'chemical', u'water resources', u'environmental studies', u'transplantation', u'computer science', u'industrial relations & labor', u'mathematics', u'history of social sciences', u'social issues', u'literature', u'pharmacology & pharmacy', u'developmental', u'information science & library science', u'automation & control systems', u'social work', u'anesthesiology', u'condensed matter', u'biophysics', u'food science & technology', u'cultural studies', u'political science', u'hospitality', u'ethics', u'paper & wood', u'cell biology', u'information systems', u'software engineering', u'remote sensing', u'acoustics', u'characterization & testing', u'critical care medicine', u'dairy & animal science', u'mathematical methods in social sciences', u'gastroenterology & hepatology', u'mechanical', u'psychiatry', u'chemistry', u'physics', u'biochemistry & molecular biology']
+len of unique new subjects = 262
+
+dumped file with path: file/new_unique_subjects.json
+len of TCP data: 11940
+len of old subjects = 67693
+[u'meteorology & atmospheric sciences', u'arts & humanities - other topics', u'allergy', u'mycology', u'fisheries', u'atomic', u'molecular & chemical', u'nuclear science & technology', u'evolutionary biology', u'pediatrics', u'geography', u'chemical', u'fluids & plasmas', u'operations research & management science', u'general & internal medicine', u'multidisciplinary', u'mathematical methods', u'geological', u'otorhinolaryngology', u'thermodynamics', u'biomedical', u'ssci', u'obstetrics & gynecology', u'biodiversity conservation', u'materials science', u'clinical neurology', u'interdisciplinary', u'paleontology', u'entomology', u'hematology', u'ophthalmology', u'aerospace', u'astronomy & astrophysics', u'multidisciplinary sciences', u'infectious diseases', u'immunology', u'virology', u'veterinary sciences', u'biomaterials', u'architecture', u'analytical', u'biological', u'composites', u'polymer science', u'optics', u'medical informatics', u'geriatrics & gerontology', u'agricultural engineering', u'ecology', u'developmental biology', u'biochemical research methods', u'nutrition & dietetics', u'audiology & speech-language pathology', u'mining & mineral processing', u'biodiversity & conservation', u'environmental sciences', u'dermatology', u'electrical & electronic', u'surgery', u'crystallography', u'agriculture', u'imaging science & photographic technology', u'life sciences & biomedicine - other topics', u'social sciences', u'construction & building technology', u'research & experimental medicine', u'cell biology', u'nuclear medicine & medical imaging', u'energy & fuels', u'scientific disciplines', u'nuclear', u'microbiology', u'legal', u'parasitology', u'general & internal', u'plant sciences', u'medicine', u'archaeology', u'public', u'law', u'neurosciences', u'biology', u'transportation', u'business', u'transportation science & technology', u'environmental & occupational health', u'inorganic & nuclear', u'geochemistry & geophysics', u'food science & technology', u'anthropology', u'health care sciences & services', u'oceanography', u'manufacturing', u'marine', u'physiology', u'particles & fields', u'government & law', u'organic', u'economics', u'rehabilitation', u'neurosciences & neurology', u'history & philosophy of science', u'social', u'toxicology', u'dairy & animal science', u'sci', u'instruments & instrumentation', u'mathematical', u'industrial', u'mineralogy', u'civil', u'health policy & services', u'robotics', u'legal medicine', u'respiratory system', u'cybernetics', u'zoology', u'interdisciplinary applications', u'telecommunications', u'horticulture', u'management', u'science & technology - other topics', u'petroleum', u'metallurgy & metallurgical engineering', u'behavioral sciences', u'mathematical & computational biology', u'urology & nephrology', u'biotechnology & applied microbiology', u'artificial intelligence', u'genetics & heredity', u'limnology', u'reproductive biology', u'marine & freshwater biology', u'environmental', u'endocrinology & metabolism', u'sociology', u'nanoscience & nanotechnology', u'business & economics', u'ceramics', u'applied', u'geosciences', u'physical geography', u'tropical medicine', u'hardware & architecture', u'electrochemistry', u'urban studies', u'spectroscopy', u'medicinal', u'social sciences - other topics', u'history', u'mechanics', u'nursing', u'research & experimental', u'ornithology', u'coatings & films', u'engineering', u'radiology', u'agricultural economics & policy', u'sport sciences', u'textiles', u'agronomy', u'education', u'pathology', u'physical', u'soil science', u'statistics & probability', u'humanities', u'integrative & complementary medicine', u'geology', u'education & educational research', u'environmental sciences & ecology', u'forestry', u'water resources', u'environmental studies', u'transplantation', u'computer science', u'mathematics', u'social issues', u'pharmacology & pharmacy', u'information science & library science', u'automation & control systems', u'philosophy', u'anesthesiology', u'condensed matter', u'biophysics', u'theory & methods', u'ethics', u'paper & wood', u'psychology', u'information systems', u'software engineering', u'remote sensing', u'acoustics', u'characterization & testing', u'critical care medicine', u'ocean', u'mathematical methods in social sciences', u'mechanical', u'psychiatry', u'chemistry', u'physics', u'biochemistry & molecular biology']
+len of unique old subjects = 202
+
+dumped file with path: file/old_unique_subjects.json
+Number of subjects in related data found in original = 202
+
+Subjects not in original data:
+Lenght of unreq data: 60
+Found: 11437
+Not found: 984
+
+Number of related records = 11505
+Added 68 samples which included 'climate'
+Filtered away: 916
+
+Three samples which were filtered away:
+
+	WOS:000293629700011
+	Subjects: [u'Agricultural Economics & Policy', u'Economics', u'Agriculture', u'Business & Economics', u'AGRICULTURAL ECONOMICS & POLICY', u'ECONOMICS']
+	The role of traders and traditional exchange institutions has received little attention in empirical research on rural markets in developing countries. We use detailed data on transactions in a village commodity market in India and identify two observed anomalies: first, the repeal of the law of one price, and second, a trader-idiosyncratic effect, namely that large volumes are sold to a trader who does not offer the best price. Econometric analysis demonstrates that trader idiosyncrasy can largely be explained by reciprocity motives in interlocked village markets. Reciprocity leads to market inefficiencies and can result in unexpected supply responses.
+
+	WOS:000308994700009
+	Subjects: [u'Political Science', u'Psychology, Social', u'Government & Law', u'Psychology', u'POLITICAL SCIENCE', u'PSYCHOLOGY, SOCIAL']
+	The issues surrounding rising levels of atmospheric CO2 and climate change have become part of the collective conscious and the vernacular of world leaders, media, and the public alike. Despite the widespread concern and attention, attempts to achieve a global commitment to mitigate climate change are failing. In this article, we suggest that the Actualizing Social and Personal Identity Resources model (ASPIRe; Haslam, Eggins, & Reynolds, 2003), developed to help organizations become more sustainable and productive, can promote more efficient negotiations in matters of global environmental concern. Using this model as a framework, the dynamics of the United Nations (UN) meeting in Copenhagen are scrutinized along with suggestions for how to structure future negotiations. Building on an understanding of existing UN-type committee structures, it is argued that as the interests of individual nations and those of like-minded other nations (subgroup interests) become the real basis for decision making on the issue of climate change the more likely it is that a higher-order superordinate identity will emerge, which promotes aligned action. To date, the psychological aspects of social and behavioral change have been neglected, which could be a factor in explaining the lack of coordinated action on climate change.
+
+	WOS:000328719400014
+	Subjects: [u'Psychology, Clinical', u'Psychology', u'PSYCHOLOGY, CLINICAL']
+	Recent research has supported the use of mindfulness and acceptance-based interventions for Social Anxiety Disorder (SAD).
+
+Subjects not found in TCP data and not found in the hand-picked subjects AKA unrecognizable subjects:
+
+	acoustics
+	anatomy & morphology
+	andrology
+	area studies
+	art
+	artificial intelligence
+	asian studies
+	biomedical social sciences
+	business
+	business & economics
+	cardiac & cardiovascular systems
+	cardiovascular system & cardiology
+	cell & tissue engineering
+	clinical
+	communication
+	criminology & penology
+	cultural studies
+	demography
+	dentistry
+	developmental
+	educational
+	emergency medicine
+	ergonomics
+	ethnic studies
+	experimental
+	family studies
+	film
+	finance
+	gastroenterology & hepatology
+	government & law
+	hardware & architecture
+	history of social sciences
+	hospitality
+	industrial relations & labor
+	international relations
+	language & linguistics
+	law
+	legal
+	leisure
+	linguistics
+	literary theory & criticism
+	literature
+	logic
+	medical ethics
+	medical laboratory technology
+	microscopy
+	music
+	neuroimaging
+	oncology
+	oral surgery & medicine
+	orthopedics
+	peripheral vascular disease
+	planning & development
+	political science
+	primary health care
+	psychoanalysis
+	public administration
+	radio
+	radio & television
+	religion
+	rheumatology
+	robotics
+	romance
+	social work
+	special
+	sport & tourism
+	substance abuse
+	telecommunications
+	television
+	textiles
+	women's studies
+dumped file with path: file/new_subjects_not_found_in_TCP_subjects.json
+
+Lenght of unrec subjects: 71
+len of final filter: 11505
+
+================================================================================
+Storing:
+================================================================================
+
+dumped file with path: related_data_correct_v2.json
+
+Process finished with exit code 0

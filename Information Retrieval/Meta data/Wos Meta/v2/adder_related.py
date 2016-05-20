@@ -67,8 +67,6 @@ def getAddressSpec(list, tryNumber):
         individual = [country, city, street, org]
         return individual
     except:
-        if individual is None:
-            print("Organization_spec was 'None' with try {} out of 3".format(tryNumber))
         return individual
 
 
@@ -133,17 +131,9 @@ def getSubjects(root):
         return None
 
 def getPublisherInfo(root):
-    address = root.findall("static_data/summary/publishers/publisher/address_spec/full_address")[0].text
-    city = root.findall("static_data/summary/publishers/publisher/address_spec/city")[0].text
-    name = root.findall("static_data/summary/publishers/publisher/names/name/full_name")[0].text
     try:
-        pub_info = [i.strip() for i in address.split(",")]
-        if len(city) > 0:
-            pub_info[1] = city
-        pub_info.append(name)
-
-        if len(pub_info) > 0:
-            return pub_info.reverse()
+        full_address = root.findall("static_data/summary/publishers/publisher/address_spec/full_address")[0].text
+        return full_address
     except:
         #print("No publisher info found")
         return None
@@ -201,7 +191,7 @@ def getAbstract(root):
         return None
 
 def getTitle(root):
-    ret = root.findall(".REC/static_data/summary/titles/")
+    ret = root.findall("static_data/summary/titles/")
 
     try:
         titles = [i.text for i in ret]

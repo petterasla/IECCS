@@ -3,7 +3,7 @@ import pandas as pd
 import json
 import numpy as np
 
-def filterSubjects(data):
+def filterSubjects(data, store=False):
 
     with open("../../TextFiles/data/meta_data.json", "r") as f:
         original_data = json.load(f)
@@ -20,7 +20,7 @@ def filterSubjects(data):
     uniq = list(set(s))
     print uniq
     print("len of unique new subjects = {}\n".format(len(uniq)))
-    storeToJson(uniq, "file/new_unique_subjects.json")
+
 
     print("len of TCP data: {}".format(len(original_data)))
     s_o = []
@@ -37,9 +37,6 @@ def filterSubjects(data):
     uniq_o = list(set(s_o))
     print uniq_o
     print("len of unique old subjects = {}\n".format(len(uniq_o)))
-
-    storeToJson(uniq_o, "file/old_unique_subjects.json")
-
 
     counter = 0
     for subject in uniq:
@@ -127,7 +124,6 @@ def filterSubjects(data):
     for s in unrec_sub_store:
         print("\t{}".format(s))
 
-    storeToJson(unrec_sub_store, "file/new_subjects_not_found_in_TCP_subjects.json")
 
     print("\nLenght of unrec subjects: {}".format(len(unrecognized_subjects)))
 
@@ -136,6 +132,11 @@ def filterSubjects(data):
         for d in data:
             if d["WOS"] == ids:
                 final_filter.append(d)
+
+    if store:
+        storeToJson(uniq_o, "file/old_unique_subjects.json")
+        storeToJson(uniq, "file/new_unique_subjects.json")
+        storeToJson(unrec_sub_store, "file/new_subjects_not_found_in_TCP_subjects.json")
 
     print("len of final filter: {}".format(len(final_filter)))
     return final_filter
@@ -201,7 +202,15 @@ def filterDuplicates(data):
     print("\nlen of related data: {}".format(len(new_data)))
     return new_data
 
+def filter2011(data):
+    new_data = []
+    print("len of incomming data: {}".format(len(data)))
+    for d in data:
+        if d["Publication_year"] != "2011":
+            new_data.append(d)
 
+    print("len of after removing 2011 data: {}".format(len(new_data)))
+    return new_data
 
 def filterAbstracts(data):
     new_data = []
@@ -211,6 +220,7 @@ def filterAbstracts(data):
             new_data.append(dic)
     print("len of data after: {}".format(len(new_data)))
     return new_data
+
 
 
 def convertToInt(data):
@@ -224,6 +234,11 @@ def storeToJson(file, path):
         print("dumped file with path: {}".format(path))
 
 def filter_process(store=False):
+    # Small batch
+    #with open("../../TextFiles/data/related_data.json", "r") as f:
+    #    data = json.load(f)
+
+    # Large batch
     with open("one_file.json", "r") as f:
         data = json.load(f)
 
@@ -234,10 +249,16 @@ def filter_process(store=False):
     data_with_abs = filterAbstracts(data)
     print
     print 80*'='
+    print "2011 filter:"
+    print 80*'='
+    print
+    data_no_2011 = filter2011(data_with_abs)
+    print
+    print 80*'='
     print "Duplicate filter:"
     print 80*'='
     print
-    data_no_dup = filterDuplicates(data_with_abs)
+    data_no_dup = filterDuplicates(data_no_2011)
     print
     print 80*'='
     print "Common TCP 2011 filter:"
@@ -249,13 +270,13 @@ def filter_process(store=False):
     print "Subject filter:"
     print 80*'='
     print
-    data_relevant_subjects = filterSubjects(data_no_common_with_tcp)
+    data_relevant_subjects = filterSubjects(data_no_common_with_tcp, store=True)
     print
     print 80*'='
     print "Storing:"
     print 80*'='
     print
     if store:
-        storeToJson(data_relevant_subjects, "related_data_correct_v2.json")
+        storeToJson(data_relevant_subjects, "related_data_correct_v3_post2011_many.json")
 
-filter_process(True)
+filter_process(store=False)

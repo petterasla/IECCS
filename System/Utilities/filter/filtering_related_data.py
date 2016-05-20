@@ -20,6 +20,7 @@ def filterSubjects(data):
     uniq = list(set(s))
     print uniq
     print("len of unique new subjects = {}\n".format(len(uniq)))
+    storeToJson(uniq, "file/new_unique_subjects.json")
 
     print("len of TCP data: {}".format(len(original_data)))
     s_o = []
@@ -36,6 +37,8 @@ def filterSubjects(data):
     uniq_o = list(set(s_o))
     print uniq_o
     print("len of unique old subjects = {}\n".format(len(uniq_o)))
+
+    storeToJson(uniq_o, "file/old_unique_subjects.json")
 
 
     counter = 0
@@ -69,6 +72,8 @@ def filterSubjects(data):
     ]
     for s in f_subs:
         unrecognized_subjects.append(s)
+
+    unrecognized_subjects = list(set(unrecognized_subjects))
     ## EX:
     ## [u'Geosciences, Multidisciplinary', u'Geology', u'GEOSCIENCES, MULTIDISCIPLINARY']
     for i, d in enumerate(data):
@@ -118,8 +123,11 @@ def filterSubjects(data):
                 print("\t{}\n".format(abstract))
 
     print("Subjects not found in TCP data and not found in the hand-picked subjects AKA unrecognizable subjects:\n")
-    for s in sorted(unrecognized_subjects):
+    unrec_sub_store = sorted(unrecognized_subjects)
+    for s in unrec_sub_store:
         print("\t{}".format(s))
+
+    storeToJson(unrec_sub_store, "file/new_subjects_not_found_in_TCP_subjects.json")
 
     print("\nLenght of unrec subjects: {}".format(len(unrecognized_subjects)))
 
@@ -133,35 +141,43 @@ def filterSubjects(data):
     return final_filter
 
 def filterCommonTCP(data):
-    new_data = []
+    new_2011 = []
+    new_2011_processed = []
+    new_data_total = []
+    print("len of incomming data: {}".format(len(data)))
 
     old = pd.read_json("../../TextFiles/data/meta_data.json")
     old_2011 = old[old.Publication_year == 2011]
     old_2011_wos = old_2011.WOS.unique().tolist()
 
     data_temp = convertToInt(data)
-    data = []
     for d in data_temp:
         if d["Publication_year"] == 2011:
-            data.append(d)
+            new_2011.append(d)
 
     print("old length 2011: {}".format(len(old_2011_wos)))
-    print("new length 2011: {}".format(len(data)))
+    print("new length 2011: {}".format(len(new_2011)))
 
     identical_dict = dict(zip(old_2011_wos, np.zeros(len(old_2011_wos))))
     identical = 0
 
-    for d in data:
+    for d in new_2011:
         try:
             hit = identical_dict[d["WOS"]]
             identical += 1
         except:
-            new_data.append(d)
+            new_2011_processed.append(d)
 
     print("Number of identical papers = {}\n".format(identical))
+    print ("len of new data 2011 after processed: {}".format(len(new_2011_processed)))
 
-    print ("len of old after: {}".format(len(new_data)))
-    return new_data
+    for d in data:
+        if d["Publication_year"] != 2011:
+            new_data_total.append(d)
+
+    new_data_total = new_data_total + new_2011_processed
+    print ("len of new data total: {}".format(len(new_data_total)))
+    return new_data_total
 
 
 def filterDuplicates(data):
@@ -174,6 +190,7 @@ def filterDuplicates(data):
 
     for d in data:
         wos_dic[d["WOS"]] += 1
+
 
     for d in data:
         if wos_dic[d["WOS"]] == 1:
@@ -201,10 +218,13 @@ def convertToInt(data):
         d["Publication_year"] = int(d["Publication_year"])
     return data
 
-
+def storeToJson(file, path):
+    with open(path, "w") as f:
+        json.dump(file, f)
+        print("dumped file with path: {}".format(path))
 
 def filter_process(store=False):
-    with open("../../TextFiles/data/related_data.json", "r") as f:
+    with open("one_file.json", "r") as f:
         data = json.load(f)
 
     print 80*'='
@@ -217,7 +237,7 @@ def filter_process(store=False):
     print "Duplicate filter:"
     print 80*'='
     print
-    data_no_dup = filterDuplicates(data_with_abs[:1000])
+    data_no_dup = filterDuplicates(data_with_abs)
     print
     print 80*'='
     print "Common TCP 2011 filter:"
@@ -235,10 +255,7 @@ def filter_process(store=False):
     print "Storing:"
     print 80*'='
     print
-
     if store:
-        with open("related_data_correct_v2.json", "w") as f:
-            json.dump(data_relevant_subjects, f)
-            print("dumped")
+        storeToJson(data_relevant_subjects, "related_data_correct_v2.json")
 
-filter_process()
+filter_process(True)

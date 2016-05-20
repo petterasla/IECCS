@@ -17,7 +17,8 @@ from __future__ import print_function
 # Fix path for use in terminal ###
 import sys
 import os
-sys.path.append(os.path.abspath(__file__ + "/../../../"))
+import pandas as pd
+sys.path.append(os.path.abspath(__file__ + "/../../../../"))
 ###
 
 import System.DataProcessing.process_data as ptd
@@ -38,7 +39,7 @@ import System.Utilities.write_to_file as write
 
 #print(__doc__)
 
-file = write.initFile("GridSearch-results")
+file = write.initFile("GridSearch-results-tuned-mnb")
 
 # Display progress logs on stdout
 logging.basicConfig(level=logging.INFO,
@@ -51,16 +52,12 @@ logging.basicConfig(level=logging.INFO,
 # Uncomment the following to do the analysis on all the categories
 #categories = None
 
-abstracts = ptd.getAbstractData().tolist()
-endorsement = ptd.getEndorsementData().tolist()
-labels = []
-for endorse in endorsement:
-    labels.append(ptd.getAbstractStance('soft', endorse))
+data = ptd.getTrainingData()
 
-cv = StratifiedKFold(labels, n_folds=10, shuffle=True, random_state=1)
+cv = StratifiedKFold(data.Stance, n_folds=10, shuffle=True, random_state=1)
 
-print("%d documents" % len(abstracts))
-write.writeTextToFile("%d documents" % len(abstracts),file)
+print("%d documents" % len(data))
+write.writeTextToFile("%d documents" % len(data),file)
 print("%d categories" % 3)
 write.writeTextToFile("%d categories" % 3,file)
 print()
@@ -80,15 +77,16 @@ pipeline = Pipeline([
 # increase processing time in a combinatorial way
 parameters = {
     'vect__analyzer': ['word', 'char'],
-    'vect__ngram_range': [(1, 1), (1,2), (1,3), (2, 3)],
+    'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3)],
     'vect__stop_words': [None, 'english'],
+    #'tfidf__use_idf':[True, False],
     #'vect__max_features': (None, 50000),
     #'clf__kernel': ['rbf', 'linear', 'poly', 'sigmoid'],
     #'clf__shrinking': (True, False),
     #'clf__decision_function_shape': ['ovo', 'ovr', None],
     #'clf__C' : np.logspace(-1, 1.3, 6),
     #'clf__kernel': ['linear']
-    'clf__alpha': np.logspace(-1,0,6),
+    'clf__alpha': np.logspace(-1, 0, 6),
     'clf__fit_prior': [True, False]
     #'clf__penalty' : ['l1', 'l2'],
     #'clf__tol' : np.linspace(0.0001,1,11)
@@ -111,7 +109,7 @@ if __name__ == "__main__":
     pprint(parameters)
     write.writeTextToFile(parameters,file)
     t0 = time()
-    grid_search.fit(abstracts, labels)
+    grid_search.fit(data.Abstract, data.Stance)
     print("done in %0.3fs" % (time() - t0))
     write.writeTextToFile("Done in %0.3fs " % (time() - t0), file)
     print()

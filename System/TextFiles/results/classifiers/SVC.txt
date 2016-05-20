@@ -1,0 +1,35 @@
+Running...
+================================================================================
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+Cross validated train score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1154    0.0732    0.0896        41
+      FAVOR     0.5844    0.5836    0.5840      2046
+       NONE     0.7927    0.7961    0.7944      4183
+
+avg / total     0.7203    0.7220    0.7211      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score (NONE): 0.4893
+
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1111    0.0588    0.0769        17
+      FAVOR     0.6186    0.6363    0.6273       877
+       NONE     0.8187    0.8109    0.8148      1793
+
+avg / total     0.7489    0.7492    0.7489      2687
+
+Validation macro F-score: 0.5063
+
+
+--- 615.830497026 seconds ---

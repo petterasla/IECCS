@@ -1,0 +1,35 @@
+Running...
+================================================================================
+LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False)
+================================================================================
+Cross validated train score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3333    0.0244    0.0455        41
+      FAVOR     0.6283    0.5875    0.6072      2046
+       NONE     0.8009    0.8336    0.8169      4183
+
+avg / total     0.7415    0.7480    0.7434      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score (NONE): 0.4899
+
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3333    0.0588    0.1000        17
+      FAVOR     0.6463    0.6271    0.6366       877
+       NONE     0.8194    0.8377    0.8285      1793
+
+avg / total     0.7598    0.7640    0.7612      2687
+
+Validation macro F-score: 0.5217
+
+
+--- 147.254909992 seconds ---

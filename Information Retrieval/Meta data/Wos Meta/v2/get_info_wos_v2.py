@@ -8,6 +8,7 @@ import wos.utils
 from wos import WosClient
 import re
 import adder
+import difflib
 
 
 def isOperator(string):
@@ -24,8 +25,8 @@ def removeOperator(string):
 def queryWos(tcp_data, start, start_sample, end_sample):
     # Return a small list of titles, year and ids for testing
 
-    with open("../wos_not_meta_data.json", "r") as f:
-        small_list_ids = json.load(f)
+    #with open("data/wos_not_meta_data.json", "r") as f:
+    #    small_list_ids = json.load(f)
     # Create an empty list which should contain info later
     info = []
     not_found = []
@@ -33,7 +34,7 @@ def queryWos(tcp_data, start, start_sample, end_sample):
     with WosClient(c.getUserName(), c.getPassword()) as client:
         print("Starting the queries")
         # Looping through the titles (search parameter)
-        for i, id in enumerate(small_list_ids):
+        for i, id in enumerate(tcp_data.index.values.tolist()[:100]):
             # Replace '|' with ','
             title = tcp_data.loc[id].Title.replace("|",",").replace("?","").replace('"', '').replace("/"," ").replace("-", " ").replace(":", " ")
             title = re.sub(r'\([^)]*\)', '', title)
@@ -70,8 +71,18 @@ def queryWos(tcp_data, start, start_sample, end_sample):
                 print("Not found length is {}".format(len(not_found)))
             else:
                 # Adding dictionary
-                info.append((root, id))
-                print("Successfully retrieved is now {}".format(len(info)))
+                tcp_data_title = tcp_data.loc[id].Title.replace("|", ",")
+                wos_title = getTitle(root)
+                wos_title = re.sub(r'\([^)]*\)', '', wos_title)
+                print("tcp title: {}".format(tcp_data_title))
+                print("wos title: {}".format(wos_title))
+                print
+                if difflib.SequenceMatcher(None, tcp_data_title, wos_title).ratio() > 0.95:
+                    info.append((root, id))
+                    print("Successfully retrieved is now {}".format(len(info)))
+                else:
+                    print("titles not alike...")
+                    not_found.append(id)
             print("Number of queries so far is {}. Time used is {:0.1f} minutes".format((i+1),((time.time()-start)/60.0)))
             time.sleep(1)
     return info, not_found
@@ -82,13 +93,24 @@ def extractDataFromRoot(roots, tcp_data):
         data.append(adder.add(root[0], root[1], tcp_data))
     return data
 
+def getTitle(root):
+
+    try:
+        ret = root.findall(".REC/static_data/summary/titles/")
+        titles = [i.text for i in ret]
+        lengths = [len(s) for s in titles]
+        index = lengths.index(max(lengths))
+        title = titles[index]
+        return title
+    except:
+        return None
 
 def init():
     # Get all titles
-    tcp_data = pd.read_csv("../../../tcp_abstracts.txt", index_col="Id")
+    tcp_data = pd.read_csv("../../../../System/TextFiles/data/tcp_abstracts.txt", index_col="Id")
 
-    sample_start = None
-    sample_end = None
+    sample_start = 0
+    sample_end = 100
 
     start_time = time.time()
     # Get a list of dicts containing data wos

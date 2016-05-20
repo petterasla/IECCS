@@ -68,9 +68,9 @@ print()
 pipeline = Pipeline([
     ('vect', CountVectorizer()),
     #('tfidf', TfidfTransformer()),
-    ('clf', MultinomialNB()),
+    #('clf', MultinomialNB()),
     #('clf', LinearSVC()),
-    #('clf', SVC()),
+    ('clf', SVC()),
 ])
 
 # uncommenting more parameters will give better exploring power but will
@@ -84,10 +84,10 @@ parameters = {
     #'clf__kernel': ['rbf', 'linear', 'poly', 'sigmoid'],
     #'clf__shrinking': (True, False),
     #'clf__decision_function_shape': ['ovo', 'ovr', None],
-    #'clf__C' : np.logspace(-1, 1.3, 6),
+    'clf__C' : np.logspace(-1, 1.3, 6),
     #'clf__kernel': ['linear']
-    'clf__alpha': np.logspace(-1, 0, 6),
-    'clf__fit_prior': [True, False]
+    #'clf__alpha': np.logspace(-1, 0, 5),
+    #'clf__fit_prior': [True, False]
     #'clf__penalty' : ['l1', 'l2'],
     #'clf__tol' : np.linspace(0.0001,1,11)
 }

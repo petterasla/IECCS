@@ -1,0 +1,61 @@
+6270 documents
+3 categories
+
+Performing grid search...
+pipeline: ['vect', 'clf']
+parameters:
+{'clf__C': array([  0.1       ,   0.28840315,   0.83176377,   2.39883292,
+         6.91830971,  19.95262315]),
+ 'vect__analyzer': ['word', 'char'],
+ 'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3)],
+ 'vect__stop_words': [None, 'english']}
+Fitting 10 folds for each of 96 candidates, totalling 960 fits
+[Parallel(n_jobs=10)]: Done  30 tasks      | elapsed:  2.8min
+[Parallel(n_jobs=10)]: Done 180 tasks      | elapsed: 42.6min
+[Parallel(n_jobs=10)]: Done 430 tasks      | elapsed: 119.9min
+[Parallel(n_jobs=10)]: Done 780 tasks      | elapsed: 264.6min
+[Parallel(n_jobs=10)]: Done 960 out of 960 | elapsed: 331.4min finished
+done in 20274.348s
+
+Best score: 0.509
+Best parameters set:
+	clf__C: 19.952623149688797
+	vect__analyzer: 'char'
+	vect__ngram_range: (2, 3)
+	vect__stop_words: None
+
+================================================================================
+SVC(C=19.9, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Pipeline(steps=[('vect', CountVectorizer(analyzer='char', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(2, 3), preprocessor=None, stop_words=None,
+        stri...,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))])
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0784    0.0976    0.0870        41
+      FAVOR     0.5533    0.5738    0.5633      2046
+       NONE     0.7842    0.7681    0.7761      4183
+
+avg / total     0.7042    0.7003    0.7022      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.4755
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        17
+      FAVOR     0.5778    0.6055    0.5913       877
+       NONE     0.8024    0.7814    0.7917      1793
+
+avg / total     0.7240    0.7190    0.7213      2687
+
+Validation macro F-score: 0.4610

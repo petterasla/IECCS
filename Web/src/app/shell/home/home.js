@@ -209,7 +209,7 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
       var keys = [];
       keys = initFavor.map(function (a) {return parseInt(a._id);});
 
-      var chart = c3.generate({
+      self.chart = c3.generate({
         bindto: '#BarChart',
         data: {
           columns: [
@@ -244,11 +244,11 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
 
       self.usePercentage.subscribe(function(newValue) {
         if (newValue) {
-          chart.load({
+          self.chart.load({
             columns: [favorPerc, againstPerc, nonePerc]
           });
         } else {
-          chart.load({
+          self.chart.load({
             columns: [favor, against, none]
           });
         }

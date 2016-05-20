@@ -198,7 +198,7 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
         var keys = [];
         keys = initFavor.map(function (a) {return parseInt(a._id);});
 
-        var chart = c3.generate({
+        self.chart = c3.generate({
           bindto: '#BarChart',
           data: {
             columns: [
@@ -233,14 +233,15 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
 
         self.usePercentage.subscribe(function(newValue) {
           if (newValue) {
-            chart.load({
+            self.chart.load({
               columns: [favorPerc, againstPerc, nonePerc]
             });
           } else {
-            chart.load({
+            self.chart.load({
               columns: [favor, against, none]
             });
           }
+
         });
       });
 

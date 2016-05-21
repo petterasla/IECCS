@@ -1,39 +1,65 @@
 import json
-import csv
 import os
 import pandas as pd
-import glob
-import codecs
-import difflib
-import time
-import System.DataProcessing.process_data as ptd
+import numpy as np
 
+def mergeAllFilesFromFolder(path):
+    path = os.getcwd()+path
+    files = []
+    for i, filename in enumerate(os.listdir(path)):
+        print("Filename: {}".format(filename))
+        with open(path+"/"+filename, 'r') as read_file:
+            x = json.load(read_file)
+        for d in x:
+            files.append(d)
 
+    print("len of ids: {}".format(len(files)))
+    return files
 
-with open("wos_identities_1991_2011.json", "r") as f:
-    wos = json.load( f)
+def convertToInt(data):
+    for d in data:
+        d["Publication_year"] = int(d["Publication_year"])
+    return data
 
-print wos[:3]
-print("len of wos before identicals: {}".format(len(wos)))
-wos = list(set(wos))
-print("len of wos after identicals: {}".format(len(wos)))
+def getTCPData(yearList=[]):
+    with open("../../../../System/TextFiles/data/meta_data.json") as f:
+        d1 = json.load(f)
+        d2 = convertToInt(d1)
+        data = pd.DataFrame(d2)
 
-with open("../../../../System/TextFiles/data/meta_data.json") as f:
-    tcp_data = pd.DataFrame(json.load(f))
-    tcp_data = tcp_data[tcp_data.Publication_year == 2011]
-    tcp_wos_2011 = tcp_data.WOS.tolist()
+    wos_year_ids = []
+    for year in yearList:
+        temp_list = []
+        temp_list = data[data.Publication_year == year].WOS.tolist()
+        wos_year_ids = wos_year_ids + temp_list
 
-print("\nlen of tcp wos 2011: {}".format(len(tcp_wos_2011)))
-print tcp_wos_2011[:3]
+    print("len of tcp id = {} after including yearlist: {}".format(len(wos_year_ids), yearList))
+    return wos_year_ids
 
-found = []
-for w in wos:
-    if w in tcp_wos_2011:
-        found.append(w)
+def getData(store=False, path="random"):
+    data_ids = mergeAllFilesFromFolder("/data/2011")
 
-print("\nNumber found: {} out of {}".format(len(found), len(tcp_wos_2011)))
+    temp = []
+    for dic in data_ids:
+        temp.append(dic["WOS"])
 
+    data_wos_ids = list(set(temp))
 
-    #with open("related_data_final_filtering_with_titles.json", "w") as f:
-    #    json.dump(related, f)
-    #    print("dumped")
+    yearList = [1991, 1992, 1993]
+    tcp_wos_ids = getTCPData(yearList)
+
+    print("len of new ids that should fit in years {} === {}".format(yearList, len(data_wos_ids)))
+
+    c = 0
+    for id in data_wos_ids:
+        if id in tcp_wos_ids:
+            c += 1
+
+    print("number of records found in the year list: {} was === {}".format(yearList, c))
+
+    if store:
+        with open(path, "w") as f:
+            json.dump(data_wos_ids, f)
+            print("dumped with path: {}".format(path))
+
+getData(store=False, path="llol")

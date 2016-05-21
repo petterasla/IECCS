@@ -1,4 +1,4 @@
-define('app/shell/home/home', ['require', 'knockout','q', '$http', 'c3'], function(require, ko, $q, $http, c3) {
+define('app/shell/home/home', ['require', 'knockout','q', '$http', 'c3', 'text!app/templates/home.html'], function(require, ko, $q, $http, c3) {
   'use strict';
 
   function compare(a,b) {

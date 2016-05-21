@@ -210,7 +210,7 @@ define('app/shell/home/home', ['knockout','q', '$http', 'c3'], function(ko, $q, 
       keys = initFavor.map(function (a) {return parseInt(a._id);});
 
       self.chart = c3.generate({
-        bindto: '#BarChart',
+        bindto: '#BarChartHome',
         data: {
           columns: [
             favor,

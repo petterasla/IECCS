@@ -38,7 +38,7 @@ define('app/shell/home/home', ['require', 'knockout','q', '$http', 'c3', 'text!a
       if(!temp[obj._id]) {
         temp[obj._id] = obj;
       } else {
-        temp[obj._id].count += obj.count;
+        temp[obj._id].count = parseInt(temp[obj._id].count) +  parseInt(obj.count);
       }
     }
     var result = [];
@@ -66,14 +66,14 @@ define('app/shell/home/home', ['require', 'knockout','q', '$http', 'c3', 'text!a
     self.alertMsg = ko.observable('Error retrieving some of the data!');
     self.progress = ko.observable(5);
     self.progressPct = ko.observable('5%');
-    console.log(self.progress());
+    //console.log(self.progress());
 
     var favorReq = $http.get('https://ieccs.herokuapp.com/api/stance/year/FAVOR')
       .success(function(data) {
         initFavor.push.apply(initFavor, data);
         self.progress(self.progress()+15);
         self.progressPct(self.progress()+'%');
-        console.log(self.progress());
+        //console.log(self.progress());
       })
       .error(function(err) {
         self.alert(1);
@@ -84,7 +84,7 @@ define('app/shell/home/home', ['require', 'knockout','q', '$http', 'c3', 'text!a
         initAgainst.push.apply(initAgainst, data);
         self.progress(self.progress()+15);
         self.progressPct(self.progress()+'%');
-        console.log(self.progress());
+        //console.log(self.progress());
       })
       .error(function(err) {
         self.alert(1);
@@ -95,7 +95,7 @@ define('app/shell/home/home', ['require', 'knockout','q', '$http', 'c3', 'text!a
         initNone.push.apply(initNone, data);
         self.progress(self.progress()+15);
         self.progressPct(self.progress()+'%');
-        console.log(self.progress());
+        //console.log(self.progress());
       })
       .error(function(err) {
         self.alert(1);
@@ -107,7 +107,7 @@ define('app/shell/home/home', ['require', 'knockout','q', '$http', 'c3', 'text!a
         initFavor.push.apply(initFavor, data);
         self.progress(self.progress()+15);
         self.progressPct(self.progress()+'%');
-        console.log(self.progress());
+        //console.log(self.progress());
       })
       .error(function(err) {
         self.alert(1);
@@ -118,7 +118,7 @@ define('app/shell/home/home', ['require', 'knockout','q', '$http', 'c3', 'text!a
         initAgainst.push.apply(initAgainst,data);
         self.progress(self.progress()+15);
         self.progressPct(self.progress()+'%');
-        console.log(self.progress());
+        //console.log(self.progress());
       })
       .error(function(err) {
         self.alert(1);
@@ -129,7 +129,7 @@ define('app/shell/home/home', ['require', 'knockout','q', '$http', 'c3', 'text!a
         initNone.push.apply(initNone, data);
         self.progress(self.progress()+15);
         self.progressPct(self.progress()+'%');
-        console.log(self.progress());
+        //console.log(self.progress());
       })
       .error(function(err) {
         self.alert(1);
@@ -140,12 +140,12 @@ define('app/shell/home/home', ['require', 'knockout','q', '$http', 'c3', 'text!a
     $q.all([favorReq, noneReq, againstReq, favorReqNew, againstReqNew, noneReqNew]).then( function() {
       self.progress(self.progress()+5);
       self.progressPct(self.progress()+'%');
-      console.log(self.progress());
+      //console.log(self.progress());
 
       setTimeout(function(){
         self.progress(self.progress()+1);
         self.progressPct(self.progress()+'%');
-        console.log(self.progress());
+        //console.log(self.progress());
       }, 500);
 
       initFavor = initFavor.sort(compare);
@@ -155,7 +155,6 @@ define('app/shell/home/home', ['require', 'knockout','q', '$http', 'c3', 'text!a
       initFavor = mergeDublicateYears(initFavor);
       initAgainst = mergeDublicateYears(initAgainst);
       initNone = mergeDublicateYears(initNone);
-
 
       for (var i= 0; i<initFavor.length;i++){
         total.push(clone(initFavor[i]));
@@ -171,18 +170,20 @@ define('app/shell/home/home', ['require', 'knockout','q', '$http', 'c3', 'text!a
 
       total.forEach(function (item) {
         initFavor.filter(function (obj) {
-          if (obj._id === item._id) {
-            var percent = parseFloat(obj.count / item.count);
-            obj.percent = Math.round(percent * 10000)/100;          }
+          if (parseInt(obj._id) === parseInt(item._id)) {
+            var percent = parseFloat(parseInt(obj.count) / parseInt(item.count));
+            obj.percent = Math.round(percent * 10000)/100;
+          }
         });
         initNone.filter(function (obj) {
-          if (obj._id === item._id) {
-            var percent = parseFloat(obj.count / item.count);
-            obj.percent = Math.round(percent * 10000)/100;          }
+          if (parseInt(obj._id) === parseInt(item._id)) {
+            var percent = parseFloat(parseInt(obj.count) / parseInt(item.count));
+            obj.percent = Math.round(percent * 10000)/100;
+          }
         });
         initAgainst.filter(function (obj) {
-          if (obj._id === item._id) {
-            var percent = parseFloat(obj.count / item.count);
+          if (parseInt(obj._id) === parseInt(item._id)) {
+            var percent = parseFloat(parseInt(obj.count) / parseInt(item.count));
             obj.percent = Math.round(percent * 10000)/100;
           }
         });
@@ -252,7 +253,6 @@ define('app/shell/home/home', ['require', 'knockout','q', '$http', 'c3', 'text!a
             columns: [favor, against, none]
           });
         }
-
       });
     });
   }

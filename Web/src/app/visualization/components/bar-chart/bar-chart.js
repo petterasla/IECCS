@@ -66,7 +66,7 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
     self.alertMsg = ko.observable('Error retrieving some of the data!');
     self.progress = ko.observable(5);
     self.progressPct = ko.observable('5%');
-    console.log(self.progress());
+    //console.log(self.progress());
 
     self.dataType = ko.observable();
 
@@ -75,7 +75,7 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
     });
 
     function updateUrl(dataType) {
-      console.log(dataType);
+      //console.log(dataType);
       var url1, url2, url3;
       if (dataType === 1) {
         url1 = 'https://ieccs.herokuapp.com/api/stance/year/new/FAVOR';
@@ -96,7 +96,7 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
           initFavor = data;
           self.progress(self.progress()+30);
           self.progressPct(self.progress()+'%');
-          console.log(self.progress());
+          //console.log(self.progress());
         })
         .error(function(err) {
           self.alert(1);
@@ -107,7 +107,7 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
           initAgainst = data;
           self.progress(self.progress()+30);
           self.progressPct(self.progress()+'%');
-          console.log(self.progress());
+          //console.log(self.progress());
         })
         .error(function(err) {
           self.alert(1);
@@ -118,7 +118,7 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
           initNone = data;
           self.progress(self.progress()+30);
           self.progressPct(self.progress()+'%');
-          console.log(self.progress());
+          //console.log(self.progress());
         })
         .error(function(err) {
           self.alert(1);
@@ -128,12 +128,12 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
       $q.all([favorReq, noneReq, againstReq]).then( function() {
         self.progress(self.progress()+5);
         self.progressPct(self.progress()+'%');
-        console.log(self.progress());
+        //console.log(self.progress());
 
         setTimeout(function(){
           self.progress(self.progress()+1);
           self.progressPct(self.progress()+'%');
-          console.log(self.progress());
+          //console.log(self.progress());
         }, 500);
 
 
@@ -160,18 +160,20 @@ define('app/visualization/components/bar-chart/bar-chart' ,['require','knockout'
 
         total.forEach(function (item) {
           initFavor.filter(function (obj) {
-            if (obj._id === item._id) {
-              var percent = parseFloat(obj.count / item.count);
-              obj.percent = Math.round(percent * 10000)/100;          }
+            if (parseInt(obj._id) === parseInt(item._id)) {
+              var percent = parseFloat(parseInt(obj.count) / parseInt(item.count));
+              obj.percent = Math.round(percent * 10000)/100;
+            }
           });
           initNone.filter(function (obj) {
-            if (obj._id === item._id) {
-              var percent = parseFloat(obj.count / item.count);
-              obj.percent = Math.round(percent * 10000)/100;          }
+            if (parseInt(obj._id) === parseInt(item._id)) {
+              var percent = parseFloat(parseInt(obj.count) / parseInt(item.count));
+              obj.percent = Math.round(percent * 10000)/100;
+            }
           });
           initAgainst.filter(function (obj) {
-            if (obj._id === item._id) {
-              var percent = parseFloat(obj.count / item.count);
+            if (parseInt(obj._id) === parseInt(item._id)) {
+              var percent = parseFloat(parseInt(obj.count) / parseInt(item.count));
               obj.percent = Math.round(percent * 10000)/100;
             }
           });

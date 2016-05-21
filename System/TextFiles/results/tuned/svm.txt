@@ -91,3 +91,88 @@ Best parameters set:
 	vect__analyzer: 'word'
 	vect__ngram_range: (1, 1)
 	vect__stop_words: None
+
+
+
+
+
+
+
+Linear kernel
+
+6270 documents
+3 categories
+
+Performing grid search...
+pipeline: ['vect', 'tfidf', 'clf']
+parameters:
+{'clf__C': array([  0.1       ,   0.28840315,   0.83176377,   2.39883292,
+         6.91830971,  19.95262315]),
+ 'clf__kernel': ['linear'],
+ 'tfidf__use_idf': [True, False],
+ 'vect__analyzer': ['word', 'char'],
+ 'vect__max_features': (None, 50000),
+ 'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3)],
+ 'vect__stop_words': [None, 'english']}
+Fitting 10 folds for each of 384 candidates, totalling 3840 fits
+[Parallel(n_jobs=10)]: Done  30 tasks      | elapsed:  4.8min
+[Parallel(n_jobs=10)]: Done 180 tasks      | elapsed: 35.6min
+[Parallel(n_jobs=10)]: Done 430 tasks      | elapsed: 135.2min
+[Parallel(n_jobs=10)]: Done 780 tasks      | elapsed: 252.3min
+[Parallel(n_jobs=10)]: Done 1230 tasks      | elapsed: 400.3min
+[Parallel(n_jobs=10)]: Done 1780 tasks      | elapsed: 572.0min
+[Parallel(n_jobs=10)]: Done 2430 tasks      | elapsed: 755.4min
+[Parallel(n_jobs=10)]: Done 3180 tasks      | elapsed: 933.3min
+[Parallel(n_jobs=10)]: Done 3840 out of 3840 | elapsed: 1144.6min finished
+done in 68716.995s
+
+Best score: 0.534
+Best parameters set:
+	clf__C: 6.9183097091893631
+	clf__kernel: 'linear'
+	tfidf__use_idf: False
+	vect__analyzer: 'word'
+	vect__max_features: None
+	vect__ngram_range: (1, 1)
+	vect__stop_words: 'english'
+
+================================================================================
+SVC(C=6.9, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Pipeline(steps=[('vect', CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 1), preprocessor=None, stop_words='english',
+       ...,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))])
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.4167    0.1220    0.1887        41
+      FAVOR     0.6259    0.6002    0.6128      2046
+       NONE     0.8049    0.8267    0.8157      4183
+
+avg / total     0.7440    0.7482    0.7454      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5390
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3333    0.1176    0.1739        17
+      FAVOR     0.6414    0.6465    0.6440       877
+       NONE     0.8247    0.8265    0.8256      1793
+
+avg / total     0.7618    0.7633    0.7622      2687
+
+Validation macro F-score: 0.5478
+
+
+time =  129.218789101
+
+Process finished with exit code 0

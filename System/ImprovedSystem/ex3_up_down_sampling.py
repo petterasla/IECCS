@@ -30,10 +30,14 @@ use_downsample = 1
 strength = 'soft'
 
 rates = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+training_scores = []
+validation_scores = []
 
 for downsample_rate_favor in rates:
+    tmp = []
+    tmp2 = []
     for downsample_rate_none in rates:
-        print 100*'*'
+        print 120*'*'
         # ***** LOAD DATA   *****
         if use_downsample:
             print("using down sampling")
@@ -56,7 +60,7 @@ for downsample_rate_favor in rates:
 
         if use_upsample:
             print("using up sampling")
-            train_data = pd.concat([train_data, train_data[train_data.Stance == "AGAINST"], train_data[train_data.Stance == "AGAINST"], train_data[train_data.Stance == "AGAINST"]])
+            train_data = pd.concat([train_data, train_data[train_data.Stance == "AGAINST"]])
 
 
         cv = StratifiedKFold(train_data.Stance, n_folds=10, shuffle=True, random_state=1)
@@ -64,7 +68,7 @@ for downsample_rate_favor in rates:
         # Select classifiers to use
         classifiers = [
             #LinearSVC(C=1.178),
-            SVC(decision_function_shape='ovo', kernel='linear', shrinking=True)
+            SVC(C=6.9183097091893631, kernel='linear', shrinking=True)
             #MultinomialNB(alpha=0.1, fit_prior=False)
             #LogisticRegression()
         ]
@@ -78,10 +82,10 @@ for downsample_rate_favor in rates:
             # Use optimized parameters from grid_search_improved
             pipeline = Pipeline([('vect', CountVectorizer(decode_error='ignore',
                                                           analyzer='word',
-                                                          ngram_range=(1, 2),
-                                                          stop_words=None,
+                                                          ngram_range=(1, 1),
+                                                          stop_words='english',
                                                           max_features=None)),
-                                 #('tfidf', TfidfTransformer(use_idf=True)),
+                                 ('tfidf', TfidfTransformer(use_idf=False)),
                                  ('clf', clf)])
 
             pred_stances = cross_val_predict(pipeline, train_data.Abstract, train_data.Stance, cv=cv, n_jobs=10)
@@ -93,6 +97,8 @@ for downsample_rate_favor in rates:
                                   average='macro')
 
             print 'macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): {:.4f}\n'.format(macro_f)
+
+            tmp.append(macro_f)
 
             print 80 * "="
             print("Validation score")
@@ -107,7 +113,7 @@ for downsample_rate_favor in rates:
             macro_f = fbeta_score(validate_data.Stance, validate_preds, 1.0,
                                   labels=['AGAINST', 'FAVOR', 'NONE'], average='macro')
             print("Validation macro F-score: {:.4f}\n\n".format(macro_f))
-
+            tmp2.append(macro_f)
         #################################
         #                               #
         #       Testing procedure       #
@@ -150,5 +156,13 @@ for downsample_rate_favor in rates:
         #         print("Test macro F-score: {:.4f}".format(macro_f))
 
         print "time = " , time.time()-start_time
+    training_scores.append(tmp)
+    validation_scores.append(tmp2)
 
+
+print 80*'='
+print 80*'='
+print 80*'='
+print training_scores
+print validation_scores
 

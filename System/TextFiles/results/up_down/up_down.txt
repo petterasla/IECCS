@@ -1,0 +1,36 @@
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.1
+Downsample none: 0.1
+using up sampling
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.9048    0.9268    0.9157        82
+      FAVOR     0.6880    0.6829    0.6854       410
+       NONE     0.6857    0.6874    0.6865       419
+
+avg / total     0.7064    0.7069    0.7067       911
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.7625
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1176    0.2353    0.1569        17
+      FAVOR     0.5491    0.7013    0.6159       877
+       NONE     0.8337    0.7128    0.7685      1793
+
+avg / total     0.7363    0.7060    0.7148      2687
+
+Validation macro F-score: 0.5138
+
+
+time =  9.8981821537

@@ -30,8 +30,8 @@ word2vec_ids = [fname.split('/')[-1].split('_')[0] for fname in word2vec_fnames]
 print word2vec_ids
 
 
-w2vec_clf = LogisticRegression( solver='lbfgs', multi_class='multinomial', class_weight='balanced')
-svm_clf = SVC(C=5.2, kernel='linear', probability=True)
+w2vec_clf = LogisticRegression(C=1, solver='lbfgs', multi_class='multinomial', class_weight='balanced')
+svm_clf = SVC(C=6.9, kernel='linear', probability=True)
 
 # *****     FINDING BEST VECTOR SPACE     *****
 print 80 * '='
@@ -57,7 +57,7 @@ vote_pipeline = VotingClassifier(estimators=[('glove', word2vec_clf),
                                             ('linear', linear_clf)],
                                             voting='soft')
 
-"""
+
 cv = StratifiedKFold(train_data.Stance, n_folds=10, shuffle=True, random_state=1)
 
 pred_stances = cross_val_predict(vote_pipeline, train_data.Abstract, train_data.Stance, cv=cv)
@@ -69,7 +69,7 @@ macro_f = fbeta_score(train_data.Stance, pred_stances, 1.0,
                       average='macro')
 
 print 'macro-average of F-score(FAVOR) and F-score(AGAINST): {:.4f}\n'.format(macro_f)
-"""
+
 
 print 80 * '='
 print "VALIDATE"

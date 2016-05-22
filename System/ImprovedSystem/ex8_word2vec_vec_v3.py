@@ -31,8 +31,8 @@ print word2vec_ids
 
 
 w2vec_clf = LogisticRegression( solver='lbfgs', multi_class='multinomial', class_weight='balanced')
-svm_clf = SVC(C=5.17876863, kernel='linear', probability=True)
-mnb_clf = MultinomialNB(alpha=0.1, fit_prior=False)
+svm_clf = SVC(C=6.9, kernel='linear', probability=True)
+mnb_clf = MultinomialNB(alpha=0.1, fit_prior=True)
 
 # *****     FINDING BEST VECTOR SPACE     *****
 print 80 * '='
@@ -47,18 +47,18 @@ word2vec_clf = Pipeline([('vect', Word2VecVectorizer(word2vec_vecs)),
                          ('clf', w2vec_clf)])
 
 first_clf = Pipeline([('vect', CountVectorizer(analyzer="word",
-                                                ngram_range=(1, 2),
-                                                stop_words=None,
+                                                ngram_range=(1, 1),
+                                                stop_words='english',
                                                 max_features=None,
                                                 decode_error='ignore')),
-                       #('tfidf', TfidfTransformer(use_idf=False)),
+                       ('tfidf', TfidfTransformer(use_idf=False)),
                        ('clf', svm_clf)])
 second_clf = Pipeline([('vect', CountVectorizer(decode_error='ignore',
                                               analyzer='word',
-                                              ngram_range=(2, 3),
+                                              ngram_range=(1, 3),
                                               stop_words='english',
                                               max_features=50000)),
-                     ('tfidf', TfidfTransformer(use_idf=True)),
+                     #('tfidf', TfidfTransformer(use_idf=True)),
                      ('clf', mnb_clf)])
 
 vote_pipeline = VotingClassifier(estimators=[('glove', word2vec_clf),
@@ -69,6 +69,12 @@ vote_pipeline = VotingClassifier(estimators=[('glove', word2vec_clf),
 cv = StratifiedKFold(train_data.Stance, n_folds=10, shuffle=True, random_state=1)
 
 pred_stances = cross_val_predict(vote_pipeline, train_data.Abstract, train_data.Stance, cv=cv)
+print second_clf.named_steps
+print first_clf.named_steps
+
+print 80 * '='
+print "TRAIN"
+print 80 * '='
 
 print classification_report(train_data.Stance, pred_stances, digits=4)
 

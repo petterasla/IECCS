@@ -33,14 +33,14 @@ word2vec_ids = [fname.split('/')[-1].split('_')[0] for fname in word2vec_fnames]
 # *****     FINDING BEST VECTOR SPACE     *****
 for fname, glove_id in zip(glove_fnames, glove_ids):
     print 80 * '='
-    print 'GLOVE VECTORS:', glove_id
+    print 'GLOVE VECTORS:', glove_id, " AND WORD2VEC"
     print 80 * '='
 
     glove_vecs = pd.read_pickle(fname)
     word2vec_vecs = pd.read_pickle(word2vec_fnames[0])
 
     glove_clf = Pipeline([('vect', GloveVectorizer(glove_vecs)),
-                          ('clf', LogisticRegression(
+                          ('clf', LogisticRegression(C=0.83,
                                                      solver='lbfgs',
                                                      multi_class='multinomial',
                                                      class_weight='balanced',
@@ -62,11 +62,11 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
 
     vote_pipeline = VotingClassifier(estimators=[('glove', glove_clf),
                                                  ('word2vec', word2vec_pipeline),
-                                                 ('mnb', word_clf)
+                                                 #('mnb', word_clf)
                                                  ],
                                      voting='soft')
 
-    """
+
     print '\nTRAIN:'
     print 80 * '='
     cv = StratifiedKFold(data.Stance, n_folds=10, shuffle=True, random_state=1)
@@ -80,7 +80,7 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
                           average='macro')
 
     print 'macro-average of F-score(FAVOR) and F-score(AGAINST): {:.4f}\n'.format(macro_f)
-    """
+
     print 'VALIDATE:'
     print 80 * '='
     vote_pipeline.fit(data.Abstract, data.Stance)

@@ -40,23 +40,26 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
     glove_vecs = pd.read_pickle(fname)
 
     glove_clf = Pipeline([('vect', GloveVectorizer(glove_vecs)),
-                          ('clf', LogisticRegression(solver='lbfgs',
+                          ('clf', LogisticRegression(C=0.83,
+                                                     solver='lbfgs',
                                                      multi_class='multinomial',
                                                      class_weight='balanced',
                                                      ))])
 
     char_clf = Pipeline([('vect', CountVectorizer(analyzer="word",
-                                                  ngram_range=(1, 2),
-                                                  stop_words=None,
+                                                  ngram_range=(1, 1),
+                                                  stop_words='english',
                                                   max_features=None,
                                                   decode_error='ignore')),
-                         ('clf', SVC(C=5.17876863, kernel='linear', probability=True))
+                         ('tfidf', TfidfTransformer(use_idf=False)),
+                         ('clf', SVC(C=6.9, kernel='linear', probability=True))
                          ])
 
     vot_clf = VotingClassifier(estimators=[('glove', glove_clf),
                                              ('linear', char_clf)],
                                      voting='soft')
 
+    print char_clf.named_steps
 
     print "TRAIN"
     print 80 * '='

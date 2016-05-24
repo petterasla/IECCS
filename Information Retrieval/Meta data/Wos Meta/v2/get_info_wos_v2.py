@@ -34,7 +34,7 @@ def queryWos(tcp_data, start, start_sample, end_sample):
     with WosClient(c.getUserName(), c.getPassword()) as client:
         print("Starting the queries")
         # Looping through the titles (search parameter)
-        for i, id in enumerate(tcp_data.index.values.tolist()[:100]):
+        for i, id in enumerate(tcp_data.index.values.tolist()[start_sample:end_sample]):
             # Replace '|' with ','
             title = tcp_data.loc[id].Title.replace("|",",").replace("?","").replace('"', '').replace("/"," ").replace("-", " ").replace(":", " ")
             title = re.sub(r'\([^)]*\)', '', title)
@@ -55,15 +55,16 @@ def queryWos(tcp_data, start, start_sample, end_sample):
             #print query_string
             # Perform the query on wos engine
             root = None
+            wait = 2
             try:
                 root = wos.utils.query_v2(client, query_string, count=1)
             except suds.WebFault:
-                print "Suds.WebFault: Waiting 15 sec"
+                print "Suds.WebFault: Waiting {} sec".format(wait)
                 print suds.WebFault.args
-                time.sleep(15)
+                time.sleep(wait)
             except:
-                print "Some other error occured, sleep 15 sec"
-                time.sleep(15)
+                print "Some other error occured, sleep {} sec".format(wait)
+                time.sleep(wait)
             if root is None:
                 # Adding tuple with id and title
                 not_found.append(id)
@@ -72,19 +73,25 @@ def queryWos(tcp_data, start, start_sample, end_sample):
             else:
                 # Adding dictionary
                 tcp_data_title = tcp_data.loc[id].Title.replace("|", ",")
+                tcp_data_title = re.sub(r'\([^)]*\)', '', tcp_data_title)
                 wos_title = getTitle(root)
                 wos_title = re.sub(r'\([^)]*\)', '', wos_title)
                 print("tcp title: {}".format(tcp_data_title))
                 print("wos title: {}".format(wos_title))
                 print
                 if difflib.SequenceMatcher(None, tcp_data_title, wos_title).ratio() > 0.95:
-                    info.append((root, id))
-                    print("Successfully retrieved is now {}".format(len(info)))
+                    if getAbstract(root) is not None:
+                        info.append((root, id))
+                        print("Successfully retrieved is now {}".format(len(info)))
+                    else:
+                        print
+                        print("Abstract was none")
+                        print
                 else:
                     print("titles not alike...")
                     not_found.append(id)
             print("Number of queries so far is {}. Time used is {:0.1f} minutes".format((i+1),((time.time()-start)/60.0)))
-            time.sleep(1)
+            time.sleep(0.5)
     return info, not_found
 
 def extractDataFromRoot(roots, tcp_data):
@@ -92,6 +99,13 @@ def extractDataFromRoot(roots, tcp_data):
     for root in roots:
         data.append(adder.add(root[0], root[1], tcp_data))
     return data
+
+def getAbstract(root):
+    ret = root.findall(".REC/static_data/fullrecord_metadata/abstracts/abstract/abstract_text/")
+    try:
+        return ret[0].text
+    except:
+        return None
 
 def getTitle(root):
 
@@ -108,36 +122,41 @@ def getTitle(root):
 def init():
     # Get all titles
     tcp_data = pd.read_csv("../../../../System/TextFiles/data/tcp_abstracts.txt", index_col="Id")
+    parts = 15
+    slice = len(tcp_data)/parts
+    start = -slice
+    end = slice
+    for i in range(parts):
+        start += slice
+        end += slice
+        if i == parts-1:
+            end = None
 
-    sample_start = 0
-    sample_end = 100
+        start_time = time.time()
+        # Get a list of dicts containing data wos
+        list_of_roots_from_wos, not_found = queryWos(tcp_data, start_time, start, end)
+        data = extractDataFromRoot(list_of_roots_from_wos, tcp_data)
+        print ("len of abstracts = {}".format(len(list_of_roots_from_wos)))
 
-    start_time = time.time()
-    # Get a list of dicts containing data wos
-    list_of_roots_from_wos, not_found = queryWos(tcp_data, start_time, sample_start, sample_end)
-    data = extractDataFromRoot(list_of_roots_from_wos, tcp_data)
+        if end is None:
+            end = "_of_not_found"
 
-    if sample_end is None:
-        sample_end = "_of_not_found"
+        file_name = 'data/abstract_check/wos_data_{}.json'.format(end)
+        with open(file_name,'w') as f:
+            json.dump(data,f)
 
-    file_name = 'wos_data{}.json'.format(sample_end)
-    with open(file_name,'w') as f:
-        json.dump(data,f)
-        f.close()
+        not_found_file = 'data/abstract_check/not_found{}.json'.format(end)
+        with open(not_found_file, 'w') as f:
+            json.dump(not_found, f)
 
-    not_found_file = 'not_found{}.json'.format(sample_end)
-    with open(not_found_file, 'w') as f:
-        json.dump(not_found, f)
-        f.close()
+        s1 = "Time used was {:0.2f} seconds or {:0.1f} minutes \n".format((time.time() - start_time), ((time.time()-start_time)/60.0))
+        s2 = "Number of successfully retrieved records was {} \n".format(len(list_of_roots_from_wos))
+        s3 = "Number of unsuccessfully retrieved records was {} \n".format(len(not_found))
 
-    s1 = "Time used was {:0.2f} seconds or {:0.1f} minutes \n".format((time.time() - start_time), ((time.time()-start_time)/60.0))
-    s2 = "Number of successfully retrieved records was {} \n".format(len(list_of_roots_from_wos))
-    s3 = "Number of unsuccessfully retrieved records was {} \n".format(len(not_found))
-
-    with open("wos_info.txt", "a") as f:
-        f.write(s1)
-        f.write(s2)
-        f.write(s3)
+        with open("data/abstract_check/wos_info.txt", "a") as f:
+            f.write(s1)
+            f.write(s2)
+            f.write(s3)
 
 
 

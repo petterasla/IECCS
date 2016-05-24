@@ -8,7 +8,7 @@ import time
 start_time = time.time()
 
 import System.DataProcessing.process_data as ptd
-
+import System.Utilities.helper_feature as helper
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.metrics import classification_report
@@ -49,15 +49,16 @@ else:
 if use_upsample:
     data = pd.concat([data, data[data.Stance == "AGAINST"]])
 
+#train_data, validate_data, test_data = helper.lemmatizeAbstracts(train_data, validate_data, test_data)
 
 cv = StratifiedKFold(train_data.Stance, n_folds=10, shuffle=True, random_state=1)
 
 # Select classifiers to use
 classifiers = [
-    LinearSVC(C=0.1),
-    #SVC(C=5.2, kernel='linear')
-    #MultinomialNB(alpha=0.63, fit_prior=True)
-    #LogisticRegression(C=22.759, penalty='l2', solver='lbfgs')
+    #LinearSVC(C=1.18),
+    #SVC(C=0.1, kernel='linear')
+    #MultinomialNB(alpha=0.1, fit_prior=True)
+    #LogisticRegression(C=22.9, penalty='l2', solver='lbfgs')
     #SGDClassifier(alpha=0.0001, loss='squared_hinge')
     #BernoulliNB(alpha=0.1, fit_prior=True)
 ]
@@ -68,11 +69,11 @@ for clf in classifiers:
 
     # Use optimized parameters from grid_search_improved
     pipeline = Pipeline([('vect', CountVectorizer(decode_error='ignore',
-                                                  analyzer='word',
-                                                  ngram_range=(1, 3),
-                                                  stop_words='english',
-                                                  max_features=None)),
-                         #('tfidf', TfidfTransformer(use_idf=False)),
+                                                  analyzer='char',
+                                                  ngram_range=(2, 3),
+                                                  stop_words=None,
+                                                  max_features=50000)),
+                         #('tfidf', TfidfTransformer(use_idf=True)),
                          ('clf', clf)])
 
     print 80 * "="
@@ -93,8 +94,11 @@ for clf in classifiers:
     print 80 * "="
     print("Validation score")
     print 80 * "="
-    validate_preds = cross_val_predict(pipeline, validate_data.Abstract,
-                                       validate_data.Stance)
+
+    pipeline.fit(train_data.Abstract, train_data.Stance)
+
+    validate_preds = pipeline.predict(validate_data.Abstract)
+
     print classification_report(validate_data.Stance, validate_preds, digits=4)
 
     macro_f = fbeta_score(validate_data.Stance, validate_preds, 1.0,
@@ -116,10 +120,10 @@ if check_test:
         print 80 * "="
         pipeline = Pipeline([('vect', CountVectorizer(decode_error='ignore',
                                                       analyzer='word',
-                                                      ngram_range=(1, 1),
-                                                      stop_words= None,
-                                                      max_features=10000)),
-                             #('tfidf', TfidfTransformer(use_idf=True)),
+                                                      ngram_range=(1, 3),
+                                                      stop_words='english',
+                                                      max_features=50000)),
+                             ('tfidf', TfidfTransformer(use_idf=True)),
                              ('clf', clf)]) \
             .fit(train_and_validation.Abstract, train_and_validation.Stance)
 

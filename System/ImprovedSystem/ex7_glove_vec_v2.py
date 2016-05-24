@@ -47,12 +47,12 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
                                                      ))])
 
     char_clf = Pipeline([('vect', CountVectorizer(analyzer="word",
-                                                  ngram_range=(1, 1),
-                                                  stop_words='english',
+                                                  ngram_range=(1, 2),
+                                                  stop_words=None,
                                                   max_features=None,
                                                   decode_error='ignore')),
-                         ('tfidf', TfidfTransformer(use_idf=False)),
-                         ('clf', SVC(C=6.9, kernel='linear', probability=True))
+                         #('tfidf', TfidfTransformer(use_idf=False)),
+                         ('clf', SVC(C=5.2, kernel='linear', probability=True))
                          ])
 
     vot_clf = VotingClassifier(estimators=[('glove', glove_clf),
@@ -71,10 +71,10 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
 
     macro_f = fbeta_score(data.Stance, pred_stances, 1.0,
                           labels=['AGAINST', 'FAVOR', 'NONE'],
-                          average='macro')
+                          average='weighted')
 
     print 'macro-average of F-score(FAVOR) and F-score(AGAINST): {:.4f}\n'.format(macro_f)
-    """
+
     print "VALIDATE"
     print 80 * '='
 
@@ -86,11 +86,11 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
 
     macro_f = fbeta_score(val.Stance, pred_stances, 1.0,
                           labels=['AGAINST', 'FAVOR', 'NONE'],
-                          average='macro')
+                          average='weighted')
 
     print 'macro-average of F-score(FAVOR) and F-score(AGAINST): {:.4f}\n'.format(macro_f)
-    """
-    testing = 0
+
+    testing = 1
     if testing:
         print "TEST"
         print 80 * '='
@@ -103,6 +103,6 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
 
         macro_f = fbeta_score(test.Stance, pred_stances, 1.0,
                               labels=['AGAINST', 'FAVOR', 'NONE'],
-                              average='macro')
+                              average='weighted')
 
         print 'macro-average of F-score(FAVOR) and F-score(AGAINST): {:.4f}\n'.format(macro_f)

@@ -24,7 +24,8 @@ data = pd.read_csv(open('../TextFiles/data/tcp_train.csv'), sep='\t', index_col=
 val = pd.read_csv(open('../TextFiles/data/tcp_validate.csv'), sep='\t', index_col=0)
 test = pd.read_csv(open('../TextFiles/data/tcp_test.csv'), sep='\t', index_col=0)
 
-glove_fnames = glob('../DataProcessing/GloveVectorizer/vectors/*.pkl')
+#glove_fnames = glob('../DataProcessing/GloveVectorizer/vectors/*.pkl')
+glove_fnames = glob('../DataProcessing/GloveVectorizer/vectors/glove.840B.300d_tcp_abstracts.pkl')
 glove_ids = [fname.split('/')[-1].split('_')[0] for fname in glove_fnames]
 
 # *****     FINDING BEST VECTOR SPACE     *****
@@ -36,21 +37,23 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
     glove_vecs = pd.read_pickle(fname)
 
     glove_clf = Pipeline([('vect', GloveVectorizer(glove_vecs)),
-                          ('clf', LogisticRegression(solver='lbfgs',
+                          ('clf', LogisticRegression(C=0.83,
+                                                     solver='lbfgs',
                                                      multi_class='multinomial',
                                                      class_weight='balanced',
                                                      ))])
 
     char_clf = Pipeline([('vect', CountVectorizer(analyzer="word",
-                                                  ngram_range=(1, 2),
-                                                  stop_words=None,
+                                                  ngram_range=(1, 1),
+                                                  stop_words='english',
                                                   max_features=None,
                                                   decode_error='ignore')),
-                         ('clf', SVC(C=5.17876863, probability=True, kernel='linear'))])
+                         ('tfidf', TfidfTransformer(use_idf=False)),
+                         ('clf', SVC(C=6.9, probability=True, kernel='linear'))])
 
     word_clf = Pipeline([('vect', CountVectorizer(decode_error='ignore',
                                                    analyzer='word',
-                                                   ngram_range=(2, 3),
+                                                   ngram_range=(1, 3),
                                                    stop_words='english',
                                                    max_features=50000)),
                         ('tfidf', TfidfTransformer(use_idf=True)),
@@ -59,8 +62,11 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
     vot_clf = VotingClassifier(estimators=[('glove', glove_clf),
                                            ('char', char_clf),
                                            ('word', word_clf)],
-                               voting='hard')
-    """
+                               voting='soft')
+
+    print word_clf.named_steps
+    print char_clf.named_steps
+
     print "TRAIN"
     print 80 * '='
     cv = StratifiedKFold(data.Stance, n_folds=10, shuffle=True, random_state=1)
@@ -89,9 +95,9 @@ for fname, glove_id in zip(glove_fnames, glove_ids):
                           average='macro')
 
     print 'macro-average of F-score(FAVOR) and F-score(AGAINST): {:.4f}\n'.format(macro_f)
+    """
 
-
-    testing = 1
+    testing = 0
     if testing:
         print "TEST"
         print 80 * '='

@@ -33,7 +33,7 @@ test = pd.read_csv(open('../TextFiles/data/tcp_test.csv'), sep='\t', index_col=0
 
 train_data = pd.concat([train, val, test])
 
-unlabelled_data = ptd.getUnlabelledData()
+unlabelled_data = ptd.getUnlabeledData()
 
 print len(unlabelled_data.Abstract.unique())
 
@@ -44,14 +44,15 @@ print len(unlabelled_data.Abstract.unique())
 
 
 print("Training classifier")
-
+print ("Time used: {}".format((time.time()-start_time)/60.0))
 glove_fnames = glob('/Users/petterasla/Desktop/Skole/9. semester/In-Depth project/IECCS/System/DataProcessing/GloveVectorizer/finalVec/glove.840B.300d_tcp_abstracts.pkl')
 best_classifier = SVC(C=5.2, kernel='linear', probability=True)
 
 glove_vecs = pd.read_pickle(glove_fnames[0])
 
 glove_clf = Pipeline([('vect', GloveVectorizer(glove_vecs)),
-                      ('clf', LogisticRegression(solver='lbfgs',
+                      ('clf', LogisticRegression(C=0.83,
+                                                 solver='lbfgs',
                                                  multi_class='multinomial',
                                                  class_weight='balanced',
                                                  ))])
@@ -76,6 +77,7 @@ vot_clf.fit(train_data.Abstract, train_data.Stance)
 
 
 print("Predicting labels")
+print ("Time used: {}".format((time.time()-start_time)/60.0))
 predictions = vot_clf.predict(unlabelled_data.Abstract)
 print predictions
 
@@ -100,7 +102,7 @@ print("\tAGAINST:\t{}".format(against_c))
 print("\tNONE:   \t{}".format(none_c))
 
 unique_years = list(set(unlabelled_data.Publication_year.tolist()))
-unlabelled_data = ptd.getUnlabelledDataAsList()
+unlabelled_data = ptd.getUnlabeledDataAsList()
 
 for i, dic in enumerate(unlabelled_data):
     dic["Stance"] = predictions[i]
@@ -127,8 +129,9 @@ for year in unique_years:
 #   Store as file        #
 ##########################
 
+print ("Time used: {}".format((time.time()-start_time)/60.0))
 if store_to_file:
-    with open("../TextFiles/data/related_data_with_predictions.json", "w") as f:
+    with open("../TextFiles/data/related_data_with_predictions3_few.json", "w") as f:
         json.dump(unlabelled_data, f)
         print("dumped")
 

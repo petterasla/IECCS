@@ -9,6 +9,7 @@ from wos import WosClient
 import re
 import adder
 import difflib
+import string
 
 
 def isOperator(string):
@@ -74,8 +75,10 @@ def queryWos(tcp_data, start, start_sample, end_sample):
                 # Adding dictionary
                 tcp_data_title = tcp_data.loc[id].Title.replace("|", ",")
                 tcp_data_title = re.sub(r'\([^)]*\)', '', tcp_data_title)
+                tcp_data_title = removePunct(tcp_data_title)
                 wos_title = getTitle(root)
                 wos_title = re.sub(r'\([^)]*\)', '', wos_title)
+                wos_title = removePunct(wos_title)
                 print("tcp title: {}".format(tcp_data_title))
                 print("wos title: {}".format(wos_title))
                 print
@@ -99,6 +102,11 @@ def extractDataFromRoot(roots, tcp_data):
     for root in roots:
         data.append(adder.add(root[0], root[1], tcp_data))
     return data
+
+def removePunct(title):
+    table = string.maketrans("","")
+    return title.translate(table, string.punctuation)
+
 
 def getAbstract(root):
     ret = root.findall(".REC/static_data/fullrecord_metadata/abstracts/abstract/abstract_text/")
@@ -138,14 +146,12 @@ def init():
         data = extractDataFromRoot(list_of_roots_from_wos, tcp_data)
         print ("len of abstracts = {}".format(len(list_of_roots_from_wos)))
 
-        if end is None:
-            end = "_of_not_found"
 
-        file_name = 'data/abstract_check/wos_data_{}.json'.format(end)
+        file_name = 'data/abstract_check/wos_data_{}.json'.format(i)
         with open(file_name,'w') as f:
             json.dump(data,f)
 
-        not_found_file = 'data/abstract_check/not_found{}.json'.format(end)
+        not_found_file = 'data/abstract_check/not_found{}.json'.format(i)
         with open(not_found_file, 'w') as f:
             json.dump(not_found, f)
 
@@ -157,7 +163,7 @@ def init():
             f.write(s1)
             f.write(s2)
             f.write(s3)
-
+        time.sleep(60)
 
 
 

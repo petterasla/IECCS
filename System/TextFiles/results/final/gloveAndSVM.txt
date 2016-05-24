@@ -1,0 +1,154 @@
+================================================================================
+GLOVE VECTORS: glove.840B.300d
+================================================================================
+{'tfidf': TfidfTransformer(norm=u'l2', smooth_idf=True, sublinear_tf=False,
+         use_idf=False), 'vect': CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 1), preprocessor=None, stop_words='english',
+        strip_accents=None, token_pattern=u'(?u)\\b\\w\\w+\\b',
+        tokenizer=None, vocabulary=None), 'clf': SVC(C=6.9, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=True, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)}
+================================================================================
+TRAIN
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1341    0.2683    0.1789        41
+      FAVOR     0.6634    0.6579    0.6606      2046
+       NONE     0.8329    0.8281    0.8305      4183
+
+avg / total     0.7730    0.7689    0.7708      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5567
+================================================================================
+GLOVE VECTORS: glove.840B.300d
+================================================================================
+SVM:
+{'tfidf': TfidfTransformer(norm=u'l2', smooth_idf=True, sublinear_tf=False,
+         use_idf=False), 'vect': CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 1), preprocessor=None, stop_words='english',
+        strip_accents=None, token_pattern=u'(?u)\\b\\w\\w+\\b',
+        tokenizer=None, vocabulary=None), 'clf': SVC(C=6.9, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=True, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)}
+================================================================================
+VALIDATE
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2121    0.4118    0.2800        17
+      FAVOR     0.7029    0.7013    0.7021       877
+       NONE     0.8539    0.8472    0.8505      1793
+
+avg / total     0.8005    0.7968    0.7984      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.6109
+
+================================================================================
+GLOVE VECTORS: glove.840B.300d
+================================================================================
+{'tfidf': TfidfTransformer(norm=u'l2', smooth_idf=True, sublinear_tf=False,
+         use_idf=False), 'vect': CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 1), preprocessor=None, stop_words='english',
+        strip_accents=None, token_pattern=u'(?u)\\b\\w\\w+\\b',
+        tokenizer=None, vocabulary=None), 'clf': SVC(C=6.9, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=True, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)}
+================================================================================
+TEST
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1852    0.5263    0.2740        19
+      FAVOR     0.6971    0.6742    0.6855       973
+       NONE     0.8466    0.8453    0.8459      1991
+
+avg / total     0.7936    0.7875    0.7900      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.6018
+
+
+================================================================================
+================================================================================
+
+
+svm_clf = Pipeline([('vect', CountVectorizer(analyzer="word",
+                                                  ngram_range=(1, 2),
+                                                  stop_words=None,
+                                                  max_features=None,
+                                                  decode_error='ignore')),
+                         ('clf', SVC(C=5.17876863, kernel='linear', probability=True))
+                         ])
+================================================================================
+TRAIN
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1446    0.2927    0.1935        41
+      FAVOR     0.6833    0.6823    0.6828      2046
+       NONE     0.8446    0.8367    0.8406      4183
+
+avg / total     0.7874    0.7828    0.7849      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5723
+================================================================================
+GLOVE VECTORS: glove.840B.300d AND SVM
+================================================================================
+VALIDATE
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2333    0.4118    0.2979        17
+      FAVOR     0.7125    0.7149    0.7137       877
+       NONE     0.8599    0.8522    0.8560      1793
+
+avg / total     0.8078    0.8046    0.8060      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.6225
+
+================================================================================
+GLOVE VECTORS: glove.840B.300d
+================================================================================
+{'vect': CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 2), preprocessor=None, stop_words=None,
+        strip_accents=None, token_pattern=u'(?u)\\b\\w\\w+\\b',
+        tokenizer=None, vocabulary=None), 'clf': SVC(C=5.2, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=True, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)}
+================================================================================
+TEST
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1636    0.4737    0.2432        19
+      FAVOR     0.7168    0.7050    0.7109       973
+       NONE     0.8610    0.8523    0.8566      1991
+
+avg / total     0.8095    0.8019    0.8052      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.6036
+
+
+
+#########################
+#########################
+#########################
+#########################
+#########################
+#########################
+
+WEIGHTED MACRO F-SCORE
+
+#########################

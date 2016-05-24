@@ -1,0 +1,41 @@
+Loading data...
+2633
+Training classifier
+Time used: 0.00689311424891
+Predicting labels
+Time used: 49.5347295006
+
+
+The distribution of predictions are:
+	FAVOR:  	207
+	AGAINST:	10
+	NONE:   	2416
+
+Year distribution: 2016
+	FAVOR:  	14
+	AGAINST:	1
+	NONE:   	153
+
+Year distribution: 2012
+	FAVOR:  	48
+	AGAINST:	1
+	NONE:   	571
+
+Year distribution: 2013
+	FAVOR:  	41
+	AGAINST:	3
+	NONE:   	541
+
+Year distribution: 2014
+	FAVOR:  	45
+	AGAINST:	4
+	NONE:   	557
+
+Year distribution: 2015
+	FAVOR:  	59
+	AGAINST:	1
+	NONE:   	594
+
+Time used: 50.2694882512
+dumped
+Time used: 50.27 minutes

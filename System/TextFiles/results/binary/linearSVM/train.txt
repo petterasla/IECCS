@@ -1,0 +1,54 @@
+Training
+================================================================================
+TRAIN: STANCE VS NO STANCE
+================================================================================
+{'tfidf': TfidfTransformer(norm=u'l2', smooth_idf=True, sublinear_tf=False,
+         use_idf=True), 'vect': CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 3), preprocessor=None, stop_words=None,
+        strip_accents=None, token_pattern=u'(?u)\\b\\w\\w+\\b',
+        tokenizer=None, vocabulary=None), 'clf': LinearSVC(C=1.93069772888, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)}
+================================================================================
+             precision    recall  f1-score   support
+
+       NONE     0.8492    0.8386    0.8439      4183
+     STANCE     0.6844    0.7015    0.6929      2087
+
+avg / total     0.7943    0.7930    0.7936      6270
+
+macro-average of F-score(STANCE) and F-score(NONE): 0.7684
+
+################################################################################
+################################################################################
+================================================================================
+TRAIN: FAVOR VS AGAINST
+================================================================================
+{'tfidf': TfidfTransformer(norm=u'l2', smooth_idf=True, sublinear_tf=False,
+         use_idf=True), 'vect': CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 3), preprocessor=None, stop_words=None,
+        strip_accents=None, token_pattern=u'(?u)\\b\\w\\w+\\b',
+        tokenizer=None, vocabulary=None), 'clf': LinearSVC(C=1.93069772888, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)}
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.8182    1.0000    0.9000        18
+      FAVOR     0.6830    1.0000    0.8117      1446
+       NONE     0.0000    0.0000    0.0000       675
+
+avg / total     0.4686    0.6844    0.5563      2139
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5706
+
+================================================================================
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE) is: 0.8519
+
+time =  110.096708059

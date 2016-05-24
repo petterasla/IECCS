@@ -1,0 +1,51 @@
+Training
+================================================================================
+TRAIN: STANCE VS NO STANCE
+================================================================================
+{'tfidf': TfidfTransformer(norm=u'l2', smooth_idf=True, sublinear_tf=False,
+         use_idf=True), 'vect': CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(2, 3), preprocessor=None, stop_words='english',
+        strip_accents=None, token_pattern=u'(?u)\\b\\w\\w+\\b',
+        tokenizer=None, vocabulary=None), 'clf': MultinomialNB(alpha=0.1, class_prior=None, fit_prior=False)}
+================================================================================
+             precision    recall  f1-score   support
+
+       NONE     0.8204    0.8233    0.8219      4183
+     STANCE     0.6433    0.6387    0.6410      2087
+
+avg / total     0.7615    0.7619    0.7617      6270
+
+macro-average of F-score(STANCE) and F-score(NONE): 0.7314
+
+################################################################################
+################################################################################
+================================================================================
+TRAIN: FAVOR VS AGAINST
+================================================================================
+{'tfidf': TfidfTransformer(norm=u'l2', smooth_idf=True, sublinear_tf=False,
+         use_idf=True), 'vect': CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(2, 3), preprocessor=None, stop_words='english',
+        strip_accents=None, token_pattern=u'(?u)\\b\\w\\w+\\b',
+        tokenizer=None, vocabulary=None), 'clf': MultinomialNB(alpha=0.1, class_prior=None, fit_prior=False)}
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3404    1.0000    0.5079        16
+      FAVOR     0.6370    0.9795    0.7720      1317
+       NONE     0.0000    0.0000    0.0000       739
+
+avg / total     0.4075    0.6303    0.4946      2072
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.4266
+
+================================================================================
+none f score: 0.82185896671
+favor f score: 0.771992818671
+against f score: 0.507936507937
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE) is: 0.7006
+
+time =  72.6483588219

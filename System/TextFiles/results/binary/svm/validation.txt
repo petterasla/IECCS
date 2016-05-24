@@ -1,0 +1,59 @@
+/usr/local/bin/python "/Users/petterasla/Desktop/Skole/9. semester/In-Depth project/IECCS/System/ImprovedSystem/ex12_binary.py"
+/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/nltk/twitter/__init__.py:20: UserWarning: The twython library has not been installed. Some functionality from the twitter package will not be available.
+  warnings.warn("The twython library has not been installed. "
+Validating
+================================================================================
+VALIDATE: STANCE VS NO STANCE
+================================================================================
+{'tfidf': TfidfTransformer(norm=u'l2', smooth_idf=True, sublinear_tf=False,
+         use_idf=True), 'vect': CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 1), preprocessor=None, stop_words=None,
+        strip_accents=None, token_pattern=u'(?u)\\b\\w\\w+\\b',
+        tokenizer=None, vocabulary=None), 'clf': SVC(C=0.1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)}
+================================================================================
+             precision    recall  f1-score   support
+
+       NONE     0.7439    0.9799    0.8457      1793
+     STANCE     0.8892    0.3233    0.4742       894
+
+avg / total     0.7922    0.7614    0.7221      2687
+
+macro-average of F-score(STANCE) and F-score(NONE): 0.6599
+
+################################################################################
+################################################################################
+================================================================================
+VALIDATE: FAVOR VS AGAINST
+================================================================================
+{'tfidf': TfidfTransformer(norm=u'l2', smooth_idf=True, sublinear_tf=False,
+         use_idf=True), 'vect': CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 1), preprocessor=None, stop_words=None,
+        strip_accents=None, token_pattern=u'(?u)\\b\\w\\w+\\b',
+        tokenizer=None, vocabulary=None), 'clf': SVC(C=0.1, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)}
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000         6
+      FAVOR     0.8708    1.0000    0.9309       283
+       NONE     0.0000    0.0000    0.0000        36
+
+avg / total     0.7582    0.8708    0.8106       325
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.4655
+
+================================================================================
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE) is: 0.5922
+
+time =  63.6514689922
+
+Process finished with exit code 0

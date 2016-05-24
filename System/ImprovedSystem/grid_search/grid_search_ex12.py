@@ -22,7 +22,7 @@ from sklearn.preprocessing import FunctionTransformer
 from sklearn.naive_bayes import MultinomialNB, BernoulliNB
 from sklearn.linear_model import SGDClassifier, LogisticRegression
 
-file = write.initFile("ex12-linearSVC")
+file = write.initFile("ex12-SVC")
 
 # Display progress logs on stdout
 logging.basicConfig(level=logging.INFO,
@@ -33,7 +33,8 @@ logging.basicConfig(level=logging.INFO,
 # Load
 strength = 'soft'
 
-data = pd.read_csv('../../TextFiles/data/tcp_train.csv', sep='\t')
+#data = pd.read_csv('../../TextFiles/data/tcp_train.csv', sep='\t')
+data = ptd.getTrainingData()
 
 binaryStances = []
 for endorse in data.Endorse.tolist():
@@ -51,7 +52,7 @@ print()
 ###############################################################################
 # Classifiers
 # MultinomialNB(), BernoulliNB(), SVM(), LinearSVM(), SGDClassifier(), LogisticRegression()
-clf = LinearSVC()
+clf = MultinomialNB()
 
 print("Using train, validation and test approach with clf {}".format(clf))
 write.writeTextToFile("Using train, validation and test approach with clf {}".format(clf), file)
@@ -68,18 +69,18 @@ pipeline = Pipeline([
 # increase processing time in a combinatorial way
 parameters = {
     'vect__analyzer': ['word'],
-    'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3), (3, 3)],
+    'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3)],
     'vect__stop_words': [None, 'english'],
-    'vect__max_features': (None, 50000),
+    #'vect__max_features': (None, 50000),
     'tfidf__use_idf': (True, False),
     #'clf__alpha': np.logspace(-1, 0, 5),
-    #'clf__fit_prior': [True, False]
+    'clf__fit_prior': [True, False],
     #'clf__kernel': ['linear'],
-    'clf__C': np.logspace(-1, 2, 15),
+    #'clf__C': np.logspace(-1, 1.3, 6),
     #'clf__penalty': ['l2'],
     #'clf__solver': ['newton-cg', 'lbfgs']
     #'clf__loss': ['modified_huber', 'squared_hinge', 'perceptron'],
-    #'clf__alpha': [0.1]
+    'clf__alpha': np.logspace(-1, 0.5, 4)
 }
 if __name__ == "__main__":
     # multiprocessing requires the fork to happen in a __main__ protected
@@ -88,7 +89,7 @@ if __name__ == "__main__":
     # find the best parameters for both the feature extraction and the
     # classifier
     grid_search = GridSearchCV(pipeline, parameters, n_jobs=10, verbose=1, cv=cv,
-                               scoring='f1_weighted')
+                               scoring='f1_macro')
 
     print("Performing grid search...")
     write.writeTextToFile("Performing grid search...",file)

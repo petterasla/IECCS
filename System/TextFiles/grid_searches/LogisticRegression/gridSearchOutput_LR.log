@@ -1,5 +1,4 @@
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/nltk/twitter/__init__.py:20: UserWarning: The twython library has not been installed. Some functionality from the twitter package will not be available.
-  warnings.warn("The twython library has not been installed. "
+
 6270 documents
 3 categories
 
@@ -13,67 +12,11 @@ parameters:
  'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3)],
  'vect__stop_words': [None, 'english']}
 Fitting 10 folds for each of 192 candidates, totalling 1920 fits
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
-  'precision', 'predicted', average, warn_for)
 [Parallel(n_jobs=10)]: Done  30 tasks      | elapsed:  9.8min
 [Parallel(n_jobs=10)]: Done 180 tasks      | elapsed: 117.3min
 [Parallel(n_jobs=10)]: Done 430 tasks      | elapsed: 232.8min
 [Parallel(n_jobs=10)]: Done 780 tasks      | elapsed: 486.5min
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/scipy/optimize/linesearch.py:285: LineSearchWarning: The line search algorithm did not converge
-  warn('The line search algorithm did not converge', LineSearchWarning)
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:193: UserWarning: Line Search failed
-  warnings.warn('Line Search failed')
 [Parallel(n_jobs=10)]: Done 1230 tasks      | elapsed: 812.2min
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/scipy/optimize/linesearch.py:285: LineSearchWarning: The line search algorithm did not converge
-  warn('The line search algorithm did not converge', LineSearchWarning)
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:193: UserWarning: Line Search failed
-  warnings.warn('Line Search failed')
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:200: UserWarning: newton-cg failed to converge. Increase the number of iterations.
-  warnings.warn("newton-cg failed to converge. Increase the "
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:200: UserWarning: newton-cg failed to converge. Increase the number of iterations.
-  warnings.warn("newton-cg failed to converge. Increase the "
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:200: UserWarning: newton-cg failed to converge. Increase the number of iterations.
-  warnings.warn("newton-cg failed to converge. Increase the "
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:200: UserWarning: newton-cg failed to converge. Increase the number of iterations.
-  warnings.warn("newton-cg failed to converge. Increase the "
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:200: UserWarning: newton-cg failed to converge. Increase the number of iterations.
-  warnings.warn("newton-cg failed to converge. Increase the "
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:200: UserWarning: newton-cg failed to converge. Increase the number of iterations.
-  warnings.warn("newton-cg failed to converge. Increase the "
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:200: UserWarning: newton-cg failed to converge. Increase the number of iterations.
-  warnings.warn("newton-cg failed to converge. Increase the "
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:200: UserWarning: newton-cg failed to converge. Increase the number of iterations.
-  warnings.warn("newton-cg failed to converge. Increase the "
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:200: UserWarning: newton-cg failed to converge. Increase the number of iterations.
-  warnings.warn("newton-cg failed to converge. Increase the "
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:200: UserWarning: newton-cg failed to converge. Increase the number of iterations.
-  warnings.warn("newton-cg failed to converge. Increase the "
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/scipy/optimize/linesearch.py:285: LineSearchWarning: The line search algorithm did not converge
-  warn('The line search algorithm did not converge', LineSearchWarning)
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:193: UserWarning: Line Search failed
-  warnings.warn('Line Search failed')
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/scipy/optimize/linesearch.py:285: LineSearchWarning: The line search algorithm did not converge
-  warn('The line search algorithm did not converge', LineSearchWarning)
-/data/software/python/anaconda/envs/ieccs/lib/python2.7/site-packages/sklearn/utils/optimize.py:193: UserWarning: Line Search failed
-  warnings.warn('Line Search failed')
 [Parallel(n_jobs=10)]: Done 1780 tasks      | elapsed: 1205.6min
 [Parallel(n_jobs=10)]: Done 1920 out of 1920 | elapsed: 1270.4min finished
 done in 76231.399s

@@ -41,6 +41,10 @@ define('app/visualization/components/map/map' ,
           url2 = 'https://ieccs.herokuapp.com/api/visual/new/organization/AGAINST';
           url3 = 'https://ieccs.herokuapp.com/api/visual/new/organization/NONE';
         }
+        else if (stance === 'Favor + Against') {
+          url1 = 'https://ieccs.herokuapp.com/api/visual/new/organization/FAVOR';
+          url2 = 'https://ieccs.herokuapp.com/api/visual/new/organization/AGAINST';
+        }
         else {
           url = 'https://ieccs.herokuapp.com/api/visual/new/organization/' + stance.toUpperCase();
         }
@@ -51,6 +55,10 @@ define('app/visualization/components/map/map' ,
           url1 = 'https://ieccs.herokuapp.com/api/visual/old/organization/FAVOR';
           url2 = 'https://ieccs.herokuapp.com/api/visual/old/organization/AGAINST';
           url3 = 'https://ieccs.herokuapp.com/api/visual/old/organization/NONE';
+        }
+        else if (stance === 'Favor + Against') {
+          url1 = 'https://ieccs.herokuapp.com/api/visual/old/organization/FAVOR';
+          url2 = 'https://ieccs.herokuapp.com/api/visual/old/organization/AGAINST';
         }
         else {
           url = 'https://ieccs.herokuapp.com/api/visual/old/organization/' + stance.toUpperCase();
@@ -97,6 +105,37 @@ define('app/visualization/components/map/map' ,
           drawMap(data, typeData, self);
         });
       }
+      else if (stance === 'Favor + Against') {
+        var fData, aData = [];
+
+        req1 = $http.get(url1)
+          .success(function (info) {
+            //console.log('Favor success');
+            fData = setColor(info.Data, favorColor);
+          })
+          .error(function (err) {
+            self.alert(1);
+            console.log(err);
+          });
+
+        req2 = $http.get(url2)
+          .success(function (info) {
+            //console.log('against success');
+            aData = setColor(info.Data, againstColor);
+          })
+          .error(function (err) {
+            self.alert(1);
+            console.log(err);
+          });
+
+        $q.all([req1, req2]).then(function() {
+          data = aData.concat(fData);
+          data.sort(compare);
+          console.log('all requests received and compared');
+          updateBar(75, self);
+          drawMap(data, typeData, self);
+        });
+      }
       else {
         req = $http.get(url)
           .success(function (info) {
@@ -128,10 +167,10 @@ define('app/visualization/components/map/map' ,
 
       self.stanceModel = [
         {id: 0, type:'All', icon: '', status: ko.observable(true)},
-        {id: 1, type:'Favor', icon: '<i class="fa fa-circle background-favor"></i>', status: ko.observable(false)},
-        {id: 2, type:'Against', icon: '<i class="fa fa-circle background-against"></i>', status: ko.observable(false)},
-        {id: 3, type:'None', icon: '<i class="fa fa-circle background-none"></i>', status: ko.observable(false)}
-
+        {id: 1, type:'Favor + Against', icon: '', status: ko.observable(false)},
+        {id: 2, type:'Favor', icon: '<i class="fa fa-circle background-favor"></i>', status: ko.observable(false)},
+        {id: 3, type:'Against', icon: '<i class="fa fa-circle background-against"></i>', status: ko.observable(false)},
+        {id: 4, type:'None', icon: '<i class="fa fa-circle background-none"></i>', status: ko.observable(false)}
       ];
 
 

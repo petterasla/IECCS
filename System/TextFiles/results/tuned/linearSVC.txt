@@ -1,0 +1,38 @@
+================================================================================
+LinearSVC(C=2.39883291902, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='crammer_singer', penalty='l2', random_state=None,
+     tol=0.0001, verbose=0)
+Pipeline(steps=[('vect', CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 1), preprocessor=None, stop_words='english',
+       ...0,
+     multi_class='crammer_singer', penalty='l2', random_state=None,
+     tol=0.0001, verbose=0))])
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3478    0.1951    0.2500        41
+      FAVOR     0.5773    0.5802    0.5787      2046
+       NONE     0.7910    0.7925    0.7917      4183
+
+avg / total     0.7184    0.7193    0.7187      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5402
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2222    0.1176    0.1538        17
+      FAVOR     0.5966    0.6055    0.6010       877
+       NONE     0.8043    0.8020    0.8031      1793
+
+avg / total     0.7328    0.7335    0.7331      2687
+
+Validation macro F-score: 0.5193
+
+
+time =  299.854017019

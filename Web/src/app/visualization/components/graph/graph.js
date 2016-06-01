@@ -9,7 +9,7 @@ define('app/visualization/components/graph/graph' ,['require','knockout',
         id: 0,
         size:'Large subset',
         type:'TCP data:',
-        url:'https://graphcommons.com/graphs/560a2a81-e564-4bb0-b5cc-bdd5588de3e6/embed',
+        url:'https://graphcommons.com/graphs/85c23961-0213-44aa-b1a5-29de6a56df7a/embed',
         urlSmall:'https://graphcommons.com/graphs/4620d8a7-f393-45e8-b29b-45c2c7ed7893/embed',
         status:ko.observable(true)
       },
@@ -17,7 +17,7 @@ define('app/visualization/components/graph/graph' ,['require','knockout',
         id: 1,
         size:'Large subset',
         type:'Unseen data:',
-        url:'https://graphcommons.com/graphs/63b04999-10d3-4ce5-9c97-4454ab717cd3/embed',
+        url:'https://graphcommons.com/graphs/0d592f93-01ca-44d2-a3fe-3ce7d1b12a03/embed',
         urlSmall:'https://graphcommons.com/graphs/60f2202f-c226-4e3c-ad22-8e7c4be9f03b/embed',
         status:ko.observable(false)
       }

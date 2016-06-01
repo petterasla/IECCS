@@ -15,6 +15,19 @@
   <label data-binD="visible: $data.progress() > 99">
     <input type="checkbox" data-bind="checked: usePercentage" /> Show percentage distribution per year
   </label>
+  <div class="row">
+    <div class="col-xs-12">
+      <div >
+        <div class="alert alert-info alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h5>
+            Our server shuts down after being idle for 15 minutes. If the application fails to retrieve data,
+            please try again as the server is starting up.
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
   <p></p>
   <p>
     This single page web aplication presents the result of our research on stance detection in scientific literature.
@@ -29,11 +42,3 @@
   </p>
   <p><a class="btn btn-primary btn-lg" href="http://theconsensusproject.com/" role="button">The Consensus Project</a></p>
 </div>
-
-<!--
-<a>
-  <button class="btn btn-sm btn-primary" data-bind="click: getData">test me</button>
-</a>
-
-<p> Returning data: <span data-bind="text: showData"></span></p>
--->

@@ -19,9 +19,14 @@
     <h3 data-bind="click: updateUrl($parents[1])" >
       Common subjects for climate papers (only subset)
     </h3>
-    <p> Click
-      <a style="cursor: pointer" data-bind="click: toGraphCommon" style="">here</a>
-      for a graph with fewer nodes
+    <p>
+      The graphs show the relation between stance and common subjects found in climate related scientific publications.
+    </p>
+    <p>
+      The orange nodes represent the detected subjects. The size of these nodes are determined by the number of
+      relations.
+      The green and red nodes (fixed size) represent publications endorsing or rejecting human-induced global warming.
+      While the blue nodes represent publications that does not express any stance.
     </p>
     <iframe data-bind="attr: {src: $data.url()}" frameborder="0"
               style="overflow:hidden;border:1px solid #DDDDDD;;height:600px;min-height:400px;"

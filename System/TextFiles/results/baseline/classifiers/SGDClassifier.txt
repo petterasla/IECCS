@@ -1,0 +1,36 @@
+Running...
+================================================================================
+SGDClassifier(alpha=0.0001, average=False, class_weight=None, epsilon=0.1,
+       eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+       learning_rate='optimal', loss='hinge', n_iter=5, n_jobs=1,
+       penalty='l2', power_t=0.5, random_state=None, shuffle=True,
+       verbose=0, warm_start=False)
+================================================================================
+Cross validated train score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1111    0.0244    0.0400        41
+      FAVOR     0.6538    0.5484    0.5965      2046
+       NONE     0.7910    0.8594    0.8238      4183
+
+avg / total     0.7418    0.7525    0.7445      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score (NONE): 0.4868
+
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        17
+      FAVOR     0.7513    0.3341    0.4625       877
+       NONE     0.7413    0.9492    0.8325      1793
+
+avg / total     0.7399    0.7425    0.7065      2687
+
+Validation macro F-score: 0.4317
+
+
+--- 71.5540809631 seconds ---

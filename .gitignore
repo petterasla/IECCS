@@ -2,6 +2,13 @@
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
 *.iml
+*.pyc
+*.DS_Store
 
 ## Directory-based project format:
 .idea/
+System/TextFiles/logs/
+
+Information Retrieval/Meta data/Wos Meta/v1/credentials.py
+Information Retrieval/Meta data/Wos Meta/v2/credentialsv2.py
+Information Retrieval/Meta data/Wos Meta/v3/credentialsv3.py

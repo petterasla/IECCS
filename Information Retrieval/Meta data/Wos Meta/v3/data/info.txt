@@ -1,0 +1,27 @@
+1991-1993
+
+len of old       11940 TCP
+len of filtered: 11422 TCP without 1991, 1992, 1993
+difference: 518
+
+len of ids: 62015
+len of tcp id = 518 after including yearlist: [1991, 1992, 1993]
+len of new ids that should fit in years [1991, 1992, 1993] === 21807
+number of records found in the year list: [1991, 1992, 1993] was === 146
+
+146/518 = 28 %
+
+
+
+2011:
+
+len of old       11940 TCP
+len of filtered: 10316 TCP without 2011
+difference: 1624
+
+len of ids: 72200 retrieved
+len of tcp id = 1624 after including year list: [2011]
+len of new ids that should fit in years [2011] === 17035
+number of records found in the year list: [2011] was === 296
+
+296/1624 = 18.22 %

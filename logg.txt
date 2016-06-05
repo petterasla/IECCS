@@ -25,6 +25,12 @@ i SemEval konkurranse *klapp klapp*.
 og "most_frequent": classen som er mest representert blir alltid valgt. Resultatene lagt inn baseline_results.txt.
 Viste seg at most_frequent ikke ble så bra allikevel. Beste res er med SVM og Linear SVM (52 %). Time to beat that..
 
+
+TODO: Virker som om Erwin er veldig opptatt av å vise resulteter samt grafer/tabeller
+TODO: Inkludere masse runs for å vise at vi faktisk gjorde noe (i appendix - master oppagaven våres)
+TODO: Potensielt lage grafer/tabeller for systemet til SemEval for å vise at vi har prøvd mye
+TODO: Få med label prop og annen ekstra data vi prøvde
+=======
 11.-18. februar:
 - Path-fix for genrell kjøring i terminal
 - Optimalisering av grid search for multiprossesor kjøring på server (n_jobs). Output er inkludert i .log filer.

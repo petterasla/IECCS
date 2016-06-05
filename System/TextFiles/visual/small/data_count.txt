@@ -1,0 +1,28 @@
+[{
+        "year": "2012",
+                "Against": 1,
+                "Favor": 48,
+                 "None":571
+
+            }, {
+                "year": "2013",
+                "Against": 3,
+                "Favor": 41,
+                 "None":541
+
+            }, {
+                "year": "2014",
+                "Against": 4,
+                "Favor": 45,
+                 "None":557
+            }, {
+                "year": "2015",
+                "Against": 1,
+                "Favor": 59,
+                 "None":594
+            }, {
+                "year": "2016",
+                "Against": 1,
+                "Favor": 14,
+                 "None":153
+            }]

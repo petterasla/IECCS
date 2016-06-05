@@ -8,6 +8,7 @@ from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.sentiment import vader as vader
 from bs4 import BeautifulSoup
 from scipy import sparse
+from sklearn import cross_validation
 # When using vader.SentimentIntensityAnalyzer() sentiment methods, you might have to download and store this in
 # /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/nltk/sentiment/vader_lexicon.txt'
 # https://github.com/nltk/nltk/blob/develop/nltk/sentiment/vader_lexicon.txt
@@ -32,7 +33,60 @@ def getData():
 
     :return:        A DataFrame
     """
-    return pd.read_csv("../TextFiles/tcp_abstracts.txt")
+    a = pd.read_csv("../TextFiles/data/tcp_abstracts.txt")
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
+
+def getMetaDataAsList():
+    with open("../TextFiles/data/meta_data.json", "r") as f:
+        data = json.load(f)
+    return data
+
+def getDataWithMeta():
+    a = pd.DataFrame(getMetaDataAsList())
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
+
+def getTrainingData():
+    a = pd.read_csv("../TextFiles/data/tcp_train.csv", sep='\t')
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
+
+def getTrainingDataWithMeta():
+    a = pd.read_csv("../TextFiles/data/tcp_train_meta.csv", sep='\t')
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
+
+def getValidationData():
+    a = pd.read_csv("../TextFiles/data/tcp_validate.csv", sep='\t')
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
+
+def getValidationDataWithMeta():
+    a = pd.read_csv("../TextFiles/data/tcp_validate_meta.csv", sep='\t')
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
+
+def getTestData():
+    a =pd.read_csv("../TextFiles/data/tcp_test.csv", sep='\t')
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
+
+def getTestDataWithMeta():
+    a = pd.read_csv("../TextFiles/data/tcp_test_meta.csv", sep='\t')
+    a.Abstract.replace(to_replace='<[^>]*>', regex=True, value='', inplace=True)
+    return a
+
+
+
+def getUnlabelledData():
+    with open("../TextFiles/data/related_data_correct_v1.json", "r") as f:
+        return pd.DataFrame(json.load(f))
+
+def getUnlabelledDataAsList():
+    with open("../TextFiles/data/related_data_correct_v1.json", "r") as f:
+        return json.load(f)
+
 
 
 def getIdData():
@@ -157,6 +211,18 @@ def getDownsample(label, strength, sample_rate):
            pd.DataFrame(test_abstracts, columns=["Abstract"]).Abstract, [label for i in range(len(test_abstracts))]
 
 
+def getDownsample2_0(data, label, strength, sample_rate):
+    """
+    Returns downsampled amount of abstracts based on label.
+
+    :return:        A Series - pandas.core.series.Series
+    """
+    data = data[data.Stance == label]
+    X, X_sub, y1, y2 = cross_validation.train_test_split(data, data.Stance, test_size=sample_rate, random_state=1, stratify=data.Stance)
+
+    return X_sub
+
+
 def getAbstractStanceVsNoStance(strength, endorsement):
     """
     Converts the endorsement level of the abstract as favor, against or none depending the strength limit
@@ -189,6 +255,39 @@ def getAbstractStanceVsNoStance(strength, endorsement):
         else:
             return "NONE"
 
+
+def convertEndorsementToStance(data, strength):
+    """
+    Converts the endorsement level of the abstract as favor, against or none depending the strength limit
+
+    :param data:            Data object of type - pandas.core.series.Series
+    :param strength:        String that should decide the strength of stance of the abstract ['soft, 'medium', 'hard']
+    :return:                A Series - pandas.core.series.Series
+    """
+    stances = []
+    for endorsement in data.Endorse:
+        if strength=="soft":
+            if endorsement <= 3:
+                stances.append("FAVOR")
+            elif endorsement >= 5:
+                stances.append("AGAINST")
+            else:
+                stances.append("NONE")
+        elif strength == "medium":
+            if endorsement < 3:
+                stances.append("FAVOR")
+            elif endorsement > 5:
+                stances.append("AGAINST")
+            else:
+                stances.append("NONE")
+        else:
+            if endorsement < 2:
+                stances.append("FAVOR")
+            elif endorsement > 6:
+                stances.append("AGAINST")
+            else:
+                stances.append("NONE")
+    return pd.DataFrame(stances, columns=["Stance"]).Stance
 
 def getAbstractStance(strength, endorsement):
     """
@@ -475,6 +574,31 @@ def convertStancesToText(allNumberedStances):
     return textStances
 
 
+def yearFeature(texts):
+    """
+    Finds the number of tokens in a tweet
+
+    :param doc_name:    Tweet as string
+    :return:            Integer
+    """
+    data = getData()
+    years = []
+    for abstract in texts:
+        tmp = data[data.Abstract == abstract]
+        years.append(tmp["Year"].values[0])
+    feature = [float(year) for year in years]
+    return sparse.csr_matrix(feature, dtype='float').T
+
+def categoryFeature(texts):
+    data = getData()
+    cats = []
+    for abstract in texts:
+        tmp = data[data.Abstract == abstract]
+        cats.append(tmp["Cat"].values[0])
+    feature = [float(cat) for cat in cats]
+    return sparse.csr_matrix(feature, dtype='float').T
+
+
 def determineNegationFeature(texts):
     """
     Creates feature (0 or 1) for whether the tweet contains negated segments or not
@@ -491,6 +615,8 @@ def determineNegationFeature(texts):
             negated.append(float(0))
     return sparse.csr_matrix(negated, dtype='float').T
 #print determineNegationFeature(["hei hei hva skjer", "jada daj ladl"])
+
+
 def lengthOfTweetFeature(texts):
     """
     Creates a normalized feature between 0 and 1 for the length of the tweet

@@ -1,21 +1,27 @@
 import scrapy
-import re
-import json
-import import_data
+import import_data as import_data
 from retrieval.items import MetaItem
+
 
 class MetaSpider(scrapy.Spider):
     name = "meta retrieval"
-    start_urls = import_data.generateMetaURLs()[9000:]
+    print "META RETRIEVAL"
+    print 80*"="
+    start_urls = import_data.generateSearchURLs()[10000:]
+
 
     def parse(self, response):
         item = MetaItem()
-        metaString = re.sub('<[^>]*>', '', response.xpath('//body/p/text()').extract()[0])
-        jsonMetaString = "[" + str(metaString) + "]"
+        url = response.xpath('//a[@title="Show document details"]/@href').extract()[0]
+        request = scrapy.Request(url, callback=self.parse_next)
+        request.meta['item'] = item
+        return request
 
-        metaDict = json.loads(jsonMetaString)[0]
-        item["status"] = metaDict["status"]
-        item["message"] = metaDict["message"]
-
+    def parse_next(self, response):
+        item = response.meta['item']
+        url = response.url
+        start_index = url.index("eid=") + 4
+        end_index = url.index("&", start_index)
+        eid = url[start_index:end_index]
+        item['url'] = import_data.generateMetaURL(eid)
         yield item
-

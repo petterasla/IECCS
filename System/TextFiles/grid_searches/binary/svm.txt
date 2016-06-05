@@ -1,0 +1,68 @@
+STANCE VS NO STANCE
+
+6270 training documents
+2 categories
+
+Using train, validation and test approach with clf SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Performing grid search...
+pipeline: ['vect', 'tfidf', 'clf']
+parameters:
+{'clf__C': array([  0.1       ,   0.28840315,   0.83176377,   2.39883292,
+         6.91830971,  19.95262315]),
+ 'tfidf__use_idf': (True, False),
+ 'vect__analyzer': ['word'],
+ 'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3)],
+ 'vect__stop_words': [None, 'english']}
+Fitting 10 folds for each of 96 candidates, totalling 960 fits
+[Parallel(n_jobs=10)]: Done  30 tasks      | elapsed:  3.6min
+[Parallel(n_jobs=10)]: Done 180 tasks      | elapsed: 25.9min
+[Parallel(n_jobs=10)]: Done 430 tasks      | elapsed: 58.5min
+[Parallel(n_jobs=10)]: Done 780 tasks      | elapsed: 104.6min
+[Parallel(n_jobs=10)]: Done 960 out of 960 | elapsed: 128.2min finished
+done in 7735.181s
+
+Best score: 0.400
+Best parameters set:
+	clf__C: 0.10000000000000001
+	tfidf__use_idf: True
+	vect__analyzer: 'word'
+	vect__ngram_range: (1, 1)
+	vect__stop_words: None
+
+
+
+FAVOR VS AGAINST:
+
+2087 training documents
+3 categories
+
+Using train, validation and test approach with clf SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+Performing grid search...
+pipeline: ['vect', 'tfidf', 'clf']
+parameters:
+{'clf__C': array([  0.1       ,   0.28840315,   0.83176377,   2.39883292,
+         6.91830971,  19.95262315]),
+ 'tfidf__use_idf': (True, False),
+ 'vect__analyzer': ['word'],
+ 'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3)],
+ 'vect__stop_words': [None, 'english']}
+[Parallel(n_jobs=10)]: Done  30 tasks      | elapsed:   11.4s
+[Parallel(n_jobs=10)]: Done 180 tasks      | elapsed:  2.1min
+[Parallel(n_jobs=10)]: Done 430 tasks      | elapsed:  5.3min
+[Parallel(n_jobs=10)]: Done 780 tasks      | elapsed: 10.0min
+[Parallel(n_jobs=10)]: Done 960 out of 960 | elapsed: 12.4min finished
+done in 743.549s
+
+Best score: 0.495
+Best parameters set:
+	clf__C: 0.10000000000000001
+	tfidf__use_idf: True
+	vect__analyzer: 'word'
+	vect__ngram_range: (1, 1)
+	vect__stop_words: None

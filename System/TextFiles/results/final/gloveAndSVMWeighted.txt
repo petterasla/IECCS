@@ -1,0 +1,47 @@
+================================================================================
+GLOVE VECTORS: glove.840B.300d
+================================================================================
+{'vect': CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=None, min_df=1,
+        ngram_range=(1, 2), preprocessor=None, stop_words=None,
+        strip_accents=None, token_pattern=u'(?u)\\b\\w\\w+\\b',
+        tokenizer=None, vocabulary=None), 'clf': SVC(C=5.2, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=True, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)}
+TRAIN
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1446    0.2927    0.1935        41
+      FAVOR     0.6846    0.6823    0.6835      2046
+       NONE     0.8447    0.8377    0.8412      4183
+
+avg / total     0.7879    0.7834    0.7855      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.7855
+
+VALIDATE
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2414    0.4118    0.3043        17
+      FAVOR     0.7125    0.7149    0.7137       877
+       NONE     0.8594    0.8522    0.8558      1793
+
+avg / total     0.8075    0.8046    0.8059      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.8059
+
+TEST
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1636    0.4737    0.2432        19
+      FAVOR     0.7165    0.7040    0.7102       973
+       NONE     0.8605    0.8523    0.8564      1991
+
+avg / total     0.8091    0.8015    0.8048      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.8048

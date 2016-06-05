@@ -1,0 +1,2513 @@
+/usr/bin/python /Users/Henrik/Documents/Datateknikk/Prosjektoppgave/IECCS/System/ImprovedSystem/ex3_up_down_sampling.py
+/Users/Henrik/Library/Python/2.7/lib/python/site-packages/nltk/twitter/__init__.py:20: UserWarning: The twython library has not been installed. Some functionality from the twitter package will not be available.
+  warnings.warn("The twython library has not been installed. "
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.1
+Downsample none: 0.1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1087    0.2941    0.1587        17
+      FAVOR     0.6261    0.5462    0.5834       877
+       NONE     0.7926    0.8293    0.8106      1793
+
+avg / total     0.7340    0.7335    0.7323      2687
+
+Validation macro F-score: 0.5176
+
+
+time =  7.99761795998
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.1
+Downsample none: 0.2
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.2941    0.2381        17
+      FAVOR     0.6942    0.3831    0.4938       877
+       NONE     0.7530    0.9147    0.8260      1793
+
+avg / total     0.7303    0.7373    0.7138      2687
+
+Validation macro F-score: 0.5193
+
+
+time =  13.1043131351
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.1
+Downsample none: 0.3
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1667    0.1765    0.1714        17
+      FAVOR     0.7179    0.3193    0.4420       877
+       NONE     0.7389    0.9392    0.8271      1793
+
+avg / total     0.7285    0.7320    0.6973      2687
+
+Validation macro F-score: 0.4802
+
+
+time =  21.7099781036
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.1
+Downsample none: 0.4
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3333    0.2941    0.3125        17
+      FAVOR     0.7540    0.2691    0.3966       877
+       NONE     0.7287    0.9587    0.8280      1793
+
+avg / total     0.7345    0.7294    0.6840      2687
+
+Validation macro F-score: 0.5124
+
+
+time =  28.0694861412
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.1
+Downsample none: 0.5
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2727    0.1765    0.2143        17
+      FAVOR     0.7673    0.2406    0.3663       877
+       NONE     0.7209    0.9654    0.8255      1793
+
+avg / total     0.7332    0.7239    0.6717      2687
+
+Validation macro F-score: 0.4687
+
+
+time =  35.0346050262
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.1
+Downsample none: 0.6
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2727    0.1765    0.2143        17
+      FAVOR     0.7702    0.2064    0.3255       877
+       NONE     0.7128    0.9704    0.8219      1793
+
+avg / total     0.7288    0.7160    0.6561      2687
+
+Validation macro F-score: 0.4539
+
+
+time =  42.8006801605
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.1
+Downsample none: 0.7
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.1765    0.2069        17
+      FAVOR     0.7793    0.1893    0.3046       877
+       NONE     0.7096    0.9743    0.8212      1793
+
+avg / total     0.7294    0.7131    0.6487      2687
+
+Validation macro F-score: 0.4442
+
+
+time =  51.637843132
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.1
+Downsample none: 0.8
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3333    0.2353    0.2759        17
+      FAVOR     0.7857    0.1756    0.2870       877
+       NONE     0.7063    0.9766    0.8198      1793
+
+avg / total     0.7299    0.7105    0.6424      2687
+
+Validation macro F-score: 0.4609
+
+
+time =  61.0827100277
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.1
+Downsample none: 0.9
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.4000    0.2353    0.2963        17
+      FAVOR     0.7747    0.1608    0.2663       877
+       NONE     0.7018    0.9766    0.8167      1793
+
+avg / total     0.7237    0.7056    0.6338      2687
+
+Validation macro F-score: 0.4598
+
+
+time =  71.2054040432
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.2
+Downsample none: 0.1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1176    0.2353    0.1569        17
+      FAVOR     0.5491    0.7013    0.6159       877
+       NONE     0.8337    0.7128    0.7685      1793
+
+avg / total     0.7363    0.7060    0.7148      2687
+
+Validation macro F-score: 0.5138
+
+
+time =  75.0288350582
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.2
+Downsample none: 0.2
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2105    0.2353    0.2222        17
+      FAVOR     0.5931    0.5485    0.5699       877
+       NONE     0.7884    0.8165    0.8022      1793
+
+avg / total     0.7210    0.7253    0.7227      2687
+
+Validation macro F-score: 0.5314
+
+
+time =  80.5148200989
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.2
+Downsample none: 0.3
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1875    0.1765    0.1818        17
+      FAVOR     0.6532    0.4983    0.5653       877
+       NONE     0.7812    0.8723    0.8242      1793
+
+avg / total     0.7357    0.7458    0.7357      2687
+
+Validation macro F-score: 0.5238
+
+
+time =  87.3182029724
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.2
+Downsample none: 0.4
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3571    0.2941    0.3226        17
+      FAVOR     0.6916    0.4527    0.5472       877
+       NONE     0.7723    0.9041    0.8330      1793
+
+avg / total     0.7433    0.7529    0.7365      2687
+
+Validation macro F-score: 0.5676
+
+
+time =  95.667732954
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.2
+Downsample none: 0.5
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2308    0.1765    0.2000        17
+      FAVOR     0.7206    0.4116    0.5239       877
+       NONE     0.7625    0.9241    0.8356      1793
+
+avg / total     0.7455    0.7521    0.7299      2687
+
+Validation macro F-score: 0.5199
+
+
+time =  104.454834938
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.2
+Downsample none: 0.6
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.1765    0.2069        17
+      FAVOR     0.7220    0.3672    0.4868       877
+       NONE     0.7510    0.9336    0.8324      1793
+
+avg / total     0.7384    0.7440    0.7156      2687
+
+Validation macro F-score: 0.5087
+
+
+time =  114.518110037
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.2
+Downsample none: 0.7
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.1765    0.2069        17
+      FAVOR     0.7315    0.3261    0.4511       877
+       NONE     0.7404    0.9431    0.8295      1793
+
+avg / total     0.7344    0.7369    0.7021      2687
+
+Validation macro F-score: 0.4958
+
+
+time =  125.812136173
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.2
+Downsample none: 0.8
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3077    0.2353    0.2667        17
+      FAVOR     0.7570    0.3090    0.4389       877
+       NONE     0.7375    0.9526    0.8313      1793
+
+avg / total     0.7411    0.7380    0.6997      2687
+
+Validation macro F-score: 0.5123
+
+
+time =  138.203258038
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.2
+Downsample none: 0.9
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3077    0.2353    0.2667        17
+      FAVOR     0.7629    0.2862    0.4163       877
+       NONE     0.7322    0.9576    0.8299      1793
+
+avg / total     0.7395    0.7339    0.6913      2687
+
+Validation macro F-score: 0.5043
+
+
+time =  151.76067996
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.3
+Downsample none: 0.1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0968    0.1765    0.1250        17
+      FAVOR     0.5141    0.7891    0.6226       877
+       NONE     0.8626    0.6302    0.7283      1793
+
+avg / total     0.7440    0.6792    0.6900      2687
+
+Validation macro F-score: 0.4920
+
+
+time =  156.137324095
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.3
+Downsample none: 0.2
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1875    0.1765    0.1818        17
+      FAVOR     0.5539    0.6499    0.5981       877
+       NONE     0.8143    0.7457    0.7785      1793
+
+avg / total     0.7253    0.7108    0.7158      2687
+
+Validation macro F-score: 0.5195
+
+
+time =  162.21115613
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.3
+Downsample none: 0.3
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1429    0.1176    0.1290        17
+      FAVOR     0.6010    0.5735    0.5869       877
+       NONE     0.7968    0.8160    0.8063      1793
+
+avg / total     0.7288    0.7324    0.7304      2687
+
+Validation macro F-score: 0.5074
+
+
+time =  170.170556068
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.3
+Downsample none: 0.4
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3077    0.2353    0.2667        17
+      FAVOR     0.6445    0.5188    0.5749       877
+       NONE     0.7861    0.8628    0.8227      1793
+
+avg / total     0.7368    0.7466    0.7383      2687
+
+Validation macro F-score: 0.5547
+
+
+time =  179.997830153
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.3
+Downsample none: 0.5
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.1176    0.1481        17
+      FAVOR     0.6601    0.4983    0.5679       877
+       NONE     0.7811    0.8779    0.8267      1793
+
+avg / total     0.7380    0.7492    0.7379      2687
+
+Validation macro F-score: 0.5142
+
+
+time =  191.683794975
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.3
+Downsample none: 0.6
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1818    0.1176    0.1429        17
+      FAVOR     0.6683    0.4595    0.5446       877
+       NONE     0.7709    0.8912    0.8267      1793
+
+avg / total     0.7337    0.7454    0.7303      2687
+
+Validation macro F-score: 0.5047
+
+
+time =  205.003821135
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.3
+Downsample none: 0.7
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1818    0.1176    0.1429        17
+      FAVOR     0.6923    0.4208    0.5234       877
+       NONE     0.7625    0.9113    0.8303      1793
+
+avg / total     0.7359    0.7462    0.7258      2687
+
+Validation macro F-score: 0.4988
+
+
+time =  217.941053152
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.3
+Downsample none: 0.8
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.1765    0.2069        17
+      FAVOR     0.7029    0.3831    0.4959       877
+       NONE     0.7533    0.9230    0.8296      1793
+
+avg / total     0.7337    0.7421    0.7167      2687
+
+Validation macro F-score: 0.5108
+
+
+time =  232.983059168
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.3
+Downsample none: 0.9
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.1765    0.2069        17
+      FAVOR     0.7298    0.3820    0.5015       877
+       NONE     0.7550    0.9331    0.8346      1793
+
+avg / total     0.7436    0.7484    0.7219      2687
+
+Validation macro F-score: 0.5143
+
+
+time =  248.739670038
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.4
+Downsample none: 0.1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0769    0.1176    0.0930        17
+      FAVOR     0.4949    0.8301    0.6201       877
+       NONE     0.8756    0.5811    0.6986      1793
+
+avg / total     0.7463    0.6595    0.6692      2687
+
+Validation macro F-score: 0.4706
+
+
+time =  253.732983112
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.4
+Downsample none: 0.2
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1667    0.1176    0.1379        17
+      FAVOR     0.5496    0.7138    0.6210       877
+       NONE     0.8353    0.7156    0.7708      1793
+
+avg / total     0.7378    0.7112    0.7179      2687
+
+Validation macro F-score: 0.5099
+
+
+time =  260.614499092
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.4
+Downsample none: 0.3
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1667    0.1176    0.1379        17
+      FAVOR     0.5826    0.6397    0.6098       877
+       NONE     0.8143    0.7775    0.7954      1793
+
+avg / total     0.7345    0.7283    0.7307      2687
+
+Validation macro F-score: 0.5144
+
+
+time =  269.507071972
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.4
+Downsample none: 0.4
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3000    0.1765    0.2222        17
+      FAVOR     0.6093    0.5849    0.5969       877
+       NONE     0.8000    0.8187    0.8093      1793
+
+avg / total     0.7346    0.7384    0.7362      2687
+
+Validation macro F-score: 0.5428
+
+
+time =  279.88857913
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.4
+Downsample none: 0.5
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1429    0.0588    0.0833        17
+      FAVOR     0.6398    0.5713    0.6036       877
+       NONE     0.7992    0.8455    0.8217      1793
+
+avg / total     0.7430    0.7510    0.7458      2687
+
+Validation macro F-score: 0.5029
+
+
+time =  292.678416014
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.4
+Downsample none: 0.6
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1250    0.0588    0.0800        17
+      FAVOR     0.6528    0.5382    0.5900       877
+       NONE     0.7909    0.8628    0.8253      1793
+
+avg / total     0.7416    0.7518    0.7438      2687
+
+Validation macro F-score: 0.4984
+
+
+time =  309.850648165
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.4
+Downsample none: 0.7
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1250    0.0588    0.0800        17
+      FAVOR     0.6687    0.5063    0.5762       877
+       NONE     0.7831    0.8801    0.8288      1793
+
+avg / total     0.7416    0.7529    0.7416      2687
+
+Validation macro F-score: 0.4950
+
+
+time =  323.809457064
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.4
+Downsample none: 0.8
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.1176    0.1600        17
+      FAVOR     0.6765    0.4698    0.5545       877
+       NONE     0.7729    0.8924    0.8284      1793
+
+avg / total     0.7382    0.7495    0.7348      2687
+
+Validation macro F-score: 0.5143
+
+
+time =  339.62809515
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.4
+Downsample none: 0.9
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.1176    0.1600        17
+      FAVOR     0.6996    0.4515    0.5489       877
+       NONE     0.7700    0.9074    0.8331      1793
+
+avg / total     0.7437    0.7536    0.7361      2687
+
+Validation macro F-score: 0.5140
+
+
+time =  357.337334156
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.5
+Downsample none: 0.1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0435    0.0588    0.0500        17
+      FAVOR     0.4834    0.8609    0.6191       877
+       NONE     0.8902    0.5471    0.6777      1793
+
+avg / total     0.7521    0.6464    0.6546      2687
+
+Validation macro F-score: 0.4489
+
+
+time =  362.663435936
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.5
+Downsample none: 0.2
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1000    0.0588    0.0741        17
+      FAVOR     0.5404    0.7480    0.6275       877
+       NONE     0.8476    0.6916    0.7617      1793
+
+avg / total     0.7426    0.7060    0.7135      2687
+
+Validation macro F-score: 0.4877
+
+
+time =  369.967048168
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.5
+Downsample none: 0.3
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1111    0.0588    0.0769        17
+      FAVOR     0.5743    0.6876    0.6258       877
+       NONE     0.8305    0.7540    0.7904      1793
+
+avg / total     0.7423    0.7279    0.7322      2687
+
+Validation macro F-score: 0.4977
+
+
+time =  379.304916143
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.5
+Downsample none: 0.4
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3333    0.1176    0.1739        17
+      FAVOR     0.5980    0.6260    0.6117       877
+       NONE     0.8123    0.7987    0.8054      1793
+
+avg / total     0.7393    0.7380    0.7382      2687
+
+Validation macro F-score: 0.5303
+
+
+time =  391.054550171
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.5
+Downsample none: 0.5
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.0588    0.0909        17
+      FAVOR     0.6230    0.6123    0.6176       877
+       NONE     0.8104    0.8226    0.8165      1793
+
+avg / total     0.7454    0.7492    0.7470      2687
+
+Validation macro F-score: 0.5083
+
+
+time =  407.655224085
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.5
+Downsample none: 0.6
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1667    0.0588    0.0870        17
+      FAVOR     0.6420    0.5929    0.6165       877
+       NONE     0.8071    0.8422    0.8242      1793
+
+avg / total     0.7491    0.7559    0.7518      2687
+
+Validation macro F-score: 0.5092
+
+
+time =  426.06693697
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.5
+Downsample none: 0.7
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.0588    0.0909        17
+      FAVOR     0.6639    0.5564    0.6055       877
+       NONE     0.7976    0.8661    0.8305      1793
+
+avg / total     0.7502    0.7600    0.7524      2687
+
+Validation macro F-score: 0.5089
+
+
+time =  447.204761028
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.5
+Downsample none: 0.8
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.0588    0.0909        17
+      FAVOR     0.6701    0.5211    0.5863       877
+       NONE     0.7880    0.8790    0.8310      1793
+
+avg / total     0.7458    0.7570    0.7464      2687
+
+Validation macro F-score: 0.5027
+
+
+time =  467.588487148
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.5
+Downsample none: 0.9
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2857    0.1176    0.1667        17
+      FAVOR     0.6943    0.5154    0.5916       877
+       NONE     0.7886    0.8924    0.8373      1793
+
+avg / total     0.7546    0.7644    0.7528      2687
+
+Validation macro F-score: 0.5318
+
+
+time =  490.07901001
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.6
+Downsample none: 0.1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0417    0.0588    0.0488        17
+      FAVOR     0.4659    0.8814    0.6096       877
+       NONE     0.8974    0.5025    0.6443      1793
+
+avg / total     0.7512    0.6234    0.6292      2687
+
+Validation macro F-score: 0.4342
+
+
+time =  496.855296135
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.6
+Downsample none: 0.2
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0833    0.0588    0.0690        17
+      FAVOR     0.5201    0.7822    0.6248       877
+       NONE     0.8584    0.6492    0.7393      1793
+
+avg / total     0.7431    0.6889    0.6977      2687
+
+Validation macro F-score: 0.4777
+
+
+time =  506.16476512
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.6
+Downsample none: 0.3
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1111    0.0588    0.0769        17
+      FAVOR     0.5528    0.7218    0.6261       877
+       NONE     0.8395    0.7178    0.7739      1793
+
+avg / total     0.7413    0.7149    0.7213      2687
+
+Validation macro F-score: 0.4923
+
+
+time =  518.471601009
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.6
+Downsample none: 0.4
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2857    0.1176    0.1667        17
+      FAVOR     0.5899    0.6807    0.6321       877
+       NONE     0.8303    0.7724    0.8003      1793
+
+avg / total     0.7484    0.7384    0.7414      2687
+
+Validation macro F-score: 0.5330
+
+
+time =  533.483911991
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.6
+Downsample none: 0.5
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.0588    0.0909        17
+      FAVOR     0.6070    0.6534    0.6293       877
+       NONE     0.8222    0.7970    0.8094      1793
+
+avg / total     0.7480    0.7454    0.7461      2687
+
+Validation macro F-score: 0.5099
+
+
+time =  551.217177153
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.6
+Downsample none: 0.6
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1667    0.0588    0.0870        17
+      FAVOR     0.6256    0.6363    0.6309       877
+       NONE     0.8195    0.8176    0.8185      1793
+
+avg / total     0.7520    0.7536    0.7527      2687
+
+Validation macro F-score: 0.5121
+
+
+time =  571.88411212
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.6
+Downsample none: 0.7
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1667    0.0588    0.0870        17
+      FAVOR     0.6274    0.6066    0.6168       877
+       NONE     0.8101    0.8282    0.8191      1793
+
+avg / total     0.7464    0.7510    0.7484      2687
+
+Validation macro F-score: 0.5076
+
+
+time =  600.761857986
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.6
+Downsample none: 0.8
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.0588    0.0909        17
+      FAVOR     0.6532    0.5735    0.6108       877
+       NONE     0.8023    0.8555    0.8281      1793
+
+avg / total     0.7498    0.7585    0.7525      2687
+
+Validation macro F-score: 0.5099
+
+
+time =  623.368889093
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.6
+Downsample none: 0.9
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1667    0.0588    0.0870        17
+      FAVOR     0.6763    0.5576    0.6112       877
+       NONE     0.7998    0.8734    0.8350      1793
+
+avg / total     0.7555    0.7652    0.7572      2687
+
+Validation macro F-score: 0.5111
+
+
+time =  649.349681139
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.7
+Downsample none: 0.1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0500    0.0588    0.0541        17
+      FAVOR     0.4595    0.9065    0.6099       877
+       NONE     0.9125    0.4769    0.6264      1793
+
+avg / total     0.7592    0.6144    0.6174      2687
+
+Validation macro F-score: 0.4301
+
+
+time =  657.25151515
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.7
+Downsample none: 0.2
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0833    0.0588    0.0690        17
+      FAVOR     0.5107    0.8141    0.6277       877
+       NONE     0.8708    0.6202    0.7244      1793
+
+avg / total     0.7483    0.6799    0.6887      2687
+
+Validation macro F-score: 0.4737
+
+
+time =  668.279164076
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.7
+Downsample none: 0.3
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1111    0.0588    0.0769        17
+      FAVOR     0.5443    0.7423    0.6281       877
+       NONE     0.8455    0.6988    0.7652      1793
+
+avg / total     0.7425    0.7090    0.7161      2687
+
+Validation macro F-score: 0.4901
+
+
+time =  681.51981616
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.7
+Downsample none: 0.4
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.0588    0.0952        17
+      FAVOR     0.5678    0.6967    0.6257       877
+       NONE     0.8320    0.7457    0.7865      1793
+
+avg / total     0.7421    0.7253    0.7296      2687
+
+Validation macro F-score: 0.5025
+
+
+time =  698.303815126
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.7
+Downsample none: 0.5
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.0588    0.0909        17
+      FAVOR     0.6016    0.6956    0.6452       877
+       NONE     0.8363    0.7780    0.8061      1793
+
+avg / total     0.7557    0.7466    0.7491      2687
+
+Validation macro F-score: 0.5141
+
+
+time =  716.914040089
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.7
+Downsample none: 0.6
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.0588    0.0952        17
+      FAVOR     0.6170    0.6613    0.6384       877
+       NONE     0.8262    0.8031    0.8145      1793
+
+avg / total     0.7543    0.7521    0.7525      2687
+
+Validation macro F-score: 0.5160
+
+
+time =  739.150232077
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.7
+Downsample none: 0.7
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.0588    0.0952        17
+      FAVOR     0.6332    0.6397    0.6364       877
+       NONE     0.8214    0.8232    0.8223      1793
+
+avg / total     0.7563    0.7585    0.7570      2687
+
+Validation macro F-score: 0.5180
+
+
+time =  764.064568043
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.7
+Downsample none: 0.8
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.0588    0.0952        17
+      FAVOR     0.6469    0.5975    0.6212       877
+       NONE     0.8089    0.8450    0.8265      1793
+
+avg / total     0.7525    0.7592    0.7549      2687
+
+Validation macro F-score: 0.5143
+
+
+time =  788.023220062
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.7
+Downsample none: 0.9
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.0588    0.0952        17
+      FAVOR     0.6602    0.5804    0.6177       877
+       NONE     0.8049    0.8583    0.8308      1793
+
+avg / total     0.7542    0.7626    0.7566      2687
+
+Validation macro F-score: 0.5146
+
+
+time =  815.153844118
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.8
+Downsample none: 0.1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0556    0.0588    0.0571        17
+      FAVOR     0.4469    0.9156    0.6006       877
+       NONE     0.9151    0.4451    0.5989      1793
+
+avg / total     0.7569    0.5962    0.5960      2687
+
+Validation macro F-score: 0.4189
+
+
+time =  823.977790117
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.8
+Downsample none: 0.2
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1000    0.0588    0.0741        17
+      FAVOR     0.5007    0.8438    0.6285       877
+       NONE     0.8849    0.5917    0.7092      1793
+
+avg / total     0.7545    0.6706    0.6788      2687
+
+Validation macro F-score: 0.4706
+
+
+time =  835.896593094
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.8
+Downsample none: 0.3
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1250    0.0588    0.0800        17
+      FAVOR     0.5346    0.7754    0.6329       877
+       NONE     0.8579    0.6732    0.7544      1793
+
+avg / total     0.7477    0.7026    0.7104      2687
+
+Validation macro F-score: 0.4891
+
+
+time =  851.518710136
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.8
+Downsample none: 0.4
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.4000    0.1176    0.1818        17
+      FAVOR     0.5739    0.7434    0.6478       877
+       NONE     0.8519    0.7345    0.7889      1793
+
+avg / total     0.7583    0.7335    0.7390      2687
+
+Validation macro F-score: 0.5395
+
+
+time =  869.529441118
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.8
+Downsample none: 0.5
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.0588    0.0909        17
+      FAVOR     0.5862    0.7172    0.6451       877
+       NONE     0.8421    0.7557    0.7966      1793
+
+avg / total     0.7545    0.7387    0.7427      2687
+
+Validation macro F-score: 0.5109
+
+
+time =  890.223796129
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.8
+Downsample none: 0.6
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1667    0.0588    0.0870        17
+      FAVOR     0.6109    0.6876    0.6470       877
+       NONE     0.8353    0.7892    0.8116      1793
+
+avg / total     0.7578    0.7514    0.7533      2687
+
+Validation macro F-score: 0.5152
+
+
+time =  914.787744045
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.8
+Downsample none: 0.7
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.0588    0.0952        17
+      FAVOR     0.6301    0.6682    0.6486       877
+       NONE     0.8311    0.8126    0.8218      1793
+
+avg / total     0.7619    0.7607    0.7607      2687
+
+Validation macro F-score: 0.5219
+
+
+time =  943.656823158
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.8
+Downsample none: 0.8
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.0588    0.0952        17
+      FAVOR     0.6398    0.6340    0.6369       877
+       NONE     0.8203    0.8299    0.8251      1793
+
+avg / total     0.7578    0.7611    0.7590      2687
+
+Validation macro F-score: 0.5191
+
+
+time =  970.832535028
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.8
+Downsample none: 0.9
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.0588    0.0909        17
+      FAVOR     0.6561    0.6112    0.6328       877
+       NONE     0.8145    0.8472    0.8305      1793
+
+avg / total     0.7589    0.7652    0.7613      2687
+
+Validation macro F-score: 0.5181
+
+
+time =  996.925320148
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.9
+Downsample none: 0.1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0667    0.0588    0.0625        17
+      FAVOR     0.4402    0.9225    0.5959       877
+       NONE     0.9173    0.4267    0.5824      1793
+
+avg / total     0.7562    0.5862    0.5835      2687
+
+Validation macro F-score: 0.4136
+
+
+time =  1005.04480314
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.9
+Downsample none: 0.2
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1250    0.0588    0.0800        17
+      FAVOR     0.4970    0.8518    0.6277       877
+       NONE     0.8886    0.5828    0.7039      1793
+
+avg / total     0.7560    0.6673    0.6751      2687
+
+Validation macro F-score: 0.4706
+
+
+time =  1016.73784399
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.9
+Downsample none: 0.3
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1250    0.0588    0.0800        17
+      FAVOR     0.5299    0.7982    0.6369       877
+       NONE     0.8675    0.6570    0.7477      1793
+
+avg / total     0.7526    0.6993    0.7073      2687
+
+Validation macro F-score: 0.4882
+
+
+time =  1031.23042512
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.9
+Downsample none: 0.4
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3333    0.1176    0.1739        17
+      FAVOR     0.5635    0.7594    0.6469       877
+       NONE     0.8566    0.7161    0.7801      1793
+
+avg / total     0.7576    0.7265    0.7328      2687
+
+Validation macro F-score: 0.5336
+
+
+time =  1048.38958097
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.9
+Downsample none: 0.5
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1667    0.0588    0.0870        17
+      FAVOR     0.5759    0.7355    0.6460       877
+       NONE     0.8482    0.7384    0.7895      1793
+
+avg / total     0.7550    0.7332    0.7382      2687
+
+Validation macro F-score: 0.5075
+
+
+time =  1068.58787203
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.9
+Downsample none: 0.6
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1667    0.0588    0.0870        17
+      FAVOR     0.6115    0.7127    0.6582       877
+       NONE     0.8451    0.7819    0.8123      1793
+
+avg / total     0.7646    0.7547    0.7574      2687
+
+Validation macro F-score: 0.5192
+
+
+time =  1092.06688714
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.9
+Downsample none: 0.7
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.0588    0.0952        17
+      FAVOR     0.6220    0.6830    0.6511       877
+       NONE     0.8349    0.8009    0.8175      1793
+
+avg / total     0.7617    0.7577    0.7586      2687
+
+Validation macro F-score: 0.5213
+
+
+time =  1118.06365895
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.9
+Downsample none: 0.8
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.0588    0.0909        17
+      FAVOR     0.6395    0.6534    0.6464       877
+       NONE     0.8270    0.8238    0.8254      1793
+
+avg / total     0.7618    0.7633    0.7623      2687
+
+Validation macro F-score: 0.5209
+
+
+time =  1142.8053391
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.9
+Downsample none: 0.9
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1667    0.0588    0.0870        17
+      FAVOR     0.6539    0.6442    0.6491       877
+       NONE     0.8255    0.8366    0.8310      1793
+
+avg / total     0.7654    0.7689    0.7669      2687
+
+Validation macro F-score: 0.5223
+
+
+time =  1171.13001108
+================================================================================
+================================================================================
+================================================================================
+[[], [], [], [], [], [], [], [], []]
+[[0.51758002762551192, 0.51927941544098799, 0.48017650199590739, 0.51239111251436986, 0.46869003621954269, 0.4539143636167387, 0.44421176468547285, 0.46088809654288149, 0.45976100311056195], [0.51375910347389031, 0.53143973877142747, 0.5237968298770368, 0.56759340564021332, 0.51985012421743504, 0.50869690641748921, 0.49584405698125011, 0.51229296322096463, 0.50426274727004039], [0.49196984044627251, 0.51946215639998083, 0.50741537859004582, 0.554726027022729, 0.51424335166165236, 0.50471533169412108, 0.49884865034060671, 0.5108038153236083, 0.51433855266218143], [0.47058367173944132, 0.50992160772331896, 0.5143829119676967, 0.54278072065265348, 0.50287600265560883, 0.49842891437716724, 0.49501023381448622, 0.51429349337742769, 0.51397795526827783], [0.44894213277193229, 0.48773193871233089, 0.49772617227318317, 0.53033717763600985, 0.50833379911590393, 0.50922376210910392, 0.50894981046783705, 0.5027289416447257, 0.53184922781033472], [0.43422121596095992, 0.47767338079443761, 0.49231280741850281, 0.53303128437419955, 0.50987869114399154, 0.51211951575173054, 0.50761750215166368, 0.5099289317293344, 0.51106128703843223], [0.4301080377029744, 0.47369593078679895, 0.49006305662462796, 0.50247090951075768, 0.51406525950523119, 0.51604423432582325, 0.51797913972069509, 0.51432436980243101, 0.51457525753642264], [0.4188718360343951, 0.4705829263872226, 0.48907582984333803, 0.53948883024045413, 0.51087584569066047, 0.51517937344796028, 0.52186597535901846, 0.51906159364452087, 0.51807976307205894], [0.41362061131242517, 0.47055727107279416, 0.48821393942946695, 0.53363397537279489, 0.50747684791470393, 0.51916014531796872, 0.52128664074696818, 0.52088046806391131, 0.52234457376602705]]
+
+Process finished with exit code 0
+
+
+################################################################################
+ONLY DOWN FAVOR
+/usr/bin/python /Users/Henrik/Documents/Datateknikk/Prosjektoppgave/IECCS/System/ImprovedSystem/ex3_up_down_sampling.py
+/Users/Henrik/Library/Python/2.7/lib/python/site-packages/nltk/twitter/__init__.py:20: UserWarning: The twython library has not been installed. Some functionality from the twitter package will not be available.
+  warnings.warn("The twython library has not been installed. "
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.1
+Downsample none: 1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3333    0.2353    0.2759        17
+      FAVOR     0.7935    0.1403    0.2384       877
+       NONE     0.6984    0.9816    0.8161      1793
+
+avg / total     0.7272    0.7023    0.6241      2687
+
+Validation macro F-score: 0.4435
+
+
+time =  12.4617459774
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.2
+Downsample none: 1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3333    0.2353    0.2759        17
+      FAVOR     0.7651    0.2600    0.3881       877
+       NONE     0.7253    0.9615    0.8269      1793
+
+avg / total     0.7358    0.7279    0.6802      2687
+
+Validation macro F-score: 0.4969
+
+
+time =  26.9491999149
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.3
+Downsample none: 1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2727    0.1765    0.2143        17
+      FAVOR     0.7346    0.3660    0.4886       877
+       NONE     0.7512    0.9381    0.8343      1793
+
+avg / total     0.7428    0.7466    0.7176      2687
+
+Validation macro F-score: 0.5124
+
+
+time =  45.7830598354
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.4
+Downsample none: 1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2857    0.1176    0.1667        17
+      FAVOR     0.7074    0.4356    0.5392       877
+       NONE     0.7659    0.9141    0.8335      1793
+
+avg / total     0.7438    0.7529    0.7332      2687
+
+Validation macro F-score: 0.5131
+
+
+time =  66.6123969555
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.5
+Downsample none: 1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3333    0.1176    0.1739        17
+      FAVOR     0.6916    0.4857    0.5707       877
+       NONE     0.7792    0.8974    0.8341      1793
+
+avg / total     0.7478    0.7581    0.7439      2687
+
+Validation macro F-score: 0.5262
+
+
+time =  90.0538439751
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.6
+Downsample none: 1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.0588    0.0909        17
+      FAVOR     0.6758    0.5348    0.5971       877
+       NONE     0.7928    0.8790    0.8336      1793
+
+avg / total     0.7508    0.7614    0.7517      2687
+
+Validation macro F-score: 0.5072
+
+
+time =  116.286374807
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.7
+Downsample none: 1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.0588    0.0952        17
+      FAVOR     0.6747    0.5724    0.6194       877
+       NONE     0.8040    0.8695    0.8355      1793
+
+avg / total     0.7583    0.7674    0.7603      2687
+
+Validation macro F-score: 0.5167
+
+
+time =  144.482983828
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.8
+Downsample none: 1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.0588    0.0952        17
+      FAVOR     0.6603    0.5918    0.6242       877
+       NONE     0.8086    0.8555    0.8314      1793
+
+avg / total     0.7567    0.7644    0.7591      2687
+
+Validation macro F-score: 0.5169
+
+
+time =  177.169759035
+************************************************************************************************************************
+using down sampling
+Downsample favor: 0.9
+Downsample none: 1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3333    0.1176    0.1739        17
+      FAVOR     0.6547    0.6226    0.6382       877
+       NONE     0.8181    0.8427    0.8302      1793
+
+avg / total     0.7617    0.7663    0.7634      2687
+
+Validation macro F-score: 0.5475
+
+
+time =  211.423331022
+================================================================================
+================================================================================
+================================================================================
+[[], [], [], [], [], [], [], [], []]
+[[0.44345714047898427], [0.49693522951264812], [0.51239852866565194], [0.51309812806044419], [0.52622902540966321], [0.50720763776528044], [0.51669527002823312], [0.51694919686647822], [0.54745202831625717]]
+
+Process finished with exit code 0
+
+
+#################################################################################
+ONLY NONE
+/usr/bin/python /Users/Henrik/Documents/Datateknikk/Prosjektoppgave/IECCS/System/ImprovedSystem/ex3_up_down_sampling.py
+/Users/Henrik/Library/Python/2.7/lib/python/site-packages/nltk/twitter/__init__.py:20: UserWarning: The twython library has not been installed. Some functionality from the twitter package will not be available.
+  warnings.warn("The twython library has not been installed. "
+************************************************************************************************************************
+using down sampling
+Downsample favor: 1
+Downsample none: 0.1
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0769    0.0588    0.0667        17
+      FAVOR     0.4342    0.9225    0.5905       877
+       NONE     0.9149    0.4138    0.5699      1793
+
+avg / total     0.7527    0.5776    0.5734      2687
+
+Validation macro F-score: 0.4090
+
+
+time =  13.0714509487
+************************************************************************************************************************
+using down sampling
+Downsample favor: 1
+Downsample none: 0.2
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1250    0.0588    0.0800        17
+      FAVOR     0.4913    0.8666    0.6271       877
+       NONE     0.8949    0.5650    0.6926      1793
+
+avg / total     0.7583    0.6602    0.6674      2687
+
+Validation macro F-score: 0.4666
+
+
+time =  27.6987309456
+************************************************************************************************************************
+using down sampling
+Downsample favor: 1
+Downsample none: 0.3
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1111    0.0588    0.0769        17
+      FAVOR     0.5269    0.8141    0.6398       877
+       NONE     0.8745    0.6453    0.7426      1793
+
+avg / total     0.7562    0.6967    0.7048      2687
+
+Validation macro F-score: 0.4864
+
+
+time =  44.7535820007
+************************************************************************************************************************
+using down sampling
+Downsample favor: 1
+Downsample none: 0.4
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.1176    0.1600        17
+      FAVOR     0.5535    0.7788    0.6471       877
+       NONE     0.8637    0.6960    0.7708      1793
+
+avg / total     0.7585    0.7194    0.7266      2687
+
+Validation macro F-score: 0.5260
+
+
+time =  65.2868468761
+************************************************************************************************************************
+using down sampling
+Downsample favor: 1
+Downsample none: 0.5
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.0588    0.0909        17
+      FAVOR     0.5690    0.7526    0.6480       877
+       NONE     0.8548    0.7256    0.7849      1793
+
+avg / total     0.7574    0.7302    0.7358      2687
+
+Validation macro F-score: 0.5079
+
+
+time =  88.6305499077
+************************************************************************************************************************
+using down sampling
+Downsample favor: 1
+Downsample none: 0.6
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.0588    0.0909        17
+      FAVOR     0.5934    0.7138    0.6480       877
+       NONE     0.8433    0.7652    0.8023      1793
+
+avg / total     0.7576    0.7440    0.7475      2687
+
+Validation macro F-score: 0.5138
+
+
+time =  114.740191936
+************************************************************************************************************************
+using down sampling
+Downsample favor: 1
+Downsample none: 0.7
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.0588    0.0952        17
+      FAVOR     0.6186    0.6990    0.6563       877
+       NONE     0.8410    0.7936    0.8166      1793
+
+avg / total     0.7647    0.7581    0.7598      2687
+
+Validation macro F-score: 0.5227
+
+
+time =  146.464874983
+************************************************************************************************************************
+using down sampling
+Downsample favor: 1
+Downsample none: 0.8
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2500    0.0588    0.0952        17
+      FAVOR     0.6254    0.6796    0.6514       877
+       NONE     0.8347    0.8054    0.8198      1793
+
+avg / total     0.7627    0.7596    0.7602      2687
+
+Validation macro F-score: 0.5221
+
+
+time =  179.32779789
+************************************************************************************************************************
+using down sampling
+Downsample favor: 1
+Downsample none: 0.9
+================================================================================
+SVC(C=6.91830970919, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma='auto', kernel='linear',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+================================================================================
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.2000    0.0588    0.0909        17
+      FAVOR     0.6356    0.6602    0.6477       877
+       NONE     0.8289    0.8187    0.8238      1793
+
+avg / total     0.7618    0.7622    0.7617      2687
+
+Validation macro F-score: 0.5208
+
+
+time =  212.057278872
+================================================================================
+================================================================================
+================================================================================
+[[], [], [], [], [], [], [], [], []]
+[[0.40902336289668523], [0.46657075964006656], [0.48644225504550986], [0.52597763004398557], [0.50794597222735483], [0.51376046616321214], [0.52273258879638618], [0.52212003510775518], [0.52078452936021924]]
+
+Process finished with exit code 0

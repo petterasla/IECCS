@@ -1,0 +1,400 @@
+/usr/local/bin/python "/Users/petterasla/Desktop/Skole/9. semester/In-Depth project/IECCS/System/ImprovedSystem/ex7_and_8_both_word_embeddings.py"
+================================================================================
+GLOVE VECTORS: glove.42B.300d
+================================================================================
+
+TRAIN:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1007    0.3659    0.1579        41
+      FAVOR     0.6007    0.7361    0.6615      2046
+       NONE     0.8564    0.7399    0.7939      4183
+
+avg / total     0.7680    0.7362    0.7465      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5378
+
+VALIDATE:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1250    0.4118    0.1918        17
+      FAVOR     0.6176    0.7514    0.6780       877
+       NONE     0.8664    0.7557    0.8073      1793
+
+avg / total     0.7805    0.7521    0.7612      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5590
+
+TEST:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1193    0.6842    0.2031        19
+      FAVOR     0.6372    0.7544    0.6908       973
+       NONE     0.8751    0.7569    0.8117      1991
+
+avg / total     0.7927    0.7556    0.7684      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5686
+
+================================================================================
+GLOVE VECTORS: glove.6B.100d
+================================================================================
+
+TRAIN:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0824    0.5366    0.1429        41
+      FAVOR     0.5915    0.7234    0.6508      2046
+       NONE     0.8535    0.7143    0.7777      4183
+
+avg / total     0.7630    0.7161    0.7322      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5238
+
+VALIDATE:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0833    0.5882    0.1460        17
+      FAVOR     0.6011    0.7526    0.6684       877
+       NONE     0.8679    0.7111    0.7817      1793
+
+avg / total     0.7759    0.7239    0.7407      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5320
+
+TEST:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0838    0.7368    0.1505        19
+      FAVOR     0.6303    0.7307    0.6768       973
+       NONE     0.8703    0.7378    0.7986      1991
+
+avg / total     0.7870    0.7355    0.7547      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5420
+
+================================================================================
+GLOVE VECTORS: glove.6B.200d
+================================================================================
+
+TRAIN:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0757    0.3415    0.1239        41
+      FAVOR     0.5995    0.7258    0.6566      2046
+       NONE     0.8520    0.7349    0.7891      4183
+
+avg / total     0.7645    0.7293    0.7415      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5232
+
+VALIDATE:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1127    0.4706    0.1818        17
+      FAVOR     0.6011    0.7560    0.6697       877
+       NONE     0.8672    0.7317    0.7937      1793
+
+avg / total     0.7755    0.7380    0.7494      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5484
+
+TEST:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1034    0.6316    0.1778        19
+      FAVOR     0.6316    0.7400    0.6815       973
+       NONE     0.8686    0.7534    0.8069      1991
+
+avg / total     0.7864    0.7482    0.7620      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5554
+
+================================================================================
+GLOVE VECTORS: glove.6B.300d
+================================================================================
+
+TRAIN:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0909    0.3171    0.1413        41
+      FAVOR     0.6014    0.7366    0.6621      2046
+       NONE     0.8558    0.7409    0.7942      4183
+
+avg / total     0.7678    0.7367    0.7468      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5325
+
+VALIDATE:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1311    0.4706    0.2051        17
+      FAVOR     0.6110    0.7594    0.6772       877
+       NONE     0.8685    0.7440    0.8014      1793
+
+avg / total     0.7798    0.7473    0.7571      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5612
+
+TEST:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0989    0.4737    0.1636        19
+      FAVOR     0.6334    0.7513    0.6874       973
+       NONE     0.8734    0.7624    0.8142      1991
+
+avg / total     0.7902    0.7570    0.7687      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5550
+
+================================================================================
+GLOVE VECTORS: glove.6B.50d
+================================================================================
+
+TRAIN:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0511    0.4390    0.0916        41
+      FAVOR     0.5864    0.7063    0.6408      2046
+       NONE     0.8521    0.7036    0.7707      4183
+
+avg / total     0.7601    0.7027    0.7239      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5010
+
+VALIDATE:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0566    0.5294    0.1023        17
+      FAVOR     0.6006    0.7252    0.6570       877
+       NONE     0.8611    0.7055    0.7756      1793
+
+avg / total     0.7710    0.7108    0.7326      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5116
+
+TEST:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0758    0.7895    0.1382        19
+      FAVOR     0.6277    0.7122    0.6673       973
+       NONE     0.8638    0.7293    0.7908      1991
+
+avg / total     0.7818    0.7241    0.7464      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5321
+
+================================================================================
+GLOVE VECTORS: glove.840B.300d
+================================================================================
+
+TRAIN:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1056    0.3659    0.1639        41
+      FAVOR     0.6038    0.7351    0.6630      2046
+       NONE     0.8568    0.7449    0.7969      4183
+
+avg / total     0.7693    0.7392    0.7491      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5413
+
+VALIDATE:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1552    0.5294    0.2400        17
+      FAVOR     0.6201    0.7742    0.6886       877
+       NONE     0.8774    0.7507    0.8091      1793
+
+avg / total     0.7889    0.7570    0.7662      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5793
+
+TEST:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1134    0.5789    0.1897        19
+      FAVOR     0.6285    0.7513    0.6845       973
+       NONE     0.8717    0.7544    0.8088      1991
+
+avg / total     0.7876    0.7523    0.7643      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5610
+
+================================================================================
+GLOVE VECTORS: glove.twitter.27B.100d
+================================================================================
+
+TRAIN:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0591    0.3171    0.0996        41
+      FAVOR     0.5859    0.7214    0.6467      2046
+       NONE     0.8485    0.7162    0.7768      4183
+
+avg / total     0.7577    0.7153    0.7299      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5077
+
+VALIDATE:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0708    0.4706    0.1231        17
+      FAVOR     0.5946    0.7343    0.6571       877
+       NONE     0.8618    0.7167    0.7826      1793
+
+avg / total     0.7696    0.7209    0.7375      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5209
+
+TEST:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0705    0.5789    0.1257        19
+      FAVOR     0.6281    0.7256    0.6733       973
+       NONE     0.8691    0.7433    0.8013      1991
+
+avg / total     0.7854    0.7365    0.7553      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5335
+
+================================================================================
+GLOVE VECTORS: glove.twitter.27B.200d
+================================================================================
+
+TRAIN:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0938    0.3659    0.1493        41
+      FAVOR     0.5861    0.7317    0.6509      2046
+       NONE     0.8521    0.7244    0.7830      4183
+
+avg / total     0.7603    0.7244    0.7358      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5277
+
+VALIDATE:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1013    0.4706    0.1667        17
+      FAVOR     0.5896    0.7355    0.6545       877
+       NONE     0.8600    0.7262    0.7874      1793
+
+avg / total     0.7669    0.7276    0.7401      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5362
+
+TEST:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1081    0.6316    0.1846        19
+      FAVOR     0.6278    0.7369    0.6780       973
+       NONE     0.8671    0.7534    0.8062      1991
+
+avg / total     0.7842    0.7472    0.7605      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5563
+
+================================================================================
+GLOVE VECTORS: glove.twitter.27B.25d
+================================================================================
+
+TRAIN:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0458    0.4390    0.0829        41
+      FAVOR     0.5676    0.6872    0.6217      2046
+       NONE     0.8379    0.6811    0.7514      4183
+
+avg / total     0.7446    0.6815    0.7047      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.4854
+
+VALIDATE:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0378    0.4118    0.0693        17
+      FAVOR     0.5725    0.6933    0.6271       877
+       NONE     0.8424    0.6765    0.7504      1793
+
+avg / total     0.7492    0.6803    0.7058      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.4823
+
+TEST:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0718    0.7895    0.1316        19
+      FAVOR     0.5956    0.6886    0.6387       973
+       NONE     0.8526    0.7062    0.7725      1991
+
+avg / total     0.7638    0.7010    0.7248      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5143
+
+================================================================================
+GLOVE VECTORS: glove.twitter.27B.50d
+================================================================================
+
+TRAIN:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0478    0.4146    0.0856        41
+      FAVOR     0.5822    0.7028    0.6368      2046
+       NONE     0.8420    0.6933    0.7605      4183
+
+avg / total     0.7521    0.6946    0.7157      6270
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.4943
+
+VALIDATE:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0514    0.5294    0.0938        17
+      FAVOR     0.5889    0.7138    0.6454       877
+       NONE     0.8544    0.6905    0.7637      1793
+
+avg / total     0.7627    0.6971    0.7209      2687
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5009
+
+TEST:
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0628    0.6842    0.1150        19
+      FAVOR     0.6132    0.6958    0.6519       973
+       NONE     0.8523    0.7157    0.7781      1991
+
+avg / total     0.7693    0.7090    0.7327      2983
+
+macro-average of F-score(FAVOR) and F-score(AGAINST): 0.5150

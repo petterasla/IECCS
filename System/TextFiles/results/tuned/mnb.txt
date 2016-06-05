@@ -1,0 +1,138 @@
+6270 documents
+3 categories
+
+Performing grid search...
+pipeline: ['vect', 'clf']
+parameters:
+{'clf__alpha': array([ 0.1       ,  0.21544347,  0.46415888,  1.        ]),
+ 'clf__fit_prior': [True, False],
+ 'vect__analyzer': ['word', 'char'],
+ 'vect__max_features': (None, 50000),
+ 'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3)],
+ 'vect__stop_words': [None, 'english']}
+Fitting 10 folds for each of 256 candidates, totalling 2560 fits
+[Parallel(n_jobs=10)]: Done 180 tasks      | elapsed: 11.9min
+[Parallel(n_jobs=10)]: Done 430 tasks      | elapsed: 32.8min
+[Parallel(n_jobs=10)]: Done 780 tasks      | elapsed: 60.9min
+[Parallel(n_jobs=10)]: Done 1230 tasks      | elapsed: 101.0min
+[Parallel(n_jobs=10)]: Done 1780 tasks      | elapsed: 151.5min
+[Parallel(n_jobs=10)]: Done 2430 tasks      | elapsed: 210.3min
+[Parallel(n_jobs=10)]: Done 2560 out of 2560 | elapsed: 225.4min finished
+done in 13543.985s
+
+Best score: 0.584
+Best parameters set:
+	clf__alpha: 0.10000000000000001
+	clf__fit_prior: True
+	vect__analyzer: 'word'
+	vect__max_features: 50000
+	vect__ngram_range: (1, 3)
+	vect__stop_words: 'english'
+
+================================================================================
+MultinomialNB(alpha=0.1, class_prior=None, fit_prior=True)
+Pipeline(steps=[('vect', CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=50000, min_df=1,
+        ngram_range=(1, 3), preprocessor=None, stop_words='english',
+        strip_accents=None, token_pattern=u'(?u)\\b\\w\\w+\\b',
+        tokenizer=None, vocabulary=None)), ('clf', MultinomialNB(alpha=0.1, class_prior=None, fit_prior=True))])
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.3235    0.2683    0.2933        41
+      FAVOR     0.6005    0.7507    0.6672      2046
+       NONE     0.8578    0.7542    0.8027      4183
+
+avg / total     0.7703    0.7499    0.7552      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5878
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1667    0.1176    0.1379        17
+      FAVOR     0.6150    0.7685    0.6832       877
+       NONE     0.8702    0.7663    0.8149      1793
+
+avg / total     0.7824    0.7629    0.7677      2687
+
+Validation macro F-score: 0.5454
+
+
+Grid search 2
+
+6270 documents
+3 categories
+
+Performing grid search...
+pipeline: ['vect', 'tfidf', 'clf']
+parameters:
+{'clf__alpha': array([ 0.1       ,  0.21544347,  0.46415888,  1.        ]),
+ 'clf__fit_prior': [True, False],
+ 'tfidf__use_idf': [True, False],
+ 'vect__analyzer': ['word', 'char'],
+ 'vect__max_features': (None, 50000),
+ 'vect__ngram_range': [(1, 1), (1, 2), (1, 3), (2, 3)],
+ 'vect__stop_words': [None, 'english']}
+Fitting 10 folds for each of 512 candidates, totalling 5120 fits
+[Parallel(n_jobs=10)]: Done  30 tasks      | elapsed:   24.8s
+[Parallel(n_jobs=10)]: Done 180 tasks      | elapsed:  5.3min
+[Parallel(n_jobs=10)]: Done 430 tasks      | elapsed: 15.1min
+[Parallel(n_jobs=10)]: Done 780 tasks      | elapsed: 28.7min
+[Parallel(n_jobs=10)]: Done 1230 tasks      | elapsed: 46.2min
+[Parallel(n_jobs=10)]: Done 1780 tasks      | elapsed: 66.8min
+[Parallel(n_jobs=10)]: Done 2430 tasks      | elapsed: 91.6min
+[Parallel(n_jobs=10)]: Done 3180 tasks      | elapsed: 121.4min
+[Parallel(n_jobs=10)]: Done 4030 tasks      | elapsed: 152.6min
+[Parallel(n_jobs=10)]: Done 4980 tasks      | elapsed: 188.6min
+[Parallel(n_jobs=10)]: Done 5120 out of 5120 | elapsed: 195.4min finished
+done in 11743.243s
+
+Best score: 0.524
+Best parameters set:
+	clf__alpha: 0.10000000000000001
+	clf__fit_prior: False
+	tfidf__use_idf: True
+	vect__analyzer: 'word'
+	vect__max_features: 50000
+	vect__ngram_range: (2, 3)
+	vect__stop_words: 'english'
+
+
+================================================================================
+MultinomialNB(alpha=0.1, class_prior=None, fit_prior=False)
+Pipeline(steps=[('vect', CountVectorizer(analyzer='word', binary=False, decode_error='ignore',
+        dtype=<type 'numpy.int64'>, encoding=u'utf-8', input=u'content',
+        lowercase=True, max_df=1.0, max_features=50000, min_df=1,
+        ngram_range=(2, 3), preprocessor=None, stop_words='english',
+      ...alse,
+         use_idf=True)), ('clf', MultinomialNB(alpha=0.1, class_prior=None, fit_prior=False))])
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.1389    0.1220    0.1299        41
+      FAVOR     0.5809    0.7493    0.6544      2046
+       NONE     0.8531    0.7332    0.7886      4183
+
+avg / total     0.7596    0.7344    0.7405      6270
+
+macro-average of F-score(FAVOR), F-score(AGAINST) and F-score(NONE): 0.5243
+
+================================================================================
+Validation score
+================================================================================
+             precision    recall  f1-score   support
+
+    AGAINST     0.0000    0.0000    0.0000        17
+      FAVOR     0.6048    0.7697    0.6774       877
+       NONE     0.8671    0.7535    0.8063      1793
+
+avg / total     0.7760    0.7540    0.7591      2687
+
+Validation macro F-score: 0.4946
+
+
+time =  97.2107748985

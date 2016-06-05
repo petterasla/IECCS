@@ -1,0 +1,87 @@
+var chart = AmCharts.makeChart("chartdiv", {
+    "theme": "light",
+    "type": "serial",
+    "dataProvider": [{
+        "year": "2012",
+                "Against": (1.0/620.0)*100,
+                "Favor": (48.0/620)*100,
+                 "None":(571.0/620)*100
+
+            }, {
+                "year": "2013",
+                "Against": (3.0/585)*100,
+                "Favor": (41.0/585)*100,
+                 "None":(541.0/585)*100
+
+            }, {
+                "year": "2014",
+                "Against": (4.0/606)*100,
+                "Favor": (45.0/606)*100,
+                 "None":(557.0/606)*100
+            }, {
+                "year": "2015",
+                "Against": (1.0/654)*100,
+                "Favor": (59.0/654)*100,
+                 "None":(594.0/654)*100
+            }, {
+                "year": "2016",
+                "Against": (1.0/168)*100,
+                "Favor": (14.0/168)*100,
+                 "None":(153.0/168)*100
+            }],
+    "valueAxes": [{
+        "stackType": "3d",
+        "unit": "%",
+        "position": "left",
+        "title": "Stance in %",
+    }],
+    "startDuration": 1,
+    "graphs": [{
+        "balloonText": "Stance in [[category]] (2004): <b>[[value]]</b>",
+        "fillAlphas": 0.9,
+        "lineAlpha": 0.2,
+        "title": "Against",
+        "type": "column",
+        "valueField": "Against"
+    }, {
+        "balloonText": "GDP grow in [[category]] (2005): <b>[[value]]</b>",
+        "fillAlphas": 0.9,
+        "lineAlpha": 0.2,
+        "title": "Favor",
+        "type": "column",
+        "valueField": "Favor"
+    },
+              {
+        "balloonText": "GDP grow in [[category]] (2006): <b>[[value]]</b>",
+        "fillAlphas": 0.9,
+        "lineAlpha": 0.2,
+        "title": "None",
+        "type": "column",
+        "valueField": "None"
+    }],
+    "plotAreaFillAlphas": 0.1,
+    "depth3D": 60,
+    "angle": 30,
+    "categoryField": "year",
+    "categoryAxis": {
+        "gridPosition": "start"
+    },
+    "export": {
+    	"enabled": true
+     }
+});
+jQuery('.chart-input').off().on('input change',function() {
+	var property	= jQuery(this).data('property');
+	var target		= chart;
+	chart.startDuration = 0;
+
+	if ( property == 'topRadius') {
+		target = chart.graphs[0];
+      	if ( this.value == 0 ) {
+          this.value = undefined;
+      	}
+	}
+
+	target[property] = this.value;
+	chart.validateNow();
+});

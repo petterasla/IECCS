@@ -1,0 +1,49 @@
+<div class="row pad">
+    <div class="col-xs-12 col-sm-12 col-md-12 ">
+      <p style="text-align: center">Pick a stance</p>
+      <div data-bind="click: updateStanceStatus(0, $parents[1])"></div>
+      <div class="btn-group btn-group-justified" role="group" data-bind="foreach: stanceModel">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-vis-representation2"
+                    data-bind="css: {activate: status}, click: function(i, a) {$parent.updateStanceStatus($index(), $parents[2])}">
+              <span data-bind="text: type"></span>
+              <span data-bind="html: icon"></span>
+            </button>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="row col-xs-12 col-sm-12 col-md-12 ">
+  <div data-bind="visible: $data.progress() < 101">
+    <p></p>
+    <p></p>
+    <p></p>
+  </div>
+  <div data-bind="visible: $data.alert() == 1, text: $data.alertMsg()" class="alert alert-danger alert-dismissible"
+       role="alert">
+  </div>
+
+  <div class="progress" data-bind="visible: $data.progress() < 101">
+    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+         data-bind="style: { width: $data.progressPct() }, attr: { 'aria-valuenow': $data.progress() }">
+    </div>
+  </div>
+  <p></p>
+</div>
+
+<div data-bind="visible: !allStancesFalse()">
+  <div class="col-xs-12 border-line" >
+    <div id=chartdiv></div>
+  <!--
+  <div id="left-pointer" class="col-xs-1"></div>
+
+    <div class="col-xs-10">
+      <div id=chartdiv></div>
+
+
+  </div>
+  <div id="right-pointer" class="col-xs-1"></div>
+  -->
+  </div>
+</div>

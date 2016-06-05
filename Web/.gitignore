@@ -4,4 +4,12 @@ dev/
 build/
 .idea/
 npm-debug.log
-bower_components/
+bower_components/*
+!bower_components/bootstrap/
+
+bower_components/bootstrap/*
+!bower_components/bootstrap/less
+
+#bower_components/bootstrap/less/*
+#!bower_components/bootstrap/less/variables.less
+

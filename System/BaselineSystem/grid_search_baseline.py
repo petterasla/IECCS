@@ -14,6 +14,13 @@ regularization regimes.
 """
 
 from __future__ import print_function
+
+# Fix path for use in terminal ###
+import sys
+import os
+sys.path.append(os.path.abspath(__file__ + "/../../../"))
+###
+
 import System.DataProcessing.process_data as ptd
 from pprint import pprint
 from time import time
@@ -27,6 +34,7 @@ from sklearn.svm import LinearSVC, SVC
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.grid_search import GridSearchCV
 from sklearn.pipeline import Pipeline
+from sklearn.cross_validation import StratifiedKFold
 
 #print(__doc__)
 
@@ -46,6 +54,8 @@ endorsement = ptd.getEndorsementData().tolist()
 labels = []
 for endorse in endorsement:
     labels.append(ptd.getAbstractStance('soft', endorse))
+
+cv = StratifiedKFold(labels, n_folds=10, shuffle=True, random_state=1)
 
 
 print("%d documents" % len(abstracts))
@@ -73,7 +83,7 @@ parameters = {
     'tfidf__use_idf': (True, False),
     'clf__kernel': ['rbf', 'linear', 'poly', 'sigmoid'],
     'clf__shrinking': (True, False),
-    'clf__decision_function_shape': ['ovo', 'ovr', None]
+    #'clf__decision_function_shape': ['ovo', 'ovr', None]
 }
 if __name__ == "__main__":
     # multiprocessing requires the fork to happen in a __main__ protected
@@ -81,7 +91,7 @@ if __name__ == "__main__":
 
     # find the best parameters for both the feature extraction and the
     # classifier
-    grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1, verbose=1)
+    grid_search = GridSearchCV(pipeline, parameters, n_jobs=10, verbose=1, cv=cv)
 
     print("Performing grid search...")
     print("pipeline:", [name for name, _ in pipeline.steps])

@@ -24,3 +24,16 @@ i SemEval konkurranse *klapp klapp*.
 - Inkluder dummy classifiers med "stratified": generates predictions by respecting the training set’s class distribution
 og "most_frequent": classen som er mest representert blir alltid valgt. Resultatene lagt inn baseline_results.txt.
 Viste seg at most_frequent ikke ble så bra allikevel. Beste res er med SVM og Linear SVM (52 %). Time to beat that..
+
+11.-18. februar:
+- Path-fix for genrell kjøring i terminal
+- Optimalisering av grid search for multiprossesor kjøring på server (n_jobs). Output er inkludert i .log filer.
+    - Kjøring gjøres ved følgende kommando: 'nohup python file_name.py > output_file_name.log &'
+- Kommentarer for beskrivelse av grid search implementasjonen
+- Laget improved system + grid search for parametere (ex1.py + grid_search_improved.py)
+- Nye utilities funskjoner for å skrive til fil.
+- Noen endringer i resultater for baseline (bør vurdere å kjøre testene på nytt hvor vi har satt cross_validation random_state=1)
+- Nye utilities funksjoner for opp- og nedsampling (brukes i ex1.py).
+- Implementert opp- og nedsampling (ex1.py).
+- Nye utilities funskjoner for binary klassifisering (brukes i ex2.py).
+- Implementert binary klassifisering for stance vs no stance (ex2.py).

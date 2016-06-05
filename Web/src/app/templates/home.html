@@ -1,0 +1,44 @@
+<div class="jumbotron centered">
+  <h1>Interactive Exploration of Consensus in Climate Science</h1>
+
+  <div data-bind="visible: $data.progress() < 101"></div>
+  <div data-bind="visible: $data.alert() == 1, text: $data.alertMsg()" class="alert alert-danger alert-dismissible"
+       role="alert">
+  </div>
+
+  <div class="progress" data-bind="visible: $data.progress() < 101">
+    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+         data-bind="style: { width: $data.progressPct() }, attr: { 'aria-valuenow': $data.progress() }">
+    </div>
+  </div>
+  <div id="BarChartHome"></div>
+  <label data-binD="visible: $data.progress() > 99">
+    <input type="checkbox" data-bind="checked: usePercentage" /> Show percentage distribution per year
+  </label>
+  <div class="row">
+    <div class="col-xs-12">
+      <div >
+        <div class="alert alert-info alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h5>
+            Our server shuts down after being idle for 15 minutes. If the application fails to retrieve data,
+            please try again as the server is starting up.
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p></p>
+  <p>
+    This single page web aplication presents the result of our research on stance detection in scientific literature.
+    The topic of the literature in question is anthropogenic (human-induced) global warming.
+    We have based our research ont The Consensus Project (TCP). TCP manually examined 11,940 climate abstracts related
+    to anthropogenic global warming and classified the papers' stances. The work of TCP is extensive and
+    time consuming. The material presented here is the result of our exploration of automating their work and classify
+    stance using machine learning on global warming literature after 2011.
+    The findings of TCP have been used as training and testing foundation for our work.
+
+    To read about The Consus Project click the button below.
+  </p>
+  <p><a class="btn btn-primary btn-lg" href="http://theconsensusproject.com/" role="button">The Consensus Project</a></p>
+</div>

@@ -1,4 +1,4 @@
-define(function(require) {
+define('app/shared/components/ui-view', ['require', '$router', 'knockout', 'crossroads', 'hasher', 'jquery'], function(require) {
     'use strict';
 
     var router      = require('$router'),
@@ -96,8 +96,8 @@ define(function(require) {
 
             if (state) {
                 $element
-                    .css({opacity: 0, marginLeft: '15px'})
-                    .animate({opacity: 1, marginLeft: 0}, 500);
+                    .css({opacity: 0, marginLeft: '10px'})
+                    .animate({opacity: 1, marginLeft: 0}, 300);
             }
         }
     };

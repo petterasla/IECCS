@@ -1,0 +1,76 @@
+<div id="visualization" class="container section">
+  <div class="page-header centered">
+    <h2>Visualization</h2>
+  </div>
+  <div class="page-header">
+    <p>
+      This sub-page provide three different visual representations of the findings from our master thesis. The visual
+      components are available with two different data sets; the "old" (TCP) data and the new, unseen data.
+      The first visual component is an interactive bar chart presenting stance distribution per year for climate related
+      publications.
+      The second component provide an interactive relational graph showing the relation between publication stances and
+      common subjects found in the data sets.
+      The last shows the geographic distribution of climate related publications based on author affiliations, sorted by
+      the stance expressed in the abstract.
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div >
+        <div class="alert alert-info alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4>Make your selections below to navigate to various data representations.</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIST FIRST ROW -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="btn-group btn-group-justified" data-bind="foreach: visualModel">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-vis-representation"
+                  data-bind="css: {activate: status}, click: function(i) {$parent.updateVisualNavBar($index())}">
+            <span data-bind="text: type"></span>
+            <div data-bind="html: icon"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIST SECOND ROW -->
+  <div class="row pad">
+    <div data-bind="visible: !allOptionsFalse()">
+      <div class="col-xs-12">
+        <div class="btn-group btn-group-justified" role="group" data-bind="foreach: representation">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-vis-representation"
+                    data-bind="css: {activate: status}, click: function(i) {$parent.updateRepresentationStatus($index())}">
+              <span data-bind="text: type"></span>
+              <div data-bind="html: icon"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INJECT VISUAL DATA -->
+    <div class="col-xs-12">
+      <div class="centered" data-bind="visible: allOptionsFalse">
+        <!-- <i class="fa fa-spinner fa-spin fa-5x"></i> -->
+      </div>
+      <div data-bind="foreach: {data:visualModel, as:'vm'}">
+        <div data-bind="foreach: {data:$parent.representation, as:'r'}">
+          <div data-bind="visible: vm.status() && r.status()">
+            <div data-bind="if: vm.status() && r.status()">
+              <div data-bind="component: vm.repres[r.id]"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

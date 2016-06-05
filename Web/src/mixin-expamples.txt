@@ -1,0 +1,42 @@
+Source:
+http://webdesign.tutsplus.com/tutorials/baking-bootstrap-snippets-with-jade--cms-22798
+
+### ###
+Article:
++article('IECCS')
+  p Welcome to the visualization of IECCS.
+
+
+Navbar:
++nav("Project name", "dropdown_menu")
+  +nav_item( "index.html", "active" ) Home
+  +nav_item( "about.html" ) About
+  +nav_item( "contact.html" ) Contact
+  +nav_item_dropdown( "#" )( label="Dropdown")
+      +nav_item( "#" ) Action
+      +nav_item( "#" ) Another action
+      +nav_item( "#" ) Something else here
+      +nav_divider
+      +nav_header Nav header
+      +nav_item( "#" ) Separated link
+      +nav_item( "#" ) One more separated link
+
+
+Panel:
++panel("Panel Heading") We are a fairly small,
++panel("Panel Heading", "success")
++panel("Panel Heading", "primary")
+
+
+Button:
++button("success", "success.html", "large") Success
++button("info", "info.html", "small") Info
++button("warning", "warning.html", "mini") Warning
+
+
+Alert:
++alert("warning") Warning! Warning!
++alert("danger") Danger Will Robinson!
++alert("success") You succeeded :-)
++alert("info") Some information for you
+

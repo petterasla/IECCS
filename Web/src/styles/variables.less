@@ -9,3 +9,142 @@
 // Using CDN font
 //
 @fa-font-path:            "https://netdna.bootstrapcdn.com/font-awesome/@{fa-version}/fonts";
+@button-back-color: #4dc9bc;
+@bord-color: #35aea1;
+@hover-nav-text-color: lightgrey;
+@vis-representation: #eeeeee;
+
+// Removes blue focus mark around button border
+button:focus {outline:none !important;}
+
+.list-group-item.activate {
+  background-color: @button-back-color !important;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+  &:hover {
+    color: @hover-nav-text-color !important;
+  }
+}
+.list-group-item.vis-representation{
+  background-color: @button-back-color !important;
+  border-color: @bord-color !important;
+  color: white;
+}
+.centered {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 5em;
+}
+.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+button.btn.btn-vis-representation.activate {
+  background-color: @button-back-color !important;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+}
+.btn-vis-representation {
+  background-color: @button-back-color !important;
+  border-color: @bord-color !important;
+  color: white;
+}
+.btn-download {
+  width: 80%
+}
+.small-download-color {
+  color: darkgreen;
+  font-size: 70%
+}
+
+button.btn.btn-vis-representation{
+  background-color: @button-back-color !important;
+  border-color: @bord-color !important;
+  color: white;
+  font-size: 2em;
+  &:active {
+    background-color: white !important;
+
+  }
+  &:hover {
+    color: #777777;
+    border-color: transparent !important;
+  }
+}
+
+.row.pad {
+  margin-top: 2em;
+}
+
+#chartdiv {
+  width		: 100%;
+  height		: 500px;
+  font-size	: 11px;
+}
+
+#piechartdiv {
+  margin-top: 2em;
+  width: 100%;
+  height: 400px;
+}
+
+#left-pointer {
+  background: -webkit-linear-gradient(-90deg, white, darkgrey); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(-90deg, white, darkgrey); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(-90deg, white, darkgrey); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(-90deg, white, darkgrey); /* Standard syntax */
+
+  height: 500px;
+}
+#right-pointer {
+  background: -webkit-linear-gradient(90deg, white, darkgrey); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(90deg, white, darkgrey); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(90deg, white, darkgrey); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(90deg, white, darkgrey); /* Standard syntax */
+
+  height: 500px;
+  margin: auto;
+  display: inline-block;
+}
+
+button.btn.btn-vis-representation2{
+  background-color: @button-back-color !important;
+  border-color: @bord-color !important;
+  color: white;
+  font-size: 1em;
+  &:active {
+    background-color: white !important;
+
+  }
+  &:hover {
+    color: #777777;
+    border-color: transparent !important;
+  }
+}
+
+button.btn.btn-vis-representation2.activate {
+  background-color: @button-back-color !important;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.background-favor {
+  margin-left: 0.5em;
+  color: #2ca02c;
+}
+.background-against {
+  margin-left: 0.5em;
+  color: #ff7f0e;
+}
+.background-none {
+  margin-left: 0.5em;
+  color: #1f77b4;
+}
+
+.border-line {
+  border: 1px solid;
+  border-radius: 1em;
+}
+
+body {
+  margin-bottom: 100px;
+}

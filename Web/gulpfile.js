@@ -196,7 +196,17 @@ gulp.task('process-vendor-scripts', function() {
             'hasher/dist/js/hasher.js',
             'js-signals/dist/signals.js',
             'q/q.js',
-            'requirejs-text/text.js'], {cwd: buildConfig.bowerComponentsDir})
+            'requirejs-text/text.js',
+            'c3/c3.js',
+            'd3/d3.js',
+            'ammap3/ammap/ammap.js',
+            'ammap3/ammap/maps/js/worldLow.js',
+            'ammap3/ammap/themes/dark.js',
+            'amcharts3/amcharts/themes/light.js',
+            'amcharts3/amcharts/pie.js',
+            'amcharts3/amcharts/plugins/animate/animate.min.js',
+            'amcharts3/amcharts/amcharts.js'
+        ], {cwd: buildConfig.bowerComponentsDir})
             .pipe(plugins.changed(buildConfig.outputPath))
     );
     return stream.pipe(gulp.dest(buildConfig.outputPath));
@@ -276,6 +286,13 @@ gulp.task('process-app-jade', function() {
         .pipe(gulp.dest(buildConfig.outputPath));
 });
 
+gulp.task('process-app-html', function() {
+    return gulp.src('src/app/**/*.html', {base:'src'})
+      .pipe(plugins.plumber(onTaskError))
+      .pipe(plugins.changed('app', {cwd: buildConfig.outputPath}))
+      .pipe(gulp.dest(buildConfig.outputPath));
+});
+
 gulp.task('process-index-jade', function() {
     return gulp.src('src/index.jade', {base: 'src'})
         .pipe(plugins.plumber(onTaskError))
@@ -302,7 +319,7 @@ gulp.task('process-index-jade', function() {
         .pipe(gulp.dest(buildConfig.outputPath));
 });
 
-gulp.task('process-static-content', ['process-assets', 'process-less', 'process-app-jade', 'process-index-jade']);
+gulp.task('process-static-content', ['process-assets', 'process-less', 'process-app-jade','process-app-html', 'process-index-jade']);
 
 
 gulp.task('build', ['clean', 'process-vendor-scripts', 'process-app-scripts', 'process-static-content'], function(done) {
@@ -327,6 +344,7 @@ gulp.task('watch', ['build'], function() {
     gulp.watch('src/assets/**', ['process-assets']);
     gulp.watch(['src/styles/*.less', 'src/app/**/*.less'], ['process-less']);
     gulp.watch('src/app/**/*.jade', ['process-app-jade']);
+    gulp.watch('src/app/**/*.html', ['process-app-html']);
     gulp.watch('src/index.jade', ['process-index-jade']);
 
     gulp.src(buildConfig.outputPath)
